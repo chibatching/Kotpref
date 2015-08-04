@@ -45,17 +45,14 @@ public object UserInfo : KotprefModel() {
 ```xml
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
 <map>
-    <string name="name">chibatching</string>
-    <int name="age" value="30" />
     <long name="highScore" value="49219902" />
-    <string name="userName">Hoge Fuga</string>
     <set name="prizes">
         <string>Bronze</string>
         <string>Gold</string>
         <string>Silver</string>
     </set>
-    <int name="userAge" value="30" />
-    <string name="userNickName">chibatching</string>
+    <string name="name">chibatching</string>
+    <int name="age" value="30" />
     <float name="threshold" value="49.21" />
 </map>
 ```
