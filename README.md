@@ -1,4 +1,4 @@
-# kotpref
+# Kotpref
 
 SharedPreference delegation for Kotlin.
 
@@ -23,6 +23,7 @@ public object UserInfo : KotprefModel() {
 ```
 
 ### Read and Write
+
 ```kotlin
     UserInfo.name = "chibatching"
     UserInfo.age = 30
@@ -37,4 +38,24 @@ public object UserInfo : KotprefModel() {
     Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
     Log.d(javaClass.getSimpleName(), "User threshold: ${UserInfo.threshold}")
     UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize[$i]: ${s}") }
+```
+
+### Result shared preference xml
+
+```xml
+<?xml version='1.0' encoding='utf-8' standalone='yes' ?>
+<map>
+    <string name="name">chibatching</string>
+    <int name="age" value="30" />
+    <long name="highScore" value="49219902" />
+    <string name="userName">Hoge Fuga</string>
+    <set name="prizes">
+        <string>Bronze</string>
+        <string>Gold</string>
+        <string>Silver</string>
+    </set>
+    <int name="userAge" value="30" />
+    <string name="userNickName">chibatching</string>
+    <float name="threshold" value="49.21" />
+</map>
 ```
