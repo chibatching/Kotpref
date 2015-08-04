@@ -1,5 +1,3 @@
-.gradle
-/local.properties
 /.idea/workspace.xml
 /.idea/libraries
 /.idea/compiler.xml
@@ -8,7 +6,6 @@
 /.idea/modules.xml
 /.idea/runConfigurations.xml
 .DS_Store
-/build
 /captures
 
 # Built application files
