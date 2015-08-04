@@ -12,7 +12,7 @@ public object UserInfo : KotprefModel() {
     var age: Int by intPrefVar()
     var highScore: Long by longPrefVar()
     var threshold: Float by floatPrefVar()
-    var prizes: MutableSet<String> by stringSetPrefVar(TreeSet<String>())
+    var prizes: MutableSet<String> by stringSetPrefVar(default = TreeSet<String>())
 }
 ```
 
