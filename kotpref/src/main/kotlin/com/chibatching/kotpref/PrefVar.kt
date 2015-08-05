@@ -74,7 +74,9 @@ private class StringSetPrefVar(val default: Set<String>) : ReadWriteProperty<Kot
     }
 }
 
-private class PrefMutableSet(val set: MutableSet<String>, val key: String, val thisRef: KotprefModel) : MutableSet<String> by set {
+private class PrefMutableSet(val set: MutableSet<String>,
+                             val key: String,
+                             val thisRef: KotprefModel) : MutableSet<String> by set {
     override fun add(e: String): Boolean {
         val result = set.add(e)
         thisRef.kotprefPreference.edit().putStringSet(key, set).apply()
