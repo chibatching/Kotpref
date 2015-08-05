@@ -1,7 +1,5 @@
 package com.chibatching.kotpref
 
-import android.content.Context
-import android.preference.PreferenceManager
 import android.test.AndroidTestCase
 import java.util.TreeSet
 import kotlin.test.assertEquals
@@ -22,9 +20,15 @@ public class KotprefTest : AndroidTestCase() {
         var testStringSetVar: MutableSet<String> by stringSetPrefVar(TreeSet<String>())
     }
 
+    object NameExample : KotprefModel() {
+        override val kotprefName: String = "name_example"
+        var testIntVar: Int by intPrefVar(Int.MAX_VALUE)
+    }
+
     override fun setUp() {
         Kotpref.init(getContext())
         getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode).edit().clear().apply()
+        getContext().getSharedPreferences(NameExample.kotprefName, NameExample.kotprefMode).edit().clear().apply()
     }
 
     public fun testIntPrefVar() {
@@ -176,5 +180,11 @@ public class KotprefTest : AndroidTestCase() {
         assertEquals(treeSet.size(), pref.getStringSet("testStringSetVar", null).size())
         assertTrue(Example.testStringSetVar.containsAll(treeSet))
         assertTrue(pref.getStringSet("testStringSetVar", null).containsAll(treeSet))
+    }
+
+    public fun testPreferenceName() {
+        val pref = getContext().getSharedPreferences("name_example", NameExample.kotprefMode)
+        NameExample.testIntVar = 39
+        assertEquals(pref.getInt("testIntVar", 0), NameExample.testIntVar)
     }
 }
