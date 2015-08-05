@@ -69,7 +69,7 @@ var age: Int by intPrefVar(18)
 
 or
 
-```
+```kotlin
 var age: Int by intPrefVar(default = 18)
 ```
 
