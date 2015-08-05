@@ -40,7 +40,4 @@ buildscript {
 }
 repositories {
     mavenCentral()
-    maven {
-        url  "http://dl.bintray.com/chibatching/maven"
-    }
 }
