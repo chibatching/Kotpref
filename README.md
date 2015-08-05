@@ -91,3 +91,21 @@ Override `kotprefMode` property. Default is `Context.MODE_PRIVATE`.
 public object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
 ```
+
+### Download
+
+Currently not available via jcenter.
+
+Add bintary maven repository.
+
+```
+maven {
+    url  "http://dl.bintray.com/chibatching/maven"
+}
+```
+
+And add this line in dependencies.
+
+```
+compile 'com.chibatching:kotpref:0.0.1'
+```

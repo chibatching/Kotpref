@@ -37,4 +37,116 @@ buildscript {
 }
 repositories {
     mavenCentral()
+    jcenter()
+}
+
+// Bintray upload
+group = 'com.chibatching'
+version = '0.0.1'
+
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'maven-publish'
+
+def siteUrl = 'https://github.com/chibatching/kotpref'
+def gitUrl = 'https://github.com/chibatching/kotpref.git'
+
+bintray {
+    Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    user = properties.getProperty("bintray_user")
+    key = properties.getProperty("bintray_api_key")
+
+    configurations = ['archives'] //When uploading configuration files
+    publications = ['MyPublication']
+    dryRun = true
+    pkg {
+        repo = 'maven'
+        name = project.name
+        desc = 'SharedPreference delegation for Kotlin.'
+        websiteUrl = siteUrl
+        issueTrackerUrl = 'https://github.com/chibatching/kotpref/issues'
+        vcsUrl = gitUrl
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'kotlin']
+        publicDownloadNumbers = true
+    }
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                packaging 'aar'
+                name 'Bintray publish Gradle aar example'
+                url siteUrl
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id 'chibatching'
+                        name 'chibatching'
+                        email 'chibatching.apps@gmail.com'
+                    }
+                }
+                scm {
+                    connection 'https://github.com/chibatching/kotpref'
+                    developerConnection 'https://github.com/chibatching/kotpref.git'
+                    url siteUrl
+
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+artifacts {
+//    archives javadocJar
+    archives sourcesJar
+}
+
+task findConventions << {
+    println project.getConvention()
+}
+
+publishing {
+    publications {
+        MyPublication(MavenPublication) {
+            artifact source: file("${project.buildDir}/outputs/aar/${project.name}-release.aar")
+            groupId 'com.chibatching'
+            artifactId 'kotpref'
+            version '0.0.1'
+        }
+    }
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+            url "$buildDir/poms"
+        }
+    }
+}
+
+model {
+    tasks.generatePomFileForMyPublicationPublication {
+        destination = file("$buildDir/poms/pom-default.xml")
+    }
 }
