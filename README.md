@@ -83,9 +83,6 @@ or
 var age: Int by intPrefVar(default = 18)
 ```
 
-##### StringSet declaration
-
-
 #### Change XML file name
 
 Override `kotprefName` property.
