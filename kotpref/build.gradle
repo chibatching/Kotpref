@@ -42,7 +42,7 @@ repositories {
 
 // Bintray upload
 group = 'com.chibatching'
-version = '0.0.1'
+version = '0.1.0'
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
@@ -60,7 +60,6 @@ bintray {
 
     configurations = ['archives'] //When uploading configuration files
     publications = ['MyPublication']
-    dryRun = true
     pkg {
         repo = 'maven'
         name = project.name
@@ -71,37 +70,6 @@ bintray {
         licenses = ['Apache-2.0']
         labels = ['aar', 'android', 'kotlin']
         publicDownloadNumbers = true
-    }
-}
-
-install {
-    repositories.mavenInstaller {
-        pom {
-            project {
-                packaging 'aar'
-                name 'Bintray publish Gradle aar example'
-                url siteUrl
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'chibatching'
-                        name 'chibatching'
-                        email 'chibatching.apps@gmail.com'
-                    }
-                }
-                scm {
-                    connection 'https://github.com/chibatching/kotpref'
-                    developerConnection 'https://github.com/chibatching/kotpref.git'
-                    url siteUrl
-
-                }
-            }
-        }
     }
 }
 
@@ -132,21 +100,13 @@ publishing {
     publications {
         MyPublication(MavenPublication) {
             artifact source: file("${project.buildDir}/outputs/aar/${project.name}-release.aar")
+            artifact sourcesJar
             groupId 'com.chibatching'
             artifactId 'kotpref'
-            version '0.0.1'
+            pom.withXml {
+                asNode().appendNode('description',
+                        'SharedPreference delegation for Kotlin')
+            }
         }
-    }
-    repositories {
-        maven {
-            // change to point to your repo, e.g. http://my.org/repo
-            url "$buildDir/poms"
-        }
-    }
-}
-
-model {
-    tasks.generatePomFileForMyPublicationPublication {
-        destination = file("$buildDir/poms/pom-default.xml")
     }
 }
