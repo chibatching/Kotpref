@@ -2,17 +2,27 @@
 
 SharedPreference delegation for Kotlin.
 
+## Install
+
+```
+compile 'com.chibatching:kotpref:0.1.0'
+```
+
 ## How to use
 
-### Create preference model
+### Declare preference model
 
 ```kotlin
 public object UserInfo : KotprefModel() {
     var name: String by stringPrefVar()
-    var age: Int by intPrefVar()
+    var age: Int by intPrefVar(default = 14)
     var highScore: Long by longPrefVar()
-    var threshold: Float by floatPrefVar()
-    var prizes: MutableSet<String> by stringSetPrefVar(default = TreeSet<String>())
+    var rate: Float by floatPrefVar()
+    val prizes: MutableSet<String> by stringSetPrefVal {
+        val set = TreeSet<String>()
+        set.add("Beginner")
+        return@stringSetPrefVal set
+    }
 }
 ```
 
@@ -28,7 +38,7 @@ Kotpref.init(context)
 UserInfo.name = "chibatching"
 UserInfo.age = 30
 UserInfo.highScore = 49219902
-UserInfo.threshold = 49.21F
+UserInfo.rate = 49.21F
 UserInfo.prizes.add("Bronze")
 UserInfo.prizes.add("Silver")
 UserInfo.prizes.add("Gold")
@@ -36,7 +46,7 @@ UserInfo.prizes.add("Gold")
 Log.d(javaClass.getSimpleName(), "User name: ${UserInfo.name}")
 Log.d(javaClass.getSimpleName(), "User age: ${UserInfo.age}")
 Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
-Log.d(javaClass.getSimpleName(), "User threshold: ${UserInfo.threshold}")
+Log.d(javaClass.getSimpleName(), "User rate: ${UserInfo.rate}")
 UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize[$i]: ${s}") }
 ```
 
@@ -55,7 +65,7 @@ XML file name equals model class name. If model class named `UserInfo`, XML file
     </set>
     <string name="name">chibatching</string>
     <int name="age" value="30" />
-    <float name="threshold" value="49.21" />
+    <float name="rate" value="49.21" />
 </map>
 ```
 
@@ -73,7 +83,6 @@ or
 var age: Int by intPrefVar(default = 18)
 ```
 
-
 #### Change XML file name
 
 Override `kotprefName` property.
@@ -90,10 +99,4 @@ Override `kotprefMode` property. Default is `Context.MODE_PRIVATE`.
 ```kotlin
 public object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
-```
-
-### Install
-
-```
-compile 'com.chibatching:kotpref:0.0.1'
 ```

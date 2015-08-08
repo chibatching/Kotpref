@@ -1,7 +1,7 @@
 package com.chibatching.kotpref
 
 import android.test.AndroidTestCase
-import java.util.TreeSet
+import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertTrue
@@ -17,7 +17,14 @@ public class KotprefTest : AndroidTestCase() {
         var testFloatVar: Float by floatPrefVar(Float.MAX_VALUE)
         var testBooleanVar: Boolean by booleanPrefVar(true)
         var testStringVar: String by stringPrefVar("Default string")
-        var testStringSetVar: MutableSet<String> by stringSetPrefVar(TreeSet<String>())
+        val testStringSetVar: MutableSet<String> by stringSetPrefVal(TreeSet<String>())
+        val testLazyDefaultSS: MutableSet<String> by stringSetPrefVal{
+            val defSet = LinkedHashSet<String>()
+            defSet.add("Lazy set item 1")
+            defSet.add("lazy set item 2")
+            defSet.add("lazy set item 3")
+            defSet
+        }
     }
 
     object NameExample : KotprefModel() {
@@ -180,6 +187,14 @@ public class KotprefTest : AndroidTestCase() {
         assertEquals(treeSet.size(), pref.getStringSet("testStringSetVar", null).size())
         assertTrue(Example.testStringSetVar.containsAll(treeSet))
         assertTrue(pref.getStringSet("testStringSetVar", null).containsAll(treeSet))
+    }
+
+    public fun testLazyDefaultStringSet() {
+        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+
+        assertEquals(Example.testLazyDefaultSS.size(), 3)
+        assertEquals(pref.getStringSet("testLazyDefaultSS", null).size(), 3)
+        assertTrue(Example.testLazyDefaultSS.containsAll(pref.getStringSet("testLazyDefaultSS", null)))
     }
 
     public fun testPreferenceName() {
