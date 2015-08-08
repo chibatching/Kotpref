@@ -2,7 +2,9 @@ package com.chibatching.kotpref
 
 import android.content.Context
 import android.content.SharedPreferences
+import java.util.*
 import kotlin.properties.Delegates
+import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 
 
@@ -66,6 +68,13 @@ public open class KotprefModel() {
      * Delegate string set shared preference property.
      * @param default default string set value
      */
-    protected fun stringSetPrefVar(default: Set<String>)
-            : ReadWriteProperty<KotprefModel, MutableSet<String>> = StringSetPrefVar(default)
+    protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>())
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal{ default }
+
+    /**
+     * Delegate string set shared preference property.
+     * @param default default string set value creation function
+     */
+    protected fun stringSetPrefVal(default: () -> Set<String>)
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default)
 }

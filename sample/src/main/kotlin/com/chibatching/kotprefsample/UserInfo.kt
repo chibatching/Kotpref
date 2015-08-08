@@ -9,5 +9,9 @@ public object UserInfo : KotprefModel() {
     var age: Int by intPrefVar()
     var highScore: Long by longPrefVar()
     var threshold: Float by floatPrefVar()
-    var prizes: MutableSet<String> by stringSetPrefVar(TreeSet<String>())
+    val prizes: MutableSet<String> by stringSetPrefVal {
+        val set = TreeSet<String>()
+        set.add("Beginner")
+        return@stringSetPrefVal set
+    }
 }
