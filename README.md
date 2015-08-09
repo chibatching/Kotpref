@@ -59,6 +59,7 @@ XML file name equals model class name. If model class named `UserInfo`, XML file
 <map>
     <long name="highScore" value="49219902" />
     <set name="prizes">
+        <string>Beginner</string>
         <string>Bronze</string>
         <string>Gold</string>
         <string>Silver</string>
