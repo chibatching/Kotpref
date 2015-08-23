@@ -2,10 +2,10 @@
 
 SharedPreference delegation for Kotlin.
 
-## Download
+## Install
 
 ```
-compile 'com.chibatching:kotpref:0.1.0'
+compile 'com.chibatching:kotpref:0.2.0'
 ```
 
 ## How to use
@@ -48,6 +48,19 @@ Log.d(javaClass.getSimpleName(), "User age: ${UserInfo.age}")
 Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
 Log.d(javaClass.getSimpleName(), "User rate: ${UserInfo.rate}")
 UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize[$i]: ${s}") }
+```
+
+### Bulk edit
+
+```kotlin
+Kotpref.bulk(UserInfo) {
+    name = "chibatching Jr"
+    age = 2
+    highScore = 3901
+    rate = 0.4F
+    prizes.clear()
+    prizes.add("New Born")
+}
 ```
 
 ### Result shared preference xml
