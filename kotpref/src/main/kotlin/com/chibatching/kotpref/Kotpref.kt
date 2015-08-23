@@ -28,4 +28,15 @@ public object Kotpref {
     public fun init(context: Context) {
         this.context = context.getApplicationContext()
     }
+
+    public fun <T : KotprefModel> bulk(receiver: T, f: T.() -> Unit) {
+        receiver.beginBulkEdit()
+        try {
+            receiver.f()
+        } catch (e: Exception) {
+            receiver.cancelBulkEdit()
+            throw e
+        }
+        receiver.commitBulkEdit()
+    }
 }
