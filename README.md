@@ -115,6 +115,13 @@ public object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
 ```
 
+## Proguard
+
+```
+-keepnames class * extends com.chibatching.kotpref.KotprefModel
+-dontwarn com.chibatching.kotpref.**
+```
+
 ## License
 
 ```
