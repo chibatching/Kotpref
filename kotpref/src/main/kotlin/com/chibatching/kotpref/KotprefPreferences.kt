@@ -1,10 +1,10 @@
 package com.chibatching.kotpref
 
 import android.content.SharedPreferences
-import java.util.LinkedList
+import java.util.*
 
 
-private class KotprefPreferences(val preferences: SharedPreferences) : SharedPreferences by preferences {
+internal class KotprefPreferences(val preferences: SharedPreferences) : SharedPreferences by preferences {
 
     override fun edit(): SharedPreferences.Editor {
         return KotprefEditor(preferences.edit())

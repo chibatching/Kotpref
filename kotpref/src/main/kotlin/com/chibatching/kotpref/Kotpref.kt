@@ -26,7 +26,7 @@ public object Kotpref {
      * @param context Application context
      */
     public fun init(context: Context) {
-        this.context = context.getApplicationContext()
+        this.context = context.applicationContext
     }
 
     public fun <T : KotprefModel> bulk(receiver: T, f: T.() -> Unit) {

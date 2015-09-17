@@ -2,7 +2,7 @@ package com.chibatching.kotpref
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.util.LinkedHashSet
+import java.util.*
 import kotlin.properties.Delegates
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
@@ -16,7 +16,7 @@ public open class KotprefModel() {
     /**
      * Preference file name
      */
-    open val kotprefName: String = javaClass.getSimpleName()
+    open val kotprefName: String = javaClass.simpleName
 
     /**
      * Preference read/write mode
@@ -27,7 +27,7 @@ public open class KotprefModel() {
      * Internal shared preference.
      * This property will be initialized on use.
      */
-    private val kotprefPreference: KotprefPreferences by Delegates.lazy {
+    private val kotprefPreference: KotprefPreferences by lazy {
         KotprefPreferences(Kotpref.context!!.getSharedPreferences(kotprefName, kotprefMode))
     }
 
@@ -123,26 +123,26 @@ public open class KotprefModel() {
     public abstract inner class PrefVar<T>() : ReadWriteProperty<KotprefModel, T> {
 
         private var lastUpdate: Long = 0
-        private var transactionData: T = null
+        abstract protected var transactionData: T
 
-        override fun get(thisRef: KotprefModel, desc: PropertyMetadata): T {
+        override fun get(thisRef: KotprefModel, property: PropertyMetadata): T {
             if (!thisRef.kotprefInTransaction) {
-                return getFromPreference(desc, kotprefPreference)
+                return getFromPreference(property, kotprefPreference)
             }
             if (lastUpdate < thisRef.kotprefTransactionStartTime) {
-                transactionData = getFromPreference(desc, kotprefPreference)
+                transactionData = getFromPreference(property, kotprefPreference)
                 lastUpdate = System.currentTimeMillis()
             }
             return transactionData
         }
 
-        override fun set(thisRef: KotprefModel, desc: PropertyMetadata, value: T) {
+        override fun set(thisRef: KotprefModel, property: PropertyMetadata, value: T) {
             if (thisRef.kotprefInTransaction) {
                 transactionData = value
                 lastUpdate = System.currentTimeMillis()
-                setToEditor(desc, value, kotprefEditor!!)
+                setToEditor(property, value, kotprefEditor!!)
             } else {
-                setToPreference(desc, value, kotprefPreference)
+                setToPreference(property, value, kotprefPreference)
             }
         }
 
@@ -153,6 +153,8 @@ public open class KotprefModel() {
 
 
     private inner class StringPrefVar(val default: String) : PrefVar<String>() {
+
+        override var transactionData: String by Delegates.notNull()
 
         override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): String {
             return preference.getString(desc.name, default)
@@ -170,6 +172,8 @@ public open class KotprefModel() {
 
     private inner class IntPrefVar(val default: Int) : PrefVar<Int>() {
 
+        override var transactionData: Int by Delegates.notNull()
+
         override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Int {
             return preference.getInt(desc.name, default)
         }
@@ -185,6 +189,8 @@ public open class KotprefModel() {
 
 
     private inner class LongPrefVar(val default: Long) : PrefVar<Long>() {
+
+        override var transactionData: Long by Delegates.notNull()
 
         override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Long {
             return preference.getLong(desc.name, default)
@@ -202,6 +208,8 @@ public open class KotprefModel() {
 
     private inner class FloatPrefVar(val default: Float) : PrefVar<Float>() {
 
+        override var transactionData: Float by Delegates.notNull()
+
         override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Float {
             return preference.getFloat(desc.name, default)
         }
@@ -217,6 +225,8 @@ public open class KotprefModel() {
 
 
     private inner class BooleanPrefVar(val default: Boolean) : PrefVar<Boolean>() {
+
+        override var transactionData: Boolean by Delegates.notNull()
 
         override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Boolean {
             return preference.getBoolean(desc.name, default)
@@ -237,10 +247,10 @@ public open class KotprefModel() {
         var stringSet: MutableSet<String>? = null
         var lastUpdate: Long = 0L
 
-        override fun get(thisRef: KotprefModel, desc: PropertyMetadata): MutableSet<String> {
+        override fun get(thisRef: KotprefModel, property: PropertyMetadata): MutableSet<String> {
             if (stringSet == null || lastUpdate < kotprefTransactionStartTime) {
-                val prefSet = kotprefPreference.getStringSet(desc.name, null)
-                stringSet = PrefMutableSet(prefSet ?: default.invoke().toMutableSet(), desc.name)
+                val prefSet = kotprefPreference.getStringSet(property.name, null)
+                stringSet = PrefMutableSet(prefSet ?: default.invoke().toMutableSet(), property.name)
                 if (prefSet == null) {
                     stringSet?.addAll(stringSet!!)
                 }
