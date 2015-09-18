@@ -5,7 +5,7 @@ SharedPreference delegation for Kotlin.
 ## Install
 
 ```
-compile 'com.chibatching:kotpref:0.3.0'
+compile 'com.chibatching:kotpref:0.3.1'
 ```
 
 ## How to use
