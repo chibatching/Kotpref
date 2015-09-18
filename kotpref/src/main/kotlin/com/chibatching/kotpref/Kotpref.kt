@@ -5,12 +5,12 @@ import android.content.Context
 /**
  * Kotpref: SharedPreference delegation for Kotlin
  */
-public object Kotpref {
+object Kotpref {
 
     /**
      * Internal context. If context is not set, Kotpref will throw [IllegalStateException].
      */
-    var context: Context? = null
+    internal var context: Context? = null
         get() {
             if ($context != null) {
                 return $context
@@ -25,11 +25,11 @@ public object Kotpref {
      *
      * @param context Application context
      */
-    public fun init(context: Context) {
+    fun init(context: Context) {
         this.context = context.applicationContext
     }
 
-    public fun <T : KotprefModel> bulk(receiver: T, f: T.() -> Unit) {
+    fun <T : KotprefModel> bulk(receiver: T, f: T.() -> Unit) {
         receiver.beginBulkEdit()
         try {
             receiver.f()

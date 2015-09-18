@@ -8,7 +8,7 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 
 
-public open class KotprefModel() {
+open class KotprefModel() {
 
     private  var kotprefInTransaction: Boolean = false
     private  var kotprefTransactionStartTime: Long = 0
@@ -16,12 +16,12 @@ public open class KotprefModel() {
     /**
      * Preference file name
      */
-    open val kotprefName: String = javaClass.simpleName
+    internal open val kotprefName: String = javaClass.simpleName
 
     /**
      * Preference read/write mode
      */
-    open val kotprefMode: Int = Context.MODE_PRIVATE
+    internal open val kotprefMode: Int = Context.MODE_PRIVATE
 
     /**
      * Internal shared preference.
@@ -39,7 +39,7 @@ public open class KotprefModel() {
     /**
      * Clear all preferences in this model
      */
-    public fun clear() {
+    fun clear() {
         beginBulkEdit()
         kotprefEditor!!.clear()
         commitBulkEdit()
@@ -97,7 +97,7 @@ public open class KotprefModel() {
     /**
      * Begin bulk edit mode. You must commit or cancel after bulk edit finished.
      */
-    public fun beginBulkEdit() {
+    fun beginBulkEdit() {
         kotprefInTransaction = true
         kotprefTransactionStartTime = System.currentTimeMillis()
         kotprefEditor = kotprefPreference.KotprefEditor(kotprefPreference.edit())
@@ -106,7 +106,7 @@ public open class KotprefModel() {
     /**
      * Commit values set in the bulk edit mode to preferences.
      */
-    public fun commitBulkEdit() {
+    fun commitBulkEdit() {
         kotprefEditor!!.apply()
         kotprefInTransaction = false
     }
@@ -114,13 +114,13 @@ public open class KotprefModel() {
     /**
      * Cancel bulk edit mode. Values set in the bulk mode will be rolled back.
      */
-    public fun cancelBulkEdit() {
+    fun cancelBulkEdit() {
         kotprefEditor = null
         kotprefInTransaction = false
     }
 
 
-    public abstract inner class PrefVar<T>() : ReadWriteProperty<KotprefModel, T> {
+    abstract inner class PrefVar<T>() : ReadWriteProperty<KotprefModel, T> {
 
         private var lastUpdate: Long = 0
         abstract protected var transactionData: T
@@ -146,9 +146,9 @@ public open class KotprefModel() {
             }
         }
 
-        abstract fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences) : T
-        abstract fun setToPreference(desc: PropertyMetadata, value: T, preference: SharedPreferences)
-        abstract fun setToEditor(desc: PropertyMetadata, value: T, editor: SharedPreferences.Editor)
+        abstract internal fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences) : T
+        abstract internal fun setToPreference(desc: PropertyMetadata, value: T, preference: SharedPreferences)
+        abstract internal fun setToEditor(desc: PropertyMetadata, value: T, editor: SharedPreferences.Editor)
     }
 
 
@@ -244,8 +244,8 @@ public open class KotprefModel() {
 
     private inner class StringSetPrefVal(val default: () -> Set<String>) : ReadOnlyProperty<KotprefModel, MutableSet<String>> {
 
-        var stringSet: MutableSet<String>? = null
-        var lastUpdate: Long = 0L
+        private var stringSet: MutableSet<String>? = null
+        private var lastUpdate: Long = 0L
 
         override fun get(thisRef: KotprefModel, property: PropertyMetadata): MutableSet<String> {
             if (stringSet == null || lastUpdate < kotprefTransactionStartTime) {
@@ -261,7 +261,7 @@ public open class KotprefModel() {
     }
 
 
-    inner class PrefMutableSet(var set: MutableSet<String>, val key: String) : MutableSet<String> by set {
+    internal inner class PrefMutableSet(var set: MutableSet<String>, val key: String) : MutableSet<String> by set {
 
         private var transactionData: MutableSet<String>? = null
             get() {
@@ -271,7 +271,7 @@ public open class KotprefModel() {
                 return $transactionData
             }
 
-        fun syncTransaction() {
+        internal fun syncTransaction() {
             synchronized(this) {
                 if (transactionData != null) {
                     set.clear()

@@ -10,7 +10,7 @@ internal class KotprefPreferences(val preferences: SharedPreferences) : SharedPr
         return KotprefEditor(preferences.edit())
     }
 
-    inner class KotprefEditor(val editor: SharedPreferences.Editor) : SharedPreferences.Editor by editor {
+    internal inner class KotprefEditor(val editor: SharedPreferences.Editor) : SharedPreferences.Editor by editor {
 
         private var prefStringSet: LinkedList<KotprefModel.PrefMutableSet>? = null
 
@@ -31,7 +31,7 @@ internal class KotprefPreferences(val preferences: SharedPreferences) : SharedPr
             return result
         }
 
-        fun putStringSet(key: String?, values: MutableSet<String>?, prefSet: KotprefModel.PrefMutableSet): SharedPreferences.Editor {
+        internal fun putStringSet(key: String?, values: MutableSet<String>?, prefSet: KotprefModel.PrefMutableSet): SharedPreferences.Editor {
             editor.putStringSet(key, values)
             if (prefStringSet == null) {
                 prefStringSet = LinkedList<KotprefModel.PrefMutableSet>()
