@@ -14,6 +14,11 @@ open class KotprefModel() {
     private  var kotprefTransactionStartTime: Long = 0
 
     /**
+     * Context set to Kotpref
+     */
+    val context: Context by lazy { Kotpref.context!! }
+
+    /**
      * Preference file name
      */
     internal open val kotprefName: String = javaClass.simpleName
@@ -28,7 +33,7 @@ open class KotprefModel() {
      * This property will be initialized on use.
      */
     private val kotprefPreference: KotprefPreferences by lazy {
-        KotprefPreferences(Kotpref.context!!.getSharedPreferences(kotprefName, kotprefMode))
+        KotprefPreferences(context.getSharedPreferences(kotprefName, kotprefMode))
     }
 
     /**
@@ -48,51 +53,58 @@ open class KotprefModel() {
     /**
      * Delegate string shared preference property.
      * @param default default string value
+     * @param key custom preference key
      */
-    protected fun stringPrefVar(default: String = "")
-            : ReadWriteProperty<KotprefModel, String> = StringPrefVar(default)
+    protected fun stringPrefVar(default: String = "", key: String? = null)
+            : ReadWriteProperty<KotprefModel, String> = StringPrefVar(default, key)
 
     /**
      * Delegate Int shared preference property.
      * @param default default int value
+     * @param key custom preference key
      */
-    protected fun intPrefVar(default: Int = 0)
-            : ReadWriteProperty<KotprefModel, Int> = IntPrefVar(default)
+    protected fun intPrefVar(default: Int = 0, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Int> = IntPrefVar(default, key)
 
     /**
      * Delegate long shared preference property.
      * @param default default long value
+     * @param key custom preference key
      */
-    protected fun longPrefVar(default: Long = 0L)
-            : ReadWriteProperty<KotprefModel, Long> = LongPrefVar(default)
+    protected fun longPrefVar(default: Long = 0L, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Long> = LongPrefVar(default, key)
 
     /**
      * Delegate float shared preference property.
      * @param default default float value
+     * @param key custom preference key
      */
-    protected fun floatPrefVar(default: Float = 0F)
-            : ReadWriteProperty<KotprefModel, Float> = FloatPrefVar(default)
+    protected fun floatPrefVar(default: Float = 0F, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Float> = FloatPrefVar(default, key)
 
     /**
      * Delegate boolean shared preference property.
      * @param default default boolean value
+     * @param key custom preference key
      */
-    protected fun booleanPrefVar(default: Boolean = false)
-            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPrefVar(default)
+    protected fun booleanPrefVar(default: Boolean = false, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPrefVar(default, key)
 
     /**
      * Delegate string set shared preference property.
      * @param default default string set value
+     * @param key custom preference key
      */
-    protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>())
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal{ default }
+    protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>(), key: String? = null)
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal({ default }, key)
 
     /**
      * Delegate string set shared preference property.
      * @param default default string set value creation function
+     * @param key custom preference key
      */
-    protected fun stringSetPrefVal(default: () -> Set<String>)
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default)
+    protected fun stringSetPrefVal(key: String? = null, default: () -> Set<String>)
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default, key)
 
     /**
      * Begin bulk edit mode. You must commit or cancel after bulk edit finished.
@@ -120,10 +132,10 @@ open class KotprefModel() {
     }
 
 
-    abstract inner class PrefVar<T>() : ReadWriteProperty<KotprefModel, T> {
+    abstract inner class PrefVar<T : Any>() : ReadWriteProperty<KotprefModel, T> {
 
         private var lastUpdate: Long = 0
-        abstract protected var transactionData: T
+        private var transactionData: T by Delegates.notNull<T>()
 
         override fun get(thisRef: KotprefModel, property: PropertyMetadata): T {
             if (!thisRef.kotprefInTransaction) {
@@ -146,114 +158,102 @@ open class KotprefModel() {
             }
         }
 
-        abstract internal fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences) : T
-        abstract internal fun setToPreference(desc: PropertyMetadata, value: T, preference: SharedPreferences)
-        abstract internal fun setToEditor(desc: PropertyMetadata, value: T, editor: SharedPreferences.Editor)
+        abstract internal fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences) : T
+        abstract internal fun setToPreference(property: PropertyMetadata, value: T, preference: SharedPreferences)
+        abstract internal fun setToEditor(property: PropertyMetadata, value: T, editor: SharedPreferences.Editor)
     }
 
 
-    private inner class StringPrefVar(val default: String) : PrefVar<String>() {
+    private inner class StringPrefVar(val default: String, val key: String?) : PrefVar<String>() {
 
-        override var transactionData: String by Delegates.notNull()
-
-        override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): String {
-            return preference.getString(desc.name, default)
+        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): String {
+            return preference.getString(key ?: property.name, default)
         }
 
-        override fun setToPreference(desc: PropertyMetadata, value: String, preference: SharedPreferences) {
-            preference.edit().putString(desc.name, value).apply()
+        override fun setToPreference(property: PropertyMetadata, value: String, preference: SharedPreferences) {
+            preference.edit().putString(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(desc: PropertyMetadata, value: String, editor: SharedPreferences.Editor) {
-            editor.putString(desc.name, value)
-        }
-    }
-
-
-    private inner class IntPrefVar(val default: Int) : PrefVar<Int>() {
-
-        override var transactionData: Int by Delegates.notNull()
-
-        override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Int {
-            return preference.getInt(desc.name, default)
-        }
-
-        override fun setToPreference(desc: PropertyMetadata, value: Int, preference: SharedPreferences) {
-            preference.edit().putInt(desc.name, value).apply()
-        }
-
-        override fun setToEditor(desc: PropertyMetadata, value: Int, editor: SharedPreferences.Editor) {
-            editor.putInt(desc.name, value)
+        override fun setToEditor(property: PropertyMetadata, value: String, editor: SharedPreferences.Editor) {
+            editor.putString(key ?: property.name, value)
         }
     }
 
 
-    private inner class LongPrefVar(val default: Long) : PrefVar<Long>() {
+    private inner class IntPrefVar(val default: Int, val key: String?) : PrefVar<Int>() {
 
-        override var transactionData: Long by Delegates.notNull()
-
-        override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Long {
-            return preference.getLong(desc.name, default)
+        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Int {
+            return preference.getInt(key ?: property.name, default)
         }
 
-        override fun setToPreference(desc: PropertyMetadata, value: Long, preference: SharedPreferences) {
-            preference.edit().putLong(desc.name, value).apply()
+        override fun setToPreference(property: PropertyMetadata, value: Int, preference: SharedPreferences) {
+            preference.edit().putInt(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(desc: PropertyMetadata, value: Long, editor: SharedPreferences.Editor) {
-            editor.putLong(desc.name, value)
+        override fun setToEditor(property: PropertyMetadata, value: Int, editor: SharedPreferences.Editor) {
+            editor.putInt(key ?: property.name, value)
         }
     }
 
 
-    private inner class FloatPrefVar(val default: Float) : PrefVar<Float>() {
+    private inner class LongPrefVar(val default: Long, val key: String?) : PrefVar<Long>() {
 
-        override var transactionData: Float by Delegates.notNull()
-
-        override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Float {
-            return preference.getFloat(desc.name, default)
+        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Long {
+            return preference.getLong(key ?: property.name, default)
         }
 
-        override fun setToPreference(desc: PropertyMetadata, value: Float, preference: SharedPreferences) {
-            preference.edit().putFloat(desc.name, value).apply()
+        override fun setToPreference(property: PropertyMetadata, value: Long, preference: SharedPreferences) {
+            preference.edit().putLong(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(desc: PropertyMetadata, value: Float, editor: SharedPreferences.Editor) {
-            editor.putFloat(desc.name, value)
+        override fun setToEditor(property: PropertyMetadata, value: Long, editor: SharedPreferences.Editor) {
+            editor.putLong(key ?: property.name, value)
         }
     }
 
 
-    private inner class BooleanPrefVar(val default: Boolean) : PrefVar<Boolean>() {
+    private inner class FloatPrefVar(val default: Float, val key: String?) : PrefVar<Float>() {
 
-        override var transactionData: Boolean by Delegates.notNull()
-
-        override fun getFromPreference(desc: PropertyMetadata, preference: SharedPreferences): Boolean {
-            return preference.getBoolean(desc.name, default)
+        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Float {
+            return preference.getFloat(key ?: property.name, default)
         }
 
-        override fun setToPreference(desc: PropertyMetadata, value: Boolean, preference: SharedPreferences) {
-            preference.edit().putBoolean(desc.name, value).apply()
+        override fun setToPreference(property: PropertyMetadata, value: Float, preference: SharedPreferences) {
+            preference.edit().putFloat(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(desc: PropertyMetadata, value: Boolean, editor: SharedPreferences.Editor) {
-            editor.putBoolean(desc.name, value)
+        override fun setToEditor(property: PropertyMetadata, value: Float, editor: SharedPreferences.Editor) {
+            editor.putFloat(key ?: property.name, value)
         }
     }
 
 
-    private inner class StringSetPrefVal(val default: () -> Set<String>) : ReadOnlyProperty<KotprefModel, MutableSet<String>> {
+    private inner class BooleanPrefVar(val default: Boolean, val key: String?) : PrefVar<Boolean>() {
+
+        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Boolean {
+            return preference.getBoolean(key ?: property.name, default)
+        }
+
+        override fun setToPreference(property: PropertyMetadata, value: Boolean, preference: SharedPreferences) {
+            preference.edit().putBoolean(key ?: property.name, value).apply()
+        }
+
+        override fun setToEditor(property: PropertyMetadata, value: Boolean, editor: SharedPreferences.Editor) {
+            editor.putBoolean(key ?: property.name, value)
+        }
+    }
+
+
+    private inner class StringSetPrefVal(val default: () -> Set<String>, val key: String?) : ReadOnlyProperty<KotprefModel, MutableSet<String>> {
 
         private var stringSet: MutableSet<String>? = null
         private var lastUpdate: Long = 0L
 
         override fun get(thisRef: KotprefModel, property: PropertyMetadata): MutableSet<String> {
             if (stringSet == null || lastUpdate < kotprefTransactionStartTime) {
-                val prefSet = kotprefPreference.getStringSet(property.name, null)
-                stringSet = PrefMutableSet(prefSet ?: default.invoke().toMutableSet(), property.name)
-                if (prefSet == null) {
-                    stringSet?.addAll(stringSet!!)
-                }
+                val prefSet = kotprefPreference.getStringSet(key ?: property.name, null)
+                stringSet = PrefMutableSet(prefSet ?: default.invoke().toMutableSet(), key ?: property.name)
+                prefSet?.let { stringSet?.addAll(stringSet!!) }
                 lastUpdate = System.currentTimeMillis()
             }
             return stringSet!!
@@ -273,7 +273,7 @@ open class KotprefModel() {
 
         internal fun syncTransaction() {
             synchronized(this) {
-                if (transactionData != null) {
+                transactionData?.let {
                     set.clear()
                     set.addAll(transactionData!!)
                     transactionData = null

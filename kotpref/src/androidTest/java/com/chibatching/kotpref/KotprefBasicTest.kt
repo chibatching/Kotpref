@@ -2,8 +2,7 @@ package com.chibatching.kotpref
 
 import android.content.SharedPreferences
 import android.test.AndroidTestCase
-import java.util.LinkedHashSet
-import java.util.TreeSet
+import java.util.*
 import kotlin.test.assertEquals
 import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
@@ -12,7 +11,7 @@ import kotlin.test.assertTrue
 /**
  * [Testing Fundamentals](http://d.android.com/tools/testing/testing_android.html)
  */
-public class KotprefTest : AndroidTestCase() {
+public class KotprefBasicTest : AndroidTestCase() {
 
     object Example : KotprefModel() {
         var testIntVar: Int by intPrefVar(Int.MAX_VALUE)
@@ -24,8 +23,8 @@ public class KotprefTest : AndroidTestCase() {
         val testLazyDefaultSS: MutableSet<String> by stringSetPrefVal {
             val defSet = LinkedHashSet<String>()
             defSet.add("Lazy set item 1")
-            defSet.add("lazy set item 2")
-            defSet.add("lazy set item 3")
+            defSet.add("Lazy set item 2")
+            defSet.add("Lazy set item 3")
             defSet
         }
     }
@@ -37,22 +36,16 @@ public class KotprefTest : AndroidTestCase() {
     fun SharedPreferences.getTestString() = getString("testStringVar", "Default string")
     fun SharedPreferences.getTestStringSet() = getStringSet("testStringSetVal", TreeSet<String>())
 
-    object NameExample : KotprefModel() {
-        override val kotprefName: String = "name_example"
-        var testIntVar: Int by intPrefVar(Int.MAX_VALUE)
-    }
-
     override fun setUp() {
-        Kotpref.init(getContext())
-        getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode).edit().clear().commit()
-        getContext().getSharedPreferences(NameExample.kotprefName, NameExample.kotprefMode).edit().clear().commit()
+        Kotpref.init(context)
+        context.getSharedPreferences(Example.kotprefName, Example.kotprefMode).edit().clear().commit()
     }
 
     public fun testIntPrefVar() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         assertEquals(Int.MAX_VALUE, Example.testIntVar)
 
@@ -72,7 +65,7 @@ public class KotprefTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         assertEquals(Long.MAX_VALUE, Example.testLongVar)
 
@@ -92,7 +85,7 @@ public class KotprefTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         assertEquals(Float.MAX_VALUE, Example.testFloatVar)
 
@@ -112,7 +105,7 @@ public class KotprefTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         assertEquals(true, Example.testBooleanVar)
 
@@ -132,7 +125,7 @@ public class KotprefTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         assertEquals("Default string", Example.testStringVar)
 
@@ -154,7 +147,7 @@ public class KotprefTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         assertEquals(0, Example.testStringSetVal.size())
 
@@ -215,27 +208,17 @@ public class KotprefTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
-
         assertEquals(Example.testLazyDefaultSS.size(), 3)
-        assertEquals(pref.getStringSet("testLazyDefaultSS", null).size(), 3)
-        assertTrue(Example.testLazyDefaultSS.containsAll(pref.getStringSet("testLazyDefaultSS", null)))
-    }
-
-    public fun testPreferenceName() {
-        // Init model
-        Example.clear()
-
-        val pref = getContext().getSharedPreferences("name_example", NameExample.kotprefMode)
-        NameExample.testIntVar = 39
-        assertEquals(pref.getInt("testIntVar", 0), NameExample.testIntVar)
+        assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 1"))
+        assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 2"))
+        assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 3"))
     }
 
     public fun testBulkEdit() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         Kotpref.bulk(Example) {
             testIntVar = 1024
@@ -281,7 +264,7 @@ public class KotprefTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = getContext().getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
 
         Kotpref.bulk(Example) {
             testStringSetVal.add("test1")
