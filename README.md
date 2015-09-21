@@ -5,7 +5,7 @@ SharedPreference delegation for Kotlin.
 ## Install
 
 ```
-compile 'com.chibatching:kotpref:0.3.1'
+compile 'com.chibatching:kotpref:0.4.0'
 ```
 
 ## How to use
@@ -95,6 +95,15 @@ or
 
 ```kotlin
 var age: Int by intPrefVar(default = 18)
+```
+
+#### Change preference key
+
+You can custom preference key or use from string resources.
+
+```kotlin
+var useFunc1: Boolean by booleanPrefVar(key = "use_func1")
+var mode: Int by intPrefVar(default = 1, key = context.getString(R.string.pref_mode))
 ```
 
 #### Change XML file name
