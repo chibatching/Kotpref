@@ -1,6 +1,6 @@
 # Kotpref
 
-SharedPreference delegation for Kotlin.
+Android SharedPreference delegation for Kotlin.
 
 ## Install
 
