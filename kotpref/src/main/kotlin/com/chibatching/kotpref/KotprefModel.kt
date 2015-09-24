@@ -10,8 +10,8 @@ import kotlin.properties.ReadWriteProperty
 
 open class KotprefModel() {
 
-    private  var kotprefInTransaction: Boolean = false
-    private  var kotprefTransactionStartTime: Long = 0
+    private var kotprefInTransaction: Boolean = false
+    private var kotprefTransactionStartTime: Long = 0
 
     /**
      * Context set to Kotpref
@@ -21,12 +21,12 @@ open class KotprefModel() {
     /**
      * Preference file name
      */
-    internal open val kotprefName: String = javaClass.simpleName
+    protected open val kotprefName: String = javaClass.simpleName
 
     /**
      * Preference read/write mode
      */
-    internal open val kotprefMode: Int = Context.MODE_PRIVATE
+    protected open val kotprefMode: Int = Context.MODE_PRIVATE
 
     /**
      * Internal shared preference.

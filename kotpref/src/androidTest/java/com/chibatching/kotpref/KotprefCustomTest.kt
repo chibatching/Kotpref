@@ -1,5 +1,6 @@
 package com.chibatching.kotpref
 
+import android.content.Context
 import android.test.AndroidTestCase
 import kotlin.test.assertEquals
 
@@ -17,13 +18,13 @@ public class KotprefCustomTest : AndroidTestCase() {
 
     override fun setUp() {
         Kotpref.init(context)
-        context.getSharedPreferences(CustomExample.kotprefName, CustomExample.kotprefMode).edit().clear().commit()
+        context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit().clear().commit()
     }
 
     public fun testPreferenceName() {
         CustomExample.clear()
 
-        val pref = context.getSharedPreferences(PREFERENCE_NAME, CustomExample.kotprefMode)
+        val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
         CustomExample.testIntVar = 39
         assertEquals(pref.getInt("testIntVar", 0), CustomExample.testIntVar)
     }
@@ -31,7 +32,7 @@ public class KotprefCustomTest : AndroidTestCase() {
     public fun testCustomKey() {
         CustomExample.clear()
 
-        val pref = context.getSharedPreferences(PREFERENCE_NAME, CustomExample.kotprefMode)
+        val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
         CustomExample.testStringVar = "custom key name"
         assertEquals(pref.getString("test_string_var", "default"), CustomExample.testStringVar)
         assertEquals(pref.getString("test_string_var", "default"), "custom key name")

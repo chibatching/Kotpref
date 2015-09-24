@@ -1,5 +1,6 @@
 package com.chibatching.kotpref
 
+import android.content.Context
 import android.content.SharedPreferences
 import android.test.AndroidTestCase
 import java.util.*
@@ -38,14 +39,14 @@ public class KotprefBasicTest : AndroidTestCase() {
 
     override fun setUp() {
         Kotpref.init(context)
-        context.getSharedPreferences(Example.kotprefName, Example.kotprefMode).edit().clear().commit()
+        context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE).edit().clear().commit()
     }
 
     public fun testIntPrefVar() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         assertEquals(Int.MAX_VALUE, Example.testIntVar)
 
@@ -65,7 +66,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         assertEquals(Long.MAX_VALUE, Example.testLongVar)
 
@@ -85,7 +86,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         assertEquals(Float.MAX_VALUE, Example.testFloatVar)
 
@@ -105,7 +106,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         assertEquals(true, Example.testBooleanVar)
 
@@ -125,7 +126,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         assertEquals("Default string", Example.testStringVar)
 
@@ -147,7 +148,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         assertEquals(0, Example.testStringSetVal.size())
 
@@ -218,7 +219,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         Kotpref.bulk(Example) {
             testIntVar = 1024
@@ -264,7 +265,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        val pref = context.getSharedPreferences(Example.kotprefName, Example.kotprefMode)
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
         Kotpref.bulk(Example) {
             testStringSetVal.add("test1")
