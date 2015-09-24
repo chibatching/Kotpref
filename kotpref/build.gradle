@@ -9,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "0.4.0"
+        versionName "0.4.1"
     }
     buildTypes {
         release {
@@ -42,7 +42,7 @@ repositories {
 
 // Bintray upload
 group = 'com.chibatching'
-version = '0.4.0'
+version = '0.4.1'
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
