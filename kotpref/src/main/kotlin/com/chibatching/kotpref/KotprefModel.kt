@@ -137,7 +137,7 @@ open class KotprefModel() {
         private var lastUpdate: Long = 0
         private var transactionData: T by Delegates.notNull<T>()
 
-        override fun get(thisRef: KotprefModel, property: PropertyMetadata): T {
+        operator override fun get(thisRef: KotprefModel, property: PropertyMetadata): T {
             if (!thisRef.kotprefInTransaction) {
                 return getFromPreference(property, kotprefPreference)
             }
@@ -148,7 +148,7 @@ open class KotprefModel() {
             return transactionData
         }
 
-        override fun set(thisRef: KotprefModel, property: PropertyMetadata, value: T) {
+        operator override fun set(thisRef: KotprefModel, property: PropertyMetadata, value: T) {
             if (thisRef.kotprefInTransaction) {
                 transactionData = value
                 lastUpdate = System.currentTimeMillis()
@@ -249,7 +249,7 @@ open class KotprefModel() {
         private var stringSet: MutableSet<String>? = null
         private var lastUpdate: Long = 0L
 
-        override fun get(thisRef: KotprefModel, property: PropertyMetadata): MutableSet<String> {
+        operator override fun get(thisRef: KotprefModel, property: PropertyMetadata): MutableSet<String> {
             if (stringSet == null || lastUpdate < kotprefTransactionStartTime) {
                 val prefSet = kotprefPreference.getStringSet(key ?: property.name, null)
                 stringSet = PrefMutableSet(prefSet ?: default.invoke().toMutableSet(), key ?: property.name)
@@ -265,10 +265,10 @@ open class KotprefModel() {
 
         private var transactionData: MutableSet<String>? = null
             get() {
-                if ($transactionData == null) {
-                    $transactionData = set.toMutableSet()
+                if (field == null) {
+                    field = set.toMutableSet()
                 }
-                return $transactionData
+                return field
             }
 
         internal fun syncTransaction() {

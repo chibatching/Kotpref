@@ -12,8 +12,8 @@ object Kotpref {
      */
     internal var context: Context? = null
         get() {
-            if ($context != null) {
-                return $context
+            if (field != null) {
+                return field
             } else {
                 throw IllegalStateException("Kotpref has not been initialized.")
             }

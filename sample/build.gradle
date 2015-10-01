@@ -30,7 +30,7 @@ dependencies {
     compile project(":kotpref")
 }
 buildscript {
-    ext.kotlin_version = '0.13.1513'
+    ext.kotlin_version = '0.14.449'
     repositories {
         mavenCentral()
     }
