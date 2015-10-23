@@ -4,10 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.test.AndroidTestCase
 import java.util.*
-import kotlin.test.assertEquals
-import kotlin.test.assertFalse
 import kotlin.test.assertNotEquals
-import kotlin.test.assertTrue
 
 /**
  * [Testing Fundamentals](http://d.android.com/tools/testing/testing_android.html)
@@ -150,13 +147,13 @@ public class KotprefBasicTest : AndroidTestCase() {
 
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
-        assertEquals(0, Example.testStringSetVal.size())
+        assertEquals(0, Example.testStringSetVal.size)
 
         Example.testStringSetVal.add("test1")
         Example.testStringSetVal.add("test2")
         Example.testStringSetVal.add("test3")
-        assertEquals(3, Example.testStringSetVal.size())
-        assertEquals(3, pref.getTestStringSet().size())
+        assertEquals(3, Example.testStringSetVal.size)
+        assertEquals(3, pref.getTestStringSet().size)
         assertTrue(pref.getTestStringSet().contains("test1"))
         assertTrue(pref.getTestStringSet().contains("test2"))
         assertTrue(pref.getTestStringSet().contains("test3"))
@@ -165,8 +162,8 @@ public class KotprefBasicTest : AndroidTestCase() {
         assertTrue(Example.testStringSetVal.contains("test3"))
 
         Example.testStringSetVal.remove("test2")
-        assertEquals(2, Example.testStringSetVal.size())
-        assertEquals(2, pref.getTestStringSet().size())
+        assertEquals(2, Example.testStringSetVal.size)
+        assertEquals(2, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.contains("test1"))
         assertFalse(Example.testStringSetVal.contains("test2"))
         assertTrue(Example.testStringSetVal.contains("test3"))
@@ -180,8 +177,8 @@ public class KotprefBasicTest : AndroidTestCase() {
         treeSet.add("test6")
 
         Example.testStringSetVal.addAll(treeSet)
-        assertEquals(5, Example.testStringSetVal.size())
-        assertEquals(5, pref.getTestStringSet().size())
+        assertEquals(5, Example.testStringSetVal.size)
+        assertEquals(5, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.contains("test1"))
         assertTrue(Example.testStringSetVal.contains("test3"))
         assertTrue(Example.testStringSetVal.containsAll(treeSet))
@@ -190,8 +187,8 @@ public class KotprefBasicTest : AndroidTestCase() {
         assertTrue(pref.getTestStringSet().containsAll(treeSet))
 
         Example.testStringSetVal.removeAll(treeSet)
-        assertEquals(2, Example.testStringSetVal.size())
-        assertEquals(2, pref.getTestStringSet().size())
+        assertEquals(2, Example.testStringSetVal.size)
+        assertEquals(2, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.contains("test1"))
         assertTrue(Example.testStringSetVal.contains("test3"))
         assertTrue(pref.getTestStringSet().contains("test1"))
@@ -199,8 +196,8 @@ public class KotprefBasicTest : AndroidTestCase() {
 
         Example.testStringSetVal.addAll(treeSet)
         Example.testStringSetVal.retainAll(treeSet)
-        assertEquals(treeSet.size(), Example.testStringSetVal.size())
-        assertEquals(treeSet.size(), pref.getTestStringSet().size())
+        assertEquals(treeSet.size, Example.testStringSetVal.size)
+        assertEquals(treeSet.size, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.containsAll(treeSet))
         assertTrue(pref.getTestStringSet().containsAll(treeSet))
     }
@@ -209,7 +206,7 @@ public class KotprefBasicTest : AndroidTestCase() {
         // Init model
         Example.clear()
 
-        assertEquals(Example.testLazyDefaultSS.size(), 3)
+        assertEquals(Example.testLazyDefaultSS.size, 3)
         assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 1"))
         assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 2"))
         assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 3"))
@@ -271,8 +268,8 @@ public class KotprefBasicTest : AndroidTestCase() {
             testStringSetVal.add("test1")
             testStringSetVal.add("test2")
             testStringSetVal.add("test3")
-            assertEquals(3, testStringSetVal.size())
-            assertEquals(0, pref.getTestStringSet().size())
+            assertEquals(3, testStringSetVal.size)
+            assertEquals(0, pref.getTestStringSet().size)
             assertFalse(pref.getTestStringSet().contains("test1"))
             assertFalse(pref.getTestStringSet().contains("test2"))
             assertFalse(pref.getTestStringSet().contains("test3"))
@@ -281,8 +278,8 @@ public class KotprefBasicTest : AndroidTestCase() {
             assertTrue(testStringSetVal.contains("test3"))
         }
 
-        assertEquals(3, Example.testStringSetVal.size())
-        assertEquals(3, pref.getTestStringSet().size())
+        assertEquals(3, Example.testStringSetVal.size)
+        assertEquals(3, pref.getTestStringSet().size)
         assertTrue(pref.getTestStringSet().contains("test1"))
         assertTrue(pref.getTestStringSet().contains("test2"))
         assertTrue(pref.getTestStringSet().contains("test3"))
@@ -293,8 +290,8 @@ public class KotprefBasicTest : AndroidTestCase() {
         Kotpref.bulk(Example) {
             testStringSetVal.remove("test2")
 
-            assertEquals(2, testStringSetVal.size())
-            assertEquals(3, pref.getTestStringSet().size())
+            assertEquals(2, testStringSetVal.size)
+            assertEquals(3, pref.getTestStringSet().size)
             assertTrue(testStringSetVal.contains("test1"))
             assertFalse(testStringSetVal.contains("test2"))
             assertTrue(testStringSetVal.contains("test3"))
@@ -303,8 +300,8 @@ public class KotprefBasicTest : AndroidTestCase() {
             assertTrue(pref.getTestStringSet().contains("test3"))
         }
 
-        assertEquals(2, Example.testStringSetVal.size())
-        assertEquals(2, pref.getTestStringSet().size())
+        assertEquals(2, Example.testStringSetVal.size)
+        assertEquals(2, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.contains("test1"))
         assertFalse(Example.testStringSetVal.contains("test2"))
         assertTrue(Example.testStringSetVal.contains("test3"))
@@ -321,8 +318,8 @@ public class KotprefBasicTest : AndroidTestCase() {
         Kotpref.bulk(Example) {
             testStringSetVal.addAll(treeSet)
 
-            assertEquals(5, Example.testStringSetVal.size())
-            assertEquals(2, pref.getTestStringSet().size())
+            assertEquals(5, Example.testStringSetVal.size)
+            assertEquals(2, pref.getTestStringSet().size)
             assertTrue(testStringSetVal.contains("test1"))
             assertTrue(testStringSetVal.contains("test3"))
             assertTrue(testStringSetVal.containsAll(treeSet))
@@ -331,8 +328,8 @@ public class KotprefBasicTest : AndroidTestCase() {
             assertFalse(pref.getTestStringSet().containsAll(treeSet))
         }
 
-        assertEquals(5, Example.testStringSetVal.size())
-        assertEquals(5, pref.getTestStringSet().size())
+        assertEquals(5, Example.testStringSetVal.size)
+        assertEquals(5, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.contains("test1"))
         assertTrue(Example.testStringSetVal.contains("test3"))
         assertTrue(Example.testStringSetVal.containsAll(treeSet))
@@ -344,8 +341,8 @@ public class KotprefBasicTest : AndroidTestCase() {
         Kotpref.bulk(Example) {
             testStringSetVal.removeAll(treeSet)
 
-            assertEquals(2, Example.testStringSetVal.size())
-            assertEquals(5, pref.getTestStringSet().size())
+            assertEquals(2, Example.testStringSetVal.size)
+            assertEquals(5, pref.getTestStringSet().size)
             assertTrue(testStringSetVal.contains("test1"))
             assertTrue(testStringSetVal.contains("test3"))
             assertTrue(pref.getTestStringSet().contains("test1"))
@@ -353,8 +350,8 @@ public class KotprefBasicTest : AndroidTestCase() {
             assertTrue(pref.getTestStringSet().containsAll(treeSet))
         }
 
-        assertEquals(2, Example.testStringSetVal.size())
-        assertEquals(2, pref.getTestStringSet().size())
+        assertEquals(2, Example.testStringSetVal.size)
+        assertEquals(2, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.contains("test1"))
         assertTrue(Example.testStringSetVal.contains("test3"))
         assertTrue(pref.getTestStringSet().contains("test1"))
@@ -365,13 +362,13 @@ public class KotprefBasicTest : AndroidTestCase() {
             testStringSetVal.addAll(treeSet)
             testStringSetVal.retainAll(treeSet)
 
-            assertEquals(3, testStringSetVal.size())
-            assertEquals(2, pref.getTestStringSet().size())
+            assertEquals(3, testStringSetVal.size)
+            assertEquals(2, pref.getTestStringSet().size)
             assertTrue(testStringSetVal.containsAll(treeSet))
         }
 
-        assertEquals(3, Example.testStringSetVal.size())
-        assertEquals(3, pref.getTestStringSet().size())
+        assertEquals(3, Example.testStringSetVal.size)
+        assertEquals(3, pref.getTestStringSet().size)
         assertTrue(Example.testStringSetVal.containsAll(treeSet))
         assertTrue(pref.getTestStringSet().containsAll(treeSet))
     }

@@ -6,6 +6,7 @@ import java.util.*
 import kotlin.properties.Delegates
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 
 open class KotprefModel() {
@@ -137,7 +138,7 @@ open class KotprefModel() {
         private var lastUpdate: Long = 0
         private var transactionData: T by Delegates.notNull<T>()
 
-        operator override fun get(thisRef: KotprefModel, property: PropertyMetadata): T {
+        operator override fun getValue(thisRef: KotprefModel, property: KProperty<*>): T {
             if (!thisRef.kotprefInTransaction) {
                 return getFromPreference(property, kotprefPreference)
             }
@@ -148,7 +149,7 @@ open class KotprefModel() {
             return transactionData
         }
 
-        operator override fun set(thisRef: KotprefModel, property: PropertyMetadata, value: T) {
+        operator override fun setValue(thisRef: KotprefModel, property: KProperty<*>, value: T) {
             if (thisRef.kotprefInTransaction) {
                 transactionData = value
                 lastUpdate = System.currentTimeMillis()
@@ -158,23 +159,23 @@ open class KotprefModel() {
             }
         }
 
-        abstract internal fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences) : T
-        abstract internal fun setToPreference(property: PropertyMetadata, value: T, preference: SharedPreferences)
-        abstract internal fun setToEditor(property: PropertyMetadata, value: T, editor: SharedPreferences.Editor)
+        abstract internal fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T
+        abstract internal fun setToPreference(property: KProperty<*>, value: T, preference: SharedPreferences)
+        abstract internal fun setToEditor(property: KProperty<*>, value: T, editor: SharedPreferences.Editor)
     }
 
 
     private inner class StringPrefVar(val default: String, val key: String?) : PrefVar<String>() {
 
-        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): String {
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String {
             return preference.getString(key ?: property.name, default)
         }
 
-        override fun setToPreference(property: PropertyMetadata, value: String, preference: SharedPreferences) {
+        override fun setToPreference(property: KProperty<*>, value: String, preference: SharedPreferences) {
             preference.edit().putString(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(property: PropertyMetadata, value: String, editor: SharedPreferences.Editor) {
+        override fun setToEditor(property: KProperty<*>, value: String, editor: SharedPreferences.Editor) {
             editor.putString(key ?: property.name, value)
         }
     }
@@ -182,15 +183,15 @@ open class KotprefModel() {
 
     private inner class IntPrefVar(val default: Int, val key: String?) : PrefVar<Int>() {
 
-        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Int {
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Int {
             return preference.getInt(key ?: property.name, default)
         }
 
-        override fun setToPreference(property: PropertyMetadata, value: Int, preference: SharedPreferences) {
+        override fun setToPreference(property: KProperty<*>, value: Int, preference: SharedPreferences) {
             preference.edit().putInt(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(property: PropertyMetadata, value: Int, editor: SharedPreferences.Editor) {
+        override fun setToEditor(property: KProperty<*>, value: Int, editor: SharedPreferences.Editor) {
             editor.putInt(key ?: property.name, value)
         }
     }
@@ -198,15 +199,15 @@ open class KotprefModel() {
 
     private inner class LongPrefVar(val default: Long, val key: String?) : PrefVar<Long>() {
 
-        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Long {
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Long {
             return preference.getLong(key ?: property.name, default)
         }
 
-        override fun setToPreference(property: PropertyMetadata, value: Long, preference: SharedPreferences) {
+        override fun setToPreference(property: KProperty<*>, value: Long, preference: SharedPreferences) {
             preference.edit().putLong(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(property: PropertyMetadata, value: Long, editor: SharedPreferences.Editor) {
+        override fun setToEditor(property: KProperty<*>, value: Long, editor: SharedPreferences.Editor) {
             editor.putLong(key ?: property.name, value)
         }
     }
@@ -214,15 +215,15 @@ open class KotprefModel() {
 
     private inner class FloatPrefVar(val default: Float, val key: String?) : PrefVar<Float>() {
 
-        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Float {
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Float {
             return preference.getFloat(key ?: property.name, default)
         }
 
-        override fun setToPreference(property: PropertyMetadata, value: Float, preference: SharedPreferences) {
+        override fun setToPreference(property: KProperty<*>, value: Float, preference: SharedPreferences) {
             preference.edit().putFloat(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(property: PropertyMetadata, value: Float, editor: SharedPreferences.Editor) {
+        override fun setToEditor(property: KProperty<*>, value: Float, editor: SharedPreferences.Editor) {
             editor.putFloat(key ?: property.name, value)
         }
     }
@@ -230,15 +231,15 @@ open class KotprefModel() {
 
     private inner class BooleanPrefVar(val default: Boolean, val key: String?) : PrefVar<Boolean>() {
 
-        override fun getFromPreference(property: PropertyMetadata, preference: SharedPreferences): Boolean {
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Boolean {
             return preference.getBoolean(key ?: property.name, default)
         }
 
-        override fun setToPreference(property: PropertyMetadata, value: Boolean, preference: SharedPreferences) {
+        override fun setToPreference(property: KProperty<*>, value: Boolean, preference: SharedPreferences) {
             preference.edit().putBoolean(key ?: property.name, value).apply()
         }
 
-        override fun setToEditor(property: PropertyMetadata, value: Boolean, editor: SharedPreferences.Editor) {
+        override fun setToEditor(property: KProperty<*>, value: Boolean, editor: SharedPreferences.Editor) {
             editor.putBoolean(key ?: property.name, value)
         }
     }
@@ -249,7 +250,7 @@ open class KotprefModel() {
         private var stringSet: MutableSet<String>? = null
         private var lastUpdate: Long = 0L
 
-        operator override fun get(thisRef: KotprefModel, property: PropertyMetadata): MutableSet<String> {
+        operator override fun getValue(thisRef: KotprefModel, property: KProperty<*>): MutableSet<String> {
             if (stringSet == null || lastUpdate < kotprefTransactionStartTime) {
                 val prefSet = kotprefPreference.getStringSet(key ?: property.name, null)
                 stringSet = PrefMutableSet(prefSet ?: default.invoke().toMutableSet(), key ?: property.name)
@@ -281,57 +282,57 @@ open class KotprefModel() {
             }
         }
 
-        override fun add(e: String): Boolean {
+        override fun add(element: String): Boolean {
             if (kotprefInTransaction) {
-                val result = transactionData!!.add(e)
+                val result = transactionData!!.add(element)
                 kotprefEditor!!.putStringSet(key, transactionData, this)
                 return result
             }
-            val result = set.add(e)
+            val result = set.add(element)
             kotprefPreference.edit().putStringSet(key, set).apply()
             return result
         }
 
-        override fun addAll(c: Collection<String>): Boolean {
+        override fun addAll(elements: Collection<String>): Boolean {
             if (kotprefInTransaction) {
-                val result = transactionData!!.addAll(c)
+                val result = transactionData!!.addAll(elements)
                 kotprefEditor!!.putStringSet(key, transactionData, this)
                 return result
             }
-            val result = set.addAll(c)
+            val result = set.addAll(elements)
             kotprefPreference.edit().putStringSet(key, set).apply()
             return result
         }
 
-        override fun remove(o: Any?): Boolean {
+        override fun remove(element: String): Boolean {
             if (kotprefInTransaction) {
-                val result = transactionData!!.remove(o)
+                val result = transactionData!!.remove(element)
                 kotprefEditor!!.putStringSet(key, transactionData, this)
                 return result
             }
-            val result = set.remove(o)
+            val result = set.remove(element)
             kotprefPreference.edit().putStringSet(key, set).apply()
             return result
         }
 
-        override fun removeAll(c: Collection<Any?>): Boolean {
+        override fun removeAll(elements: Collection<String>): Boolean {
             if (kotprefInTransaction) {
-                val result = transactionData!!.removeAll(c)
+                val result = transactionData!!.removeAll(elements)
                 kotprefEditor!!.putStringSet(key, transactionData, this)
                 return result
             }
-            val result = set.removeAll(c)
+            val result = set.removeAll(elements)
             kotprefPreference.edit().putStringSet(key, set).apply()
             return result
         }
 
-        override fun retainAll(c: Collection<Any?>): Boolean {
+        override fun retainAll(elements: Collection<String>): Boolean {
             if (kotprefInTransaction) {
-                val result = transactionData!!.retainAll(c)
+                val result = transactionData!!.retainAll(elements)
                 kotprefEditor!!.putStringSet(key, transactionData, this)
                 return result
             }
-            val result = set.retainAll(c)
+            val result = set.retainAll(elements)
             kotprefPreference.edit().putStringSet(key, set).apply()
             return result
         }
@@ -346,18 +347,18 @@ open class KotprefModel() {
             kotprefPreference.edit().putStringSet(key, set).apply()
         }
 
-        override fun contains(o: Any?): Boolean {
+        override fun contains(element: String): Boolean {
             if (kotprefInTransaction) {
-                return transactionData!!.contains(o)
+                return element in transactionData!!
             }
-            return set.contains(o)
+            return element in set
         }
 
-        override fun containsAll(c: Collection<Any?>): Boolean {
+        override fun containsAll(elements: Collection<String>): Boolean {
             if (kotprefInTransaction) {
-                return transactionData!!.containsAll(c)
+                return transactionData!!.containsAll(elements)
             }
-            return set.containsAll(c)
+            return set.containsAll(elements)
         }
 
         override fun iterator(): MutableIterator<String> {
@@ -367,11 +368,12 @@ open class KotprefModel() {
             return set.iterator()
         }
 
-        override fun size(): Int {
-            if (kotprefInTransaction) {
-                return transactionData!!.size()
+        override val size: Int
+            get() {
+                if (kotprefInTransaction) {
+                    return transactionData!!.size
+                }
+                return set.size
             }
-            return set.size()
-        }
     }
 }

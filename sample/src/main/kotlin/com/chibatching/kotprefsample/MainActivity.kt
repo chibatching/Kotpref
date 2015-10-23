@@ -13,11 +13,11 @@ public class MainActivity : AppCompatActivity() {
 
         Kotpref.init(this)
 
-        Log.d(javaClass.getSimpleName(), "User name: ${UserInfo.name}")
-        Log.d(javaClass.getSimpleName(), "User age: ${UserInfo.age}")
-        Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
-        Log.d(javaClass.getSimpleName(), "User rate: ${UserInfo.rate}")
-        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize[$i]: ${s}") }
+        Log.d(javaClass.simpleName, "User name: ${UserInfo.name}")
+        Log.d(javaClass.simpleName, "User age: ${UserInfo.age}")
+        Log.d(javaClass.simpleName, "User high score: ${UserInfo.highScore}")
+        Log.d(javaClass.simpleName, "User rate: ${UserInfo.rate}")
+        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: ${s}") }
 
         UserInfo.name = "chibatching"
         UserInfo.age = 30
@@ -27,11 +27,11 @@ public class MainActivity : AppCompatActivity() {
         UserInfo.prizes.add("Silver")
         UserInfo.prizes.add("Gold")
 
-        Log.d(javaClass.getSimpleName(), "User name: ${UserInfo.name}")
-        Log.d(javaClass.getSimpleName(), "User age: ${UserInfo.age}")
-        Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
-        Log.d(javaClass.getSimpleName(), "User rate: ${UserInfo.rate}")
-        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize[$i]: ${s}") }
+        Log.d(javaClass.simpleName, "User name: ${UserInfo.name}")
+        Log.d(javaClass.simpleName, "User age: ${UserInfo.age}")
+        Log.d(javaClass.simpleName, "User high score: ${UserInfo.highScore}")
+        Log.d(javaClass.simpleName, "User rate: ${UserInfo.rate}")
+        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: ${s}") }
 
         Kotpref.bulk(UserInfo) {
             name = "chibatching Jr"
@@ -42,10 +42,10 @@ public class MainActivity : AppCompatActivity() {
             prizes.add("New Born")
         }
 
-        Log.d(javaClass.getSimpleName(), "User name: ${UserInfo.name}")
-        Log.d(javaClass.getSimpleName(), "User age: ${UserInfo.age}")
-        Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
-        Log.d(javaClass.getSimpleName(), "User rate: ${UserInfo.rate}")
-        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize[$i]: ${s}") }
+        Log.d(javaClass.simpleName, "User name: ${UserInfo.name}")
+        Log.d(javaClass.simpleName, "User age: ${UserInfo.age}")
+        Log.d(javaClass.simpleName, "User high score: ${UserInfo.highScore}")
+        Log.d(javaClass.simpleName, "User rate: ${UserInfo.rate}")
+        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: ${s}") }
     }
 }
