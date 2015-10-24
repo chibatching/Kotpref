@@ -1,22 +1,25 @@
 package com.chibatching.kotpref
 
 import android.content.Context
-import android.content.SharedPreferences
+import android.support.test.InstrumentationRegistry
+import android.support.test.runner.AndroidJUnit4
 import android.test.AndroidTestCase
+import org.junit.After
+import org.junit.Before
+import org.junit.Test
+import org.junit.runner.RunWith
 import java.util.*
-import kotlin.test.assertNotEquals
 
-/**
- * [Testing Fundamentals](http://d.android.com/tools/testing/testing_android.html)
- */
+
+@RunWith(AndroidJUnit4::class)
 public class KotprefBasicTest : AndroidTestCase() {
 
     object Example : KotprefModel() {
-        var testIntVar: Int by intPrefVar(Int.MAX_VALUE)
-        var testLongVar: Long by longPrefVar(Long.MAX_VALUE)
-        var testFloatVar: Float by floatPrefVar(Float.MAX_VALUE)
-        var testBooleanVar: Boolean by booleanPrefVar(true)
-        var testStringVar: String by stringPrefVar("Default string")
+        var testIntVar: Int by intPrefVar()
+        var testLongVar: Long by longPrefVar()
+        var testFloatVar: Float by floatPrefVar()
+        var testBooleanVar: Boolean by booleanPrefVar()
+        var testStringVar: String by stringPrefVar()
         val testStringSetVal: MutableSet<String> by stringSetPrefVal(TreeSet<String>())
         val testLazyDefaultSS: MutableSet<String> by stringSetPrefVal {
             val defSet = LinkedHashSet<String>()
@@ -27,196 +30,171 @@ public class KotprefBasicTest : AndroidTestCase() {
         }
     }
 
-    fun SharedPreferences.getTestInt() = getInt("testIntVar", Int.MAX_VALUE)
-    fun SharedPreferences.getTestLong() = getLong("testLongVar", Long.MAX_VALUE)
-    fun SharedPreferences.getTestFloat() = getFloat("testFloatVar", Float.MAX_VALUE)
-    fun SharedPreferences.getTestBoolean() = getBoolean("testBooleanVar", true)
-    fun SharedPreferences.getTestString() = getString("testStringVar", "Default string")
-    fun SharedPreferences.getTestStringSet() = getStringSet("testStringSetVal", TreeSet<String>())
-
-    override fun setUp() {
+    @Before
+    override public fun setUp() {
+        super.setUp()
+        context = InstrumentationRegistry.getTargetContext()
         Kotpref.init(context)
         context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE).edit().clear().commit()
     }
 
-    public fun testIntPrefVar() {
-        // Init model
+    @After
+    override public fun tearDown() {
         Example.clear()
+        super.tearDown()
+    }
 
+    @Test
+    public fun testIntPrefVarDefaultValue() {
+        Example.clear()
+        assertEquals(0, Example.testIntVar)
+    }
+
+    @Test
+    public fun testIntPrefVarDelegation() {
+        Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
-        assertEquals(Int.MAX_VALUE, Example.testIntVar)
 
         Example.testIntVar = -922
-        assertEquals(pref.getTestInt(), Example.testIntVar)
-        assertEquals(pref.getTestInt(), -922)
-
+        assertPreferenceEquals(pref, "testIntVar", -922, Example.testIntVar)
         Example.testIntVar = 4320
-        assertEquals(pref.getTestInt(), Example.testIntVar)
-        assertEquals(pref.getTestInt(), 4320)
-
-        Example.clear()
-        assertEquals(Int.MAX_VALUE, Example.testIntVar)
+        assertPreferenceEquals(pref, "testIntVar", 4320, Example.testIntVar)
     }
 
-    public fun testLongPrefVar() {
-        // Init model
+    @Test
+    public fun testLongPrefVarDefaultValue() {
         Example.clear()
+        assertEquals(0L, Example.testLongVar)
+    }
 
+    @Test
+    public fun testLongPrefVarDelegation() {
+        Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
-        assertEquals(Long.MAX_VALUE, Example.testLongVar)
 
         Example.testLongVar = 83109402L
-        assertEquals(pref.getTestLong(), Example.testLongVar)
-        assertEquals(pref.getTestLong(), 83109402L)
-
+        assertPreferenceEquals(pref, "testLongVar", 83109402L, Example.testLongVar)
         Example.testLongVar = -43824L
-        assertEquals(pref.getTestLong(), Example.testLongVar)
-        assertEquals(pref.getTestLong(), -43824L)
-
-        Example.clear()
-        assertEquals(Long.MAX_VALUE, Example.testLongVar)
+        assertPreferenceEquals(pref, "testLongVar", -43824L, Example.testLongVar)
     }
 
-    public fun testFloatPrefVar() {
-        // Init model
+    @Test
+    public fun testFloatPrefVarDefaultValue() {
         Example.clear()
+        assertEquals(0F, Example.testFloatVar)
+    }
 
+    @Test
+    public fun testFloatPrefVar() {
+        Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
-        assertEquals(Float.MAX_VALUE, Example.testFloatVar)
 
         Example.testFloatVar = 78422.214F
-        assertEquals(pref.getTestFloat(), Example.testFloatVar)
-        assertEquals(pref.getTestFloat(), 78422.214F)
-
+        assertPreferenceEquals(pref, "testFloatVar", 78422.214F, Example.testFloatVar)
         Example.testFloatVar = -0.32394F
-        assertEquals(pref.getTestFloat(), Example.testFloatVar)
-        assertEquals(pref.getTestFloat(), -0.32394F)
-
-        pref.edit().remove("testFloatVar").apply()
-        assertEquals(Float.MAX_VALUE, Example.testFloatVar)
+        assertPreferenceEquals(pref, "testFloatVar", -0.32394F, Example.testFloatVar)
     }
 
-    public fun testBooleanPrefVar() {
-        // Init model
+    @Test
+    public fun testBooleanPrefVarDefaultValue() {
         Example.clear()
+        assertEquals(false, Example.testBooleanVar)
+    }
 
+    @Test
+    public fun testBooleanPrefVar() {
+        Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
-        assertEquals(true, Example.testBooleanVar)
-
-        Example.testBooleanVar = false
-        assertEquals(pref.getTestBoolean(), Example.testBooleanVar)
-        assertEquals(pref.getTestBoolean(), false)
 
         Example.testBooleanVar = true
-        assertEquals(pref.getTestBoolean(), Example.testBooleanVar)
-        assertEquals(pref.getTestBoolean(), true)
-
-        pref.edit().remove("testBooleanVar").apply()
-        assertEquals(true, Example.testBooleanVar)
+        assertPreferenceEquals(pref, "testBooleanVar", true, Example.testBooleanVar)
+        Example.testBooleanVar = false
+        assertPreferenceEquals(pref, "testBooleanVar", false, Example.testBooleanVar)
     }
 
-    public fun testStringPrefVar() {
-        // Init model
+    @Test
+    public fun testStringPrefVarDefaultValue() {
         Example.clear()
+        assertEquals("", Example.testStringVar)
+    }
 
+    @Test
+    public fun testStringPrefVar() {
+        Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
-        assertEquals("Default string", Example.testStringVar)
 
         Example.testStringVar = "Ohayo!"
-        assertEquals(pref.getTestString(), Example.testStringVar)
-        assertEquals(pref.getTestString(), "Ohayo!")
-        assertEquals(Example.testStringVar, "Ohayo!")
-
+        assertPreferenceEquals(pref, "testStringVar", "Ohayo!", Example.testStringVar)
         Example.testStringVar = "Oyasumi!"
-        assertEquals(pref.getTestString(), Example.testStringVar)
-        assertEquals(pref.getTestString(), "Oyasumi!")
-        assertEquals(Example.testStringVar, "Oyasumi!")
-
-        pref.edit().remove("testStringVar").apply()
-        assertEquals("Default string", Example.testStringVar)
+        assertPreferenceEquals(pref, "testStringVar", "Oyasumi!", Example.testStringVar)
     }
 
-    public fun testStringSetPrefVar() {
-        // Init model
+    @Test fun testStringSetPrefVarDefaultValue() {
         Example.clear()
-
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
         assertEquals(0, Example.testStringSetVal.size)
-
-        Example.testStringSetVal.add("test1")
-        Example.testStringSetVal.add("test2")
-        Example.testStringSetVal.add("test3")
-        assertEquals(3, Example.testStringSetVal.size)
-        assertEquals(3, pref.getTestStringSet().size)
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertTrue(pref.getTestStringSet().contains("test2"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertTrue(Example.testStringSetVal.contains("test2"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
-
-        Example.testStringSetVal.remove("test2")
-        assertEquals(2, Example.testStringSetVal.size)
-        assertEquals(2, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertFalse(Example.testStringSetVal.contains("test2"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertFalse(pref.getTestStringSet().contains("test2"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-
-        val treeSet = TreeSet<String>()
-        treeSet.add("test4")
-        treeSet.add("test5")
-        treeSet.add("test6")
-
-        Example.testStringSetVal.addAll(treeSet)
-        assertEquals(5, Example.testStringSetVal.size)
-        assertEquals(5, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
-        assertTrue(Example.testStringSetVal.containsAll(treeSet))
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-        assertTrue(pref.getTestStringSet().containsAll(treeSet))
-
-        Example.testStringSetVal.removeAll(treeSet)
-        assertEquals(2, Example.testStringSetVal.size)
-        assertEquals(2, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-
-        Example.testStringSetVal.addAll(treeSet)
-        Example.testStringSetVal.retainAll(treeSet)
-        assertEquals(treeSet.size, Example.testStringSetVal.size)
-        assertEquals(treeSet.size, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.containsAll(treeSet))
-        assertTrue(pref.getTestStringSet().containsAll(treeSet))
     }
 
-    public fun testLazyDefaultStringSet() {
-        // Init model
+    @Test
+    public fun testStringSetPrefVar() {
         Example.clear()
-
-        assertEquals(Example.testLazyDefaultSS.size, 3)
-        assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 1"))
-        assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 2"))
-        assertTrue(Example.testLazyDefaultSS.contains("Lazy set item 3"))
-    }
-
-    public fun testBulkEdit() {
-        // Init model
-        Example.clear()
-
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
+
+        val testSet = TreeSet<String>()
+        testSet.add("test1")
+        testSet.add("test2")
+        testSet.add("test3")
+
+        testSet.forEach { Example.testStringSetVal.add(it) }
+        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
+
+        testSet.remove("test2")
+        Example.testStringSetVal.remove("test2")
+        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
+
+        testSet.add("test4")
+        testSet.add("test5")
+        testSet.add("test6")
+        Example.testStringSetVal.addAll(testSet)
+        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
+
+        val removeSet = TreeSet<String>()
+        removeSet.remove("test2")
+        removeSet.remove("test5")
+
+        testSet.removeAll(removeSet)
+        Example.testStringSetVal.removeAll(removeSet)
+        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
+
+        testSet.add("test5")
+        testSet.retainAll(removeSet)
+        Example.testStringSetVal.add("test5")
+        Example.testStringSetVal.retainAll(removeSet)
+        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
+    }
+
+    @Test
+    public fun testLazyDefaultStringSet() {
+        Example.clear()
+
+        val testSet = LinkedHashSet<String>()
+        testSet.add("Lazy set item 1")
+        testSet.add("Lazy set item 2")
+        testSet.add("Lazy set item 3")
+
+        assertTrue(testSet.containsAll(Example.testLazyDefaultSS))
+        assertEquals(testSet.size, Example.testLazyDefaultSS.size)
+    }
+
+    @Test
+    public fun testBulkEdit() {
+        Example.clear()
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
+
+        Example.testIntVar = -500
+        Example.testLongVar = -3000L
+        Example.testFloatVar = -3.8F
+        Example.testBooleanVar = true
+        Example.testStringVar = "committed data"
 
         Kotpref.bulk(Example) {
             testIntVar = 1024
@@ -225,151 +203,102 @@ public class KotprefBasicTest : AndroidTestCase() {
             testBooleanVar = false
             testStringVar = "bulk edit"
 
-            assertEquals(1024, testIntVar)
-            assertEquals(Int.MAX_VALUE, pref.getTestInt())
-            assertNotEquals(Int.MAX_VALUE, testIntVar)
-
-            assertEquals(422098523L, testLongVar)
-            assertEquals(Long.MAX_VALUE, pref.getTestLong())
-            assertNotEquals(Long.MAX_VALUE, testLongVar)
-
-            assertEquals(43093.301F, testFloatVar)
-            assertEquals(Float.MAX_VALUE, pref.getTestFloat())
-            assertNotEquals(Float.MAX_VALUE, testFloatVar)
-
-            assertFalse(testBooleanVar)
-            assertTrue(pref.getTestBoolean())
-            assertFalse(testBooleanVar)
-
-            assertEquals("bulk edit", testStringVar)
-            assertEquals("Default string", pref.getTestString())
-            assertNotEquals("Default string", testStringVar)
+            assertPreferenceInTransaction(pref, "testIntVar", -500, 1024, testIntVar)
+            assertPreferenceInTransaction(pref, "testLongVar", -3000L, 422098523L, testLongVar)
+            assertPreferenceInTransaction(pref, "testFloatVar", -3.8F, 43093.301F, testFloatVar)
+            assertPreferenceInTransaction(pref, "testBooleanVar", true, false, testBooleanVar)
+            assertPreferenceInTransaction(pref, "testStringVar", "committed data", "bulk edit", testStringVar)
         }
 
-        assertEquals(1024, Example.testIntVar)
-        assertEquals(1024, pref.getTestInt())
-        assertEquals(422098523L, Example.testLongVar)
-        assertEquals(422098523L, pref.getTestLong())
-        assertEquals(43093.301F, Example.testFloatVar)
-        assertEquals(43093.301F, pref.getTestFloat())
-        assertFalse(Example.testBooleanVar)
-        assertFalse(pref.getTestBoolean())
-        assertEquals("bulk edit", Example.testStringVar)
-        assertEquals("bulk edit", pref.getTestString())
+        assertPreferenceEquals(pref, "testIntVar", 1024, Example.testIntVar)
+        assertPreferenceEquals(pref, "testLongVar", 422098523L, Example.testLongVar)
+        assertPreferenceEquals(pref, "testFloatVar", 43093.301F, Example.testFloatVar)
+        assertPreferenceEquals(pref, "testBooleanVar", false, Example.testBooleanVar)
+        assertPreferenceEquals(pref, "testStringVar", "bulk edit", Example.testStringVar)
     }
 
+    @Test
     public fun testBulkEditStringSet() {
-        // Init model
         Example.clear()
-
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
+        var testSet = TreeSet<String>()
+        val tranSet = TreeSet<String>()
+
+        testSet.add("Initial item")
+        tranSet.addAll(testSet)
+        Example.testStringSetVal.addAll(testSet)
+
         Kotpref.bulk(Example) {
+            tranSet.add("test1")
+            tranSet.add("test2")
+            tranSet.add("test3")
+
             testStringSetVal.add("test1")
             testStringSetVal.add("test2")
             testStringSetVal.add("test3")
-            assertEquals(3, testStringSetVal.size)
-            assertEquals(0, pref.getTestStringSet().size)
-            assertFalse(pref.getTestStringSet().contains("test1"))
-            assertFalse(pref.getTestStringSet().contains("test2"))
-            assertFalse(pref.getTestStringSet().contains("test3"))
-            assertTrue(testStringSetVal.contains("test1"))
-            assertTrue(testStringSetVal.contains("test2"))
-            assertTrue(testStringSetVal.contains("test3"))
-        }
 
-        assertEquals(3, Example.testStringSetVal.size)
-        assertEquals(3, pref.getTestStringSet().size)
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertTrue(pref.getTestStringSet().contains("test2"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertTrue(Example.testStringSetVal.contains("test2"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
+            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
+        }
+        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
+        testSet.addAll(tranSet)
+        testSet.retainAll(tranSet)
 
         Kotpref.bulk(Example) {
+            tranSet.remove("test2")
             testStringSetVal.remove("test2")
 
-            assertEquals(2, testStringSetVal.size)
-            assertEquals(3, pref.getTestStringSet().size)
-            assertTrue(testStringSetVal.contains("test1"))
-            assertFalse(testStringSetVal.contains("test2"))
-            assertTrue(testStringSetVal.contains("test3"))
-            assertTrue(pref.getTestStringSet().contains("test1"))
-            assertTrue(pref.getTestStringSet().contains("test2"))
-            assertTrue(pref.getTestStringSet().contains("test3"))
+            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
         }
-
-        assertEquals(2, Example.testStringSetVal.size)
-        assertEquals(2, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertFalse(Example.testStringSetVal.contains("test2"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertFalse(pref.getTestStringSet().contains("test2"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-
-
-        val treeSet = TreeSet<String>()
-        treeSet.add("test4")
-        treeSet.add("test5")
-        treeSet.add("test6")
+        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
+        testSet.addAll(tranSet)
+        testSet.retainAll(tranSet)
 
         Kotpref.bulk(Example) {
-            testStringSetVal.addAll(treeSet)
+            val subSet = TreeSet<String>()
+            subSet.add("test4")
+            subSet.add("test5")
+            subSet.add("test6")
 
-            assertEquals(5, Example.testStringSetVal.size)
-            assertEquals(2, pref.getTestStringSet().size)
-            assertTrue(testStringSetVal.contains("test1"))
-            assertTrue(testStringSetVal.contains("test3"))
-            assertTrue(testStringSetVal.containsAll(treeSet))
-            assertTrue(pref.getTestStringSet().contains("test1"))
-            assertTrue(pref.getTestStringSet().contains("test3"))
-            assertFalse(pref.getTestStringSet().containsAll(treeSet))
+            tranSet.addAll(subSet)
+            testStringSetVal.addAll(subSet)
+
+            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
         }
-
-        assertEquals(5, Example.testStringSetVal.size)
-        assertEquals(5, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
-        assertTrue(Example.testStringSetVal.containsAll(treeSet))
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-        assertTrue(pref.getTestStringSet().containsAll(treeSet))
-
+        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
+        testSet.addAll(tranSet)
+        testSet.retainAll(tranSet)
 
         Kotpref.bulk(Example) {
-            testStringSetVal.removeAll(treeSet)
+            val subSet = TreeSet<String>()
+            subSet.add("test4")
+            subSet.add("test5")
+            subSet.add("test6")
 
-            assertEquals(2, Example.testStringSetVal.size)
-            assertEquals(5, pref.getTestStringSet().size)
-            assertTrue(testStringSetVal.contains("test1"))
-            assertTrue(testStringSetVal.contains("test3"))
-            assertTrue(pref.getTestStringSet().contains("test1"))
-            assertTrue(pref.getTestStringSet().contains("test3"))
-            assertTrue(pref.getTestStringSet().containsAll(treeSet))
+            tranSet.removeAll(subSet)
+            testStringSetVal.removeAll(subSet)
+
+            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
         }
-
-        assertEquals(2, Example.testStringSetVal.size)
-        assertEquals(2, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.contains("test1"))
-        assertTrue(Example.testStringSetVal.contains("test3"))
-        assertTrue(pref.getTestStringSet().contains("test1"))
-        assertTrue(pref.getTestStringSet().contains("test3"))
-
+        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
+        testSet.addAll(tranSet)
+        testSet.retainAll(tranSet)
 
         Kotpref.bulk(Example) {
-            testStringSetVal.addAll(treeSet)
-            testStringSetVal.retainAll(treeSet)
+            val subSet = TreeSet<String>()
+            subSet.add("test4")
+            subSet.add("test5")
+            subSet.add("test6")
 
-            assertEquals(3, testStringSetVal.size)
-            assertEquals(2, pref.getTestStringSet().size)
-            assertTrue(testStringSetVal.containsAll(treeSet))
+            tranSet.addAll(subSet)
+            tranSet.retainAll(subSet)
+            testStringSetVal.addAll(subSet)
+            testStringSetVal.retainAll(subSet)
+
+            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
         }
-
-        assertEquals(3, Example.testStringSetVal.size)
-        assertEquals(3, pref.getTestStringSet().size)
-        assertTrue(Example.testStringSetVal.containsAll(treeSet))
-        assertTrue(pref.getTestStringSet().containsAll(treeSet))
+        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
+        testSet.addAll(tranSet)
+        testSet.retainAll(tranSet)
     }
 }
