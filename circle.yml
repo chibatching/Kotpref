@@ -1,0 +1,13 @@
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter "tool,android-23,build-tools-23.0.1,extra"
+    - echo "sdk.dir=${ANDROID_HOME}" > /home/ubuntu/Kotpref/local.properties
+    - echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=1024m -Xms512m" > gradle.properties
+
+test:
+  override:
+    - emulator -avd circleci-android22 -no-audio -no-window:
+        background: true
+        parallel: true
+    - circle-android wait-for-boot
+    - ./gradlew connectedAndroidTest
