@@ -9,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "0.6.0"
+        versionName "0.7.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -34,7 +34,7 @@ dependencies {
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
 }
 buildscript {
-    ext.kotlin_version = '1.0.0-beta-1038'
+    ext.kotlin_version = '1.0.0-beta-1103'
     repositories {
         mavenCentral()
     }
@@ -49,7 +49,7 @@ repositories {
 
 // Bintray upload
 group = 'com.chibatching'
-version = '0.6.0'
+version = '0.7.0'
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
