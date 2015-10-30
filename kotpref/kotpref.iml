@@ -96,9 +96,9 @@
     <orderEntry type="jdk" jdkName="Android API 23 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" scope="TEST" name="junit-dep-4.10" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-runtime-1.0.0-beta-1103" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="hamcrest-core-1.1" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-runtime-1.0.0-beta-1038" level="project" />
     <orderEntry type="library" exported="" scope="TEST" name="testing-support-lib-0.1" level="project" />
-    <orderEntry type="library" exported="" name="kotlin-stdlib-1.0.0-beta-1038" level="project" />
+    <orderEntry type="library" exported="" name="kotlin-stdlib-1.0.0-beta-1103" level="project" />
   </component>
 </module>
