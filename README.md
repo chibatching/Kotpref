@@ -1,3 +1,5 @@
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0--beta--1103-blue.svg)](https://kotlinlang.org/)
+
 # Kotpref
 
 Android SharedPreference delegation for Kotlin.
@@ -5,7 +7,7 @@ Android SharedPreference delegation for Kotlin.
 ## Install
 
 ```
-compile 'com.chibatching:kotpref:0.6.0'
+compile 'com.chibatching:kotpref:0.7.0'
 ```
 
 ## How to use
