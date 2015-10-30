@@ -1,5 +1,3 @@
-[![Circle CI](https://circleci.com/gh/chibatching/Kotpref/tree/master.svg?style=svg&circle-token=a21811bfd6e2d82b6715d68f9cc5797c8330041f)](https://circleci.com/gh/chibatching/Kotpref/tree/master)
-
 # Kotpref
 
 Android SharedPreference delegation for Kotlin.
