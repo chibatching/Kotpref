@@ -17,7 +17,7 @@ public class MainActivity : AppCompatActivity() {
         Log.d(javaClass.simpleName, "User age: ${UserInfo.age}")
         Log.d(javaClass.simpleName, "User high score: ${UserInfo.highScore}")
         Log.d(javaClass.simpleName, "User rate: ${UserInfo.rate}")
-        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: ${s}") }
+        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: $s") }
 
         UserInfo.name = "chibatching"
         UserInfo.age = 30
@@ -31,7 +31,7 @@ public class MainActivity : AppCompatActivity() {
         Log.d(javaClass.simpleName, "User age: ${UserInfo.age}")
         Log.d(javaClass.simpleName, "User high score: ${UserInfo.highScore}")
         Log.d(javaClass.simpleName, "User rate: ${UserInfo.rate}")
-        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: ${s}") }
+        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: $s") }
 
         Kotpref.bulk(UserInfo) {
             name = "chibatching Jr"
@@ -46,6 +46,6 @@ public class MainActivity : AppCompatActivity() {
         Log.d(javaClass.simpleName, "User age: ${UserInfo.age}")
         Log.d(javaClass.simpleName, "User high score: ${UserInfo.highScore}")
         Log.d(javaClass.simpleName, "User rate: ${UserInfo.rate}")
-        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: ${s}") }
+        UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.simpleName, "prize[$i]: $s") }
     }
 }
