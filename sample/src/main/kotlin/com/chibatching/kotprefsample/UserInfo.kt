@@ -1,6 +1,6 @@
 package com.chibatching.kotprefsample
 
-import com.chibatching.kotpref.*
+import com.chibatching.kotpref.KotprefModel
 import java.util.*
 
 
