@@ -3,7 +3,7 @@ dependencies:
     - emulator -avd circleci-android22 -no-audio -no-window:
         background: true
         parallel: true
-    - echo y | android update sdk --no-ui --all --filter "tool,android-23,build-tools-23.0.1,extra-android-support,extra-android-m2repository"
+    - echo y | android update sdk --no-ui --all --filter "tool,android-23,build-tools-23.0.2,extra-android-support,extra-android-m2repository"
     - echo "sdk.dir=${ANDROID_HOME}" > /home/ubuntu/Kotpref/local.properties
     - echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=1024m -Xms512m" > gradle.properties
 
