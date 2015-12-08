@@ -261,7 +261,7 @@ open class KotprefModel() {
     }
 
 
-    internal inner class PrefMutableSet(var set: MutableSet<String>, val key: String) : MutableSet<String> by set {
+    internal inner class PrefMutableSet(val set: MutableSet<String>, val key: String) : MutableSet<String> by set {
 
         init {
             addAll(set)
@@ -269,9 +269,7 @@ open class KotprefModel() {
 
         private var transactionData: MutableSet<String>? = null
             get() {
-                if (field == null) {
-                    field = set.toMutableSet()
-                }
+                field = field ?: set.toMutableSet()
                 return field
             }
 

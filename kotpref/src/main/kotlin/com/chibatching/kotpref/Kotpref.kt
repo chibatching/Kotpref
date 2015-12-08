@@ -12,11 +12,7 @@ object Kotpref {
      */
     internal var context: Context? = null
         get() {
-            if (field != null) {
-                return field
-            } else {
-                throw IllegalStateException("Kotpref has not been initialized.")
-            }
+            return field ?: throw IllegalStateException("Kotpref has not been initialized.")
         }
         private set
 
