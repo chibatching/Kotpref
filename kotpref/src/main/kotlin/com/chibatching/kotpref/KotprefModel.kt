@@ -254,7 +254,6 @@ open class KotprefModel() {
             if (stringSet == null || lastUpdate < kotprefTransactionStartTime) {
                 val prefSet = kotprefPreference.getStringSet(key ?: property.name, null)
                 stringSet = PrefMutableSet(prefSet ?: default.invoke().toMutableSet(), key ?: property.name)
-                prefSet?.let { stringSet?.addAll(stringSet!!) }
                 lastUpdate = System.currentTimeMillis()
             }
             return stringSet!!
@@ -263,6 +262,10 @@ open class KotprefModel() {
 
 
     internal inner class PrefMutableSet(var set: MutableSet<String>, val key: String) : MutableSet<String> by set {
+
+        init {
+            addAll(set)
+        }
 
         private var transactionData: MutableSet<String>? = null
             get() {

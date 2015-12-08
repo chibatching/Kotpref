@@ -12,31 +12,24 @@ internal class KotprefPreferences(val preferences: SharedPreferences) : SharedPr
 
     internal inner class KotprefEditor(val editor: SharedPreferences.Editor) : SharedPreferences.Editor by editor {
 
-        private var prefStringSet: LinkedList<KotprefModel.PrefMutableSet>? = null
+        private val prefStringSet: LinkedList<KotprefModel.PrefMutableSet> by lazy { LinkedList<KotprefModel.PrefMutableSet>() }
 
         override fun apply() {
             editor.apply()
-            prefStringSet?.forEach {
-                it.syncTransaction()
-            }
-            prefStringSet = null
+            prefStringSet.forEach { it.syncTransaction() }
+            prefStringSet.clear()
         }
 
         override fun commit(): Boolean {
             val result = editor.commit()
-            prefStringSet?.forEach {
-                it.syncTransaction()
-            }
-            prefStringSet = null
+            prefStringSet.forEach { it.syncTransaction() }
+            prefStringSet.clear()
             return result
         }
 
         internal fun putStringSet(key: String?, values: MutableSet<String>?, prefSet: KotprefModel.PrefMutableSet): SharedPreferences.Editor {
             editor.putStringSet(key, values)
-            if (prefStringSet == null) {
-                prefStringSet = LinkedList<KotprefModel.PrefMutableSet>()
-            }
-            prefStringSet?.add(prefSet)
+            prefStringSet.add(prefSet)
             return this
         }
     }
