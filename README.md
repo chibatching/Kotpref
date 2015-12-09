@@ -1,4 +1,4 @@
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0--beta--2423-blue.svg)](https://kotlinlang.org/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0--beta--3595-blue.svg)](https://kotlinlang.org/)
 
 # Kotpref
 
@@ -7,7 +7,7 @@ Android SharedPreference delegation for Kotlin.
 ## Install
 
 ```
-compile 'com.chibatching:kotpref:0.8.0'
+compile 'com.chibatching:kotpref:0.9.0'
 ```
 
 ## How to use
@@ -124,13 +124,6 @@ Override `kotprefMode` property. Default is `Context.MODE_PRIVATE`.
 ```kotlin
 public object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
-```
-
-## Proguard
-
-```
--keepnames class * extends com.chibatching.kotpref.KotprefModel
--dontwarn com.chibatching.kotpref.**
 ```
 
 ## License
