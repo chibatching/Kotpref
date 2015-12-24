@@ -37,7 +37,7 @@ dependencies {
     androidTestCompile 'com.android.support.test:testing-support-lib:0.1'
 }
 buildscript {
-    ext.kotlin_version = '1.0.0-beta-3595'
+    ext.kotlin_version = '1.0.0-beta-4583'
     repositories {
         mavenCentral()
     }
