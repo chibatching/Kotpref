@@ -1,4 +1,4 @@
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0-rc-1036-blue.svg)](https://kotlinlang.org/)
+[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0--rc--1036-blue.svg)](https://kotlinlang.org/)
 
 # Kotpref
 
