@@ -9,7 +9,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 23
         versionCode 1
-        versionName "1.0.0"
+        versionName "1.0.1"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
@@ -52,7 +52,7 @@ repositories {
 
 // Bintray upload
 group = 'com.chibatching'
-version = '1.0.0'
+version = '1.0.1'
 
 apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'com.jfrog.bintray'
@@ -71,7 +71,7 @@ bintray {
     pkg {
         repo = 'maven'
         name = project.name
-        desc = 'SharedPreference delegation for Kotlin.'
+        desc = 'Android SharedPreferences delegation for Kotlin.'
         websiteUrl = siteUrl
         issueTrackerUrl = 'https://github.com/chibatching/kotpref/issues'
         vcsUrl = gitUrl
