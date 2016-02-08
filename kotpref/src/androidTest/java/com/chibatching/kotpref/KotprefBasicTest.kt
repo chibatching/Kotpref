@@ -12,7 +12,7 @@ import java.util.*
 
 
 @RunWith(AndroidJUnit4::class)
-public class KotprefBasicTest : AndroidTestCase() {
+class KotprefBasicTest : AndroidTestCase() {
 
     object Example : KotprefModel() {
         var testIntVar: Int by intPrefVar()
@@ -45,13 +45,13 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testIntPrefVarDefaultValue() {
+    fun testIntPrefVarDefaultValue() {
         Example.clear()
         assertEquals(0, Example.testIntVar)
     }
 
     @Test
-    public fun testIntPrefVarDelegation() {
+    fun testIntPrefVarDelegation() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
@@ -62,13 +62,13 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testLongPrefVarDefaultValue() {
+    fun testLongPrefVarDefaultValue() {
         Example.clear()
         assertEquals(0L, Example.testLongVar)
     }
 
     @Test
-    public fun testLongPrefVarDelegation() {
+    fun testLongPrefVarDelegation() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
@@ -79,13 +79,13 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testFloatPrefVarDefaultValue() {
+    fun testFloatPrefVarDefaultValue() {
         Example.clear()
         assertEquals(0F, Example.testFloatVar)
     }
 
     @Test
-    public fun testFloatPrefVar() {
+    fun testFloatPrefVar() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
@@ -96,13 +96,13 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testBooleanPrefVarDefaultValue() {
+    fun testBooleanPrefVarDefaultValue() {
         Example.clear()
         assertEquals(false, Example.testBooleanVar)
     }
 
     @Test
-    public fun testBooleanPrefVar() {
+    fun testBooleanPrefVar() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
@@ -113,13 +113,13 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testStringPrefVarDefaultValue() {
+    fun testStringPrefVarDefaultValue() {
         Example.clear()
         assertEquals("", Example.testStringVar)
     }
 
     @Test
-    public fun testStringPrefVar() {
+    fun testStringPrefVar() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
@@ -129,13 +129,14 @@ public class KotprefBasicTest : AndroidTestCase() {
         assertPreferenceEquals(pref, "testStringVar", "Oyasumi!", Example.testStringVar)
     }
 
-    @Test fun testStringSetPrefVarDefaultValue() {
+    @Test
+    fun testStringSetPrefVarDefaultValue() {
         Example.clear()
         assertEquals(0, Example.testStringSetVal.size)
     }
 
     @Test
-    public fun testStringSetPrefVar() {
+    fun testStringSetPrefVar() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
@@ -173,7 +174,7 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testLazyDefaultStringSet() {
+    fun testLazyDefaultStringSet() {
         Example.clear()
 
         val testSet = LinkedHashSet<String>()
@@ -186,7 +187,7 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testBulkEdit() {
+    fun testBulkEdit() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 
@@ -218,7 +219,7 @@ public class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testBulkEditStringSet() {
+    fun testBulkEditStringSet() {
         Example.clear()
         val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
 

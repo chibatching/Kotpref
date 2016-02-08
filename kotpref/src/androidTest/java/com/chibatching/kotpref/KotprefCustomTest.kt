@@ -11,7 +11,7 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-public class KotprefCustomTest : AndroidTestCase() {
+class KotprefCustomTest : AndroidTestCase() {
 
     companion object {
         val PREFERENCE_NAME = "custom_example"
@@ -39,31 +39,31 @@ public class KotprefCustomTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testIntDefault() {
+    fun testIntDefault() {
         CustomExample.clear()
         assertEquals(Int.MAX_VALUE, CustomExample.testIntVar)
     }
 
     @Test
-    public fun testLongDefault() {
+    fun testLongDefault() {
         CustomExample.clear()
         assertEquals(Long.MAX_VALUE, CustomExample.testLongVar)
     }
 
     @Test
-    public fun testFloatDefault() {
+    fun testFloatDefault() {
         CustomExample.clear()
         assertEquals(Float.MAX_VALUE, CustomExample.testFloatVar)
     }
 
     @Test
-    public fun testBooleanDefault() {
+    fun testBooleanDefault() {
         CustomExample.clear()
         assertEquals(true, CustomExample.testBooleanVar)
     }
 
     @Test
-    public fun testPreferenceName() {
+    fun testPreferenceName() {
         CustomExample.clear()
 
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
@@ -72,7 +72,7 @@ public class KotprefCustomTest : AndroidTestCase() {
     }
 
     @Test
-    public fun testCustomKey() {
+    fun testCustomKey() {
         CustomExample.clear()
 
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)

@@ -4,7 +4,7 @@ import com.chibatching.kotpref.KotprefModel
 import java.util.*
 
 
-public object UserInfo : KotprefModel() {
+object UserInfo : KotprefModel() {
     var name: String by stringPrefVar()
     var age: Int by intPrefVar()
     var highScore: Long by longPrefVar()
