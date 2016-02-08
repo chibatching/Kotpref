@@ -20,6 +20,7 @@ class KotprefBasicTest : AndroidTestCase() {
         var testFloatVar: Float by floatPrefVar()
         var testBooleanVar: Boolean by booleanPrefVar()
         var testStringVar: String by stringPrefVar()
+        var testStringNullableVar: String? by stringNullablePrefVar()
         val testStringSetVal: MutableSet<String> by stringSetPrefVal(TreeSet<String>())
         val testLazyDefaultSS: MutableSet<String> by stringSetPrefVal {
             val defSet = LinkedHashSet<String>()
@@ -127,6 +128,23 @@ class KotprefBasicTest : AndroidTestCase() {
         assertPreferenceEquals(pref, "testStringVar", "Ohayo!", Example.testStringVar)
         Example.testStringVar = "Oyasumi!"
         assertPreferenceEquals(pref, "testStringVar", "Oyasumi!", Example.testStringVar)
+    }
+
+    @Test
+    fun testStringNullablePrefVarDefaultValue() {
+        Example.clear()
+        assertEquals(null, Example.testStringNullableVar)
+    }
+
+    @Test
+    fun testStringNullablePrefVar() {
+        Example.clear()
+        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
+
+        Example.testStringNullableVar = "Ohayo!"
+        assertPreferenceEquals(pref, "testStringNullableVar", "Ohayo!", Example.testStringNullableVar)
+        Example.testStringNullableVar = null
+        assertPreferenceEquals(pref, "testStringVar", null, Example.testStringNullableVar)
     }
 
     @Test
