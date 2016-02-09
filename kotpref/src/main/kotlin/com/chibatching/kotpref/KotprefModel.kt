@@ -152,6 +152,7 @@ open class KotprefModel() {
                 transactionData = getFromPreference(property, kotprefPreference)
                 lastUpdate = System.currentTimeMillis()
             }
+            @Suppress("UNCHECKED_CAST")
             return transactionData as T
         }
 
