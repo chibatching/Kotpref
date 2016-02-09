@@ -6,6 +6,7 @@ import java.util.*
 
 object UserInfo : KotprefModel() {
     var name: String by stringPrefVar()
+    var code: String? by stringNullablePrefVar()
     var age: Int by intPrefVar()
     var highScore: Long by longPrefVar()
     var rate: Float by floatPrefVar()

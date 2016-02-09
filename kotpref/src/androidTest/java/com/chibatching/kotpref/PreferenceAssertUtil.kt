@@ -28,7 +28,7 @@ fun assertPreferenceEquals(preferences: SharedPreferences, key: String, expected
     AndroidTestCase.assertEquals("Actual value is not same with expected value.", expected, actual)
 }
 
-fun assertPreferenceEquals(preferences: SharedPreferences, key: String, expected: String, actual: String) {
+fun assertPreferenceEquals(preferences: SharedPreferences, key: String, expected: String?, actual: String?) {
     val prefValue = preferences.getString(key, null)
     AndroidTestCase.assertEquals("Preference value is not same with expected value.", expected, prefValue)
     AndroidTestCase.assertEquals("Actual value is not same with expected value.", expected, actual)

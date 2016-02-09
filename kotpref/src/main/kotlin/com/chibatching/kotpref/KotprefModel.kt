@@ -3,7 +3,6 @@ package com.chibatching.kotpref
 import android.content.Context
 import android.content.SharedPreferences
 import java.util.*
-import kotlin.properties.Delegates
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -58,6 +57,14 @@ open class KotprefModel() {
      */
     protected fun stringPrefVar(default: String = "", key: String? = null)
             : ReadWriteProperty<KotprefModel, String> = StringPrefVar(default, key)
+
+    /**
+     * Delegate nullable string shared preference property.
+     * @param default default string value
+     * @param key custom preference key
+     */
+    protected fun stringNullablePrefVar(default: String? = null, key: String? = null)
+            : ReadWriteProperty<KotprefModel, String?> = StringNullablePrefVar(default, key)
 
     /**
      * Delegate Int shared preference property.
@@ -132,11 +139,10 @@ open class KotprefModel() {
         kotprefInTransaction = false
     }
 
-
-    abstract inner class PrefVar<T : Any>() : ReadWriteProperty<KotprefModel, T> {
+    abstract inner class PrefVar<T : Any?>() : ReadWriteProperty<KotprefModel, T> {
 
         private var lastUpdate: Long = 0
-        private var transactionData: T by Delegates.notNull<T>()
+        private var transactionData: Any? = null
 
         operator override fun getValue(thisRef: KotprefModel, property: KProperty<*>): T {
             if (!thisRef.kotprefInTransaction) {
@@ -146,7 +152,8 @@ open class KotprefModel() {
                 transactionData = getFromPreference(property, kotprefPreference)
                 lastUpdate = System.currentTimeMillis()
             }
-            return transactionData
+            @Suppress("UNCHECKED_CAST")
+            return transactionData as T
         }
 
         operator override fun setValue(thisRef: KotprefModel, property: KProperty<*>, value: T) {
@@ -180,6 +187,20 @@ open class KotprefModel() {
         }
     }
 
+    private inner class StringNullablePrefVar(val default: String?, val key: String?) : PrefVar<String?>() {
+
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String? {
+            return preference.getString(key ?: property.name, default)
+        }
+
+        override fun setToPreference(property: KProperty<*>, value: String?, preference: SharedPreferences) {
+            preference.edit().putString(key ?: property.name, value).apply()
+        }
+
+        override fun setToEditor(property: KProperty<*>, value: String?, editor: SharedPreferences.Editor) {
+            editor.putString(key ?: property.name, value)
+        }
+    }
 
     private inner class IntPrefVar(val default: Int, val key: String?) : PrefVar<Int>() {
 
