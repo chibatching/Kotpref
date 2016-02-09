@@ -24,6 +24,7 @@ class KotprefCustomTest : AndroidTestCase() {
         var testFloatVar: Float by floatPrefVar(Float.MAX_VALUE)
         var testBooleanVar: Boolean by booleanPrefVar(true)
         var testStringVar: String by stringPrefVar(default = "default", key = "test_string_var")
+        var testStringNullableVar: String? by stringNullablePrefVar(default = "nullable default")
     }
 
     @Before
@@ -60,6 +61,12 @@ class KotprefCustomTest : AndroidTestCase() {
     fun testBooleanDefault() {
         CustomExample.clear()
         assertEquals(true, CustomExample.testBooleanVar)
+    }
+
+    @Test
+    fun testStringNullableDefault() {
+        CustomExample.clear()
+        assertEquals("nullable default", CustomExample.testStringNullableVar)
     }
 
     @Test
