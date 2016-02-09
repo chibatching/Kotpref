@@ -47,12 +47,12 @@ UserInfo.prizes.add("Bronze")
 UserInfo.prizes.add("Silver")
 UserInfo.prizes.add("Gold")
 
-Log.d(javaClass.getSimpleName(), "User name: ${UserInfo.name}")
+Log.d(TAG, "User name: ${UserInfo.name}")
 Log.d(TAG, "User code: ${UserInfo.code}")
-Log.d(javaClass.getSimpleName(), "User age: ${UserInfo.age}")
-Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
-Log.d(javaClass.getSimpleName(), "User rate: ${UserInfo.rate}")
-UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize[$i]: ${s}") }
+Log.d(TAG, "User age: ${UserInfo.age}")
+Log.d(TAG, "User high score: ${UserInfo.highScore}")
+Log.d(TAG, "User rate: ${UserInfo.rate}")
+UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: ${s}") }
 ```
 
 ### Bulk edit
