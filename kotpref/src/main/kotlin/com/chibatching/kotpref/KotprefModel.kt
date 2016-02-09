@@ -64,7 +64,7 @@ open class KotprefModel() {
      * @param key custom preference key
      */
     protected fun stringNullablePrefVar(default: String? = null, key: String? = null)
-            : ReadWriteProperty<KotprefModel, String?> = StringPrefVarNullable(default, key)
+            : ReadWriteProperty<KotprefModel, String?> = StringNullablePrefVar(default, key)
 
     /**
      * Delegate Int shared preference property.
@@ -186,7 +186,7 @@ open class KotprefModel() {
         }
     }
 
-    private inner class StringPrefVarNullable(val default: String?, val key: String?) : PrefVar<String?>() {
+    private inner class StringNullablePrefVar(val default: String?, val key: String?) : PrefVar<String?>() {
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String? {
             return preference.getString(key ?: property.name, default)
