@@ -7,7 +7,7 @@ Android SharedPreference delegation for Kotlin.
 ## Install
 
 ```
-compile 'com.chibatching:kotpref:1.0.1'
+compile 'com.chibatching:kotpref:1.1.0'
 ```
 
 ## How to use
@@ -15,8 +15,9 @@ compile 'com.chibatching:kotpref:1.0.1'
 ### Declare preference model
 
 ```kotlin
-public object UserInfo : KotprefModel() {
+object UserInfo : KotprefModel() {
     var name: String by stringPrefVar()
+    var code: String? by stringNullablePrefVar()
     var age: Int by intPrefVar(default = 14)
     var highScore: Long by longPrefVar()
     var rate: Float by floatPrefVar()
@@ -38,6 +39,7 @@ Kotpref.init(context)
 
 ```kotlin
 UserInfo.name = "chibatching"
+UserInfo.code = "DAEF2599-7FC9-49C5-9A11-3C12B14A6898"
 UserInfo.age = 30
 UserInfo.highScore = 49219902
 UserInfo.rate = 49.21F
@@ -46,6 +48,7 @@ UserInfo.prizes.add("Silver")
 UserInfo.prizes.add("Gold")
 
 Log.d(javaClass.getSimpleName(), "User name: ${UserInfo.name}")
+Log.d(TAG, "User code: ${UserInfo.code}")
 Log.d(javaClass.getSimpleName(), "User age: ${UserInfo.age}")
 Log.d(javaClass.getSimpleName(), "User high score: ${UserInfo.highScore}")
 Log.d(javaClass.getSimpleName(), "User rate: ${UserInfo.rate}")
@@ -57,6 +60,7 @@ UserInfo.prizes.forEachIndexed { i, s -> Log.d(javaClass.getSimpleName(), "prize
 ```kotlin
 Kotpref.bulk(UserInfo) {
     name = "chibatching Jr"
+    code = "451B65F6-EF95-4C2C-AE76-D34535F51B3B"
     age = 2
     highScore = 3901
     rate = 0.4F
@@ -80,6 +84,7 @@ XML file name equals model class name. If model class named `UserInfo`, XML file
         <string>Silver</string>
     </set>
     <string name="name">chibatching</string>
+    <string name="code">DAEF2599-7FC9-49C5-9A11-3C12B14A6898</string>
     <int name="age" value="30" />
     <float name="rate" value="49.21" />
 </map>
