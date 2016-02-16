@@ -1,5 +1,3 @@
-[![Kotlin](https://img.shields.io/badge/Kotlin-1.0.0--rc--1036-blue.svg)](https://kotlinlang.org/)
-
 # Kotpref
 
 Android SharedPreference delegation for Kotlin.
