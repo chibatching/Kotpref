@@ -8,7 +8,7 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 
-open class KotprefModel() {
+abstract class KotprefModel() {
 
     private var kotprefInTransaction: Boolean = false
     private var kotprefTransactionStartTime: Long = 0
