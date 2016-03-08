@@ -4,11 +4,12 @@ import android.content.Context
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.test.AndroidTestCase
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-
 
 @RunWith(AndroidJUnit4::class)
 class KotprefCustomTest : AndroidTestCase() {
@@ -40,52 +41,51 @@ class KotprefCustomTest : AndroidTestCase() {
     }
 
     @Test
-    fun testIntDefault() {
-        CustomExample.clear()
-        assertEquals(Int.MAX_VALUE, CustomExample.testIntVar)
+    fun customIntPrefVarDefaultIsSetValue() {
+        assertThat(CustomExample.testIntVar, equalTo(Int.MAX_VALUE))
     }
 
     @Test
-    fun testLongDefault() {
-        CustomExample.clear()
-        assertEquals(Long.MAX_VALUE, CustomExample.testLongVar)
+    fun customLongPrefVarDefaultIsSetValue() {
+        assertThat(CustomExample.testLongVar, equalTo(Long.MAX_VALUE))
     }
 
     @Test
-    fun testFloatDefault() {
-        CustomExample.clear()
-        assertEquals(Float.MAX_VALUE, CustomExample.testFloatVar)
+    fun customFloatPrefVarDefaultIsSetValue() {
+        assertThat(CustomExample.testFloatVar, equalTo(Float.MAX_VALUE))
     }
 
     @Test
-    fun testBooleanDefault() {
-        CustomExample.clear()
-        assertEquals(true, CustomExample.testBooleanVar)
+    fun customBooleanPrefVarDefaultIsSetValue() {
+        assertThat(CustomExample.testBooleanVar, equalTo(true))
     }
 
     @Test
-    fun testStringNullableDefault() {
-        CustomExample.clear()
-        assertEquals("nullable default", CustomExample.testStringNullableVar)
+    fun customStringPrefVarDefaultIsSetValue() {
+        assertThat(CustomExample.testStringVar, equalTo("default"))
     }
 
     @Test
-    fun testPreferenceName() {
-        CustomExample.clear()
+    fun customStringNullablePrefVarDefaultIsSetValue() {
+        assertThat(CustomExample.testStringNullableVar, equalTo("nullable default"))
+    }
 
+    @Test
+    fun canReadWithCustomPreferenceName() {
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+
         CustomExample.testIntVar = 39
-        assertEquals(pref.getInt("testIntVar", 0), CustomExample.testIntVar)
+
+        assertThat(pref.getInt("testIntVar", 0), equalTo(CustomExample.testIntVar))
     }
 
     @Test
-    fun testCustomKey() {
-        CustomExample.clear()
-
+    fun canReadWithCustomPreferenceKey() {
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-        CustomExample.testStringVar = "custom key name"
-        assertEquals(pref.getString("test_string_var", "default"), CustomExample.testStringVar)
-        assertEquals(pref.getString("test_string_var", "default"), "custom key name")
+
+        CustomExample.testStringVar = "custom key test"
+
+        assertThat(pref.getString("test_string_var", "default"), equalTo(CustomExample.testStringVar))
     }
 }
 

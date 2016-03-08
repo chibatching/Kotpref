@@ -1,9 +1,12 @@
 package com.chibatching.kotpref
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4
 import android.test.AndroidTestCase
+import org.hamcrest.MatcherAssert.assertThat
+import org.hamcrest.Matchers.*
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -31,12 +34,17 @@ class KotprefBasicTest : AndroidTestCase() {
         }
     }
 
+    lateinit private var pref: SharedPreferences
+
     @Before
     override public fun setUp() {
         super.setUp()
         context = InstrumentationRegistry.getTargetContext()
         Kotpref.init(context)
-        context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE).edit().clear().commit()
+
+        Example.clear()
+        pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
+        pref.edit().clear().commit()
     }
 
     @After
@@ -46,162 +54,152 @@ class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    fun testIntPrefVarDefaultValue() {
-        Example.clear()
-        assertEquals(0, Example.testIntVar)
+    fun intPrefVarDefaultIs0() {
+        assertThat(Example.testIntVar, equalTo(0))
     }
 
     @Test
-    fun testIntPrefVarDelegation() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
-        Example.testIntVar = -922
-        assertPreferenceEquals(pref, "testIntVar", -922, Example.testIntVar)
+    fun setIntPrefVarSetSameValueToPreference() {
         Example.testIntVar = 4320
-        assertPreferenceEquals(pref, "testIntVar", 4320, Example.testIntVar)
+        assertThat(Example.testIntVar, equalTo(4320))
+        assertThat(Example.testIntVar, equalTo(pref.getInt("testIntVar", 0)))
     }
 
     @Test
-    fun testLongPrefVarDefaultValue() {
-        Example.clear()
-        assertEquals(0L, Example.testLongVar)
+    fun longPrefVarDefaultIs0() {
+        assertThat(Example.testLongVar, equalTo(0L))
     }
 
     @Test
-    fun testLongPrefVarDelegation() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
+    fun setLongPrefVarSetSameValueToPreference() {
         Example.testLongVar = 83109402L
-        assertPreferenceEquals(pref, "testLongVar", 83109402L, Example.testLongVar)
-        Example.testLongVar = -43824L
-        assertPreferenceEquals(pref, "testLongVar", -43824L, Example.testLongVar)
+        assertThat(Example.testLongVar, equalTo(83109402L))
+        assertThat(Example.testLongVar, equalTo(pref.getLong("testLongVar", 0L)))
     }
 
     @Test
-    fun testFloatPrefVarDefaultValue() {
-        Example.clear()
-        assertEquals(0F, Example.testFloatVar)
+    fun floatPrefVarDefaultIs0() {
+        assertThat(Example.testFloatVar, equalTo(0f))
     }
 
     @Test
-    fun testFloatPrefVar() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
+    fun setFloatPrefVarSetSameValueToPreference() {
         Example.testFloatVar = 78422.214F
-        assertPreferenceEquals(pref, "testFloatVar", 78422.214F, Example.testFloatVar)
-        Example.testFloatVar = -0.32394F
-        assertPreferenceEquals(pref, "testFloatVar", -0.32394F, Example.testFloatVar)
+        assertThat(Example.testFloatVar, equalTo(78422.214F))
+        assertThat(Example.testFloatVar, equalTo(pref.getFloat("testFloatVar", 0f)))
     }
 
     @Test
-    fun testBooleanPrefVarDefaultValue() {
-        Example.clear()
-        assertEquals(false, Example.testBooleanVar)
+    fun booleanPrefVarDefaultIsFalse() {
+        assertThat(Example.testBooleanVar, equalTo(false))
     }
 
     @Test
-    fun testBooleanPrefVar() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
-        Example.testBooleanVar = true
-        assertPreferenceEquals(pref, "testBooleanVar", true, Example.testBooleanVar)
+    fun setBooleanPrefVarSetSameValueToPreference() {
         Example.testBooleanVar = false
-        assertPreferenceEquals(pref, "testBooleanVar", false, Example.testBooleanVar)
+        assertThat(Example.testBooleanVar, equalTo(false))
+        assertThat(Example.testBooleanVar, equalTo(pref.getBoolean("testBooleanVar", false)))
     }
 
     @Test
-    fun testStringPrefVarDefaultValue() {
-        Example.clear()
-        assertEquals("", Example.testStringVar)
+    fun stringPrefVarDefaultIsEmpty() {
+        assertThat(Example.testStringVar, equalTo(""))
     }
 
     @Test
-    fun testStringPrefVar() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
+    fun setStringPrefVarSetSameValueToPreference() {
         Example.testStringVar = "Ohayo!"
-        assertPreferenceEquals(pref, "testStringVar", "Ohayo!", Example.testStringVar)
-        Example.testStringVar = "Oyasumi!"
-        assertPreferenceEquals(pref, "testStringVar", "Oyasumi!", Example.testStringVar)
+        assertThat(Example.testStringVar, equalTo("Ohayo!"))
+        assertThat(Example.testStringVar, equalTo(pref.getString("testStringVar", "")))
     }
 
     @Test
-    fun testStringNullablePrefVarDefaultValue() {
-        Example.clear()
-        assertEquals(null, Example.testStringNullableVar)
+    fun stringNullablePrefVarDefaultIsNull() {
+        assertThat(Example.testStringNullableVar, nullValue())
     }
 
     @Test
-    fun testStringNullablePrefVar() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
-
+    fun setStringNullablePrefVarSetSameValueToPreference() {
         Example.testStringNullableVar = "Ohayo!"
-        assertPreferenceEquals(pref, "testStringNullableVar", "Ohayo!", Example.testStringNullableVar)
-        Example.testStringNullableVar = null
-        assertPreferenceEquals(pref, "testStringVar", null, Example.testStringNullableVar)
+        assertThat(Example.testStringNullableVar, equalTo("Ohayo!"))
+        assertThat(Example.testStringNullableVar, equalTo(pref.getString("testStringNullableVar", "")))
     }
 
     @Test
-    fun testStringSetPrefVarDefaultValue() {
-        Example.clear()
-        assertEquals(0, Example.testStringSetVal.size)
+    fun stringSetPrefValDefaultSizeIs0() {
+        assertThat(Example.testStringSetVal, hasSize(0))
     }
 
     @Test
-    fun testStringSetPrefVar() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
+    fun addRemoveStringSetPrefValItemsUpdatePreference() {
+        Example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+            remove("test2")
+            add("test4")
+        }
 
-        val testSet = TreeSet<String>()
-        testSet.add("test1")
-        testSet.add("test2")
-        testSet.add("test3")
-
-        testSet.forEach { Example.testStringSetVal.add(it) }
-        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
-
-        testSet.remove("test2")
-        Example.testStringSetVal.remove("test2")
-        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
-
-        testSet.add("test4")
-        testSet.add("test5")
-        testSet.add("test6")
-        Example.testStringSetVal.addAll(testSet)
-        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
-
-        val removeSet = TreeSet<String>()
-        removeSet.remove("test2")
-        removeSet.remove("test5")
-
-        testSet.removeAll(removeSet)
-        Example.testStringSetVal.removeAll(removeSet)
-        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
-
-        testSet.add("test5")
-        testSet.retainAll(removeSet)
-        Example.testStringSetVal.add("test5")
-        Example.testStringSetVal.retainAll(removeSet)
-        assertPreferenceEquals(pref, "testStringSetVal", testSet, Example.testStringSetVal)
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test1", "test3", "test4"))
+        assertThat(pref.getStringSet("testStringSetVal", null), containsInAnyOrder("test1", "test3", "test4"))
     }
 
     @Test
-    fun testLazyDefaultStringSet() {
-        Example.clear()
+    fun addAllToStringSetPrefValUpdatePreference() {
+        val addSet = TreeSet<String>().apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+        Example.testStringSetVal.apply {
+            add("test4")
+            addAll(addSet)
+        }
 
-        val testSet = LinkedHashSet<String>()
-        testSet.add("Lazy set item 1")
-        testSet.add("Lazy set item 2")
-        testSet.add("Lazy set item 3")
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test1", "test2", "test3", "test4"))
+        assertThat(pref.getStringSet("testStringSetVal", null), containsInAnyOrder("test1", "test2", "test3", "test4"))
+    }
 
-        assertTrue(testSet.containsAll(Example.testLazyDefaultSS))
-        assertEquals(testSet.size, Example.testLazyDefaultSS.size)
+    @Test
+    fun removeAllToStringSetPrefValUpdatePreference() {
+        val removeSet = TreeSet<String>().apply {
+            add("test2")
+            add("test4")
+        }
+        Example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+            add("test4")
+            removeAll(removeSet)
+        }
+
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test1", "test3"))
+        assertThat(pref.getStringSet("testStringSetVal", null), containsInAnyOrder("test1", "test3"))
+    }
+
+    @Test
+    fun retainAllToStringSetPrefValUpdatePreference() {
+        val retainSet = TreeSet<String>().apply {
+            add("test2")
+            add("test4")
+            add("test5")
+        }
+        Example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+            add("test4")
+            retainAll(retainSet)
+        }
+
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test2", "test4"))
+        assertThat(pref.getStringSet("testStringSetVal", null), containsInAnyOrder("test2", "test4"))
+    }
+
+    @Test
+    fun lazyDefaultStringSetDefaultIsSetDefinedInLazyBlock() {
+        assertThat(Example.testLazyDefaultSS, containsInAnyOrder("Lazy set item 1", "Lazy set item 2", "Lazy set item 3"))
     }
 
     @Test
