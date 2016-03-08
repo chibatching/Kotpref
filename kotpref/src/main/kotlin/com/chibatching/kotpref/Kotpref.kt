@@ -25,14 +25,11 @@ object Kotpref {
         this.context = context.applicationContext
     }
 
+    @Deprecated(
+            message = "",
+            replaceWith = ReplaceWith("receiver.bulk(f)")
+    )
     fun <T : KotprefModel> bulk(receiver: T, f: T.() -> Unit) {
-        receiver.beginBulkEdit()
-        try {
-            receiver.f()
-        } catch (e: Exception) {
-            receiver.cancelBulkEdit()
-            throw e
-        }
-        receiver.commitBulkEdit()
+        receiver.bulk(f)
     }
 }

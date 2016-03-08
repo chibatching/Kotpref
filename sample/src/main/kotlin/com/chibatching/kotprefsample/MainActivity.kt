@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.chibatching.kotpref.Kotpref
+import com.chibatching.kotpref.bulk
 
 class MainActivity : AppCompatActivity() {
     
@@ -40,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "User rate: ${UserInfo.rate}")
         UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: $s") }
 
-        Kotpref.bulk(UserInfo) {
+        UserInfo.bulk {
             name = "chibatching Jr"
             code = "451B65F6-EF95-4C2C-AE76-D34535F51B3B"
             age = 2
