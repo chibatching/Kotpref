@@ -203,119 +203,189 @@ class KotprefBasicTest : AndroidTestCase() {
     }
 
     @Test
-    fun testBulkEdit() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
+    fun changedPrefVarCanReadBothInAndOutBulkEdit() {
+        Example.testIntVar = 30
 
-        Example.testIntVar = -500
-        Example.testLongVar = -3000L
-        Example.testFloatVar = -3.8F
-        Example.testBooleanVar = true
-        Example.testStringVar = "committed data"
+        Example.bulk {
+            testIntVar = 5839
 
-        Kotpref.bulk(Example) {
-            testIntVar = 1024
-            testLongVar = 422098523L
-            testFloatVar = 43093.301F
-            testBooleanVar = false
-            testStringVar = "bulk edit"
-
-            assertPreferenceInTransaction(pref, "testIntVar", -500, 1024, testIntVar)
-            assertPreferenceInTransaction(pref, "testLongVar", -3000L, 422098523L, testLongVar)
-            assertPreferenceInTransaction(pref, "testFloatVar", -3.8F, 43093.301F, testFloatVar)
-            assertPreferenceInTransaction(pref, "testBooleanVar", true, false, testBooleanVar)
-            assertPreferenceInTransaction(pref, "testStringVar", "committed data", "bulk edit", testStringVar)
+            assertThat(testIntVar, equalTo(5839))
         }
-
-        assertPreferenceEquals(pref, "testIntVar", 1024, Example.testIntVar)
-        assertPreferenceEquals(pref, "testLongVar", 422098523L, Example.testLongVar)
-        assertPreferenceEquals(pref, "testFloatVar", 43093.301F, Example.testFloatVar)
-        assertPreferenceEquals(pref, "testBooleanVar", false, Example.testBooleanVar)
-        assertPreferenceEquals(pref, "testStringVar", "bulk edit", Example.testStringVar)
+        assertThat(Example.testIntVar, equalTo(5839))
     }
 
     @Test
-    fun testBulkEditStringSet() {
-        Example.clear()
-        val pref = context.getSharedPreferences(Example.javaClass.simpleName, Context.MODE_PRIVATE)
+    fun changedPrefVarNotAffectPreferenceInBulkEdit() {
+        Example.testLongVar = -9831L
 
-        var testSet = TreeSet<String>()
-        val tranSet = TreeSet<String>()
+        Example.bulk {
+            testLongVar = 831456L
 
-        testSet.add("Initial item")
-        tranSet.addAll(testSet)
-        Example.testStringSetVal.addAll(testSet)
+            assertThat(pref.getLong("testLongVar", 0L), equalTo(-9831L))
+        }
+        assertThat(pref.getLong("testLongVar", 0L), equalTo(831456L))
+    }
 
-        Kotpref.bulk(Example) {
-            tranSet.add("test1")
-            tranSet.add("test2")
-            tranSet.add("test3")
+    @Test
+    fun occurErrorInBulkEditCancelTransaction() {
+        Example.testStringVar = "before"
 
-            testStringSetVal.add("test1")
+        try {
+            Example.bulk {
+                testStringVar = "edit in bulk"
+                throw Exception()
+            }
+        } catch (e: Exception) {
+        }
+        assertThat(Example.testStringVar, equalTo("before"))
+        assertThat(pref.getString("testStringVar", ""), equalTo("before"))
+    }
+
+    @Test
+    fun addRemoveStringSetPrefValCanReadBothInAndOutBulkEdit() {
+        Example.testStringSetVal.add("test1")
+
+        Example.bulk {
             testStringSetVal.add("test2")
             testStringSetVal.add("test3")
-
-            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
-        }
-        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
-        testSet.addAll(tranSet)
-        testSet.retainAll(tranSet)
-
-        Kotpref.bulk(Example) {
-            tranSet.remove("test2")
             testStringSetVal.remove("test2")
 
-            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
+            assertThat(testStringSetVal, containsInAnyOrder("test1", "test3"))
         }
-        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
-        testSet.addAll(tranSet)
-        testSet.retainAll(tranSet)
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test1", "test3"))
+    }
 
-        Kotpref.bulk(Example) {
-            val subSet = TreeSet<String>()
-            subSet.add("test4")
-            subSet.add("test5")
-            subSet.add("test6")
+    @Test
+    fun addRemoveStringSetPrefValNotAffectPreferenceInBulkEdit() {
+        Example.testStringSetVal.add("test1")
 
-            tranSet.addAll(subSet)
-            testStringSetVal.addAll(subSet)
+        Example.bulk {
+            testStringSetVal.add("test2")
+            testStringSetVal.add("test3")
+            testStringSetVal.remove("test2")
 
-            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1"))
         }
-        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
-        testSet.addAll(tranSet)
-        testSet.retainAll(tranSet)
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test3"))
+    }
 
-        Kotpref.bulk(Example) {
-            val subSet = TreeSet<String>()
-            subSet.add("test4")
-            subSet.add("test5")
-            subSet.add("test6")
+    @Test
+    fun addAllStringSetPrefValCanReadBothInAndOutBulkEdit() {
+        Example.testStringSetVal.add("test1")
 
-            tranSet.removeAll(subSet)
-            testStringSetVal.removeAll(subSet)
-
-            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
+        val addSet = TreeSet<String>().apply {
+            add("test2")
+            add("test3")
         }
-        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
-        testSet.addAll(tranSet)
-        testSet.retainAll(tranSet)
 
-        Kotpref.bulk(Example) {
-            val subSet = TreeSet<String>()
-            subSet.add("test4")
-            subSet.add("test5")
-            subSet.add("test6")
+        Example.bulk {
+            testStringSetVal.addAll(addSet)
 
-            tranSet.addAll(subSet)
-            tranSet.retainAll(subSet)
-            testStringSetVal.addAll(subSet)
-            testStringSetVal.retainAll(subSet)
-
-            assertPreferenceInTransaction(pref, "testStringSetVal", testSet, tranSet, testStringSetVal)
+            assertThat(testStringSetVal, containsInAnyOrder("test1", "test2", "test3"))
         }
-        assertPreferenceEquals(pref, "testStringSetVal", tranSet, Example.testStringSetVal)
-        testSet.addAll(tranSet)
-        testSet.retainAll(tranSet)
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test1", "test2", "test3"))
+    }
+
+    @Test
+    fun addAllStringSetPrefValNotAffectPreferenceInBulkEdit() {
+        Example.testStringSetVal.add("test1")
+
+        val addSet = TreeSet<String>().apply {
+            add("test2")
+            add("test3")
+        }
+
+        Example.bulk {
+            testStringSetVal.addAll(addSet)
+
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1"))
+        }
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
+    }
+
+    @Test
+    fun removeAllStringSetPrefValCanReadBothInAndOutBulkEdit() {
+        Example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val removeSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+        }
+
+        Example.bulk {
+            testStringSetVal.removeAll(removeSet)
+
+            assertThat(testStringSetVal, containsInAnyOrder("test2"))
+        }
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test2"))
+    }
+
+    @Test
+    fun removeAllStringSetPrefValNotAffectPreferenceInBulkEdit() {
+        Example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val removeSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+        }
+
+        Example.bulk {
+            testStringSetVal.removeAll(removeSet)
+
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
+        }
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test2"))
+    }
+
+    @Test
+    fun retainAllStringSetPrefValCanReadBothInAndOutBulkEdit() {
+        Example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val retainSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+            add("test4")
+        }
+
+        Example.bulk {
+            testStringSetVal.retainAll(retainSet)
+
+            assertThat(testStringSetVal, containsInAnyOrder("test1", "test3"))
+        }
+        assertThat(Example.testStringSetVal, containsInAnyOrder("test1", "test3"))
+    }
+
+    @Test
+    fun retainAllStringSetPrefValNotAffectPreferenceInBulkEdit() {
+        Example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val retainSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+            add("test4")
+        }
+
+        Example.bulk {
+            testStringSetVal.retainAll(retainSet)
+
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
+        }
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test3"))
     }
 }
