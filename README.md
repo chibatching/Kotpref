@@ -5,7 +5,7 @@ Android SharedPreference delegation for Kotlin.
 ## Install
 
 ```groovy
-compile 'com.chibatching:kotpref:1.1.0'
+compile 'com.chibatching:kotpref:1.2.0'
 ```
 
 ## How to use
@@ -56,7 +56,7 @@ UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: ${s}") }
 ### Bulk edit
 
 ```kotlin
-Kotpref.bulk(UserInfo) {
+UserInfo.bulk {
     name = "chibatching Jr"
     code = "451B65F6-EF95-4C2C-AE76-D34535F51B3B"
     age = 2
