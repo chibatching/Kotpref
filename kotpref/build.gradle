@@ -65,8 +65,8 @@ bintray {
     Properties properties = new Properties()
     properties.load(project.rootProject.file('local.properties').newDataInputStream())
 
-    user = properties.getProperty("bintray_user")
-    key = properties.getProperty("bintray_api_key")
+    user = System.getenv("bintray_user")
+    key = System.getenv("bintray_api_key")
 
     configurations = ['archives'] //When uploading configuration files
     pkg {

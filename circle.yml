@@ -8,3 +8,7 @@ dependencies:
 test:
   override:
     - ./gradlew kotpref:test
+
+deployment:
+  bintray:
+    - ./gradlew kotpref:publish kotpref:bintrayUpload
