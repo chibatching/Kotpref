@@ -13,4 +13,4 @@ deployment:
   bintray:
     branch: publish
     commands:
-      - ./gradlew kotpref:publish kotpref:bintrayUpload
+      - ./gradlew kotpref:install kotpref:bintrayUpload
