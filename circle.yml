@@ -1,8 +1,5 @@
 dependencies:
   pre:
-    - emulator -avd circleci-android22 -no-audio -no-window:
-        background: true
-        parallel: true
     - echo y | android update sdk --no-ui --all --filter "tool"
     - (while true; do echo y; sleep 3; done) | android update sdk --no-ui --all --filter "android-23,build-tools-23.0.2,extra-android-support,extra-android-m2repository"
     - echo "sdk.dir=${ANDROID_HOME}" > /home/ubuntu/Kotpref/local.properties
@@ -10,6 +7,4 @@ dependencies:
 
 test:
   override:
-    - circle-android wait-for-boot
-    - sleep 60
-    - ./gradlew kotpref:connectedAndroidTest
+    - ./gradlew kotpref:test

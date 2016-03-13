@@ -1,24 +1,25 @@
 package com.chibatching.kotpref
 
 import android.content.Context
-import android.support.test.InstrumentationRegistry
-import android.support.test.runner.AndroidJUnit4
-import android.test.AndroidTestCase
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.equalTo
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 
-@RunWith(AndroidJUnit4::class)
-class KotprefCustomTest : AndroidTestCase() {
+@RunWith(RobolectricTestRunner::class)
+@Config(constants = BuildConfig::class, manifest = Config.NONE)
+class KotprefCustomTest {
 
     companion object {
         val PREFERENCE_NAME = "custom_example"
     }
 
-    object CustomExample : KotprefModel() {
+    class CustomExample : KotprefModel() {
         override val kotprefName: String = PREFERENCE_NAME
         var testIntVar: Int by intPrefVar(Int.MAX_VALUE)
         var testLongVar: Long by longPrefVar(Long.MAX_VALUE)
@@ -28,64 +29,69 @@ class KotprefCustomTest : AndroidTestCase() {
         var testStringNullableVar: String? by stringNullablePrefVar(default = "nullable default")
     }
 
+    lateinit var context: Context
+    lateinit var customExample: CustomExample
+
     @Before
-    override public fun setUp() {
-        context = InstrumentationRegistry.getTargetContext()
+    fun setUp() {
+        context = RuntimeEnvironment.application
         Kotpref.init(context)
+        customExample = CustomExample()
+        
         context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit().clear().commit()
     }
 
     @After
-    override public fun tearDown() {
-        super.tearDown()
+    fun tearDown() {
+        customExample.clear()
     }
 
     @Test
     fun customIntPrefVarDefaultIsSetValue() {
-        assertThat(CustomExample.testIntVar, equalTo(Int.MAX_VALUE))
+        assertThat(customExample.testIntVar, equalTo(Int.MAX_VALUE))
     }
 
     @Test
     fun customLongPrefVarDefaultIsSetValue() {
-        assertThat(CustomExample.testLongVar, equalTo(Long.MAX_VALUE))
+        assertThat(customExample.testLongVar, equalTo(Long.MAX_VALUE))
     }
 
     @Test
     fun customFloatPrefVarDefaultIsSetValue() {
-        assertThat(CustomExample.testFloatVar, equalTo(Float.MAX_VALUE))
+        assertThat(customExample.testFloatVar, equalTo(Float.MAX_VALUE))
     }
 
     @Test
     fun customBooleanPrefVarDefaultIsSetValue() {
-        assertThat(CustomExample.testBooleanVar, equalTo(true))
+        assertThat(customExample.testBooleanVar, equalTo(true))
     }
 
     @Test
     fun customStringPrefVarDefaultIsSetValue() {
-        assertThat(CustomExample.testStringVar, equalTo("default"))
+        assertThat(customExample.testStringVar, equalTo("default"))
     }
 
     @Test
     fun customStringNullablePrefVarDefaultIsSetValue() {
-        assertThat(CustomExample.testStringNullableVar, equalTo("nullable default"))
+        assertThat(customExample.testStringNullableVar, equalTo("nullable default"))
     }
 
     @Test
     fun canReadWithCustomPreferenceName() {
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-        CustomExample.testIntVar = 39
+        customExample.testIntVar = 39
 
-        assertThat(pref.getInt("testIntVar", 0), equalTo(CustomExample.testIntVar))
+        assertThat(pref.getInt("testIntVar", 0), equalTo(customExample.testIntVar))
     }
 
     @Test
     fun canReadWithCustomPreferenceKey() {
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-        CustomExample.testStringVar = "custom key test"
+        customExample.testStringVar = "custom key test"
 
-        assertThat(pref.getString("test_string_var", "default"), equalTo(CustomExample.testStringVar))
+        assertThat(pref.getString("test_string_var", "default"), equalTo(customExample.testStringVar))
     }
 }
 
