@@ -12,8 +12,6 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName version_name
-
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
