@@ -11,4 +11,6 @@ test:
 
 deployment:
   bintray:
-    - ./gradlew kotpref:publish kotpref:bintrayUpload
+    branch: publish
+    commands:
+      - ./gradlew kotpref:publish kotpref:bintrayUpload
