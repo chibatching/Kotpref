@@ -2,7 +2,6 @@ package com.chibatching.kotpref
 
 import android.content.Context
 import android.content.SharedPreferences
-import android.support.annotation.StringRes
 import java.util.*
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
@@ -62,10 +61,10 @@ abstract class KotprefModel() {
     /**
      * Delegate string shared preference property.
      * @param default default string value
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      */
-    protected fun stringPrefVar(default: String = "", @StringRes resId: Int)
-            : ReadWriteProperty<KotprefModel, String> = StringPrefVar(default, context.getString(resId))
+    protected fun stringPrefVar(default: String = "", key: Int)
+            : ReadWriteProperty<KotprefModel, String> = StringPrefVar(default, context.getString(key))
 
     /**
      * Delegate nullable string shared preference property.
@@ -78,10 +77,10 @@ abstract class KotprefModel() {
     /**
      * Delegate nullable string shared preference property.
      * @param default default string value
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      */
-    protected fun stringNullablePrefVar(default: String? = null, @StringRes resId: Int)
-            : ReadWriteProperty<KotprefModel, String?> = StringNullablePrefVar(default, context.getString(resId))
+    protected fun stringNullablePrefVar(default: String? = null, key: Int)
+            : ReadWriteProperty<KotprefModel, String?> = StringNullablePrefVar(default, context.getString(key))
 
     /**
      * Delegate int shared preference property.
@@ -94,10 +93,10 @@ abstract class KotprefModel() {
     /**
      * Delegate int shared preference property.
      * @param default default int value
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      */
-    protected fun intPrefVar(default: Int = 0, @StringRes resId: Int)
-            : ReadWriteProperty<KotprefModel, Int> = IntPrefVar(default, context.getString(resId))
+    protected fun intPrefVar(default: Int = 0, key: Int)
+            : ReadWriteProperty<KotprefModel, Int> = IntPrefVar(default, context.getString(key))
 
     /**
      * Delegate long shared preference property.
@@ -110,10 +109,10 @@ abstract class KotprefModel() {
     /**
      * Delegate long shared preference property.
      * @param default default long value
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      */
-    protected fun longPrefVar(default: Long = 0L, @StringRes resId: Int)
-            : ReadWriteProperty<KotprefModel, Long> = LongPrefVar(default, context.getString(resId))
+    protected fun longPrefVar(default: Long = 0L, key: Int)
+            : ReadWriteProperty<KotprefModel, Long> = LongPrefVar(default, context.getString(key))
 
     /**
      * Delegate float shared preference property.
@@ -126,10 +125,10 @@ abstract class KotprefModel() {
     /**
      * Delegate float shared preference property.
      * @param default default float value
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      */
-    protected fun floatPrefVar(default: Float = 0F, @StringRes resId: Int)
-            : ReadWriteProperty<KotprefModel, Float> = FloatPrefVar(default, context.getString(resId))
+    protected fun floatPrefVar(default: Float = 0F, key: Int)
+            : ReadWriteProperty<KotprefModel, Float> = FloatPrefVar(default, context.getString(key))
 
     /**
      * Delegate boolean shared preference property.
@@ -142,10 +141,10 @@ abstract class KotprefModel() {
     /**
      * Delegate boolean shared preference property.
      * @param default default boolean value
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      */
-    protected fun booleanPrefVar(default: Boolean = false, @StringRes resId: Int)
-            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPrefVar(default, context.getString(resId))
+    protected fun booleanPrefVar(default: Boolean = false, key: Int)
+            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPrefVar(default, context.getString(key))
 
     /**
      * Delegate string set shared preference property.
@@ -158,10 +157,10 @@ abstract class KotprefModel() {
     /**
      * Delegate string set shared preference property.
      * @param default default string set value
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      */
-    protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>(), @StringRes resId: Int)
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal({ default }, context.getString(resId))
+    protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>(), key: Int)
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal({ default }, context.getString(key))
 
     /**
      * Delegate string set shared preference property.
@@ -173,11 +172,11 @@ abstract class KotprefModel() {
 
     /**
      * Delegate string set shared preference property.
-     * @param resId custom preference key resource id
+     * @param key custom preference key resource id
      * @param default default string set value
      */
-    protected fun stringSetPrefVal(@StringRes resId: Int, default: () -> Set<String>)
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default, context.getString(resId))
+    protected fun stringSetPrefVal(key: Int, default: () -> Set<String>)
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default, context.getString(key))
 
     /**
      * Begin bulk edit mode. You must commit or cancel after bulk edit finished.
