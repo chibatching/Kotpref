@@ -37,7 +37,7 @@ class KotprefCustomTest {
         context = RuntimeEnvironment.application
         Kotpref.init(context)
         customExample = CustomExample()
-        
+
         context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE).edit().clear().commit()
     }
 
