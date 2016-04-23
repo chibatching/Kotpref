@@ -7,12 +7,11 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, manifest = Config.NONE)
+@RunWith(CustomRobolectricTestRunner::class)
+@Config(constants = BuildConfig::class, manifest = Config.NONE, sdk = intArrayOf(21))
 class KotprefCustomTest {
 
     companion object {
@@ -27,6 +26,7 @@ class KotprefCustomTest {
         var testBooleanVar: Boolean by booleanPrefVar(true)
         var testStringVar: String by stringPrefVar(default = "default", key = "test_string_var")
         var testStringNullableVar: String? by stringNullablePrefVar(default = "nullable default")
+        var testStringRes: Int by intPrefVar(Int.MIN_VALUE, R.string.test_preference)
     }
 
     lateinit var context: Context
@@ -92,6 +92,15 @@ class KotprefCustomTest {
         customExample.testStringVar = "custom key test"
 
         assertThat(pref.getString("test_string_var", "default"), equalTo(customExample.testStringVar))
+    }
+
+    @Test
+    fun customPrefVarKeyByStringResource() {
+        val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
+
+        customExample.testStringRes = 725
+
+        assertThat(pref.getInt(context.getString(R.string.test_preference), 0), equalTo(customExample.testStringRes))
     }
 }
 
