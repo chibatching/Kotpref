@@ -1,7 +1,7 @@
 dependencies:
   pre:
     - echo y | android update sdk --no-ui --all --filter "tool"
-    - (while true; do echo y; sleep 3; done) | android update sdk --no-ui --all --filter "android-23,build-tools-23.0.2,extra-android-support,extra-android-m2repository"
+    - (while true; do echo y; sleep 3; done) | android update sdk --no-ui --all --filter "android-23,build-tools-23.0.3,extra-android-support,extra-android-m2repository"
     - echo "sdk.dir=${ANDROID_HOME}" > /home/ubuntu/Kotpref/local.properties
     - echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=1024m -Xms512m" > gradle.properties
 
