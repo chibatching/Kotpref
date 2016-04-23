@@ -8,6 +8,8 @@
 .DS_Store
 /captures
 
+*.iml
+
 # Built application files
 *.apk
 *.ap_
