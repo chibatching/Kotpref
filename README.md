@@ -5,7 +5,7 @@ Android SharedPreference delegation for Kotlin.
 ## Install
 
 ```groovy
-compile 'com.chibatching:kotpref:1.2.0'
+compile 'com.chibatching:kotpref:1.3.0'
 ```
 
 ## How to use
@@ -108,7 +108,7 @@ You can custom preference key or use from string resources.
 
 ```kotlin
 var useFunc1: Boolean by booleanPrefVar(key = "use_func1")
-var mode: Int by intPrefVar(default = 1, key = context.getString(R.string.pref_mode))
+var mode: Int by intPrefVar(default = 1, key = R.string.pref_mode)
 ```
 
 #### Change XML file name
@@ -116,7 +116,7 @@ var mode: Int by intPrefVar(default = 1, key = context.getString(R.string.pref_m
 Override `kotprefName` property.
 
 ```kotlin
-public object UserInfo : KotprefModel() {
+object UserInfo : KotprefModel() {
     override val kotprefName: String = "user_info"
 ```
 
@@ -125,7 +125,7 @@ public object UserInfo : KotprefModel() {
 Override `kotprefMode` property. Default is `Context.MODE_PRIVATE`.
 
 ```kotlin
-public object UserInfo : KotprefModel() {
+object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
 ```
 
