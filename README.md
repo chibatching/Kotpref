@@ -132,7 +132,7 @@ object UserInfo : KotprefModel() {
 ## License
 
 ```
-Copyright 2015 chibatching
+Copyright 2015 Takao Chiba
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
