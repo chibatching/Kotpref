@@ -1,6 +1,8 @@
 package com.chibatching.kotpref
 
+import android.annotation.TargetApi
 import android.content.SharedPreferences
+import android.os.Build
 import java.util.*
 
 
@@ -16,17 +18,22 @@ internal class KotprefPreferences(val preferences: SharedPreferences) : SharedPr
 
         override fun apply() {
             editor.apply()
-            prefStringSet.forEach { it.syncTransaction() }
-            prefStringSet.clear()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                prefStringSet.forEach { it.syncTransaction() }
+                prefStringSet.clear()
+            }
         }
 
         override fun commit(): Boolean {
             val result = editor.commit()
-            prefStringSet.forEach { it.syncTransaction() }
-            prefStringSet.clear()
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+                prefStringSet.forEach { it.syncTransaction() }
+                prefStringSet.clear()
+            }
             return result
         }
 
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
         internal fun putStringSet(key: String?, values: MutableSet<String>?, prefSet: KotprefModel.PrefMutableSet): SharedPreferences.Editor {
             editor.putStringSet(key, values)
             prefStringSet.add(prefSet)

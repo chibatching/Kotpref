@@ -1,7 +1,9 @@
 package com.chibatching.kotpref
 
+import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import java.util.*
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
@@ -151,6 +153,7 @@ abstract class KotprefModel() {
      * @param default default string set value
      * @param key custom preference key
      */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>(), key: String? = null)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal({ default }, key)
 
@@ -159,6 +162,7 @@ abstract class KotprefModel() {
      * @param default default string set value
      * @param key custom preference key resource id
      */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>(), key: Int)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal({ default }, context.getString(key))
 
@@ -167,6 +171,7 @@ abstract class KotprefModel() {
      * @param key custom preference key
      * @param default default string set value creation function
      */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPrefVal(key: String? = null, default: () -> Set<String>)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default, key)
 
@@ -175,6 +180,7 @@ abstract class KotprefModel() {
      * @param key custom preference key resource id
      * @param default default string set value
      */
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPrefVal(key: Int, default: () -> Set<String>)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default, context.getString(key))
 
@@ -329,7 +335,7 @@ abstract class KotprefModel() {
         }
     }
 
-
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private inner class StringSetPrefVal(val default: () -> Set<String>, val key: String?) : ReadOnlyProperty<KotprefModel, MutableSet<String>> {
 
         private var stringSet: MutableSet<String>? = null
@@ -345,7 +351,7 @@ abstract class KotprefModel() {
         }
     }
 
-
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     internal inner class PrefMutableSet(val set: MutableSet<String>, val key: String) : MutableSet<String> by set {
 
         init {
