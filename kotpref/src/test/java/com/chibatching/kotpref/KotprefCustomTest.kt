@@ -12,7 +12,7 @@ import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
 @RunWith(RobolectricGradleTestRunner::class)
-@Config(constants = BuildConfig::class, manifest = Config.NONE, sdk = intArrayOf(21))
+@Config(constants = BuildConfig::class, manifest = Config.NONE, sdk = intArrayOf(23))
 class KotprefCustomTest {
 
     companion object {

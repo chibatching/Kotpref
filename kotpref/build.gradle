@@ -31,7 +31,8 @@ dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
-    testCompile "org.robolectric:robolectric:3.0"
+    testCompile 'junit:junit:4.12'
+    testCompile "org.robolectric:robolectric:3.1"
     testCompile 'com.android.support.test:testing-support-lib:0.1'
     testCompile 'org.hamcrest:hamcrest-library:1.3'
 }

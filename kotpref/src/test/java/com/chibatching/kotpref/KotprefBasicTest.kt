@@ -15,7 +15,7 @@ import java.util.*
 
 
 @RunWith(RobolectricGradleTestRunner::class)
-@Config(constants = BuildConfig::class, manifest = Config.NONE, sdk = intArrayOf(21))
+@Config(constants = BuildConfig::class, manifest = Config.NONE, sdk = intArrayOf(23))
 class KotprefBasicTest {
 
     class Example : KotprefModel() {
