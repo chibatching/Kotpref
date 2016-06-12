@@ -14,3 +14,16 @@ build:
         name: unit test
         code: |
           ./gradlew kotpref:testDebugUnitTest
+  after-steps:
+    - wantedly/pretty-slack-notify:
+        webhook_url: https://hooks.slack.com/services/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
+
+publish:
+  steps:
+    - script:
+        name: bintray upload
+        code: |
+          ./gradlew kotpref:install kotpref:bintrayUpload
+  after-steps:
+    - wantedly/pretty-slack-notify:
+        webhook_url: https://hooks.slack.com/services/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
