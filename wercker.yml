@@ -11,6 +11,11 @@ build:
         code: |
           echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=1024m -Xms512m" > gradle.properties
     - script:
+        name: setup gradle local cache
+        code: |-
+            mkdir -p $WERCKER_CACHE_DIR/.gradle
+            ln -sf $WERCKER_CACHE_DIR/.gradle ~/.gradle
+    - script:
         name: unit test
         code: |
           ./gradlew kotpref:testDebugUnitTest
@@ -20,6 +25,11 @@ build:
 
 publish:
   steps:
+    - script:
+        name: setup gradle local cache
+        code: |-
+            mkdir -p $WERCKER_CACHE_DIR/.gradle
+            ln -sf $WERCKER_CACHE_DIR/.gradle ~/.gradle
     - script:
         name: bintray upload
         code: |
