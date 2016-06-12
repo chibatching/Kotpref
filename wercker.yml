@@ -1,0 +1,16 @@
+box: chibatching/docker-android-sdk
+
+build:
+  steps:
+    - script:
+        name: set android sdk location
+        code: |
+          echo "sdk.dir=${ANDROID_HOME}" > local.properties
+    - script:
+        name: set gradle properties
+        code: |
+          echo "org.gradle.jvmargs=-Xmx2048m -XX:MaxPermSize=1024m -Xms512m" > gradle.properties
+    - script:
+        name: unit test
+        code: |
+          ./gradlew kotpref:testDebugUnitTest
