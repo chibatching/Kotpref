@@ -2,6 +2,8 @@
 
 Android SharedPreference delegation for Kotlin.
 
+[![Bintray](https://img.shields.io/bintray/v/chibatching/maven/kotpref.svg?maxAge=2592000)](https://bintray.com/chibatching/maven/kotpref/_latestVersion) [![kotlin](https://img.shields.io/badge/kotlin-1.0.1--2-blue.svg)]() [![method count](https://img.shields.io/badge/Methods and size-core: 261 | deps: 7203 | 36 KB-e91e63.svg)](http://www.methodscount.com/?lib=com.chibatching%3Akotpref%3A%2B) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+
 ## Install
 
 ```groovy
