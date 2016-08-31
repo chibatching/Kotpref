@@ -1,4 +1,11 @@
-<manifest
-    package="com.chibatching.kotpref">
+<manifest package="com.chibatching.kotpref"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <application>
+        <provider
+            android:authorities="${applicationId}.KotprefInitilizeProvider"
+            android:exported="false"
+            android:enabled="true"
+            android:name=".KotprefInitProvider" />
+    </application>
 </manifest>
