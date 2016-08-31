@@ -16,8 +16,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        Kotpref.init(this)
-
         Log.d(TAG, "User name: ${UserInfo.name}")
         Log.d(TAG, "User code: ${UserInfo.code}")
         Log.d(TAG, "User age: ${UserInfo.age}")
