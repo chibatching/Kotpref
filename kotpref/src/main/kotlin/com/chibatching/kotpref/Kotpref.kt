@@ -17,7 +17,8 @@ object Kotpref {
         private set
 
     /**
-     * Initialize Kotpref singleton object
+     * Initialize Kotpref singleton object.
+     * 1.4.0 or later, calling this function is not necessary to initialize kotpref.
      *
      * @param context Application context
      */
