@@ -7,7 +7,7 @@ Android SharedPreference delegation for Kotlin.
 ## Install
 
 ```groovy
-compile 'com.chibatching:kotpref:1.3.1'
+compile 'com.chibatching:kotpref:1.4.0'
 ```
 
 ## How to use
