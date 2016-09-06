@@ -2,7 +2,7 @@
 
 Android SharedPreference delegation for Kotlin.
 
-[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![Bintray](https://img.shields.io/bintray/v/chibatching/maven/kotpref.svg?maxAge=2592000)](https://bintray.com/chibatching/maven/kotpref/_latestVersion) [![kotlin](https://img.shields.io/badge/kotlin-1.0.1--2-blue.svg)]() [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![Bintray](https://img.shields.io/bintray/v/chibatching/maven/kotpref.svg?maxAge=2592000)](https://bintray.com/chibatching/maven/kotpref/_latestVersion) [![kotlin](https://img.shields.io/badge/kotlin-1.0.3-blue.svg)]() [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
 
@@ -30,6 +30,10 @@ object UserInfo : KotprefModel() {
 ```
 
 ### Set up
+
+**From 1.4.0, initialization is no longer need!**
+
+#### *Deprecated*
 
 ```kotlin
 Kotpref.init(context)
