@@ -1,7 +1,9 @@
 package com.chibatching.kotpref
 
+import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Build
 import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.*
 import org.junit.After
@@ -25,9 +27,9 @@ class KotprefBasicTest {
         var testBooleanVar: Boolean by booleanPrefVar()
         var testStringVar: String by stringPrefVar()
         var testStringNullableVar: String? by stringNullablePrefVar()
-        var testEnumValueVar: ExampleEnum by enumValuePrefVar(ExampleEnum::class.java, ExampleEnum.FIRST)
-        var testEnumNullableValueVar: ExampleEnum? by enumNullableValuePrefVar(ExampleEnum::class.java)
-        var testEnumOrdinalVar: ExampleEnum by enumOrdinalPrefVar(ExampleEnum::class.java, ExampleEnum.FIRST)
+        var testEnumValueVar: ExampleEnum by enumValuePrefVar(ExampleEnum::class, ExampleEnum.FIRST)
+        var testEnumNullableValueVar: ExampleEnum? by enumNullableValuePrefVar(ExampleEnum::class)
+        var testEnumOrdinalVar: ExampleEnum by enumOrdinalPrefVar(ExampleEnum::class, ExampleEnum.FIRST)
         val testStringSetVal: MutableSet<String> by stringSetPrefVal(TreeSet<String>())
         val testLazyDefaultSS: MutableSet<String> by stringSetPrefVal {
             val defSet = LinkedHashSet<String>()
@@ -171,6 +173,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun addRemoveStringSetPrefValItemsUpdatePreference() {
         example.testStringSetVal.apply {
             add("test1")
@@ -185,6 +188,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun addAllToStringSetPrefValUpdatePreference() {
         val addSet = TreeSet<String>().apply {
             add("test1")
@@ -201,6 +205,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun removeAllToStringSetPrefValUpdatePreference() {
         val removeSet = TreeSet<String>().apply {
             add("test2")
@@ -219,6 +224,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun retainAllToStringSetPrefValUpdatePreference() {
         val retainSet = TreeSet<String>().apply {
             add("test2")
@@ -296,6 +302,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun addRemoveStringSetPrefValNotAffectPreferenceInBulkEdit() {
         example.testStringSetVal.add("test1")
 
@@ -327,6 +334,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun addAllStringSetPrefValNotAffectPreferenceInBulkEdit() {
         example.testStringSetVal.add("test1")
 
@@ -365,6 +373,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun removeAllStringSetPrefValNotAffectPreferenceInBulkEdit() {
         example.testStringSetVal.apply {
             add("test1")
@@ -408,6 +417,7 @@ class KotprefBasicTest {
     }
 
     @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun retainAllStringSetPrefValNotAffectPreferenceInBulkEdit() {
         example.testStringSetVal.apply {
             add("test1")
