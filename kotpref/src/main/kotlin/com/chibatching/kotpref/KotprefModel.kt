@@ -149,6 +149,60 @@ abstract class KotprefModel() {
             : ReadWriteProperty<KotprefModel, Boolean> = BooleanPrefVar(default, context.getString(key))
 
     /**
+     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
+     * @param enumClass Enum class to define the property
+     * @param default default enum value
+     * @param key custom preference key
+     */
+    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: Class<T>, default: T, key: String? = null)
+            : ReadWriteProperty<KotprefModel, T> = EnumValuePrefVar(enumClass, default, key)
+
+    /**
+     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
+     * @param enumClass Enum class to define the property
+     * @param default default enum value
+     * @param key custom preference key resource id
+     */
+    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: Class<T>, default: T, key: Int)
+            : ReadWriteProperty<KotprefModel, T> = EnumValuePrefVar(enumClass, default, context.getString(key))
+
+    /**
+     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
+     * @param enumClass Enum class to define the property
+     * @param default default enum value
+     * @param key custom preference key
+     */
+    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: Class<T>, default: T? = null, key: String? = null)
+            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePrefVar(enumClass, default, key)
+
+    /**
+     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
+     * @param enumClass Enum class to define the property
+     * @param default default enum value
+     * @param key custom preference key resource id
+     */
+    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: Class<T>, default: T? = null, key: Int)
+            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePrefVar(enumClass, default, context.getString(key))
+
+    /**
+     * Delegate enum-based shared preference property storing and recalling by the enum value's ordinal as an integer.
+     * @param enumClass Enum class to define the property
+     * @param default default enum value
+     * @param key custom preference key
+     */
+    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: Class<T>, default: T, key: String? = null)
+            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPrefVar(enumClass, default, key)
+
+    /**
+     * Delegate enum-based shared preference property storing and recalling by the enum value's ordinal as an integer.
+     * @param enumClass Enum class to define the property
+     * @param default default enum value
+     * @param key custom preference key resource id
+     */
+    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: Class<T>, default: T, key: Int)
+            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPrefVar(enumClass, default, context.getString(key))
+
+    /**
      * Delegate string set shared preference property.
      * @param default default string set value
      * @param key custom preference key
@@ -332,6 +386,57 @@ abstract class KotprefModel() {
 
         override fun setToEditor(property: KProperty<*>, value: Boolean, editor: SharedPreferences.Editor) {
             editor.putBoolean(key ?: property.name, value)
+        }
+    }
+
+    private inner class EnumValuePrefVar<T : Enum<*>>(enumClass : Class<T>, val default: T, val key: String?) : PrefVar<T>() {
+        private val enumConstants = enumClass.enumConstants
+
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
+            val value = preference.getString(key ?: property.name, default.name)
+            return enumConstants.first { it.name == value }
+        }
+
+        override fun setToPreference(property: KProperty<*>, value: T, preference: SharedPreferences) {
+            preference.edit().putString(key ?: property.name, value.name).apply()
+        }
+
+        override fun setToEditor(property: KProperty<*>, value: T, editor: SharedPreferences.Editor) {
+            editor.putString(key ?: property.name, value.name)
+        }
+    }
+
+    private inner class EnumNullableValuePrefVar<T : Enum<*>>(enumClass : Class<T>, val default: T?, val key: String?) : PrefVar<T?>() {
+        private val enumConstants = enumClass.enumConstants
+
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
+            val value = preference.getString(key ?: property.name, default?.name)
+            return enumConstants.firstOrNull { it.name == value }
+        }
+
+        override fun setToPreference(property: KProperty<*>, value: T?, preference: SharedPreferences) {
+            preference.edit().putString(key ?: property.name, value?.name).apply()
+        }
+
+        override fun setToEditor(property: KProperty<*>, value: T?, editor: SharedPreferences.Editor) {
+            editor.putString(key ?: property.name, value?.name)
+        }
+    }
+
+    private inner class EnumOrdinalPrefVar<T : Enum<*>>(enumClass : Class<T>, val default: T, val key: String?) : PrefVar<T>() {
+        private val enumConstants = enumClass.enumConstants
+
+        override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
+            val value = preference.getInt(key ?: property.name, default.ordinal)
+            return enumConstants.first { it.ordinal == value }
+        }
+
+        override fun setToPreference(property: KProperty<*>, value: T, preference: SharedPreferences) {
+            preference.edit().putInt(key ?: property.name, value.ordinal).apply()
+        }
+
+        override fun setToEditor(property: KProperty<*>, value: T, editor: SharedPreferences.Editor) {
+            editor.putInt(key ?: property.name, value.ordinal)
         }
     }
 
