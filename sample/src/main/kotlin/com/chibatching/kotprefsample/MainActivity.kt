@@ -3,7 +3,6 @@ package com.chibatching.kotprefsample
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
-import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.bulk
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        Log.d(TAG, "Game level: ${UserInfo.gameLevel}")
         Log.d(TAG, "User name: ${UserInfo.name}")
         Log.d(TAG, "User code: ${UserInfo.code}")
         Log.d(TAG, "User age: ${UserInfo.age}")
@@ -23,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "User rate: ${UserInfo.rate}")
         UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: $s") }
 
+        UserInfo.gameLevel = GameLevel.HARD
         UserInfo.name = "chibatching"
         UserInfo.code = "DAEF2599-7FC9-49C5-9A11-3C12B14A6898"
         UserInfo.age = 30
@@ -32,6 +33,7 @@ class MainActivity : AppCompatActivity() {
         UserInfo.prizes.add("Silver")
         UserInfo.prizes.add("Gold")
 
+        Log.d(TAG, "Game level: ${UserInfo.gameLevel}")
         Log.d(TAG, "User name: ${UserInfo.name}")
         Log.d(TAG, "User code: ${UserInfo.code}")
         Log.d(TAG, "User age: ${UserInfo.age}")
@@ -40,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: $s") }
 
         UserInfo.bulk {
+            gameLevel = GameLevel.EASY
             name = "chibatching Jr"
             code = "451B65F6-EF95-4C2C-AE76-D34535F51B3B"
             age = 2
@@ -49,6 +52,7 @@ class MainActivity : AppCompatActivity() {
             prizes.add("New Born")
         }
 
+        Log.d(TAG, "Game level: ${UserInfo.gameLevel}")
         Log.d(TAG, "User name: ${UserInfo.name}")
         Log.d(TAG, "User code: ${UserInfo.code}")
         Log.d(TAG, "User age: ${UserInfo.age}")
