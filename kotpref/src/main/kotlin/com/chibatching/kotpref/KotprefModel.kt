@@ -7,6 +7,7 @@ import android.os.Build
 import java.util.*
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 
@@ -154,7 +155,7 @@ abstract class KotprefModel() {
      * @param default default enum value
      * @param key custom preference key
      */
-    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: Class<T>, default: T, key: String? = null)
+    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: KClass<T>, default: T, key: String? = null)
             : ReadWriteProperty<KotprefModel, T> = EnumValuePrefVar(enumClass, default, key)
 
     /**
@@ -163,7 +164,7 @@ abstract class KotprefModel() {
      * @param default default enum value
      * @param key custom preference key resource id
      */
-    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: Class<T>, default: T, key: Int)
+    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: KClass<T>, default: T, key: Int)
             : ReadWriteProperty<KotprefModel, T> = EnumValuePrefVar(enumClass, default, context.getString(key))
 
     /**
@@ -172,7 +173,7 @@ abstract class KotprefModel() {
      * @param default default enum value
      * @param key custom preference key
      */
-    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: Class<T>, default: T? = null, key: String? = null)
+    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: KClass<T>, default: T? = null, key: String? = null)
             : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePrefVar(enumClass, default, key)
 
     /**
@@ -181,7 +182,7 @@ abstract class KotprefModel() {
      * @param default default enum value
      * @param key custom preference key resource id
      */
-    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: Class<T>, default: T? = null, key: Int)
+    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: KClass<T>, default: T? = null, key: Int)
             : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePrefVar(enumClass, default, context.getString(key))
 
     /**
@@ -190,7 +191,7 @@ abstract class KotprefModel() {
      * @param default default enum value
      * @param key custom preference key
      */
-    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: Class<T>, default: T, key: String? = null)
+    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: KClass<T>, default: T, key: String? = null)
             : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPrefVar(enumClass, default, key)
 
     /**
@@ -199,7 +200,7 @@ abstract class KotprefModel() {
      * @param default default enum value
      * @param key custom preference key resource id
      */
-    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: Class<T>, default: T, key: Int)
+    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: KClass<T>, default: T, key: Int)
             : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPrefVar(enumClass, default, context.getString(key))
 
     /**
@@ -389,8 +390,8 @@ abstract class KotprefModel() {
         }
     }
 
-    private inner class EnumValuePrefVar<T : Enum<*>>(enumClass : Class<T>, val default: T, val key: String?) : PrefVar<T>() {
-        private val enumConstants = enumClass.enumConstants
+    private inner class EnumValuePrefVar<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : PrefVar<T>() {
+        private val enumConstants = enumClass.java.enumConstants
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
             val value = preference.getString(key ?: property.name, default.name)
@@ -406,8 +407,8 @@ abstract class KotprefModel() {
         }
     }
 
-    private inner class EnumNullableValuePrefVar<T : Enum<*>>(enumClass : Class<T>, val default: T?, val key: String?) : PrefVar<T?>() {
-        private val enumConstants = enumClass.enumConstants
+    private inner class EnumNullableValuePrefVar<T : Enum<*>>(enumClass : KClass<T>, val default: T?, val key: String?) : PrefVar<T?>() {
+        private val enumConstants = enumClass.java.enumConstants
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
             val value = preference.getString(key ?: property.name, default?.name)
@@ -423,8 +424,8 @@ abstract class KotprefModel() {
         }
     }
 
-    private inner class EnumOrdinalPrefVar<T : Enum<*>>(enumClass : Class<T>, val default: T, val key: String?) : PrefVar<T>() {
-        private val enumConstants = enumClass.enumConstants
+    private inner class EnumOrdinalPrefVar<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : PrefVar<T>() {
+        private val enumConstants = enumClass.java.enumConstants
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
             val value = preference.getInt(key ?: property.name, default.ordinal)
