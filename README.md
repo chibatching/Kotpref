@@ -2,12 +2,12 @@
 
 Android SharedPreference delegation for Kotlin.
 
-[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![Bintray](https://img.shields.io/bintray/v/chibatching/maven/kotpref.svg?maxAge=2592000)](https://bintray.com/chibatching/maven/kotpref/_latestVersion) [![kotlin](https://img.shields.io/badge/kotlin-1.0.3-blue.svg)]() [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![Bintray](https://img.shields.io/bintray/v/chibatching/maven/kotpref.svg?maxAge=2592000)](https://bintray.com/chibatching/maven/kotpref/_latestVersion) [![kotlin](https://img.shields.io/badge/kotlin-1.0.4-blue.svg)]() [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
 
 ```groovy
-compile 'com.chibatching:kotpref:1.4.0'
+compile 'com.chibatching:kotpref:1.5.0'
 ```
 
 ## How to use
@@ -16,6 +16,7 @@ compile 'com.chibatching:kotpref:1.4.0'
 
 ```kotlin
 object UserInfo : KotprefModel() {
+    var gameLevel: GameLevel by enumValuePrefVar(GameLevel::class, GameLevel.NORMAL)
     var name: String by stringPrefVar()
     var code: String? by stringNullablePrefVar()
     var age: Int by intPrefVar(default = 14)
@@ -27,21 +28,22 @@ object UserInfo : KotprefModel() {
         return@stringSetPrefVal set
     }
 }
+
+enum class GameLevel {
+    EASY,
+    NORMAL,
+    HARD
+}
 ```
 
 ### Set up
 
 **From 1.4.0, initialization is no longer need!**
 
-#### *Deprecated*
-
-```kotlin
-Kotpref.init(context)
-```
-
 ### Read and Write
 
 ```kotlin
+UserInfo.gameLevel = GameLevel.HARD
 UserInfo.name = "chibatching"
 UserInfo.code = "DAEF2599-7FC9-49C5-9A11-3C12B14A6898"
 UserInfo.age = 30
@@ -51,6 +53,7 @@ UserInfo.prizes.add("Bronze")
 UserInfo.prizes.add("Silver")
 UserInfo.prizes.add("Gold")
 
+Log.d(TAG, "Game level: ${UserInfo.gameLevel}")
 Log.d(TAG, "User name: ${UserInfo.name}")
 Log.d(TAG, "User code: ${UserInfo.code}")
 Log.d(TAG, "User age: ${UserInfo.age}")
@@ -63,6 +66,7 @@ UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: ${s}") }
 
 ```kotlin
 UserInfo.bulk {
+    gameLevel = GameLevel.EASY
     name = "chibatching Jr"
     code = "451B65F6-EF95-4C2C-AE76-D34535F51B3B"
     age = 2
@@ -95,6 +99,24 @@ XML file name equals model class name. If model class named `UserInfo`, XML file
 ```
 
 ### Options
+
+#### Disable auto initialize
+
+Add below tag to AndroidManifest
+
+```xml
+<provider
+    android:authorities="${applicationId}.KotprefInitProvider"
+    android:name="com.chibatching.kotpref.KotprefInitProvider"
+    tools:node="remove"/>
+```
+
+and initialize Kotpref manually.
+
+```kotlin
+Kotpref.init(context)
+```
+
 
 #### Change default value
 
