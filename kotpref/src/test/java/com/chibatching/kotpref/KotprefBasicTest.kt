@@ -438,4 +438,197 @@ class KotprefBasicTest {
         }
         assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test3"))
     }
+
+    // immediateBulk test
+
+    @Test
+    fun changedPrefVarCanReadBothInAndOutImmediateBulkEdit() {
+        example.testIntVar = 30
+
+        example.immediateBulk {
+            testIntVar = 5839
+
+            assertThat(testIntVar, equalTo(5839))
+        }
+        assertThat(example.testIntVar, equalTo(5839))
+    }
+
+    @Test
+    fun changedPrefVarNotAffectPreferenceInImmediateBulkEdit() {
+        example.testLongVar = -9831L
+
+        example.immediateBulk {
+            testLongVar = 831456L
+
+            assertThat(pref.getLong("testLongVar", 0L), equalTo(-9831L))
+        }
+        assertThat(pref.getLong("testLongVar", 0L), equalTo(831456L))
+    }
+
+    @Test
+    fun occurErrorInImmediateBulkEditCancelTransaction() {
+        example.testStringVar = "before"
+
+        try {
+            example.immediateBulk {
+                testStringVar = "edit in bulk"
+                throw Exception()
+            }
+        } catch (e: Exception) {
+        }
+        assertThat(example.testStringVar, equalTo("before"))
+        assertThat(pref.getString("testStringVar", ""), equalTo("before"))
+    }
+
+    @Test
+    fun addRemoveStringSetPrefValCanReadBothInAndOutImmediateBulkEdit() {
+        example.testStringSetVal.add("test1")
+
+        example.immediateBulk {
+            testStringSetVal.add("test2")
+            testStringSetVal.add("test3")
+            testStringSetVal.remove("test2")
+
+            assertThat(testStringSetVal, containsInAnyOrder("test1", "test3"))
+        }
+        assertThat(example.testStringSetVal, containsInAnyOrder("test1", "test3"))
+    }
+
+    @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    fun addRemoveStringSetPrefValNotAffectPreferenceInImmediateBulkEdit() {
+        example.testStringSetVal.add("test1")
+
+        example.immediateBulk {
+            testStringSetVal.add("test2")
+            testStringSetVal.add("test3")
+            testStringSetVal.remove("test2")
+
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1"))
+        }
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test3"))
+    }
+
+    @Test
+    fun addAllStringSetPrefValCanReadBothInAndOutImmediateBulkEdit() {
+        example.testStringSetVal.add("test1")
+
+        val addSet = TreeSet<String>().apply {
+            add("test2")
+            add("test3")
+        }
+
+        example.immediateBulk {
+            testStringSetVal.addAll(addSet)
+
+            assertThat(testStringSetVal, containsInAnyOrder("test1", "test2", "test3"))
+        }
+        assertThat(example.testStringSetVal, containsInAnyOrder("test1", "test2", "test3"))
+    }
+
+    @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    fun addAllStringSetPrefValNotAffectPreferenceInImmediateBulkEdit() {
+        example.testStringSetVal.add("test1")
+
+        val addSet = TreeSet<String>().apply {
+            add("test2")
+            add("test3")
+        }
+
+        example.immediateBulk {
+            testStringSetVal.addAll(addSet)
+
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1"))
+        }
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
+    }
+
+    @Test
+    fun removeAllStringSetPrefValCanReadBothInAndOutImmediateBulkEdit() {
+        example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val removeSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+        }
+
+        example.immediateBulk {
+            testStringSetVal.removeAll(removeSet)
+
+            assertThat(testStringSetVal, containsInAnyOrder("test2"))
+        }
+        assertThat(example.testStringSetVal, containsInAnyOrder("test2"))
+    }
+
+    @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    fun removeAllStringSetPrefValNotAffectPreferenceInImmediateBulkEdit() {
+        example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val removeSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+        }
+
+        example.immediateBulk {
+            testStringSetVal.removeAll(removeSet)
+
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
+        }
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test2"))
+    }
+
+    @Test
+    fun retainAllStringSetPrefValCanReadBothInAndOutImmediateBulkEdit() {
+        example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val retainSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+            add("test4")
+        }
+
+        example.immediateBulk {
+            testStringSetVal.retainAll(retainSet)
+
+            assertThat(testStringSetVal, containsInAnyOrder("test1", "test3"))
+        }
+        assertThat(example.testStringSetVal, containsInAnyOrder("test1", "test3"))
+    }
+
+    @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    fun retainAllStringSetPrefValNotAffectPreferenceInImmediateBulkEdit() {
+        example.testStringSetVal.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val retainSet = TreeSet<String>().apply {
+            add("test1")
+            add("test3")
+            add("test4")
+        }
+
+        example.immediateBulk {
+            testStringSetVal.retainAll(retainSet)
+
+            assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
+        }
+        assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test3"))
+    }
 }

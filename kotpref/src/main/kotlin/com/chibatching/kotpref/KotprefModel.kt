@@ -257,6 +257,14 @@ abstract class KotprefModel() {
     }
 
     /**
+     * Commit values set in the bulk edit mode to preferences immediately, in blocking manner.
+     */
+    fun commitBulkEditImmediately() {
+        kotprefEditor!!.commit()
+        kotprefInTransaction = false
+    }
+
+    /**
      * Cancel bulk edit mode. Values set in the bulk mode will be rolled back.
      */
     fun cancelBulkEdit() {
