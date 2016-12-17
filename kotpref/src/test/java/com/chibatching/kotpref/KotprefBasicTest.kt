@@ -439,13 +439,13 @@ class KotprefBasicTest {
         assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test3"))
     }
 
-    // immediateBulk test
+    // blockingBulk test
 
     @Test
     fun changedPrefVarCanReadBothInAndOutImmediateBulkEdit() {
         example.testIntVar = 30
 
-        example.immediateBulk {
+        example.blockingBulk {
             testIntVar = 5839
 
             assertThat(testIntVar, equalTo(5839))
@@ -457,7 +457,7 @@ class KotprefBasicTest {
     fun changedPrefVarNotAffectPreferenceInImmediateBulkEdit() {
         example.testLongVar = -9831L
 
-        example.immediateBulk {
+        example.blockingBulk {
             testLongVar = 831456L
 
             assertThat(pref.getLong("testLongVar", 0L), equalTo(-9831L))
@@ -470,7 +470,7 @@ class KotprefBasicTest {
         example.testStringVar = "before"
 
         try {
-            example.immediateBulk {
+            example.blockingBulk {
                 testStringVar = "edit in bulk"
                 throw Exception()
             }
@@ -484,7 +484,7 @@ class KotprefBasicTest {
     fun addRemoveStringSetPrefValCanReadBothInAndOutImmediateBulkEdit() {
         example.testStringSetVal.add("test1")
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.add("test2")
             testStringSetVal.add("test3")
             testStringSetVal.remove("test2")
@@ -499,7 +499,7 @@ class KotprefBasicTest {
     fun addRemoveStringSetPrefValNotAffectPreferenceInImmediateBulkEdit() {
         example.testStringSetVal.add("test1")
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.add("test2")
             testStringSetVal.add("test3")
             testStringSetVal.remove("test2")
@@ -518,7 +518,7 @@ class KotprefBasicTest {
             add("test3")
         }
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.addAll(addSet)
 
             assertThat(testStringSetVal, containsInAnyOrder("test1", "test2", "test3"))
@@ -536,7 +536,7 @@ class KotprefBasicTest {
             add("test3")
         }
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.addAll(addSet)
 
             assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1"))
@@ -557,7 +557,7 @@ class KotprefBasicTest {
             add("test3")
         }
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.removeAll(removeSet)
 
             assertThat(testStringSetVal, containsInAnyOrder("test2"))
@@ -579,7 +579,7 @@ class KotprefBasicTest {
             add("test3")
         }
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.removeAll(removeSet)
 
             assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
@@ -601,7 +601,7 @@ class KotprefBasicTest {
             add("test4")
         }
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.retainAll(retainSet)
 
             assertThat(testStringSetVal, containsInAnyOrder("test1", "test3"))
@@ -624,7 +624,7 @@ class KotprefBasicTest {
             add("test4")
         }
 
-        example.immediateBulk {
+        example.blockingBulk {
             testStringSetVal.retainAll(retainSet)
 
             assertThat(pref.getStringSet("testStringSetVal", TreeSet<String>()), containsInAnyOrder("test1", "test2", "test3"))
