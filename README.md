@@ -2,12 +2,12 @@
 
 Android SharedPreference delegation for Kotlin.
 
-[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.0.4-blue.svg)]() [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.0.5-blue.svg)]() [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
 
 ```groovy
-compile 'com.chibatching:kotpref:1.5.0'
+compile 'com.chibatching:kotpref:1.6.0'
 ```
 
 ## How to use
@@ -38,7 +38,7 @@ enum class GameLevel {
 
 ### Set up
 
-**From 1.4.0, initialization is no longer need!**
+**1.4.0 or above, initialization is no longer need!**
 
 ### Read and Write
 
@@ -74,6 +74,12 @@ UserInfo.bulk {
     rate = 0.4F
     prizes.clear()
     prizes.add("New Born")
+}
+
+// Bulk edit uses Editor#apply() method internally.
+// If you want to apply immediately, you can use blockingBulk instead.
+UserInfo.blockingBulk {
+    gameLevel = GameLevel.EASY
 }
 ```
 
