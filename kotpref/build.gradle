@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.dokka-android'
 
 def version_name = "1.5.0"
 
@@ -38,9 +39,11 @@ dependencies {
 buildscript {
     repositories {
         mavenCentral()
+        jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.11'
     }
 }
 repositories {
@@ -59,9 +62,6 @@ def siteUrl = 'https://github.com/chibatching/kotpref'
 def gitUrl = 'https://github.com/chibatching/kotpref.git'
 
 bintray {
-    Properties properties = new Properties()
-    properties.load(project.rootProject.file('local.properties').newDataInputStream())
-
     user = System.getenv("bintray_user")
     key = System.getenv("bintray_api_key")
 
@@ -84,17 +84,24 @@ task sourcesJar(type: Jar) {
     classifier = 'sources'
 }
 
-task javadoc(type: Javadoc) {
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+dokka {
+    includes = ["proguard-rules.pro"]
+    outputFormat = 'javadoc'
+    moduleName = 'kotpref'
+    linkMapping {
+        dir = "src/main/kotlin"
+        url = "https://github.com/chibatching/Kotpref/tree/v${version_name}/kotpref/src/main/kotlin"
+        suffix = "#L"
+    }
 }
 
-task javadocJar(type: Jar, dependsOn: javadoc) {
+task javadocJar(type: Jar, dependsOn: dokka) {
     classifier = 'javadoc'
-    from javadoc.destinationDir
+    from dokka.outputDirectory
 }
+
 artifacts {
-//    archives javadocJar
+    archives javadocJar
     archives sourcesJar
 }
 
