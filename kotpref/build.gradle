@@ -85,7 +85,6 @@ task sourcesJar(type: Jar) {
 }
 
 dokka {
-    includes = ["proguard-rules.pro"]
     outputFormat = 'javadoc'
     moduleName = 'kotpref'
     linkMapping {
