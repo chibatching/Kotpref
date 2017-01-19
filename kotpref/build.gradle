@@ -2,8 +2,6 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'org.jetbrains.dokka-android'
 
-def version_name = "1.6.0"
-
 android {
     compileSdkVersion 25
     buildToolsVersion '25.0.2'
@@ -52,7 +50,7 @@ repositories {
 }
 
 // Bintray upload
-group = 'com.chibatching.kotpref'
+group = group_name
 version = version_name
 
 apply plugin: 'com.github.dcendents.android-maven'
