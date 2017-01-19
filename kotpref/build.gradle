@@ -52,7 +52,7 @@ repositories {
 }
 
 // Bintray upload
-group = 'com.chibatching'
+group = 'com.chibatching.kotpref'
 version = version_name
 
 apply plugin: 'com.github.dcendents.android-maven'
