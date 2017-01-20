@@ -1,1 +1,1 @@
-include ':sample', ':kotpref'
+include ':sample', ':kotpref', ':initializer'

@@ -1,9 +1,10 @@
-package com.chibatching.kotpref
+package com.chibatching.kotpref.initializer
 
 import android.content.ContentProvider
 import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
+import com.chibatching.kotpref.Kotpref
 
 
 class KotprefInitProvider : ContentProvider() {

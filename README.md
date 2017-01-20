@@ -113,7 +113,7 @@ Add below tag to AndroidManifest
 ```xml
 <provider
     android:authorities="${applicationId}.KotprefInitProvider"
-    android:name="com.chibatching.kotpref.KotprefInitProvider"
+    android:name="com.chibatching.kotpref.initializer.KotprefInitProvider"
     tools:node="remove"/>
 ```
 
