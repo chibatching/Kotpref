@@ -11,7 +11,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 
-abstract class KotprefModel() {
+abstract class KotprefModel {
 
     private var kotprefInTransaction: Boolean = false
     private var kotprefTransactionStartTime: Long = 0
@@ -272,7 +272,7 @@ abstract class KotprefModel() {
         kotprefInTransaction = false
     }
 
-    abstract inner class PrefVar<T : Any?>() : ReadWriteProperty<KotprefModel, T> {
+    abstract inner class PrefVar<T : Any?> : ReadWriteProperty<KotprefModel, T> {
 
         private var lastUpdate: Long = 0
         private var transactionData: Any? = null
