@@ -16,16 +16,16 @@ compile 'com.chibatching:kotpref:1.6.0'
 
 ```kotlin
 object UserInfo : KotprefModel() {
-    var gameLevel: GameLevel by enumValuePrefVar(GameLevel::class, GameLevel.NORMAL)
-    var name: String by stringPrefVar()
-    var code: String? by stringNullablePrefVar()
-    var age: Int by intPrefVar(default = 14)
-    var highScore: Long by longPrefVar()
-    var rate: Float by floatPrefVar()
-    val prizes: MutableSet<String> by stringSetPrefVal {
+    var gameLevel: GameLevel by enumValuePref(GameLevel::class, GameLevel.NORMAL)
+    var name: String by stringPref()
+    var code: String? by nullableStringPref()
+    var age: Int by intPref(default = 14)
+    var highScore: Long by longPref()
+    var rate: Float by floatPref()
+    val prizes: MutableSet<String> by stringSetPref {
         val set = TreeSet<String>()
         set.add("Beginner")
-        return@stringSetPrefVal set
+        return@stringSetPref set
     }
 }
 
@@ -127,13 +127,13 @@ Kotpref.init(context)
 #### Change default value
 
 ```kotlin
-var age: Int by intPrefVar(18)
+var age: Int by intPref(18)
 ```
 
 or
 
 ```kotlin
-var age: Int by intPrefVar(default = 18)
+var age: Int by intPref(default = 18)
 ```
 
 #### Change preference key
@@ -141,8 +141,8 @@ var age: Int by intPrefVar(default = 18)
 You can custom preference key or use from string resources.
 
 ```kotlin
-var useFunc1: Boolean by booleanPrefVar(key = "use_func1")
-var mode: Int by intPrefVar(default = 1, key = R.string.pref_mode)
+var useFunc1: Boolean by booleanPref(key = "use_func1")
+var mode: Int by intPref(default = 1, key = R.string.pref_mode)
 ```
 
 #### Change XML file name

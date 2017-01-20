@@ -21,13 +21,13 @@ class KotprefCustomTest {
 
     class CustomExample : KotprefModel() {
         override val kotprefName: String = PREFERENCE_NAME
-        var testIntVar: Int by intPrefVar(Int.MAX_VALUE)
-        var testLongVar: Long by longPrefVar(Long.MAX_VALUE)
-        var testFloatVar: Float by floatPrefVar(Float.MAX_VALUE)
-        var testBooleanVar: Boolean by booleanPrefVar(true)
-        var testStringVar: String by stringPrefVar(default = "default", key = "test_string_var")
-        var testStringNullableVar: String? by stringNullablePrefVar(default = "nullable default")
-        var testStringRes: Int by intPrefVar(Int.MIN_VALUE, R.string.test_preference)
+        var testIntVar: Int by intPref(Int.MAX_VALUE)
+        var testLongVar: Long by longPref(Long.MAX_VALUE)
+        var testFloatVar: Float by floatPref(Float.MAX_VALUE)
+        var testBooleanVar: Boolean by booleanPref(true)
+        var testStringVar: String by stringPref(default = "default", key = "test_string_var")
+        var testStringNullableVar: String? by nullableStringPref(default = "nullable default")
+        var testStringRes: Int by intPref(Int.MIN_VALUE, R.string.test_preference)
     }
 
     lateinit var context: Context

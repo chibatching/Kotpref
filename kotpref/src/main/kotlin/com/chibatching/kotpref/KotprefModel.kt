@@ -58,96 +58,96 @@ abstract class KotprefModel {
      * @param default default string value
      * @param key custom preference key
      */
-    protected fun stringPrefVar(default: String = "", key: String? = null)
-            : ReadWriteProperty<KotprefModel, String> = StringPrefVar(default, key)
+    protected fun stringPref(default: String = "", key: String? = null)
+            : ReadWriteProperty<KotprefModel, String> = StringPref(default, key)
 
     /**
      * Delegate string shared preference property.
      * @param default default string value
      * @param key custom preference key resource id
      */
-    protected fun stringPrefVar(default: String = "", key: Int)
-            : ReadWriteProperty<KotprefModel, String> = StringPrefVar(default, context.getString(key))
+    protected fun stringPref(default: String = "", key: Int)
+            : ReadWriteProperty<KotprefModel, String> = StringPref(default, context.getString(key))
 
     /**
      * Delegate nullable string shared preference property.
      * @param default default string value
      * @param key custom preference key
      */
-    protected fun stringNullablePrefVar(default: String? = null, key: String? = null)
-            : ReadWriteProperty<KotprefModel, String?> = StringNullablePrefVar(default, key)
+    protected fun nullableStringPref(default: String? = null, key: String? = null)
+            : ReadWriteProperty<KotprefModel, String?> = StringNullablePref(default, key)
 
     /**
      * Delegate nullable string shared preference property.
      * @param default default string value
      * @param key custom preference key resource id
      */
-    protected fun stringNullablePrefVar(default: String? = null, key: Int)
-            : ReadWriteProperty<KotprefModel, String?> = StringNullablePrefVar(default, context.getString(key))
+    protected fun nullableStringPref(default: String? = null, key: Int)
+            : ReadWriteProperty<KotprefModel, String?> = StringNullablePref(default, context.getString(key))
 
     /**
      * Delegate int shared preference property.
      * @param default default int value
      * @param key custom preference key
      */
-    protected fun intPrefVar(default: Int = 0, key: String? = null)
-            : ReadWriteProperty<KotprefModel, Int> = IntPrefVar(default, key)
+    protected fun intPref(default: Int = 0, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Int> = IntPref(default, key)
 
     /**
      * Delegate int shared preference property.
      * @param default default int value
      * @param key custom preference key resource id
      */
-    protected fun intPrefVar(default: Int = 0, key: Int)
-            : ReadWriteProperty<KotprefModel, Int> = IntPrefVar(default, context.getString(key))
+    protected fun intPref(default: Int = 0, key: Int)
+            : ReadWriteProperty<KotprefModel, Int> = IntPref(default, context.getString(key))
 
     /**
      * Delegate long shared preference property.
      * @param default default long value
      * @param key custom preference key
      */
-    protected fun longPrefVar(default: Long = 0L, key: String? = null)
-            : ReadWriteProperty<KotprefModel, Long> = LongPrefVar(default, key)
+    protected fun longPref(default: Long = 0L, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Long> = LongPref(default, key)
 
     /**
      * Delegate long shared preference property.
      * @param default default long value
      * @param key custom preference key resource id
      */
-    protected fun longPrefVar(default: Long = 0L, key: Int)
-            : ReadWriteProperty<KotprefModel, Long> = LongPrefVar(default, context.getString(key))
+    protected fun longPref(default: Long = 0L, key: Int)
+            : ReadWriteProperty<KotprefModel, Long> = LongPref(default, context.getString(key))
 
     /**
      * Delegate float shared preference property.
      * @param default default float value
      * @param key custom preference key
      */
-    protected fun floatPrefVar(default: Float = 0F, key: String? = null)
-            : ReadWriteProperty<KotprefModel, Float> = FloatPrefVar(default, key)
+    protected fun floatPref(default: Float = 0F, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Float> = FloatPref(default, key)
 
     /**
      * Delegate float shared preference property.
      * @param default default float value
      * @param key custom preference key resource id
      */
-    protected fun floatPrefVar(default: Float = 0F, key: Int)
-            : ReadWriteProperty<KotprefModel, Float> = FloatPrefVar(default, context.getString(key))
+    protected fun floatPref(default: Float = 0F, key: Int)
+            : ReadWriteProperty<KotprefModel, Float> = FloatPref(default, context.getString(key))
 
     /**
      * Delegate boolean shared preference property.
      * @param default default boolean value
      * @param key custom preference key
      */
-    protected fun booleanPrefVar(default: Boolean = false, key: String? = null)
-            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPrefVar(default, key)
+    protected fun booleanPref(default: Boolean = false, key: String? = null)
+            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPref(default, key)
 
     /**
      * Delegate boolean shared preference property.
      * @param default default boolean value
      * @param key custom preference key resource id
      */
-    protected fun booleanPrefVar(default: Boolean = false, key: Int)
-            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPrefVar(default, context.getString(key))
+    protected fun booleanPref(default: Boolean = false, key: Int)
+            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPref(default, context.getString(key))
 
     /**
      * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
@@ -155,8 +155,8 @@ abstract class KotprefModel {
      * @param default default enum value
      * @param key custom preference key
      */
-    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: KClass<T>, default: T, key: String? = null)
-            : ReadWriteProperty<KotprefModel, T> = EnumValuePrefVar(enumClass, default, key)
+    protected fun <T : Enum<*>> enumValuePref(enumClass: KClass<T>, default: T, key: String? = null)
+            : ReadWriteProperty<KotprefModel, T> = EnumValuePref(enumClass, default, key)
 
     /**
      * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
@@ -164,8 +164,8 @@ abstract class KotprefModel {
      * @param default default enum value
      * @param key custom preference key resource id
      */
-    protected fun <T : Enum<*>> enumValuePrefVar(enumClass: KClass<T>, default: T, key: Int)
-            : ReadWriteProperty<KotprefModel, T> = EnumValuePrefVar(enumClass, default, context.getString(key))
+    protected fun <T : Enum<*>> enumValuePref(enumClass: KClass<T>, default: T, key: Int)
+            : ReadWriteProperty<KotprefModel, T> = EnumValuePref(enumClass, default, context.getString(key))
 
     /**
      * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
@@ -173,8 +173,8 @@ abstract class KotprefModel {
      * @param default default enum value
      * @param key custom preference key
      */
-    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: KClass<T>, default: T? = null, key: String? = null)
-            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePrefVar(enumClass, default, key)
+    protected fun <T : Enum<*>> nullableEnumValuePref(enumClass: KClass<T>, default: T? = null, key: String? = null)
+            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePref(enumClass, default, key)
 
     /**
      * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
@@ -182,8 +182,8 @@ abstract class KotprefModel {
      * @param default default enum value
      * @param key custom preference key resource id
      */
-    protected fun <T : Enum<*>> enumNullableValuePrefVar(enumClass: KClass<T>, default: T? = null, key: Int)
-            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePrefVar(enumClass, default, context.getString(key))
+    protected fun <T : Enum<*>> enumNullableValuePref(enumClass: KClass<T>, default: T? = null, key: Int)
+            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePref(enumClass, default, context.getString(key))
 
     /**
      * Delegate enum-based shared preference property storing and recalling by the enum value's ordinal as an integer.
@@ -191,8 +191,8 @@ abstract class KotprefModel {
      * @param default default enum value
      * @param key custom preference key
      */
-    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: KClass<T>, default: T, key: String? = null)
-            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPrefVar(enumClass, default, key)
+    protected fun <T : Enum<*>> enumOrdinalPref(enumClass: KClass<T>, default: T, key: String? = null)
+            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPref(enumClass, default, key)
 
     /**
      * Delegate enum-based shared preference property storing and recalling by the enum value's ordinal as an integer.
@@ -200,8 +200,8 @@ abstract class KotprefModel {
      * @param default default enum value
      * @param key custom preference key resource id
      */
-    protected fun <T : Enum<*>> enumOrdinalPrefVar(enumClass: KClass<T>, default: T, key: Int)
-            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPrefVar(enumClass, default, context.getString(key))
+    protected fun <T : Enum<*>> enumOrdinalPref(enumClass: KClass<T>, default: T, key: Int)
+            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPref(enumClass, default, context.getString(key))
 
     /**
      * Delegate string set shared preference property.
@@ -209,7 +209,7 @@ abstract class KotprefModel {
      * @param key custom preference key
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>(), key: String? = null)
+    protected fun stringSetPref(default: Set<String> = LinkedHashSet<String>(), key: String? = null)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal({ default }, key)
 
     /**
@@ -218,7 +218,7 @@ abstract class KotprefModel {
      * @param key custom preference key resource id
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected fun stringSetPrefVal(default: Set<String> = LinkedHashSet<String>(), key: Int)
+    protected fun stringSetPref(default: Set<String> = LinkedHashSet<String>(), key: Int)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal({ default }, context.getString(key))
 
     /**
@@ -227,7 +227,7 @@ abstract class KotprefModel {
      * @param default default string set value creation function
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected fun stringSetPrefVal(key: String? = null, default: () -> Set<String>)
+    protected fun stringSetPref(key: String? = null, default: () -> Set<String>)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default, key)
 
     /**
@@ -236,7 +236,7 @@ abstract class KotprefModel {
      * @param default default string set value
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    protected fun stringSetPrefVal(key: Int, default: () -> Set<String>)
+    protected fun stringSetPref(key: Int, default: () -> Set<String>)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPrefVal(default, context.getString(key))
 
     /**
@@ -272,7 +272,7 @@ abstract class KotprefModel {
         kotprefInTransaction = false
     }
 
-    abstract inner class PrefVar<T : Any?> : ReadWriteProperty<KotprefModel, T> {
+    abstract inner class Pref<T : Any?> : ReadWriteProperty<KotprefModel, T> {
 
         private var lastUpdate: Long = 0
         private var transactionData: Any? = null
@@ -305,7 +305,7 @@ abstract class KotprefModel {
     }
 
 
-    private inner class StringPrefVar(val default: String, val key: String?) : PrefVar<String>() {
+    private inner class StringPref(val default: String, val key: String?) : Pref<String>() {
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String {
             return preference.getString(key ?: property.name, default)
@@ -320,7 +320,7 @@ abstract class KotprefModel {
         }
     }
 
-    private inner class StringNullablePrefVar(val default: String?, val key: String?) : PrefVar<String?>() {
+    private inner class StringNullablePref(val default: String?, val key: String?) : Pref<String?>() {
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String? {
             return preference.getString(key ?: property.name, default)
@@ -335,7 +335,7 @@ abstract class KotprefModel {
         }
     }
 
-    private inner class IntPrefVar(val default: Int, val key: String?) : PrefVar<Int>() {
+    private inner class IntPref(val default: Int, val key: String?) : Pref<Int>() {
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Int {
             return preference.getInt(key ?: property.name, default)
@@ -351,7 +351,7 @@ abstract class KotprefModel {
     }
 
 
-    private inner class LongPrefVar(val default: Long, val key: String?) : PrefVar<Long>() {
+    private inner class LongPref(val default: Long, val key: String?) : Pref<Long>() {
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Long {
             return preference.getLong(key ?: property.name, default)
@@ -367,7 +367,7 @@ abstract class KotprefModel {
     }
 
 
-    private inner class FloatPrefVar(val default: Float, val key: String?) : PrefVar<Float>() {
+    private inner class FloatPref(val default: Float, val key: String?) : Pref<Float>() {
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Float {
             return preference.getFloat(key ?: property.name, default)
@@ -383,7 +383,7 @@ abstract class KotprefModel {
     }
 
 
-    private inner class BooleanPrefVar(val default: Boolean, val key: String?) : PrefVar<Boolean>() {
+    private inner class BooleanPref(val default: Boolean, val key: String?) : Pref<Boolean>() {
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Boolean {
             return preference.getBoolean(key ?: property.name, default)
@@ -398,7 +398,7 @@ abstract class KotprefModel {
         }
     }
 
-    private inner class EnumValuePrefVar<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : PrefVar<T>() {
+    private inner class EnumValuePref<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : Pref<T>() {
         private val enumConstants = enumClass.java.enumConstants
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
@@ -415,7 +415,7 @@ abstract class KotprefModel {
         }
     }
 
-    private inner class EnumNullableValuePrefVar<T : Enum<*>>(enumClass : KClass<T>, val default: T?, val key: String?) : PrefVar<T?>() {
+    private inner class EnumNullableValuePref<T : Enum<*>>(enumClass : KClass<T>, val default: T?, val key: String?) : Pref<T?>() {
         private val enumConstants = enumClass.java.enumConstants
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
@@ -432,7 +432,7 @@ abstract class KotprefModel {
         }
     }
 
-    private inner class EnumOrdinalPrefVar<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : PrefVar<T>() {
+    private inner class EnumOrdinalPref<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : Pref<T>() {
         private val enumConstants = enumClass.java.enumConstants
 
         override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {

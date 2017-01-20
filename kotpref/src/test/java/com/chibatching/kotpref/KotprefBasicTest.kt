@@ -21,17 +21,17 @@ import java.util.*
 class KotprefBasicTest {
 
     class Example : KotprefModel() {
-        var testIntVar: Int by intPrefVar()
-        var testLongVar: Long by longPrefVar()
-        var testFloatVar: Float by floatPrefVar()
-        var testBooleanVar: Boolean by booleanPrefVar()
-        var testStringVar: String by stringPrefVar()
-        var testStringNullableVar: String? by stringNullablePrefVar()
-        var testEnumValueVar: ExampleEnum by enumValuePrefVar(ExampleEnum::class, ExampleEnum.FIRST)
-        var testEnumNullableValueVar: ExampleEnum? by enumNullableValuePrefVar(ExampleEnum::class)
-        var testEnumOrdinalVar: ExampleEnum by enumOrdinalPrefVar(ExampleEnum::class, ExampleEnum.FIRST)
-        val testStringSetVal: MutableSet<String> by stringSetPrefVal(TreeSet<String>())
-        val testLazyDefaultSS: MutableSet<String> by stringSetPrefVal {
+        var testIntVar: Int by intPref()
+        var testLongVar: Long by longPref()
+        var testFloatVar: Float by floatPref()
+        var testBooleanVar: Boolean by booleanPref()
+        var testStringVar: String by stringPref()
+        var testStringNullableVar: String? by nullableStringPref()
+        var testEnumValueVar: ExampleEnum by enumValuePref(ExampleEnum::class, ExampleEnum.FIRST)
+        var testEnumNullableValueVar: ExampleEnum? by nullableEnumValuePref(ExampleEnum::class)
+        var testEnumOrdinalVar: ExampleEnum by enumOrdinalPref(ExampleEnum::class, ExampleEnum.FIRST)
+        val testStringSetVal: MutableSet<String> by stringSetPref(TreeSet<String>())
+        val testLazyDefaultSS: MutableSet<String> by stringSetPref {
             val defSet = LinkedHashSet<String>()
             defSet.add("Lazy set item 1")
             defSet.add("Lazy set item 2")
