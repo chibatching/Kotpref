@@ -2,7 +2,7 @@
 
 buildscript {
 
-    ext.versionName = '2.0.0'
+    ext.versionName = '2.0.0-SNAPSHOT'
     ext.groupName = 'com.chibatching.kotpref'
 
     ext.kotlinVersion = '1.0.6'
