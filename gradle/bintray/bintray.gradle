@@ -16,7 +16,7 @@ bintray {
     configurations = ['archives'] //When uploading configuration files
     pkg {
         repo = 'maven'
-        name = project.name
+        name = moduleName
         desc = 'Android SharedPreferences delegation for Kotlin.'
         websiteUrl = siteUrl
         issueTrackerUrl = 'https://github.com/chibatching/kotpref/issues'
