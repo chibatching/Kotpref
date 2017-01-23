@@ -5,13 +5,13 @@ import java.util.*
 
 
 object UserInfo : KotprefModel() {
-    var gameLevel: GameLevel by enumValuePref(GameLevel::class, GameLevel.NORMAL)
-    var name: String by stringPref()
-    var code: String? by nullableStringPref()
-    var age: Int by intPref()
-    var highScore: Long by longPref()
-    var rate: Float by floatPref()
-    val prizes: MutableSet<String> by stringSetPref {
+    var gameLevel by enumValuePref(GameLevel::class, GameLevel.NORMAL)
+    var name by stringPref()
+    var code by nullableStringPref()
+    var age by intPref()
+    var highScore by longPref()
+    var rate by floatPref()
+    val prizes by stringSetPref {
         val set = TreeSet<String>()
         set.add("Beginner")
         return@stringSetPref set

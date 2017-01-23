@@ -7,11 +7,10 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class)
+@RunWith(KotprefTestRunner::class)
 @Config(constants = BuildConfig::class, manifest = Config.NONE, sdk = intArrayOf(23))
 class KotprefCustomTest {
 
@@ -21,13 +20,13 @@ class KotprefCustomTest {
 
     class CustomExample : KotprefModel() {
         override val kotprefName: String = PREFERENCE_NAME
-        var testIntVar: Int by intPref(Int.MAX_VALUE)
-        var testLongVar: Long by longPref(Long.MAX_VALUE)
-        var testFloatVar: Float by floatPref(Float.MAX_VALUE)
-        var testBooleanVar: Boolean by booleanPref(true)
-        var testStringVar: String by stringPref(default = "default", key = "test_string_var")
-        var testStringNullableVar: String? by nullableStringPref(default = "nullable default")
-        var testStringRes: Int by intPref(Int.MIN_VALUE, R.string.test_preference)
+        var testInt by intPref(Int.MAX_VALUE)
+        var testLong by longPref(Long.MAX_VALUE)
+        var testFloat by floatPref(Float.MAX_VALUE)
+        var testBoolean by booleanPref(true)
+        var testString by stringPref(default = "default", key = "test_string_var")
+        var testStringNullable by nullableStringPref(default = "nullable default")
+        var testStringRes by intPref(Int.MIN_VALUE, R.string.test_preference)
     }
 
     lateinit var context: Context
@@ -49,50 +48,50 @@ class KotprefCustomTest {
 
     @Test
     fun customIntPrefVarDefaultIsSetValue() {
-        assertThat(customExample.testIntVar, equalTo(Int.MAX_VALUE))
+        assertThat(customExample.testInt, equalTo(Int.MAX_VALUE))
     }
 
     @Test
     fun customLongPrefVarDefaultIsSetValue() {
-        assertThat(customExample.testLongVar, equalTo(Long.MAX_VALUE))
+        assertThat(customExample.testLong, equalTo(Long.MAX_VALUE))
     }
 
     @Test
     fun customFloatPrefVarDefaultIsSetValue() {
-        assertThat(customExample.testFloatVar, equalTo(Float.MAX_VALUE))
+        assertThat(customExample.testFloat, equalTo(Float.MAX_VALUE))
     }
 
     @Test
     fun customBooleanPrefVarDefaultIsSetValue() {
-        assertThat(customExample.testBooleanVar, equalTo(true))
+        assertThat(customExample.testBoolean, equalTo(true))
     }
 
     @Test
     fun customStringPrefVarDefaultIsSetValue() {
-        assertThat(customExample.testStringVar, equalTo("default"))
+        assertThat(customExample.testString, equalTo("default"))
     }
 
     @Test
     fun customStringNullablePrefVarDefaultIsSetValue() {
-        assertThat(customExample.testStringNullableVar, equalTo("nullable default"))
+        assertThat(customExample.testStringNullable, equalTo("nullable default"))
     }
 
     @Test
     fun canReadWithCustomPreferenceName() {
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-        customExample.testIntVar = 39
+        customExample.testInt = 39
 
-        assertThat(pref.getInt("testIntVar", 0), equalTo(customExample.testIntVar))
+        assertThat(pref.getInt("testInt", 0), equalTo(customExample.testInt))
     }
 
     @Test
     fun canReadWithCustomPreferenceKey() {
         val pref = context.getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
 
-        customExample.testStringVar = "custom key test"
+        customExample.testString = "custom key test"
 
-        assertThat(pref.getString("test_string_var", "default"), equalTo(customExample.testStringVar))
+        assertThat(pref.getString("test_string_var", "default"), equalTo(customExample.testString))
     }
 
     @Test
