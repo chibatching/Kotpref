@@ -6,8 +6,21 @@ Android SharedPreference delegation for Kotlin.
 
 ## Install
 
+**Kotpref version 2 is now developing! Please use carefully!**
+
 ```groovy
-compile 'com.chibatching:kotpref:1.6.0'
+repositories {
+    ...
+    maven {
+        url "https://oss.jfrog.org/list/oss-snapshot-local/"
+    }
+}
+
+dependencies {
+    ...
+    compile "com.chibatching.pref:pref:2.0.0-SNAPSHOT"
+    compile "com.chibatching.pref:initializer:2.0.0-SNAPSHOT" // optional
+}
 ```
 
 ## How to use
@@ -16,13 +29,13 @@ compile 'com.chibatching:kotpref:1.6.0'
 
 ```kotlin
 object UserInfo : KotprefModel() {
-    var gameLevel: GameLevel by enumValuePref(GameLevel::class, GameLevel.NORMAL)
-    var name: String by stringPref()
-    var code: String? by nullableStringPref()
-    var age: Int by intPref(default = 14)
-    var highScore: Long by longPref()
-    var rate: Float by floatPref()
-    val prizes: MutableSet<String> by stringSetPref {
+    var gameLevel by enumValuePref(GameLevel::class, GameLevel.NORMAL)
+    var name by stringPref()
+    var code by nullableStringPref()
+    var age by intPref(default = 14)
+    var highScore by longPref()
+    var rate by floatPref()
+    val prizes by stringSetPref {
         val set = TreeSet<String>()
         set.add("Beginner")
         return@stringSetPref set
@@ -38,7 +51,13 @@ enum class GameLevel {
 
 ### Set up
 
-**1.4.0 or above, initialization is no longer need!**
+Pass the application context to Kotpref
+
+```kotlin
+Kotpref.init(context)
+```
+
+or use auto initializer module.
 
 ### Read and Write
 
@@ -105,24 +124,6 @@ XML file name equals model class name. If model class named `UserInfo`, XML file
 ```
 
 ### Options
-
-#### Disable auto initialize
-
-Add below tag to AndroidManifest
-
-```xml
-<provider
-    android:authorities="${applicationId}.KotprefInitProvider"
-    android:name="com.chibatching.kotpref.initializer.KotprefInitProvider"
-    tools:node="remove"/>
-```
-
-and initialize Kotpref manually.
-
-```kotlin
-Kotpref.init(context)
-```
-
 
 #### Change default value
 
