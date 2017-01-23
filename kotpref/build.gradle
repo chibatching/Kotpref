@@ -53,4 +53,4 @@ repositories {
     jcenter()
 }
 
-apply from: "${project.rootDir}/gradle/bintray/bintray.gradle"
+apply from: "${project.rootDir}/gradle/publish/publish.gradle"
