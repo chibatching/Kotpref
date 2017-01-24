@@ -33,6 +33,8 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile project(":kotpref")
     compile project(":initializer")
+//    compile "com.chibatching.pref:kotpref:2.0.0-SNAPSHOT"
+//    compile "com.chibatching.pref:initializer:2.0.0-SNAPSHOT"
 }
 buildscript {
     repositories {
@@ -44,4 +46,7 @@ buildscript {
 }
 repositories {
     mavenCentral()
+    maven {
+        url "https://oss.jfrog.org/list/oss-snapshot-local/"
+    }
 }

@@ -1,5 +1,6 @@
 package com.chibatching.kotpref
 
+
 inline fun <T : KotprefModel> T.bulk(block: T.() -> Unit) {
     beginBulkEdit()
     try {
