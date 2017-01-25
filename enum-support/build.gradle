@@ -1,0 +1,55 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+ext.moduleName = 'Kotpref enum support'
+
+ext.VERSION_NAME = versionName
+ext.SDK_VERSION = sdkVersion
+ext.MIN_SDK = minSdkVersion
+ext.BUILD_TOOLS = buildToolsVersion
+
+android {
+    compileSdkVersion SDK_VERSION
+    buildToolsVersion BUILD_TOOLS
+
+    defaultConfig {
+        minSdkVersion 9
+        targetSdkVersion SDK_VERSION
+        versionCode 1
+        versionName VERSION_NAME
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+}
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compile project(":kotpref")
+
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.robolectric:robolectric:$robolectricVersion"
+    testCompile "com.android.support.test:testing-support-lib:$testingVersion"
+    testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+apply from: "${project.rootDir}/gradle/publish/publish.gradle"

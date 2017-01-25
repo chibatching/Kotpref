@@ -1,6 +1,7 @@
-package com.chibatching.kotpref.pref
+package com.chibatching.kotpref.enumsupport
 
 import android.content.SharedPreferences
+import com.chibatching.kotpref.pref.AbstractPref
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 

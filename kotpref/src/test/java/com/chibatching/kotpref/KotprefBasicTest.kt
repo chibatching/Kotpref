@@ -27,9 +27,6 @@ class KotprefBasicTest {
         var testBoolean by booleanPref()
         var testString by stringPref()
         var testStringNullable by nullableStringPref()
-        var testEnumValue by enumValuePref(ExampleEnum::class, ExampleEnum.FIRST)
-        var testEnumNullableValue by nullableEnumValuePref(ExampleEnum::class)
-        var testEnumOrdinal by enumOrdinalPref(ExampleEnum::class, ExampleEnum.FIRST)
         val testStringSet by stringSetPref(TreeSet<String>())
         val testLazyDefaultSS by stringSetPref {
             val defSet = LinkedHashSet<String>()
@@ -129,42 +126,6 @@ class KotprefBasicTest {
         example.testStringNullable = "Ohayo!"
         assertThat(example.testStringNullable, equalTo("Ohayo!"))
         assertThat(example.testStringNullable, equalTo(pref.getString("testStringNullable", "")))
-    }
-
-    @Test
-    fun enumValuePrefVarDefaultSameValueAsDefined() {
-        assertThat(example.testEnumValue, equalTo(ExampleEnum.FIRST))
-    }
-
-    @Test
-    fun setEnumValuePrefVarSetSameValueToPreference() {
-        example.testEnumValue = ExampleEnum.SECOND
-        assertThat(example.testEnumValue, equalTo(ExampleEnum.SECOND))
-        assertThat(example.testEnumValue.name, equalTo(pref.getString("testEnumValue", "")))
-    }
-
-    @Test
-    fun enumNullableValuePrefVarDefaultIsNull() {
-        assertThat(example.testEnumNullableValue, nullValue())
-    }
-
-    @Test
-    fun setEnumNullableValuePrefVarSetSameValueToPreference() {
-        example.testEnumNullableValue = ExampleEnum.SECOND
-        assertThat(example.testEnumNullableValue, equalTo(ExampleEnum.SECOND))
-        assertThat(example.testEnumNullableValue!!.name, equalTo(pref.getString("testEnumNullableValue", "")))
-    }
-
-    @Test
-    fun enumOrdinalPrefVarDefaultSameValueAsDefined() {
-        assertThat(example.testEnumOrdinal, equalTo(ExampleEnum.FIRST))
-    }
-
-    @Test
-    fun setEnumOrdinalPrefVarSetSameValueToPreference() {
-        example.testEnumOrdinal = ExampleEnum.SECOND
-        assertThat(example.testEnumOrdinal, equalTo(ExampleEnum.SECOND))
-        assertThat(example.testEnumOrdinal.ordinal, equalTo(pref.getInt("testEnumOrdinal", 0)))
     }
 
     @Test

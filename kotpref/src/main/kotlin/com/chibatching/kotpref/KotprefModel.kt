@@ -7,7 +7,6 @@ import com.chibatching.kotpref.pref.*
 import java.util.*
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KClass
 
 
 abstract class KotprefModel {
@@ -147,60 +146,6 @@ abstract class KotprefModel {
      */
     protected fun booleanPref(default: Boolean = false, key: Int)
             : ReadWriteProperty<KotprefModel, Boolean> = BooleanPref(default, context.getString(key))
-
-    /**
-     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
-     * @param enumClass Enum class to define the property
-     * @param default default enum value
-     * @param key custom preference key
-     */
-    protected fun <T : Enum<*>> enumValuePref(enumClass: KClass<T>, default: T, key: String? = null)
-            : ReadWriteProperty<KotprefModel, T> = EnumValuePref(enumClass, default, key)
-
-    /**
-     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
-     * @param enumClass Enum class to define the property
-     * @param default default enum value
-     * @param key custom preference key resource id
-     */
-    protected fun <T : Enum<*>> enumValuePref(enumClass: KClass<T>, default: T, key: Int)
-            : ReadWriteProperty<KotprefModel, T> = EnumValuePref(enumClass, default, context.getString(key))
-
-    /**
-     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
-     * @param enumClass Enum class to define the property
-     * @param default default enum value
-     * @param key custom preference key
-     */
-    protected fun <T : Enum<*>> nullableEnumValuePref(enumClass: KClass<T>, default: T? = null, key: String? = null)
-            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePref(enumClass, default, key)
-
-    /**
-     * Delegate enum-based shared preference property storing and recalling by the enum value's name as a string.
-     * @param enumClass Enum class to define the property
-     * @param default default enum value
-     * @param key custom preference key resource id
-     */
-    protected fun <T : Enum<*>> enumNullableValuePref(enumClass: KClass<T>, default: T? = null, key: Int)
-            : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePref(enumClass, default, context.getString(key))
-
-    /**
-     * Delegate enum-based shared preference property storing and recalling by the enum value's ordinal as an integer.
-     * @param enumClass Enum class to define the property
-     * @param default default enum value
-     * @param key custom preference key
-     */
-    protected fun <T : Enum<*>> enumOrdinalPref(enumClass: KClass<T>, default: T, key: String? = null)
-            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPref(enumClass, default, key)
-
-    /**
-     * Delegate enum-based shared preference property storing and recalling by the enum value's ordinal as an integer.
-     * @param enumClass Enum class to define the property
-     * @param default default enum value
-     * @param key custom preference key resource id
-     */
-    protected fun <T : Enum<*>> enumOrdinalPref(enumClass: KClass<T>, default: T, key: Int)
-            : ReadWriteProperty<KotprefModel, T> = EnumOrdinalPref(enumClass, default, context.getString(key))
 
     /**
      * Delegate string set shared preference property.

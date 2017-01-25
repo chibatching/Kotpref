@@ -1,1 +1,1 @@
-include ':sample', ':kotpref', ':initializer'
+include ':sample', ':kotpref', ':initializer', ':enum-support'
