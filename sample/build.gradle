@@ -34,6 +34,9 @@ dependencies {
     compile project(":kotpref")
     compile project(":initializer")
     compile project(":enum-support")
+//    compile "com.chibatching.kotpref:kotpref:2.0.0-SNAPSHOT"
+//    compile "com.chibatching.kotpref:initializer:2.0.0-SNAPSHOT"
+//    compile "com.chibatching.kotpref:enum-support:2.0.0-SNAPSHOT"
 }
 
 buildscript {
@@ -44,9 +47,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
+
 repositories {
     mavenCentral()
     maven {
-        url "https://oss.jfrog.org/list/oss-snapshot-local/"
+        url "https://oss.jfrog.org/libs-snapshot/"
     }
 }
