@@ -47,36 +47,36 @@ class EnumSupportTest {
     }
 
     @Test
-    fun enumValuePrefVarDefaultSameValueAsDefined() {
+    fun enumValuePrefDefaultSameValueAsDefined() {
         assertThat(example.testEnumValue, Matchers.equalTo(ExampleEnum.FIRST))
     }
 
     @Test
-    fun setEnumValuePrefVarSetSameValueToPreference() {
+    fun setEnumValuePrefSetSameValueToPreference() {
         example.testEnumValue = ExampleEnum.SECOND
         assertThat(example.testEnumValue, Matchers.equalTo(ExampleEnum.SECOND))
         assertThat(example.testEnumValue.name, Matchers.equalTo(pref.getString("testEnumValue", "")))
     }
 
     @Test
-    fun enumNullableValuePrefVarDefaultIsNull() {
+    fun enumNullableValuePrefDefaultIsNull() {
         assertThat(example.testEnumNullableValue, Matchers.nullValue())
     }
 
     @Test
-    fun setEnumNullableValuePrefVarSetSameValueToPreference() {
+    fun setEnumNullableValuePrefSetSameValueToPreference() {
         example.testEnumNullableValue = ExampleEnum.SECOND
         assertThat(example.testEnumNullableValue, Matchers.equalTo(ExampleEnum.SECOND))
         assertThat(example.testEnumNullableValue!!.name, Matchers.equalTo(pref.getString("testEnumNullableValue", "")))
     }
 
     @Test
-    fun enumOrdinalPrefVarDefaultSameValueAsDefined() {
+    fun enumOrdinalPrefDefaultSameValueAsDefined() {
         MatcherAssert.assertThat(example.testEnumOrdinal, Matchers.equalTo(ExampleEnum.FIRST))
     }
 
     @Test
-    fun setEnumOrdinalPrefVarSetSameValueToPreference() {
+    fun setEnumOrdinalPrefSetSameValueToPreference() {
         example.testEnumOrdinal = ExampleEnum.SECOND
         MatcherAssert.assertThat(example.testEnumOrdinal, Matchers.equalTo(ExampleEnum.SECOND))
         MatcherAssert.assertThat(example.testEnumOrdinal.ordinal, Matchers.equalTo(pref.getInt("testEnumOrdinal", 0)))
