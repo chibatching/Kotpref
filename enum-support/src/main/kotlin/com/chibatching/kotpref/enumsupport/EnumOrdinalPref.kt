@@ -6,7 +6,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 
-internal class EnumOrdinalPref<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : AbstractPref<T>() {
+class EnumOrdinalPref<T : Enum<*>>(enumClass : KClass<T>, val default: T, val key: String?) : AbstractPref<T>() {
     private val enumConstants = enumClass.java.enumConstants
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {

@@ -6,7 +6,7 @@ import java.util.*
 
 
 object UserInfo : KotprefModel() {
-    var gameLevel by enumValuePref(GameLevel::class, GameLevel.NORMAL)
+    var gameLevel by enumValuePref(GameLevel.NORMAL)
     var name by stringPref()
     var code by nullableStringPref()
     var age by intPref()

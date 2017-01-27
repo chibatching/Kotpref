@@ -3,10 +3,10 @@ package com.chibatching.kotpref.enumsupport
 import android.content.Context
 import android.content.SharedPreferences
 import com.chibatching.kotpref.BuildConfig
-import com.chibatching.kotpref.ExampleEnum
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
 import org.hamcrest.MatcherAssert
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
@@ -22,9 +22,9 @@ import org.robolectric.annotation.Config
 class EnumSupportTest {
 
     class Example : KotprefModel() {
-        var testEnumValue by enumValuePref(ExampleEnum::class, ExampleEnum.FIRST)
-        var testEnumNullableValue by nullableEnumValuePref(ExampleEnum::class)
-        var testEnumOrdinal by enumOrdinalPref(ExampleEnum::class, ExampleEnum.FIRST)
+        var testEnumValue by enumValuePref(ExampleEnum.FIRST)
+        var testEnumNullableValue: ExampleEnum? by nullableEnumValuePref()
+        var testEnumOrdinal by enumOrdinalPref(ExampleEnum.FIRST)
     }
 
     lateinit var example: Example
@@ -48,26 +48,26 @@ class EnumSupportTest {
 
     @Test
     fun enumValuePrefVarDefaultSameValueAsDefined() {
-        MatcherAssert.assertThat(example.testEnumValue, Matchers.equalTo(ExampleEnum.FIRST))
+        assertThat(example.testEnumValue, Matchers.equalTo(ExampleEnum.FIRST))
     }
 
     @Test
     fun setEnumValuePrefVarSetSameValueToPreference() {
         example.testEnumValue = ExampleEnum.SECOND
-        MatcherAssert.assertThat(example.testEnumValue, Matchers.equalTo(ExampleEnum.SECOND))
-        MatcherAssert.assertThat(example.testEnumValue.name, Matchers.equalTo(pref.getString("testEnumValue", "")))
+        assertThat(example.testEnumValue, Matchers.equalTo(ExampleEnum.SECOND))
+        assertThat(example.testEnumValue.name, Matchers.equalTo(pref.getString("testEnumValue", "")))
     }
 
     @Test
     fun enumNullableValuePrefVarDefaultIsNull() {
-        MatcherAssert.assertThat(example.testEnumNullableValue, Matchers.nullValue())
+        assertThat(example.testEnumNullableValue, Matchers.nullValue())
     }
 
     @Test
     fun setEnumNullableValuePrefVarSetSameValueToPreference() {
         example.testEnumNullableValue = ExampleEnum.SECOND
-        MatcherAssert.assertThat(example.testEnumNullableValue, Matchers.equalTo(ExampleEnum.SECOND))
-        MatcherAssert.assertThat(example.testEnumNullableValue!!.name, Matchers.equalTo(pref.getString("testEnumNullableValue", "")))
+        assertThat(example.testEnumNullableValue, Matchers.equalTo(ExampleEnum.SECOND))
+        assertThat(example.testEnumNullableValue!!.name, Matchers.equalTo(pref.getString("testEnumNullableValue", "")))
     }
 
     @Test
