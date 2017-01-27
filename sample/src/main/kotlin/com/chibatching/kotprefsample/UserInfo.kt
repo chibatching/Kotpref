@@ -1,7 +1,7 @@
 package com.chibatching.kotprefsample
 
 import com.chibatching.kotpref.KotprefModel
-import com.chibatching.kotpref.enumsupport.enumValuePref
+import com.chibatching.kotpref.enumpref.enumValuePref
 import java.util.*
 
 

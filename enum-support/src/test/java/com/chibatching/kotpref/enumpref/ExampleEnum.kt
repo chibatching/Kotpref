@@ -1,4 +1,4 @@
-package com.chibatching.kotpref.enumsupport
+package com.chibatching.kotpref.enumpref
 
 enum class ExampleEnum {
     FIRST,

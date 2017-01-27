@@ -1,4 +1,4 @@
-package com.chibatching.kotpref.enumsupport
+package com.chibatching.kotpref.enumpref
 
 import android.content.Context
 import android.content.SharedPreferences
