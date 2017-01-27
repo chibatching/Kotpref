@@ -2,10 +2,8 @@ package com.chibatching.kotpref.gsonpref
 
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
-import com.chibatching.kotpref.pref.AbstractPref
 import com.google.gson.Gson
 import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KClass
 
 
 /**
@@ -50,20 +48,3 @@ inline fun <reified T : Any> KotprefModel.gsonNullablePref(default: T? = null, k
  */
 inline fun <reified T : Any> KotprefModel.gsonNullablePref(default: T? = null, key: Int)
         : ReadWriteProperty<KotprefModel, T?> = GsonNullablePref(T::class, default, context.getString(key))
-
-
-internal fun <T> AbstractPref<T>.serializeToJson(value: T?): String? {
-    return Kotpref.gson.let {
-        if (it == null) throw IllegalStateException("Gson has not been set to Kotpref")
-
-        it.toJson(value)
-    }
-}
-
-internal fun <T: Any> AbstractPref<T>.deserializeFromJson(json: String, targetClass: KClass<T>): T? {
-    return Kotpref.gson.let {
-        if (it == null) throw IllegalStateException("Gson has not been set to Kotpref")
-
-        it.fromJson(json, targetClass.java)
-    }
-}
