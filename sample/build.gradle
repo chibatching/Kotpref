@@ -34,9 +34,11 @@ dependencies {
     compile project(":kotpref")
     compile project(":initializer")
     compile project(":enum-support")
+    compile project(":gson-support")
 //    compile "com.chibatching.kotpref:kotpref:2.0.0-SNAPSHOT"
 //    compile "com.chibatching.kotpref:initializer:2.0.0-SNAPSHOT"
 //    compile "com.chibatching.kotpref:enum-support:2.0.0-SNAPSHOT"
+//    compile "com.chibatching.kotpref:gson-support:2.0.0-SNAPSHOT"
 }
 
 buildscript {

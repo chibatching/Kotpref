@@ -2,6 +2,7 @@ package com.chibatching.kotprefsample
 
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.enumpref.enumValuePref
+import com.chibatching.kotpref.gsonpref.gsonPref
 import java.util.*
 
 
@@ -17,4 +18,5 @@ object UserInfo : KotprefModel() {
         set.add("Beginner")
         return@stringSetPref set
     }
+    var avatar by gsonPref(Avatar())
 }

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.chibatching.kotpref.bulk
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     
@@ -21,6 +22,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "User age: ${UserInfo.age}")
         Log.d(TAG, "User high score: ${UserInfo.highScore}")
         Log.d(TAG, "User rate: ${UserInfo.rate}")
+        Log.d(TAG, "Avatar: ${UserInfo.avatar}")
         UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: $s") }
 
         UserInfo.gameLevel = GameLevel.HARD
@@ -32,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         UserInfo.prizes.add("Bronze")
         UserInfo.prizes.add("Silver")
         UserInfo.prizes.add("Gold")
+        UserInfo.avatar = Avatar("bird", Date())
 
         Log.d(TAG, "Game level: ${UserInfo.gameLevel}")
         Log.d(TAG, "User name: ${UserInfo.name}")
@@ -39,6 +42,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "User age: ${UserInfo.age}")
         Log.d(TAG, "User high score: ${UserInfo.highScore}")
         Log.d(TAG, "User rate: ${UserInfo.rate}")
+        Log.d(TAG, "Avatar: ${UserInfo.avatar}")
         UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: $s") }
 
         UserInfo.bulk {
@@ -50,6 +54,7 @@ class MainActivity : AppCompatActivity() {
             rate = 0.4F
             prizes.clear()
             prizes.add("New Born")
+            avatar = Avatar("lion", Date())
         }
 
         Log.d(TAG, "Game level: ${UserInfo.gameLevel}")
@@ -58,6 +63,7 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "User age: ${UserInfo.age}")
         Log.d(TAG, "User high score: ${UserInfo.highScore}")
         Log.d(TAG, "User rate: ${UserInfo.rate}")
+        Log.d(TAG, "Avatar: ${UserInfo.avatar}")
         UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: $s") }
     }
 }
