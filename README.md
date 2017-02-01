@@ -6,20 +6,14 @@ Android SharedPreference delegation for Kotlin.
 
 ## Install
 
-**Kotpref version 2 is now developing! Please use carefully!**
+**Kotpref version 2 has destructive changes from version 1**
 
 ```groovy
-repositories {
-    ...
-    maven {
-        url "https://oss.jfrog.org/list/oss-snapshot-local/"
-    }
-}
-
 dependencies {
-    ...
-    compile "com.chibatching.pref:pref:2.0.0-SNAPSHOT"
-    compile "com.chibatching.pref:initializer:2.0.0-SNAPSHOT" // optional
+    compile "com.chibatching.pref:pref:2.0.0"
+    compile "com.chibatching.pref:initializer:2.0.0" // optional
+    compile "com.chibatching.pref:enum-support:2.0.0" // optional
+    compile "com.chibatching.pref:gson-support:2.0.0" // optional
 }
 ```
 
@@ -163,6 +157,19 @@ Override `kotprefMode` property. Default is `Context.MODE_PRIVATE`.
 object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
 ```
+
+### Migration from v1
+
+#### Change function names providing delegated properties
+
+Kotpref v2 changes function names providing delegated properties.
+
+Example, old `stringPrefVar` is changed to `stringPref`.
+
+
+### Separate auto initialization module
+
+If you wish to use auto initialization, you should import initializer module.
 
 ## License
 
