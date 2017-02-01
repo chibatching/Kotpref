@@ -1,18 +1,22 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'org.jetbrains.dokka-android'
 
-def version_name = "1.6.0"
+ext.moduleName = 'Kotpref'
+
+ext.VERSION_NAME = versionName
+ext.SDK_VERSION = sdkVersion
+ext.MIN_SDK = minSdkVersion
+ext.BUILD_TOOLS = buildToolsVersion
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion SDK_VERSION
+    buildToolsVersion BUILD_TOOLS
 
     defaultConfig {
         minSdkVersion 9
-        targetSdkVersion 25
+        targetSdkVersion SDK_VERSION
         versionCode 1
-        versionName version_name
+        versionName VERSION_NAME
 
         consumerProguardFiles 'proguard-rules.pro'
     }
@@ -28,113 +32,25 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
 
-    testCompile 'junit:junit:4.12'
-    testCompile "org.robolectric:robolectric:3.1.4"
-    testCompile 'com.android.support.test:testing-support-lib:0.1'
-    testCompile 'org.hamcrest:hamcrest-library:1.3'
+    testCompile "junit:junit:$junitVersion"
+    testCompile "org.robolectric:robolectric:$robolectricVersion"
+    testCompile "com.android.support.test:testing-support-lib:$testingVersion"
+    testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion"
 }
+
 buildscript {
     repositories {
-        mavenCentral()
         jcenter()
     }
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
-        classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.11'
     }
 }
+
 repositories {
-    mavenCentral()
     jcenter()
 }
 
-// Bintray upload
-group = 'com.chibatching'
-version = version_name
-
-apply plugin: 'com.github.dcendents.android-maven'
-apply plugin: 'com.jfrog.bintray'
-
-def siteUrl = 'https://github.com/chibatching/kotpref'
-def gitUrl = 'https://github.com/chibatching/kotpref.git'
-
-bintray {
-    user = System.getenv("bintray_user")
-    key = System.getenv("bintray_api_key")
-
-    configurations = ['archives'] //When uploading configuration files
-    pkg {
-        repo = 'maven'
-        name = project.name
-        desc = 'Android SharedPreferences delegation for Kotlin.'
-        websiteUrl = siteUrl
-        issueTrackerUrl = 'https://github.com/chibatching/kotpref/issues'
-        vcsUrl = gitUrl
-        licenses = ['Apache-2.0']
-        labels = ['aar', 'android', 'kotlin']
-        publicDownloadNumbers = true
-    }
-}
-
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-
-dokka {
-    outputFormat = 'javadoc'
-    moduleName = 'kotpref'
-    linkMapping {
-        dir = "src/main/kotlin"
-        url = "https://github.com/chibatching/Kotpref/tree/v${version_name}/kotpref/src/main/kotlin"
-        suffix = "#L"
-    }
-}
-
-task javadocJar(type: Jar, dependsOn: dokka) {
-    classifier = 'javadoc'
-    from dokka.outputDirectory
-}
-
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-
-install {
-    repositories.mavenInstaller {
-        // This generates POM.xml with proper parameters
-        pom {
-            project {
-                packaging 'aar'
-
-                name 'Kotpref'
-                url siteUrl
-
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'chibatching'
-                        name 'chibatching'
-                        email 'chibatching.apps@gmail.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-
-
+apply from: "${project.rootDir}/gradle/publish/publish.gradle"

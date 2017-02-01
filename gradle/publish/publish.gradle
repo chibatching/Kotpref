@@ -1,0 +1,94 @@
+apply plugin: 'com.github.dcendents.android-maven'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'org.jetbrains.dokka-android'
+
+// Bintray upload
+group = groupName
+version = versionName
+
+def SITE_URL = 'https://github.com/chibatching/kotpref'
+def GIT_URL = 'https://github.com/chibatching/kotpref.git'
+
+def USER = System.getenv("bintray_user")
+def KEY = System.getenv("bintray_api_key")
+
+bintray {
+    user = USER
+    key = KEY
+
+    configurations = ['archives'] //When uploading configuration files
+    pkg {
+        repo = 'maven'
+        name = 'kotpref'
+        desc = 'Android SharedPreferences delegation for Kotlin.'
+        websiteUrl = SITE_URL
+        issueTrackerUrl = 'https://github.com/chibatching/kotpref/issues'
+        vcsUrl = GIT_URL
+        licenses = ['Apache-2.0']
+        labels = ['aar', 'android', 'kotlin']
+        publicDownloadNumbers = true
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+dokka {
+    outputFormat = 'javadoc'
+    moduleName = project.name
+    linkMapping {
+        dir = "${project.name}/src/main/kotlin"
+        url = "https://github.com/chibatching/Kotpref/tree/v${version}/${project.name}/src/main/kotlin"
+        suffix = "#L"
+    }
+}
+
+task javadocJar(type: Jar, dependsOn: dokka) {
+    classifier = 'javadoc'
+    from dokka.outputDirectory
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
+
+uploadArchives {
+    repositories.mavenDeployer {
+        repository(url: "https://oss.jfrog.org/oss-snapshot-local/") {
+            authentication(userName: USER, password: KEY)
+        }
+    }
+}
+
+[install.repositories.mavenInstaller, uploadArchives.repositories.mavenDeployer]*.pom*.whenConfigured { pom ->
+    project {
+        packaging 'aar'
+
+        name moduleName
+        url SITE_URL
+
+        licenses {
+            license {
+                name 'The Apache Software License, Version 2.0'
+                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+            }
+        }
+        developers {
+            developer {
+                id 'chibatching'
+                name 'Takao Chiba'
+                email 'chibatching.apps@gmail.com'
+            }
+        }
+        scm {
+            connection GIT_URL
+            developerConnection GIT_URL
+            url SITE_URL
+        }
+    }
+}

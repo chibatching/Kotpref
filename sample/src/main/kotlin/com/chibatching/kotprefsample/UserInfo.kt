@@ -1,19 +1,22 @@
 package com.chibatching.kotprefsample
 
 import com.chibatching.kotpref.KotprefModel
+import com.chibatching.kotpref.enumpref.enumValuePref
+import com.chibatching.kotpref.gsonpref.gsonPref
 import java.util.*
 
 
 object UserInfo : KotprefModel() {
-    var gameLevel: GameLevel by enumValuePrefVar(GameLevel::class, GameLevel.NORMAL)
-    var name: String by stringPrefVar()
-    var code: String? by stringNullablePrefVar()
-    var age: Int by intPrefVar()
-    var highScore: Long by longPrefVar()
-    var rate: Float by floatPrefVar()
-    val prizes: MutableSet<String> by stringSetPrefVal {
+    var gameLevel by enumValuePref(GameLevel.NORMAL)
+    var name by stringPref()
+    var code by nullableStringPref()
+    var age by intPref()
+    var highScore by longPref()
+    var rate by floatPref()
+    val prizes by stringSetPref {
         val set = TreeSet<String>()
         set.add("Beginner")
-        return@stringSetPrefVal set
+        return@stringSetPref set
     }
+    var avatar by gsonPref(Avatar())
 }

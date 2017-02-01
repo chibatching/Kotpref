@@ -18,7 +18,7 @@ build:
     - script:
         name: unit test
         code: |
-          ./gradlew kotpref:testDebugUnitTest
+          ./gradlew testDebugUnitTest
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: https://hooks.slack.com/services/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
@@ -33,7 +33,22 @@ publish:
     - script:
         name: bintray upload
         code: |
-          ./gradlew install bintrayUpload
+          ./gradlew clean install bintrayUpload
+  after-steps:
+    - wantedly/pretty-slack-notify:
+        webhook_url: https://hooks.slack.com/services/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
+
+uploadSnapshot:
+  steps:
+    - script:
+        name: setup gradle local cache
+        code: |-
+            mkdir -p $WERCKER_CACHE_DIR/.gradle
+            ln -sf $WERCKER_CACHE_DIR/.gradle ~/.gradle
+    - script:
+        name: snapshot upload
+        code: |
+          ./gradlew clean uploadArchives
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: https://hooks.slack.com/services/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

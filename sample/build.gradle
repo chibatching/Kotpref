@@ -29,10 +29,18 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile project(":kotpref")
+    compile project(":initializer")
+    compile project(":enum-support")
+    compile project(":gson-support")
+//    compile "com.chibatching.kotpref:kotpref:2.0.0-SNAPSHOT"
+//    compile "com.chibatching.kotpref:initializer:2.0.0-SNAPSHOT"
+//    compile "com.chibatching.kotpref:enum-support:2.0.0-SNAPSHOT"
+//    compile "com.chibatching.kotpref:gson-support:2.0.0-SNAPSHOT"
 }
+
 buildscript {
     repositories {
         mavenCentral()
@@ -41,6 +49,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
+
 repositories {
     mavenCentral()
+    maven {
+        url "https://oss.jfrog.org/libs-snapshot/"
+    }
 }

@@ -6,8 +6,15 @@ Android SharedPreference delegation for Kotlin.
 
 ## Install
 
+**Kotpref version 2 has destructive changes from version 1**
+
 ```groovy
-compile 'com.chibatching:kotpref:1.6.0'
+dependencies {
+    compile "com.chibatching.pref:pref:2.0.0"
+    compile "com.chibatching.pref:initializer:2.0.0" // optional
+    compile "com.chibatching.pref:enum-support:2.0.0" // optional
+    compile "com.chibatching.pref:gson-support:2.0.0" // optional
+}
 ```
 
 ## How to use
@@ -16,16 +23,16 @@ compile 'com.chibatching:kotpref:1.6.0'
 
 ```kotlin
 object UserInfo : KotprefModel() {
-    var gameLevel: GameLevel by enumValuePrefVar(GameLevel::class, GameLevel.NORMAL)
-    var name: String by stringPrefVar()
-    var code: String? by stringNullablePrefVar()
-    var age: Int by intPrefVar(default = 14)
-    var highScore: Long by longPrefVar()
-    var rate: Float by floatPrefVar()
-    val prizes: MutableSet<String> by stringSetPrefVal {
+    var gameLevel by enumValuePref(GameLevel::class, GameLevel.NORMAL)
+    var name by stringPref()
+    var code by nullableStringPref()
+    var age by intPref(default = 14)
+    var highScore by longPref()
+    var rate by floatPref()
+    val prizes by stringSetPref {
         val set = TreeSet<String>()
         set.add("Beginner")
-        return@stringSetPrefVal set
+        return@stringSetPref set
     }
 }
 
@@ -38,7 +45,13 @@ enum class GameLevel {
 
 ### Set up
 
-**1.4.0 or above, initialization is no longer need!**
+Pass the application context to Kotpref
+
+```kotlin
+Kotpref.init(context)
+```
+
+or use auto initializer module.
 
 ### Read and Write
 
@@ -106,34 +119,16 @@ XML file name equals model class name. If model class named `UserInfo`, XML file
 
 ### Options
 
-#### Disable auto initialize
-
-Add below tag to AndroidManifest
-
-```xml
-<provider
-    android:authorities="${applicationId}.KotprefInitProvider"
-    android:name="com.chibatching.kotpref.KotprefInitProvider"
-    tools:node="remove"/>
-```
-
-and initialize Kotpref manually.
-
-```kotlin
-Kotpref.init(context)
-```
-
-
 #### Change default value
 
 ```kotlin
-var age: Int by intPrefVar(18)
+var age: Int by intPref(18)
 ```
 
 or
 
 ```kotlin
-var age: Int by intPrefVar(default = 18)
+var age: Int by intPref(default = 18)
 ```
 
 #### Change preference key
@@ -141,8 +136,8 @@ var age: Int by intPrefVar(default = 18)
 You can custom preference key or use from string resources.
 
 ```kotlin
-var useFunc1: Boolean by booleanPrefVar(key = "use_func1")
-var mode: Int by intPrefVar(default = 1, key = R.string.pref_mode)
+var useFunc1: Boolean by booleanPref(key = "use_func1")
+var mode: Int by intPref(default = 1, key = R.string.pref_mode)
 ```
 
 #### Change XML file name
@@ -162,6 +157,19 @@ Override `kotprefMode` property. Default is `Context.MODE_PRIVATE`.
 object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
 ```
+
+### Migration from v1
+
+#### Change function names providing delegated properties
+
+Kotpref v2 changes function names providing delegated properties.
+
+Example, old `stringPrefVar` is changed to `stringPref`.
+
+
+### Separate auto initialization module
+
+If you wish to use auto initialization, you should import initializer module.
 
 ## License
 

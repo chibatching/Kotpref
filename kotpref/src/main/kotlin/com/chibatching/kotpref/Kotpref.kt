@@ -18,19 +18,10 @@ object Kotpref {
 
     /**
      * Initialize Kotpref singleton object.
-     * 1.4.0 or later, calling this function is not necessary to initialize kotpref.
      *
      * @param context Application context
      */
     fun init(context: Context) {
         this.context = context.applicationContext
-    }
-
-    @Deprecated(
-            message = "",
-            replaceWith = ReplaceWith("receiver.bulk(f)")
-    )
-    fun <T : KotprefModel> bulk(receiver: T, f: T.() -> Unit) {
-        receiver.bulk(f)
     }
 }
