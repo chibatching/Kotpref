@@ -18,7 +18,11 @@ build:
     - script:
         name: unit test
         code: |
-          ./gradlew testDebugUnitTest
+          ./gradlew jacocoTestDebugUnitTestReport
+    - script:
+        name: upload test result to codecov
+        code: |
+          bash <(curl -s https://codecov.io/bash)
   after-steps:
     - wantedly/pretty-slack-notify:
         webhook_url: https://hooks.slack.com/services/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
