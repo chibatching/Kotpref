@@ -1,5 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'jacoco-android'
 
 ext.moduleName = 'Kotpref'
 
@@ -29,6 +30,13 @@ android {
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
 }
 
 dependencies {
@@ -51,6 +59,12 @@ buildscript {
 
 repositories {
     jcenter()
+}
+
+jacocoAndroidUnitTestReport {
+    csv.enabled false
+    html.enabled true
+    xml.enabled true
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"
