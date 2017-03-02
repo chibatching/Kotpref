@@ -5,7 +5,7 @@ buildscript {
     ext.versionName = '2.0.0'
     ext.groupName = 'com.chibatching.kotpref'
 
-    ext.kotlinVersion = '1.0.6'
+    ext.kotlinVersion = '1.1.0'
     ext.junitVersion = '4.12'
     ext.robolectricVersion = '3.2.2'
     ext.hamcrestVersion = '1.3'
@@ -21,10 +21,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.2.3'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.13'
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.1'
     }
 }
 
