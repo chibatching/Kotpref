@@ -108,6 +108,12 @@ class StringSetPrefTest : BasePrefTest() {
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun throwUnsupportedOperationExceptionWhenRemoveViaIterator() {
+        example.testStringSet.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
         val iterator = example.testStringSet.iterator()
         iterator.next()
         assertThatExceptionOfType(UnsupportedOperationException::class.java)
