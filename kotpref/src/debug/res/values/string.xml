@@ -1,3 +1,10 @@
 <resources>
     <string name="test_preference">test_preference</string>
+    <string name="test_custom_boolean">test_custom_boolean</string>
+    <string name="test_custom_int">test_custom_int</string>
+    <string name="test_custom_long">test_custom_long</string>
+    <string name="test_custom_float">test_custom_float</string>
+    <string name="test_custom_string">test_custom_string</string>
+    <string name="test_custom_nullable_string">test_custom_nullable_string</string>
+    <string name="test_custom_string_set">test_custom_string_set</string>
 </resources>

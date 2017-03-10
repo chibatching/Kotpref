@@ -36,7 +36,6 @@ dependencies {
     testCompile "junit:junit:$junitVersion"
     testCompile "org.robolectric:robolectric:$robolectricVersion"
     testCompile "com.android.support.test:testing-support-lib:$testingVersion"
-    testCompile "org.hamcrest:hamcrest-library:$hamcrestVersion"
 }
 
 buildscript {

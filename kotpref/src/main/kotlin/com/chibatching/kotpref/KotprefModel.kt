@@ -65,7 +65,7 @@ abstract class KotprefModel {
      * @param key custom preference key resource id
      */
     protected fun stringPref(default: String = "", key: Int)
-            : ReadWriteProperty<KotprefModel, String> = StringPref(default, context.getString(key))
+            : ReadWriteProperty<KotprefModel, String> = stringPref(default, context.getString(key))
 
     /**
      * Delegate nullable string shared preference property.
@@ -81,7 +81,7 @@ abstract class KotprefModel {
      * @param key custom preference key resource id
      */
     protected fun nullableStringPref(default: String? = null, key: Int)
-            : ReadWriteProperty<KotprefModel, String?> = StringNullablePref(default, context.getString(key))
+            : ReadWriteProperty<KotprefModel, String?> = nullableStringPref(default, context.getString(key))
 
     /**
      * Delegate int shared preference property.
@@ -97,7 +97,7 @@ abstract class KotprefModel {
      * @param key custom preference key resource id
      */
     protected fun intPref(default: Int = 0, key: Int)
-            : ReadWriteProperty<KotprefModel, Int> = IntPref(default, context.getString(key))
+            : ReadWriteProperty<KotprefModel, Int> = intPref(default, context.getString(key))
 
     /**
      * Delegate long shared preference property.
@@ -113,7 +113,7 @@ abstract class KotprefModel {
      * @param key custom preference key resource id
      */
     protected fun longPref(default: Long = 0L, key: Int)
-            : ReadWriteProperty<KotprefModel, Long> = LongPref(default, context.getString(key))
+            : ReadWriteProperty<KotprefModel, Long> = longPref(default, context.getString(key))
 
     /**
      * Delegate float shared preference property.
@@ -129,7 +129,7 @@ abstract class KotprefModel {
      * @param key custom preference key resource id
      */
     protected fun floatPref(default: Float = 0F, key: Int)
-            : ReadWriteProperty<KotprefModel, Float> = FloatPref(default, context.getString(key))
+            : ReadWriteProperty<KotprefModel, Float> = floatPref(default, context.getString(key))
 
     /**
      * Delegate boolean shared preference property.
@@ -145,7 +145,7 @@ abstract class KotprefModel {
      * @param key custom preference key resource id
      */
     protected fun booleanPref(default: Boolean = false, key: Int)
-            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPref(default, context.getString(key))
+            : ReadWriteProperty<KotprefModel, Boolean> = booleanPref(default, context.getString(key))
 
     /**
      * Delegate string set shared preference property.
@@ -154,7 +154,7 @@ abstract class KotprefModel {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPref(default: Set<String> = LinkedHashSet<String>(), key: String? = null)
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPref({ default }, key)
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = stringSetPref(key) { default }
 
     /**
      * Delegate string set shared preference property.
@@ -163,7 +163,7 @@ abstract class KotprefModel {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPref(default: Set<String> = LinkedHashSet<String>(), key: Int)
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPref({ default }, context.getString(key))
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = stringSetPref(context.getString(key)) { default }
 
     /**
      * Delegate string set shared preference property.
@@ -181,7 +181,7 @@ abstract class KotprefModel {
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPref(key: Int, default: () -> Set<String>)
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPref(default, context.getString(key))
+            : ReadOnlyProperty<KotprefModel, MutableSet<String>> = stringSetPref(context.getString(key), default)
 
     /**
      * Begin bulk edit mode. You must commit or cancel after bulk edit finished.

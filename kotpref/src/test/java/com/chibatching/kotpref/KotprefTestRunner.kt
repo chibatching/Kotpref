@@ -10,7 +10,6 @@ class KotprefTestRunner(clazz: Class<*>) : RobolectricTestRunner(clazz) {
         val buildType = BuildConfig.BUILD_TYPE
         return Config.Builder.defaults()
                 .setSdk(25)
-                .setManifest("build/intermediates/manifests/aapt/$buildType/AndroidManifest.xml")
                 .setConstants(BuildConfig::class.java)
                 .setPackageName("com.chibatching.kotpref")
                 .setResourceDir("../../../../../src/$buildType/res")
