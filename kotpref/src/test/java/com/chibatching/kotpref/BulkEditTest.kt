@@ -5,8 +5,6 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import org.assertj.core.api.Assertions.assertThat
-import org.hamcrest.MatcherAssert
-import org.hamcrest.Matchers
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -87,9 +85,9 @@ class BulkEditTest {
             testStringSet.add("test3")
             testStringSet.remove("test2")
 
-            MatcherAssert.assertThat(testStringSet, Matchers.containsInAnyOrder("test1", "test3"))
+            assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test3")
         }
-        MatcherAssert.assertThat(example.testStringSet, Matchers.containsInAnyOrder("test1", "test3"))
+        assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test3")
     }
 
     @Test
@@ -212,7 +210,7 @@ class BulkEditTest {
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun retainAllStringSetPrefValNotAffectPreferenceInBulkEdit() {
+    fun retainAllStringSetPrefValueNotAffectPreferenceInBulkEdit() {
         example.testStringSet.apply {
             add("test1")
             add("test2")
@@ -228,9 +226,9 @@ class BulkEditTest {
         example.bulk {
             testStringSet.retainAll(retainSet)
 
-            MatcherAssert.assertThat(pref.getStringSet("testStringSet", TreeSet<String>()), Matchers.containsInAnyOrder("test1", "test2", "test3"))
+            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
         }
-        MatcherAssert.assertThat(pref.getStringSet("testStringSet", TreeSet<String>()), Matchers.containsInAnyOrder("test1", "test3"))
+        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test3")
     }
 
     // blockingBulk test

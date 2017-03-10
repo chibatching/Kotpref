@@ -5,6 +5,7 @@ import android.os.Build
 import com.chibatching.kotpref.KotprefTestRunner
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.*
@@ -102,5 +103,21 @@ class StringSetPrefTest : BasePrefTest() {
         assertThat(customExample.testStringSet).containsExactlyInAnyOrder("Lazy set item 1", "Lazy set item 2", "Lazy set item 3", "Additional item")
         assertThat(customExample.testStringSet).containsAll(customPref.getStringSet(context.getString(R.string.test_custom_string_set), null))
         assertThat(customExample.testStringSet).hasSize(customPref.getStringSet(context.getString(R.string.test_custom_string_set), null).size)
+    }
+
+    @Test
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    fun throwUnsupportedOperationExceptionWhenRemoveViaIterator() {
+        example.testStringSet.apply {
+            add("test1")
+            add("test2")
+            add("test3")
+        }
+
+        val iterator = example.testStringSet.iterator()
+        iterator.next()
+        assertThatExceptionOfType(UnsupportedOperationException::class.java)
+                .isThrownBy { iterator.remove() }
+                .withNoCause()
     }
 }

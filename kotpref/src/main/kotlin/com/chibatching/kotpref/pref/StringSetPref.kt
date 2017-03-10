@@ -123,10 +123,19 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         }
 
         override fun iterator(): MutableIterator<String> {
-            if (kotprefModel.kotprefInTransaction) {
-                return transactionData!!.iterator()
+            return if (kotprefModel.kotprefInTransaction) {
+                KotprefMutableIterator(transactionData!!.iterator())
+            } else {
+                KotprefMutableIterator(set.iterator())
             }
-            return set.iterator()
+        }
+
+        private inner class KotprefMutableIterator(
+                val baseIterator: MutableIterator<String>) : MutableIterator<String> by baseIterator {
+
+            override fun remove() {
+                throw UnsupportedOperationException()
+            }
         }
 
         override val size: Int
