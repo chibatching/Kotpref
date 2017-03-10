@@ -2,24 +2,20 @@ package com.chibatching.kotpref.gsonpref
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.chibatching.kotpref.BuildConfig
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
+import com.chibatching.kotpref.KotprefTestRunner
 import com.google.gson.Gson
-import org.hamcrest.MatcherAssert.assertThat
-import org.hamcrest.Matchers
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
-import org.robolectric.annotation.Config
 import java.util.*
 
 
-@RunWith(RobolectricTestRunner::class)
-@Config(constants = BuildConfig::class, manifest = Config.NONE, sdk = intArrayOf(23))
+@RunWith(KotprefTestRunner::class)
 class GsonSupportTest {
 
     companion object {
@@ -63,33 +59,37 @@ class GsonSupportTest {
     }
 
     @Test
-    fun gsonPrefDefaultSameValueAsDefined() {
-        assertThat(example.content, Matchers.equalTo(createDefaultContent()))
+    fun gsonPrefDefaultIsDefined() {
+        assertThat(example.content).isEqualTo(createDefaultContent())
     }
 
     @Test
-    fun setGsonPrefSetSameValueToPreference() {
+    fun setGsonPrefSetCausePreferenceUpdate() {
         example.content = Content("new title", "this is new content", createDate(2017, 1, 25))
-        assertThat(example.content, Matchers.equalTo(Content("new title", "this is new content", createDate(2017, 1, 25))))
-        assertThat(example.content, Matchers.equalTo(Kotpref.gson?.fromJson(pref.getString("content", ""), Content::class.java)))
+        assertThat(example.content).isEqualTo(Content("new title", "this is new content", createDate(2017, 1, 25)))
+        assertThat(example.content).isEqualTo(Kotpref.gson?.fromJson(pref.getString("content", ""), Content::class.java))
     }
 
     @Test
     fun gsonNullablePrefDefaultIsNull() {
-        assertThat(example.nullableContent, Matchers.nullValue())
+        assertThat(example.nullableContent).isNull()
     }
 
     @Test
-    fun gsonNullablePrefSetSameValueToPreference() {
-        example.nullableContent= Content("nullable content", "this is not null", createDate(2017, 1, 20))
-        assertThat(example.nullableContent, Matchers.equalTo(Content("nullable content", "this is not null", createDate(2017, 1, 20))))
-        assertThat(example.nullableContent, Matchers.equalTo(Kotpref.gson?.fromJson(pref.getString("nullableContent", ""), Content::class.java)))
+    fun gsonNullablePrefCausePreferenceUpdate() {
+        example.nullableContent = Content("nullable content", "this is not null", createDate(2017, 1, 20))
+        assertThat(example.nullableContent).isEqualTo(Content("nullable content", "this is not null", createDate(2017, 1, 20)))
+        assertThat(example.nullableContent).isEqualTo(Kotpref.gson?.fromJson(pref.getString("nullableContent", ""), Content::class.java))
     }
 
     @Test
     fun gsonNullablePrefSetNull() {
-        example.nullableContent= null
-        assertThat(example.nullableContent, Matchers.nullValue())
-        assertThat(example.nullableContent, Matchers.equalTo(Kotpref.gson?.fromJson(pref.getString("nullableContent", ""), Content::class.java)))
+
+        fun setNull() {
+            example.nullableContent = null
+        }
+        setNull()
+        assertThat(example.nullableContent).isNull()
+        assertThat(example.nullableContent).isEqualTo(Kotpref.gson?.fromJson(pref.getString("nullableContent", ""), Content::class.java))
     }
 }
