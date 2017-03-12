@@ -5,7 +5,6 @@ import android.os.Build
 import com.chibatching.kotpref.KotprefTestRunner
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatExceptionOfType
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.util.*
@@ -107,7 +106,7 @@ class StringSetPrefTest : BasePrefTest() {
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun throwUnsupportedOperationExceptionWhenRemoveViaIterator() {
+    fun removeItemViaIterator() {
         example.testStringSet.apply {
             add("test1")
             add("test2")
@@ -116,8 +115,11 @@ class StringSetPrefTest : BasePrefTest() {
 
         val iterator = example.testStringSet.iterator()
         iterator.next()
-        assertThatExceptionOfType(UnsupportedOperationException::class.java)
-                .isThrownBy { iterator.remove() }
-                .withNoCause()
+        iterator.remove()
+        iterator.next()
+        iterator.remove()
+
+        assertThat(example.testStringSet).containsExactlyInAnyOrder("test3")
+        assertThat(examplePref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test3")
     }
 }
