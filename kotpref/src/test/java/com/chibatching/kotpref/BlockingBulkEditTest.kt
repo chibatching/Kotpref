@@ -4,7 +4,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
-import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -14,7 +14,7 @@ import java.util.*
 
 
 @RunWith(KotprefTestRunner::class)
-class BulkEditTest {
+class BlockingBulkEditTest {
 
     lateinit var example: Example
     lateinit var context: Context
@@ -35,79 +35,80 @@ class BulkEditTest {
         example.clear()
     }
 
+    // blockingBulk test
+
     @Test
-    fun changedPrefValueCanReadBothInAndOutBulkEdit() {
+    fun changedPrefValueCanReadBothInAndOutImmediateBulkEdit() {
         example.testInt = 30
 
-        example.bulk {
+        example.blockingBulk {
             testInt = 5839
 
-            assertThat(testInt).isEqualTo(5839)
+            Assertions.assertThat(testInt).isEqualTo(5839)
         }
-        assertThat(example.testInt).isEqualTo(5839)
+        Assertions.assertThat(example.testInt).isEqualTo(5839)
     }
 
     @Test
-    fun changedPrefValueNotAffectPreferenceInBulkEdit() {
+    fun changedPrefValueNotAffectPreferenceInImmediateBulkEdit() {
         example.testLong = -9831L
 
-        example.bulk {
+        example.blockingBulk {
             testLong = 831456L
 
-            assertThat(pref.getLong("testLong", 0L)).isEqualTo(-9831L)
+            Assertions.assertThat(pref.getLong("testLong", 0L)).isEqualTo(-9831L)
         }
-        assertThat(pref.getLong("testLong", 0L)).isEqualTo(831456L)
+        Assertions.assertThat(pref.getLong("testLong", 0L)).isEqualTo(831456L)
     }
 
     @Test
-    fun errorInBulkEditCauseCancelTransaction() {
+    fun errorInImmediateBulkEditCauseCancelTransaction() {
         example.testString = "before"
 
         try {
-            example.bulk {
+            example.blockingBulk {
                 testString = "edit in bulk"
                 throw Exception()
             }
         } catch (e: Exception) {
-            // no-op
         }
-        assertThat(example.testString).isEqualTo("before")
-        assertThat(pref.getString("testString", "")).isEqualTo("before")
+        Assertions.assertThat(example.testString).isEqualTo("before")
+        Assertions.assertThat(pref.getString("testString", "")).isEqualTo("before")
     }
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun addRemoveStringSetPrefValCanReadBothInAndOutBulkEdit() {
+    fun addRemoveStringSetPrefValueCanReadBothInAndOutImmediateBulkEdit() {
         example.testStringSet.add("test1")
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.add("test2")
             testStringSet.add("test3")
             testStringSet.remove("test2")
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test3")
+            Assertions.assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test3")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test3")
+        Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test3")
     }
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun addRemoveStringSetValueNotAffectPreferenceInBulkEdit() {
+    fun addRemoveStringSetPrefValNotAffectPreferenceInImmediateBulkEdit() {
         example.testStringSet.add("test1")
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.add("test2")
             testStringSet.add("test3")
             testStringSet.remove("test2")
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1")
+            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1")
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test3")
+        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test3")
     }
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun addAllToStringSetPrefValueCanReadBothInAndOutBulkEdit() {
+    fun addAllToStringSetPrefValueCanReadBothInAndOutImmediateBulkEdit() {
         example.testStringSet.add("test1")
 
         val addSet = TreeSet<String>().apply {
@@ -115,17 +116,17 @@ class BulkEditTest {
             add("test3")
         }
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.addAll(addSet)
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test2", "test3")
+            Assertions.assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test2", "test3")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test2", "test3")
+        Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test2", "test3")
     }
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun addAllToStringSetPrefValueNotAffectPreferenceInBulkEdit() {
+    fun addAllToStringSetPrefValueNotAffectPreferenceInImmediateBulkEdit() {
         example.testStringSet.add("test1")
 
         val addSet = TreeSet<String>().apply {
@@ -133,17 +134,16 @@ class BulkEditTest {
             add("test3")
         }
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.addAll(addSet)
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1")
+            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1")
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
+        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
     }
 
     @Test
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun removeAllFromStringSetPrefValueCanReadBothInAndOutBulkEdit() {
+    fun removeAllFromStringSetPrefValueCanReadBothInAndOutImmediateBulkEdit() {
         example.testStringSet.apply {
             add("test1")
             add("test2")
@@ -155,17 +155,17 @@ class BulkEditTest {
             add("test3")
         }
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.removeAll(removeSet)
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test2")
+            Assertions.assertThat(testStringSet).containsExactlyInAnyOrder("test2")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test2")
+        Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test2")
     }
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun removeAllFromStringSetPrefValueNotAffectPreferenceInBulkEdit() {
+    fun removeAllFromStringSetPrefValNotAffectPreferenceInImmediateBulkEdit() {
         example.testStringSet.apply {
             add("test1")
             add("test2")
@@ -177,17 +177,16 @@ class BulkEditTest {
             add("test3")
         }
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.removeAll(removeSet)
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
+            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test2")
+        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test2")
     }
 
     @Test
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun retainAllStringSetPrefValueCanReadBothInAndOutBulkEdit() {
+    fun retainAllStringSetPrefValueCanReadBothInAndOutImmediateBulkEdit() {
         example.testStringSet.apply {
             add("test1")
             add("test2")
@@ -200,17 +199,17 @@ class BulkEditTest {
             add("test4")
         }
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.retainAll(retainSet)
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test3")
+            Assertions.assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test3")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test3")
+        Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test3")
     }
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    fun retainAllStringSetPrefValueNotAffectPreferenceInBulkEdit() {
+    fun retainAllStringSetPrefValueNotAffectPreferenceInImmediateBulkEdit() {
         example.testStringSet.apply {
             add("test1")
             add("test2")
@@ -223,12 +222,12 @@ class BulkEditTest {
             add("test4")
         }
 
-        example.bulk {
+        example.blockingBulk {
             testStringSet.retainAll(retainSet)
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
+            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test3")
+        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test3")
     }
 
     @Test
@@ -240,18 +239,18 @@ class BulkEditTest {
             add("test3")
         }
 
-        example.bulk {
+        example.blockingBulk {
             val iterator = example.testStringSet.iterator()
             iterator.next()
             iterator.remove()
             iterator.next()
             iterator.remove()
 
-            assertThat(example.testStringSet).containsExactlyInAnyOrder("test3")
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
+            Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test3")
+            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
         }
 
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test3")
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test3")
+        Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test3")
+        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test3")
     }
 }

@@ -124,17 +124,9 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
 
         override fun iterator(): MutableIterator<String> {
             return if (kotprefModel.kotprefInTransaction) {
-                KotprefMutableIterator(transactionData!!.iterator())
+                KotprefMutableIterator(transactionData!!.iterator(), true)
             } else {
-                KotprefMutableIterator(set.iterator())
-            }
-        }
-
-        private inner class KotprefMutableIterator(
-                val baseIterator: MutableIterator<String>) : MutableIterator<String> by baseIterator {
-
-            override fun remove() {
-                throw UnsupportedOperationException()
+                KotprefMutableIterator(set.iterator(), false)
             }
         }
 
@@ -145,5 +137,18 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
                 }
                 return set.size
             }
+
+        private inner class KotprefMutableIterator(
+                val baseIterator: MutableIterator<String>, val inTransaction: Boolean) : MutableIterator<String> by baseIterator {
+
+            override fun remove() {
+                baseIterator.remove()
+                if (inTransaction) {
+                    kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this@PrefMutableSet)
+                } else {
+                    kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+                }
+            }
+        }
     }
 }
