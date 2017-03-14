@@ -46,7 +46,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         override fun add(element: String): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.add(element)
-                kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this)
+                kotprefModel.kotprefEditor!!.putStringSet(key, this)
                 return result
             }
             val result = set.add(element)
@@ -57,7 +57,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         override fun addAll(elements: Collection<String>): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.addAll(elements)
-                kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this)
+                kotprefModel.kotprefEditor!!.putStringSet(key, this)
                 return result
             }
             val result = set.addAll(elements)
@@ -68,7 +68,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         override fun remove(element: String): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.remove(element)
-                kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this)
+                kotprefModel.kotprefEditor!!.putStringSet(key, this)
                 return result
             }
             val result = set.remove(element)
@@ -79,7 +79,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         override fun removeAll(elements: Collection<String>): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.removeAll(elements)
-                kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this)
+                kotprefModel.kotprefEditor!!.putStringSet(key, this)
                 return result
             }
             val result = set.removeAll(elements)
@@ -90,7 +90,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         override fun retainAll(elements: Collection<String>): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.retainAll(elements)
-                kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this)
+                kotprefModel.kotprefEditor!!.putStringSet(key, this)
                 return result
             }
             val result = set.retainAll(elements)
@@ -101,7 +101,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         override fun clear() {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.clear()
-                kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this)
+                kotprefModel.kotprefEditor!!.putStringSet(key, this)
                 return result
             }
             set.clear()
@@ -124,6 +124,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
 
         override fun iterator(): MutableIterator<String> {
             return if (kotprefModel.kotprefInTransaction) {
+                kotprefModel.kotprefEditor!!.putStringSet(key, this@PrefMutableSet)
                 KotprefMutableIterator(transactionData!!.iterator(), true)
             } else {
                 KotprefMutableIterator(set.iterator(), false)
@@ -143,9 +144,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
 
             override fun remove() {
                 baseIterator.remove()
-                if (inTransaction) {
-                    kotprefModel.kotprefEditor!!.putStringSet(key, transactionData, this@PrefMutableSet)
-                } else {
+                if (!inTransaction) {
                     kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
                 }
             }
