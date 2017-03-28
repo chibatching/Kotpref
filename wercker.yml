@@ -25,7 +25,7 @@ build:
           bash <(curl -s https://codecov.io/bash)
   after-steps:
     - wantedly/pretty-slack-notify:
-        webhook_url: https://hooks.slack.com/services/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
+        webhook_url: $SLACK_WEBHOOK_URL
 
 publish:
   steps:
@@ -40,7 +40,7 @@ publish:
           ./gradlew clean install bintrayUpload --no-daemon
   after-steps:
     - wantedly/pretty-slack-notify:
-        webhook_url: https://hooks.slack.com/services/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
+        webhook_url: $SLACK_WEBHOOK_URL
 
 uploadSnapshot:
   steps:
@@ -55,4 +55,4 @@ uploadSnapshot:
           ./gradlew clean uploadArchives --no-daemon
   after-steps:
     - wantedly/pretty-slack-notify:
-        webhook_url: https://hooks.slack.com/services/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
+        webhook_url: $SLACK_WEBHOOK_URL
