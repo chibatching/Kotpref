@@ -5,7 +5,7 @@ buildscript {
     ext.versionName = '2.1.1'
     ext.groupName = 'com.chibatching.kotpref'
 
-    ext.kotlinVersion = '1.1.2-2'
+    ext.kotlinVersion = '1.1.2-3'
     ext.junitVersion = '4.12'
     ext.robolectricVersion = '3.2.2'
     ext.assertjVersion = '3.6.2'
