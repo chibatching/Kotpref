@@ -53,7 +53,7 @@ task javadocJar(type: Jar, dependsOn: dokka) {
 }
 
 artifacts {
-//    archives javadocJar
+    archives javadocJar
     archives sourcesJar
 }
 
