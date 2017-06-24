@@ -19,24 +19,14 @@ internal class KotprefPreferences(val preferences: SharedPreferences) : SharedPr
 
         override fun apply() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                prefStringSet.keys.forEach { key ->
-                    prefStringSet[key]?.let {
-                        editor.putStringSet(key, it)
-                        it.syncTransaction()
-                    }
-                }
-                prefStringSet.clear()
+                syncTransaction()
             }
             editor.apply()
         }
 
         override fun commit(): Boolean {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
-                prefStringSet.forEach { key, set ->
-                    editor.putStringSet(key, set)
-                    set.syncTransaction()
-                }
-                prefStringSet.clear()
+                syncTransaction()
             }
             return editor.commit()
         }
@@ -45,6 +35,17 @@ internal class KotprefPreferences(val preferences: SharedPreferences) : SharedPr
         internal fun putStringSet(key: String, prefSet: StringSetPref.PrefMutableSet): SharedPreferences.Editor {
             prefStringSet.put(key, prefSet)
             return this
+        }
+
+        @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+        private fun syncTransaction() {
+            prefStringSet.keys.forEach { key ->
+                prefStringSet[key]?.let {
+                    editor.putStringSet(key, it)
+                    it.syncTransaction()
+                }
+            }
+            prefStringSet.clear()
         }
     }
 }
