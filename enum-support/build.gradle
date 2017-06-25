@@ -14,9 +14,8 @@ android {
     buildToolsVersion BUILD_TOOLS
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion MIN_SDK
         targetSdkVersion SDK_VERSION
-        versionCode 1
         versionName VERSION_NAME
     }
     buildTypes {
@@ -38,7 +37,7 @@ android {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    provided "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile project(":kotpref")
 
     testCompile "junit:junit:$junitVersion"
