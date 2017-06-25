@@ -1,14 +1,18 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 
+ext.SDK_VERSION = sdkVersion
+ext.MIN_SDK = minSdkVersion
+ext.BUILD_TOOLS = buildToolsVersion
+
 android {
-    compileSdkVersion 25
-    buildToolsVersion '25.0.2'
+    compileSdkVersion SDK_VERSION
+    buildToolsVersion BUILD_TOOLS
 
     defaultConfig {
         applicationId "com.chibatching.kotprefsample"
-        minSdkVersion 9
-        targetSdkVersion 25
+        minSdkVersion MIN_SDK
+        targetSdkVersion SDK_VERSION
         versionCode 1
         versionName "1.0"
     }
@@ -28,17 +32,13 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:25.1.1'
+    compile 'com.android.support:appcompat-v7:25.4.0'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile project(":kotpref")
     compile project(":initializer")
     compile project(":enum-support")
     compile project(":gson-support")
-//    compile "com.chibatching.kotpref:kotpref:2.0.0-SNAPSHOT"
-//    compile "com.chibatching.kotpref:initializer:2.0.0-SNAPSHOT"
-//    compile "com.chibatching.kotpref:enum-support:2.0.0-SNAPSHOT"
-//    compile "com.chibatching.kotpref:gson-support:2.0.0-SNAPSHOT"
+    provided 'com.google.code.gson:gson:2.8.0'
 }
 
 buildscript {
@@ -54,5 +54,8 @@ repositories {
     mavenCentral()
     maven {
         url "https://oss.jfrog.org/libs-snapshot/"
+    }
+    maven {
+        url 'https://maven.google.com'
     }
 }

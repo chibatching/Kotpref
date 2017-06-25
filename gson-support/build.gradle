@@ -14,9 +14,8 @@ android {
     buildToolsVersion BUILD_TOOLS
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion MIN_SDK
         targetSdkVersion SDK_VERSION
-        versionCode 1
         versionName VERSION_NAME
     }
     buildTypes {
@@ -38,10 +37,10 @@ android {
 }
 
 dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    provided "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile project(":kotpref")
 
-    compile 'com.google.code.gson:gson:2.8.0'
+    provided 'com.google.code.gson:gson:2.8.0'
 
     testCompile "junit:junit:$junitVersion"
     testCompile "org.robolectric:robolectric:$robolectricVersion"
