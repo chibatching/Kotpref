@@ -174,7 +174,7 @@ If you wish to use auto initialization, you should import initializer module.
 ## License
 
 ```
-Copyright 2015 Takao Chiba
+Copyright 2015-2017 Takao Chiba
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
