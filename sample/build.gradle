@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         applicationId "com.chibatching.kotprefsample"
-        minSdkVersion MIN_SDK
+        minSdkVersion 14
         targetSdkVersion SDK_VERSION
         versionCode 1
         versionName "1.0"
@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:25.4.0'
+    compile 'com.android.support:appcompat-v7:26.0.1'
     compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     compile project(":kotpref")
     compile project(":initializer")
