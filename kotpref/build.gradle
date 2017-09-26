@@ -30,9 +30,10 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
     testOptions {
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
+        unitTests {
+            includeAndroidResources = true
+            all {
+                jacoco.includeNoLocationClasses = true
             }
         }
     }

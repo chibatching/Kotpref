@@ -9,11 +9,13 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import java.util.*
+import kotlin.collections.HashSet
 
 
-@RunWith(KotprefTestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class BlockingBulkEditTest {
 
     lateinit var example: Example
@@ -239,18 +241,22 @@ class BlockingBulkEditTest {
             add("test3")
         }
 
-        example.blockingBulk {
-            val iterator = example.testStringSet.iterator()
-            iterator.next()
-            iterator.remove()
-            iterator.next()
-            iterator.remove()
+        val originalCopy = HashSet<String>(example.testStringSet)
+        val deletedItem = HashSet<String>()
 
-            Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test3")
-            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1", "test2", "test3")
+        example.blockingBulk {
+            example.testStringSet.iterator().let { iterator ->
+                deletedItem.add(iterator.next())
+                iterator.remove()
+                deletedItem.add(iterator.next())
+                iterator.remove()
+            }
+
+            Assertions.assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
+            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy)
         }
 
-        Assertions.assertThat(example.testStringSet).containsExactlyInAnyOrder("test3")
-        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test3")
+        Assertions.assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
+        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy - deletedItem)
     }
 }

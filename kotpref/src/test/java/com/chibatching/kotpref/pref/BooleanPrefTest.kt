@@ -1,13 +1,13 @@
 package com.chibatching.kotpref.pref
 
-import com.chibatching.kotpref.KotprefTestRunner
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
 
-@RunWith(KotprefTestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class BooleanPrefTest : BasePrefTest() {
 
 
