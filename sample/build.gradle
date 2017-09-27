@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
 
 ext.SDK_VERSION = sdkVersion
 ext.MIN_SDK = minSdkVersion
@@ -32,13 +33,12 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:appcompat-v7:26.0.1'
-    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    compile project(":kotpref")
-    compile project(":initializer")
-    compile project(":enum-support")
-    compile project(":gson-support")
-    provided 'com.google.code.gson:gson:2.8.0'
+    implementation 'com.android.support:appcompat-v7:26.0.1'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    implementation project(":kotpref")
+    implementation project(":initializer")
+    implementation project(":enum-support")
+    implementation project(":gson-support")
 }
 
 buildscript {

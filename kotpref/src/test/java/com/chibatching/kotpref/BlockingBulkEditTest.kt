@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -252,11 +253,11 @@ class BlockingBulkEditTest {
                 iterator.remove()
             }
 
-            Assertions.assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
-            Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy)
+            assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
+            assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy)
         }
 
-        Assertions.assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
-        Assertions.assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy - deletedItem)
+        assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
+        assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy - deletedItem)
     }
 }

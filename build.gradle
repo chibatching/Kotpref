@@ -1,4 +1,5 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply plugin: 'jacoco'
 
 buildscript {
 
@@ -33,4 +34,34 @@ allprojects {
         jcenter()
         google()
     }
+}
+
+configure(subprojects.findAll {it.name != 'sample'}) {
+    task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
+
+        reports {
+            xml.enabled = true
+            html.enabled = true
+        }
+
+        def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*']
+        def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+        def kotlinDebugTree = fileTree(dir: "${buildDir}/tmp/kotlin-classes/debug", excludes: fileFilter)
+        def mainSrc = "${project.projectDir}/src/main/kotlin"
+
+        sourceDirectories = files([mainSrc])
+        classDirectories = files([debugTree], [kotlinDebugTree])
+        executionData = fileTree(dir: "$buildDir", includes: [
+                "jacoco/testDebugUnitTest.exec"
+        ])
+    }
+}
+
+static def env(String name, String defValue) {
+    def value = System.getenv()[name]
+    return value == null ? defValue : value
+}
+
+jacoco {
+    toolVersion = "0.7.9"
 }
