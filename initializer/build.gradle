@@ -18,6 +18,9 @@ android {
         versionName VERSION_NAME
     }
     buildTypes {
+        debug {
+            testCoverageEnabled env("CI", "false") == "true"
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -29,11 +32,11 @@ android {
 }
 
 dependencies {
-    provided "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
-    compile project(":kotpref")
+    compileOnly "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    compileOnly project(":kotpref")
 
-    testCompile "junit:junit:$junitVersion"
-    testCompile "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
 }
 
 buildscript {

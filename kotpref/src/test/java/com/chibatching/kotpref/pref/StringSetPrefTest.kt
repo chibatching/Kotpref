@@ -2,15 +2,15 @@ package com.chibatching.kotpref.pref
 
 import android.annotation.TargetApi
 import android.os.Build
-import com.chibatching.kotpref.KotprefTestRunner
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 import java.util.*
 
 
-@RunWith(KotprefTestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class StringSetPrefTest : BasePrefTest() {
 
     @Test

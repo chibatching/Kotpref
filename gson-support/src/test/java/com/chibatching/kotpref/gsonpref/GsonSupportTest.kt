@@ -4,18 +4,18 @@ import android.content.Context
 import android.content.SharedPreferences
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
-import com.chibatching.kotpref.KotprefTestRunner
 import com.google.gson.Gson
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
 import java.util.*
 
 
-@RunWith(KotprefTestRunner::class)
+@RunWith(RobolectricTestRunner::class)
 class GsonSupportTest {
 
     companion object {
