@@ -1,5 +1,4 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-apply plugin: 'jacoco'
 
 buildscript {
 
@@ -25,14 +24,17 @@ buildscript {
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.15'
-        classpath 'com.dicedmelon.gradle:jacoco-android:0.1.2'
     }
 }
 
 allprojects {
+    apply plugin: 'jacoco'
     repositories {
         jcenter()
         google()
+    }
+    jacoco {
+        toolVersion = "0.7.9"
     }
 }
 
@@ -60,8 +62,4 @@ configure(subprojects.findAll {it.name != 'sample'}) {
 static def env(String name, String defValue) {
     def value = System.getenv()[name]
     return value == null ? defValue : value
-}
-
-jacoco {
-    toolVersion = "0.7.9"
 }
