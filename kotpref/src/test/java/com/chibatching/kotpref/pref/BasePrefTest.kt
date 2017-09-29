@@ -25,10 +25,10 @@ abstract class BasePrefTest {
         example = Example()
         customExample = CustomExample()
 
-        examplePref = context.getSharedPreferences(example.javaClass.simpleName, Context.MODE_PRIVATE)
+        examplePref = example.preferences
         examplePref.edit().clear().commit()
 
-        customPref = context.getSharedPreferences(CustomExample.PREFERENCE_NAME, Context.MODE_PRIVATE)
+        customPref = customExample.preferences
         customPref.edit().clear().commit()
     }
 

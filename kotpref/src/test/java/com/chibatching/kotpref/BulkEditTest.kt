@@ -4,7 +4,6 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
-import org.assertj.core.api.Assertions
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -28,7 +27,7 @@ class BulkEditTest {
         Kotpref.init(context)
         example = Example()
 
-        pref = context.getSharedPreferences(example.javaClass.simpleName, Context.MODE_PRIVATE)
+        pref = example.preferences
         pref.edit().clear().commit()
     }
 
