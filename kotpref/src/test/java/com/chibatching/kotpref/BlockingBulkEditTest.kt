@@ -29,7 +29,7 @@ class BlockingBulkEditTest {
         Kotpref.init(context)
         example = Example()
 
-        pref = context.getSharedPreferences(example.javaClass.simpleName, Context.MODE_PRIVATE)
+        pref = example.preferences
         pref.edit().clear().commit()
     }
 

@@ -2,6 +2,7 @@ package com.chibatching.kotpref
 
 import android.annotation.TargetApi
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Build
 import com.chibatching.kotpref.pref.*
 import java.util.*
@@ -30,7 +31,7 @@ abstract class KotprefModel {
     protected open val kotprefMode: Int = Context.MODE_PRIVATE
 
     /**
-     * Internal shared preference.
+     * Internal shared preferences.
      * This property will be initialized on use.
      */
     internal val kotprefPreference: KotprefPreferences by lazy {
@@ -38,9 +39,16 @@ abstract class KotprefModel {
     }
 
     /**
-     * Internal shared preference editor.
+     * Internal shared preferences editor.
      */
     internal var kotprefEditor: KotprefPreferences.KotprefEditor? = null
+
+    /**
+     * SharedPreferences instance exposed.
+     * Use carefully when during bulk edit, it may cause inconsistent with internal data of Kotpref.
+     */
+    val preferences: SharedPreferences
+        get() = kotprefPreference.preferences
 
     /**
      * Clear all preferences in this model
@@ -52,122 +60,122 @@ abstract class KotprefModel {
     }
 
     /**
-     * Delegate string shared preference property.
+     * Delegate string shared preferences property.
      * @param default default string value
-     * @param key custom preference key
+     * @param key custom preferences key
      */
     protected fun stringPref(default: String = "", key: String? = null)
             : ReadWriteProperty<KotprefModel, String> = StringPref(default, key)
 
     /**
-     * Delegate string shared preference property.
+     * Delegate string shared preferences property.
      * @param default default string value
-     * @param key custom preference key resource id
+     * @param key custom preferences key resource id
      */
     protected fun stringPref(default: String = "", key: Int)
             : ReadWriteProperty<KotprefModel, String> = stringPref(default, context.getString(key))
 
     /**
-     * Delegate nullable string shared preference property.
+     * Delegate nullable string shared preferences property.
      * @param default default string value
-     * @param key custom preference key
+     * @param key custom preferences key
      */
     protected fun nullableStringPref(default: String? = null, key: String? = null)
             : ReadWriteProperty<KotprefModel, String?> = StringNullablePref(default, key)
 
     /**
-     * Delegate nullable string shared preference property.
+     * Delegate nullable string shared preferences property.
      * @param default default string value
-     * @param key custom preference key resource id
+     * @param key custom preferences key resource id
      */
     protected fun nullableStringPref(default: String? = null, key: Int)
             : ReadWriteProperty<KotprefModel, String?> = nullableStringPref(default, context.getString(key))
 
     /**
-     * Delegate int shared preference property.
+     * Delegate int shared preferences property.
      * @param default default int value
-     * @param key custom preference key
+     * @param key custom preferences key
      */
     protected fun intPref(default: Int = 0, key: String? = null)
             : ReadWriteProperty<KotprefModel, Int> = IntPref(default, key)
 
     /**
-     * Delegate int shared preference property.
+     * Delegate int shared preferences property.
      * @param default default int value
-     * @param key custom preference key resource id
+     * @param key custom preferences key resource id
      */
     protected fun intPref(default: Int = 0, key: Int)
             : ReadWriteProperty<KotprefModel, Int> = intPref(default, context.getString(key))
 
     /**
-     * Delegate long shared preference property.
+     * Delegate long shared preferences property.
      * @param default default long value
-     * @param key custom preference key
+     * @param key custom preferences key
      */
     protected fun longPref(default: Long = 0L, key: String? = null)
             : ReadWriteProperty<KotprefModel, Long> = LongPref(default, key)
 
     /**
-     * Delegate long shared preference property.
+     * Delegate long shared preferences property.
      * @param default default long value
-     * @param key custom preference key resource id
+     * @param key custom preferences key resource id
      */
     protected fun longPref(default: Long = 0L, key: Int)
             : ReadWriteProperty<KotprefModel, Long> = longPref(default, context.getString(key))
 
     /**
-     * Delegate float shared preference property.
+     * Delegate float shared preferences property.
      * @param default default float value
-     * @param key custom preference key
+     * @param key custom preferences key
      */
     protected fun floatPref(default: Float = 0F, key: String? = null)
             : ReadWriteProperty<KotprefModel, Float> = FloatPref(default, key)
 
     /**
-     * Delegate float shared preference property.
+     * Delegate float shared preferences property.
      * @param default default float value
-     * @param key custom preference key resource id
+     * @param key custom preferences key resource id
      */
     protected fun floatPref(default: Float = 0F, key: Int)
             : ReadWriteProperty<KotprefModel, Float> = floatPref(default, context.getString(key))
 
     /**
-     * Delegate boolean shared preference property.
+     * Delegate boolean shared preferences property.
      * @param default default boolean value
-     * @param key custom preference key
+     * @param key custom preferences key
      */
     protected fun booleanPref(default: Boolean = false, key: String? = null)
             : ReadWriteProperty<KotprefModel, Boolean> = BooleanPref(default, key)
 
     /**
-     * Delegate boolean shared preference property.
+     * Delegate boolean shared preferences property.
      * @param default default boolean value
-     * @param key custom preference key resource id
+     * @param key custom preferences key resource id
      */
     protected fun booleanPref(default: Boolean = false, key: Int)
             : ReadWriteProperty<KotprefModel, Boolean> = booleanPref(default, context.getString(key))
 
     /**
-     * Delegate string set shared preference property.
+     * Delegate string set shared preferences property.
      * @param default default string set value
-     * @param key custom preference key
+     * @param key custom preferences key
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPref(default: Set<String> = LinkedHashSet<String>(), key: String? = null)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = stringSetPref(key) { default }
 
     /**
-     * Delegate string set shared preference property.
+     * Delegate string set shared preferences property.
      * @param default default string set value
-     * @param key custom preference key resource id
+     * @param key custom preferences key resource id
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     protected fun stringSetPref(default: Set<String> = LinkedHashSet<String>(), key: Int)
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = stringSetPref(context.getString(key)) { default }
 
     /**
-     * Delegate string set shared preference property.
-     * @param key custom preference key
+     * Delegate string set shared preferences property.
+     * @param key custom preferences key
      * @param default default string set value creation function
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
@@ -175,8 +183,8 @@ abstract class KotprefModel {
             : ReadOnlyProperty<KotprefModel, MutableSet<String>> = StringSetPref(default, key)
 
     /**
-     * Delegate string set shared preference property.
-     * @param key custom preference key resource id
+     * Delegate string set shared preferences property.
+     * @param key custom preferences key resource id
      * @param default default string set value
      */
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
