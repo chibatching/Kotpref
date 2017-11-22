@@ -5,14 +5,14 @@ buildscript {
     ext.versionName = '2.2.0'
     ext.groupName = 'com.chibatching.kotpref'
 
-    ext.kotlinVersion = '1.1.51'
+    ext.kotlinVersion = '1.2.10'
     ext.junitVersion = '4.12'
     ext.robolectricVersion = '3.4.2'
     ext.assertjVersion = '3.8.0'
     ext.testingVersion = '0.1'
 
     ext.sdkVersion = 26
-    ext.buildToolsVersion = '25.0.3'
+    ext.buildToolsVersion = '26.0.2'
     ext.minSdkVersion = 9
 
     repositories {
@@ -20,7 +20,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0-beta6'
+        classpath 'com.android.tools.build:gradle:3.0.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.15'
