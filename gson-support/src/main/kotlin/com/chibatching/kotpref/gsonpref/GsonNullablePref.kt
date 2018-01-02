@@ -1,13 +1,15 @@
 package com.chibatching.kotpref.gsonpref
 
+import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import com.chibatching.kotpref.Kotpref
+import com.chibatching.kotpref.execute
 import com.chibatching.kotpref.pref.AbstractPref
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 
-class GsonNullablePref<T : Any>(val targetClass: KClass<T>, val default: T?, val key: String?) : AbstractPref<T?>() {
+class GsonNullablePref<T : Any>(val targetClass: KClass<T>, val default: T?, val key: String?, private val commitByDefault: Boolean) : AbstractPref<T?>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
         return preference.getString(key ?: property.name, null)?.let { json ->
@@ -15,9 +17,10 @@ class GsonNullablePref<T : Any>(val targetClass: KClass<T>, val default: T?, val
         }
     }
 
+    @SuppressLint("CommitPrefEdits")
     override fun setToPreference(property: KProperty<*>, value: T?, preference: SharedPreferences) {
         serializeToJson(value).let { json ->
-            preference.edit().putString(key ?: property.name, json).apply()
+            preference.edit().putString(key ?: property.name, json).execute(commitByDefault)
         }
     }
 

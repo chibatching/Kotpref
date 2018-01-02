@@ -9,14 +9,26 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.ParameterizedRobolectricTestRunner
 import org.robolectric.RuntimeEnvironment
+import java.util.*
 
 
-@RunWith(RobolectricTestRunner::class)
-class EnumSupportTest {
+@RunWith(ParameterizedRobolectricTestRunner::class)
+class EnumSupportTest(private val commitAllProperties: Boolean) {
 
-    class Example : KotprefModel() {
+    companion object {
+        @JvmStatic
+        @ParameterizedRobolectricTestRunner.Parameters(name = "commitAllProperties = {0}")
+        fun data(): Collection<Array<out Any>> {
+            return Arrays.asList(arrayOf(false), arrayOf(true))
+        }
+    }
+
+    class Example(private val commitAllProperties: Boolean) : KotprefModel() {
+        override val commitAllPropertiesByDefault: Boolean
+            get() = commitAllProperties
+
         var testEnumValue by enumValuePref(ExampleEnum.FIRST)
         var testEnumNullableValue: ExampleEnum? by nullableEnumValuePref()
         var testEnumOrdinal by enumOrdinalPref(ExampleEnum.FIRST)
@@ -30,7 +42,7 @@ class EnumSupportTest {
     fun setUp() {
         context = RuntimeEnvironment.application
         Kotpref.init(context)
-        example = Example()
+        example = Example(commitAllProperties)
 
         pref = example.preferences
         pref.edit().clear().commit()

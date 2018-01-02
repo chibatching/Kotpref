@@ -3,7 +3,10 @@ package com.chibatching.kotpref
 import java.util.*
 
 
-class Example : KotprefModel() {
+class Example(private val commitAllProperties: Boolean) : KotprefModel() {
+    override val commitAllPropertiesByDefault: Boolean
+        get() = commitAllProperties
+
     var testInt by intPref()
     var testLong by longPref()
     var testFloat by floatPref()
