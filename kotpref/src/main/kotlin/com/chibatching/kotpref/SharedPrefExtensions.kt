@@ -8,8 +8,5 @@ import android.content.SharedPreferences
  * @param synchronous save to sharedPref file instantly
  */
 fun SharedPreferences.Editor.execute(synchronous: Boolean) {
-    if (synchronous)
-        commit()
-    else
-        apply()
+    if (synchronous) commit() else apply()
 }
