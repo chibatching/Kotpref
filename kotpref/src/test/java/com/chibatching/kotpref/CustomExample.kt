@@ -3,7 +3,9 @@ package com.chibatching.kotpref
 import java.util.*
 
 
-class CustomExample : KotprefModel() {
+class CustomExample(private val commitAllProperties: Boolean) : KotprefModel() {
+    override val commitAllPropertiesByDefault: Boolean
+        get() = commitAllProperties
 
     companion object {
         val PREFERENCE_NAME = "custom_example"

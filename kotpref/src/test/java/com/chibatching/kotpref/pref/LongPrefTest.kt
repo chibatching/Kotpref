@@ -4,11 +4,19 @@ import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
-import org.robolectric.RobolectricTestRunner
+import org.robolectric.ParameterizedRobolectricTestRunner
+import java.util.*
 
 
-@RunWith(RobolectricTestRunner::class)
-class LongPrefTest : BasePrefTest() {
+@RunWith(ParameterizedRobolectricTestRunner::class)
+class LongPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {
+    companion object {
+        @JvmStatic
+        @ParameterizedRobolectricTestRunner.Parameters(name = "commitAllProperties = {0}")
+        fun data(): Collection<Array<out Any>> {
+            return Arrays.asList(arrayOf(false), arrayOf(true))
+        }
+    }
 
     @Test
     fun longPrefDefaultIs0() {

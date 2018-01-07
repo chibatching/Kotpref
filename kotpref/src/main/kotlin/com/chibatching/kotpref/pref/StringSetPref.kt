@@ -1,13 +1,15 @@
 package com.chibatching.kotpref.pref
 
+import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.os.Build
 import com.chibatching.kotpref.KotprefModel
+import com.chibatching.kotpref.execute
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-internal class StringSetPref(val default: () -> Set<String>, val key: String?) : ReadOnlyProperty<KotprefModel, MutableSet<String>> {
+internal class StringSetPref(val default: () -> Set<String>, val key: String?, private val commitByDefault: Boolean) : ReadOnlyProperty<KotprefModel, MutableSet<String>> {
 
     private var stringSet: MutableSet<String>? = null
     private var lastUpdate: Long = 0L
@@ -37,12 +39,13 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
             synchronized(this) {
                 transactionData?.let {
                     set.clear()
-                    set.addAll(transactionData!!)
+                    set.addAll(it)
                     transactionData = null
                 }
             }
         }
 
+        @SuppressLint("CommitPrefEdits")
         override fun add(element: String): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.add(element)
@@ -50,10 +53,11 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
                 return result
             }
             val result = set.add(element)
-            kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+            kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
             return result
         }
 
+        @SuppressLint("CommitPrefEdits")
         override fun addAll(elements: Collection<String>): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.addAll(elements)
@@ -61,10 +65,11 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
                 return result
             }
             val result = set.addAll(elements)
-            kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+            kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
             return result
         }
 
+        @SuppressLint("CommitPrefEdits")
         override fun remove(element: String): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.remove(element)
@@ -72,10 +77,11 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
                 return result
             }
             val result = set.remove(element)
-            kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+            kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
             return result
         }
 
+        @SuppressLint("CommitPrefEdits")
         override fun removeAll(elements: Collection<String>): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.removeAll(elements)
@@ -83,10 +89,11 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
                 return result
             }
             val result = set.removeAll(elements)
-            kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+            kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
             return result
         }
 
+        @SuppressLint("CommitPrefEdits")
         override fun retainAll(elements: Collection<String>): Boolean {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.retainAll(elements)
@@ -94,10 +101,11 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
                 return result
             }
             val result = set.retainAll(elements)
-            kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+            kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
             return result
         }
 
+        @SuppressLint("CommitPrefEdits")
         override fun clear() {
             if (kotprefModel.kotprefInTransaction) {
                 val result = transactionData!!.clear()
@@ -105,7 +113,7 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
                 return result
             }
             set.clear()
-            kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+            kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
         }
 
         override fun contains(element: String): Boolean {
@@ -142,10 +150,11 @@ internal class StringSetPref(val default: () -> Set<String>, val key: String?) :
         private inner class KotprefMutableIterator(
                 val baseIterator: MutableIterator<String>, val inTransaction: Boolean) : MutableIterator<String> by baseIterator {
 
+            @SuppressLint("CommitPrefEdits")
             override fun remove() {
                 baseIterator.remove()
                 if (!inTransaction) {
-                    kotprefModel.kotprefPreference.edit().putStringSet(key, set).apply()
+                    kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
                 }
             }
         }
