@@ -10,10 +10,10 @@ Android SharedPreference delegation for Kotlin.
 
 ```groovy
 dependencies {
-    compile "com.chibatching.kotpref:kotpref:2.2.0"
-    compile "com.chibatching.kotpref:initializer:2.2.0" // optional
-    compile "com.chibatching.kotpref:enum-support:2.2.0" // optional
-    compile "com.chibatching.kotpref:gson-support:2.2.0" // optional
+    compile "com.chibatching.kotpref:kotpref:2.3.0"
+    compile "com.chibatching.kotpref:initializer:2.3.0" // optional
+    compile "com.chibatching.kotpref:enum-support:2.3.0" // optional
+    compile "com.chibatching.kotpref:gson-support:2.3.0" // optional
 }
 ```
 
@@ -140,6 +140,22 @@ var useFunc1: Boolean by booleanPref(key = "use_func1")
 var mode: Int by intPref(default = 1, key = R.string.pref_mode)
 ```
 
+### Change default commit mode
+
+Kotpref save all preference property by `apply` method.
+You can change method to `commit` for each property.
+
+```kotlin
+var age: Int by intPref(default = 18, commitByDefault = true)
+```
+
+Or change default for each KotprefModel.
+
+```kotpref
+object UserInfo : KotprefModel() {
+    override val commitAllPropertiesByDefault: Boolean = true
+```
+
 #### Change XML file name
 
 Override `kotprefName` property.
@@ -174,7 +190,7 @@ If you wish to use auto initialization, you should import initializer module.
 ## License
 
 ```
-Copyright 2015-2017 Takao Chiba
+Copyright 2015-2018 Takao Chiba
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
