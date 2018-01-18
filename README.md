@@ -2,7 +2,7 @@
 
 Android SharedPreference delegation for Kotlin.
 
-[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.1.51-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.2.10-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
 
@@ -140,7 +140,7 @@ var useFunc1: Boolean by booleanPref(key = "use_func1")
 var mode: Int by intPref(default = 1, key = R.string.pref_mode)
 ```
 
-### Change default commit mode
+### Change default save mode
 
 Kotpref save all preference property by `apply` method.
 You can change method to `commit` for each property.
