@@ -1,0 +1,65 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+
+ext.moduleName = 'Kotpref LiveData support'
+
+ext.VERSION_NAME = versionName
+ext.SDK_VERSION = sdkVersion
+ext.MIN_SDK = minSdkVersion
+ext.BUILD_TOOLS = buildToolsVersion
+
+android {
+    compileSdkVersion SDK_VERSION
+    buildToolsVersion BUILD_TOOLS
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion SDK_VERSION
+        versionName VERSION_NAME
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled env("CI", "false") == "true"
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    testOptions {
+        unitTests.all {
+            jacoco {
+                includeNoLocationClasses = true
+            }
+        }
+    }
+}
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
+    api project(":kotpref")
+
+    api "android.arch.lifecycle:extensions:1.0.0"
+
+    testImplementation "junit:junit:$junitVersion"
+    testImplementation "org.robolectric:robolectric:$robolectricVersion"
+    testImplementation "org.assertj:assertj-core:$assertjVersion"
+}
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    }
+}
+
+repositories {
+    jcenter()
+}
+
+apply from: "${project.rootDir}/gradle/publish/publish.gradle"
