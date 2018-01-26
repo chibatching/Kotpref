@@ -42,7 +42,7 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     api project(":kotpref")
 
-    api "android.arch.lifecycle:extensions:1.0.0"
+    api "android.arch.lifecycle:livedata:1.1.0"
 
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
