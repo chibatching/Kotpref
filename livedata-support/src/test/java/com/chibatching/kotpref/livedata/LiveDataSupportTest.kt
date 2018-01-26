@@ -74,7 +74,7 @@ class LiveDataSupportTest {
 
     @Test
     fun firesLatestValueOnObserve() {
-        val latch = CountDownLatch(3)
+        val latch = CountDownLatch(5)
 
         val values = listOf("some value 1", "value 2")
         val expectedResults = listOf("default", "default", values[0], values[0], values[1])
