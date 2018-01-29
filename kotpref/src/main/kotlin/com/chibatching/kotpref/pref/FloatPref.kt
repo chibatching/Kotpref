@@ -6,7 +6,7 @@ import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
 
-internal class FloatPref(val default: Float, val key: String?, private val commitByDefault: Boolean) : AbstractPref<Float>() {
+internal class FloatPref(val default: Float, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<Float>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Float {
         return preference.getFloat(key ?: property.name, default)

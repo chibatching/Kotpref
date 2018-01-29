@@ -9,12 +9,12 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-internal class StringSetPref(val default: () -> Set<String>, val key: String?, private val commitByDefault: Boolean) : ReadOnlyProperty<KotprefModel, MutableSet<String>> {
+internal class StringSetPref(val default: () -> Set<String>, override val key: String?, private val commitByDefault: Boolean) : ReadOnlyProperty<KotprefModel, MutableSet<String>>, PreferenceKey {
 
     private var stringSet: MutableSet<String>? = null
     private var lastUpdate: Long = 0L
 
-    operator override fun getValue(thisRef: KotprefModel, property: KProperty<*>): MutableSet<String> {
+    override operator fun getValue(thisRef: KotprefModel, property: KProperty<*>): MutableSet<String> {
         if (stringSet == null || lastUpdate < thisRef.kotprefTransactionStartTime) {
             val prefSet = thisRef.kotprefPreference.getStringSet(key ?: property.name, null)
             stringSet = PrefMutableSet(thisRef, prefSet ?: default.invoke().toMutableSet(), key ?: property.name)

@@ -43,6 +43,7 @@ dependencies {
     api project(":kotpref")
 
     api "android.arch.lifecycle:livedata:1.1.0"
+    api "org.jetbrains.kotlin:kotlin-reflect:$kotlinVersion"
 
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
