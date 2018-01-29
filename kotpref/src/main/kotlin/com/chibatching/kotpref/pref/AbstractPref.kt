@@ -6,12 +6,14 @@ import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
 
-abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T> {
+abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, PreferenceKey {
 
     private var lastUpdate: Long = 0
     private var transactionData: Any? = null
 
-    operator override fun getValue(thisRef: KotprefModel, property: KProperty<*>): T {
+    abstract override val key: String?
+
+    override operator fun getValue(thisRef: KotprefModel, property: KProperty<*>): T {
         if (!thisRef.kotprefInTransaction) {
             return getFromPreference(property, thisRef.kotprefPreference)
         }
@@ -23,7 +25,7 @@ abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T> {
         return transactionData as T
     }
 
-    operator override fun setValue(thisRef: KotprefModel, property: KProperty<*>, value: T) {
+    override operator fun setValue(thisRef: KotprefModel, property: KProperty<*>, value: T) {
         if (thisRef.kotprefInTransaction) {
             transactionData = value
             lastUpdate = System.currentTimeMillis()

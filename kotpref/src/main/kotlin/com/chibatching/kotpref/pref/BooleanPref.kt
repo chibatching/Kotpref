@@ -6,7 +6,7 @@ import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
 
-internal class BooleanPref(val default: Boolean, val key: String?, private val commitByDefault: Boolean) : AbstractPref<Boolean>() {
+internal class BooleanPref(val default: Boolean, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<Boolean>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Boolean {
         return preference.getBoolean(key ?: property.name, default)

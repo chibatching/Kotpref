@@ -6,7 +6,7 @@ import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
 
-internal class LongPref(val default: Long, val key: String?, private val commitByDefault: Boolean) : AbstractPref<Long>() {
+internal class LongPref(val default: Long, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<Long>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Long {
         return preference.getLong(key ?: property.name, default)

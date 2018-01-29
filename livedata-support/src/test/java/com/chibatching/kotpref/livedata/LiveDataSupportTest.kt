@@ -1,6 +1,6 @@
 package com.chibatching.kotpref.livedata
 
-import android.arch.lifecycle.*
+import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.SharedPreferences
 import com.chibatching.kotpref.Kotpref
@@ -20,10 +20,10 @@ import java.util.concurrent.TimeUnit
 class LiveDataSupportTest {
     class Example : KotprefModel() {
         var someProperty by stringPref("default")
+        var customKeyProperty by intPref(8, "custom_key")
     }
 
     lateinit var example: Example
-    lateinit var liveData: LiveData<String>
     lateinit var context: Context
     lateinit var pref: SharedPreferences
 
@@ -35,8 +35,6 @@ class LiveDataSupportTest {
 
         pref = example.preferences
         pref.edit().clear().commit()
-
-        liveData = example.asLiveData(example::someProperty)
     }
 
     @After
@@ -48,8 +46,22 @@ class LiveDataSupportTest {
     fun providesDefaultValue() {
         val latch = CountDownLatch(1)
 
+        val liveData = example.asLiveData(example::someProperty)
         liveData.observeForever {
             assertThat(it).isEqualTo("default")
+            latch.countDown()
+        }
+
+        latch.await(1, TimeUnit.SECONDS)
+    }
+
+    @Test
+    fun providesDefaultValueWithCustomKey() {
+        val latch = CountDownLatch(1)
+
+        val liveData = example.asLiveData(example::customKeyProperty)
+        liveData.observeForever {
+            assertThat(it).isEqualTo(8)
             latch.countDown()
         }
 
@@ -62,12 +74,30 @@ class LiveDataSupportTest {
 
         val values = listOf("default", "some value 1", "value 2")
         var i = 0
+        val liveData = example.asLiveData(example::someProperty)
         liveData.observeForever {
             assertThat(it).isEqualTo(values[i++])
             latch.countDown()
         }
         example.someProperty = values[1]
         example.someProperty = values[2]
+
+        latch.await(1, TimeUnit.SECONDS)
+    }
+
+    @Test
+    fun firesValueChangesWithCustomKey() {
+        val latch = CountDownLatch(3)
+
+        val values = listOf(8, 1, 12)
+        var i = 0
+        val liveData = example.asLiveData(example::customKeyProperty)
+        liveData.observeForever {
+            assertThat(it).isEqualTo(values[i++])
+            latch.countDown()
+        }
+        example.customKeyProperty = values[1]
+        example.customKeyProperty = values[2]
 
         latch.await(1, TimeUnit.SECONDS)
     }
@@ -80,6 +110,7 @@ class LiveDataSupportTest {
         val expectedResults = listOf("default", "default", values[0], values[0], values[1])
         var i = 0
 
+        val liveData = example.asLiveData(example::someProperty)
         val observer = Observer<String> {
             assertThat(it).isEqualTo(expectedResults[i++])
             latch.countDown()
@@ -90,6 +121,31 @@ class LiveDataSupportTest {
         (0..1).forEach {
             liveData.observeForever(observer)
             example.someProperty = values[it]
+            liveData.removeObserver(observer)
+        }
+
+        latch.await(1, TimeUnit.SECONDS)
+    }
+
+    @Test
+    fun firesLatestValueOnObserveWithCustomKey() {
+        val latch = CountDownLatch(5)
+
+        val values = listOf(1, 12)
+        val expectedResults = listOf(8, 8, values[0], values[0], values[1])
+        var i = 0
+
+        val liveData = example.asLiveData(example::customKeyProperty)
+        val observer = Observer<Int> {
+            assertThat(it).isEqualTo(expectedResults[i++])
+            latch.countDown()
+        }
+        liveData.observeForever(observer)
+        liveData.removeObserver(observer)
+
+        (0..1).forEach {
+            liveData.observeForever(observer)
+            example.customKeyProperty = values[it]
             liveData.removeObserver(observer)
         }
 

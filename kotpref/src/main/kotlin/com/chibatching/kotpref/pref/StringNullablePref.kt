@@ -6,7 +6,7 @@ import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
 
-internal class StringNullablePref(val default: String?, val key: String?, private val commitByDefault: Boolean) : AbstractPref<String?>() {
+internal class StringNullablePref(val default: String?, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<String?>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String? {
         return preference.getString(key ?: property.name, default)

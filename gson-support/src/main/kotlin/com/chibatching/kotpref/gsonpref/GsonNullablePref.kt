@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 
-class GsonNullablePref<T : Any>(val targetClass: KClass<T>, val default: T?, val key: String?, private val commitByDefault: Boolean) : AbstractPref<T?>() {
+class GsonNullablePref<T : Any>(val targetClass: KClass<T>, val default: T?, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<T?>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
         return preference.getString(key ?: property.name, null)?.let { json ->
