@@ -1,13 +1,16 @@
 package com.chibatching.kotprefsample
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.chibatching.kotpref.bulk
+import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
+import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
-    
+
     companion object {
         private val TAG = MainActivity::class.java.simpleName
     }
@@ -16,6 +19,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        writeAndReadSample()
+
+        liveDataSampleButton.setOnClickListener {
+            startActivity(Intent(this, LiveDataSampleActivity::class.java))
+        }
+    }
+
+    private fun writeAndReadSample() {
         Log.d(TAG, "Game level: ${UserInfo.gameLevel}")
         Log.d(TAG, "User name: ${UserInfo.name}")
         Log.d(TAG, "User code: ${UserInfo.code}")

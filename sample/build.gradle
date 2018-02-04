@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 ext.SDK_VERSION = sdkVersion
 ext.MIN_SDK = minSdkVersion
@@ -38,6 +39,7 @@ dependencies {
     implementation project(":initializer")
     implementation project(":enum-support")
     implementation project(":gson-support")
+    implementation project(":livedata-support")
 }
 
 buildscript {

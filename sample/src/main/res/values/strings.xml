@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">kotpref sample</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="preferences_fragment_sample">PreferencesFragment sample</string>
+    <string name="live_data_sample">LiveData sample</string>
+    <string name="save">Save</string>
 </resources>
