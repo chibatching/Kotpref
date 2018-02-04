@@ -42,7 +42,7 @@ dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     api project(":kotpref")
 
-    api 'com.google.code.gson:gson:2.8.0'
+    api 'com.google.code.gson:gson:2.8.2'
 
     testImplementation "junit:junit:$junitVersion"
     testImplementation "org.robolectric:robolectric:$robolectricVersion"
