@@ -32,7 +32,7 @@ android {
 }
 
 dependencies {
-    implementation 'com.android.support:appcompat-v7:27.0.1'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion"
     implementation project(":kotpref")
     implementation project(":initializer")
@@ -52,7 +52,4 @@ buildscript {
 repositories {
     jcenter()
     google()
-    maven {
-        url "https://oss.jfrog.org/libs-snapshot/"
-    }
 }
