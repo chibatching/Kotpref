@@ -9,7 +9,7 @@ import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
 
-class GsonPref<T : Any>(val targetClass: KClass<T>, val default: T, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<T>() {
+class GsonPref<T : Any>(val targetType: Type, val default: T, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<T>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
         return preference.getString(key ?: property.name, null)?.let { json ->
@@ -42,7 +42,7 @@ class GsonPref<T : Any>(val targetClass: KClass<T>, val default: T, override val
         return Kotpref.gson.let {
             if (it == null) throw IllegalStateException("Gson has not been set to Kotpref")
 
-            it.fromJson(json, targetClass.java)
+            it.fromJson(json, targetType)
         }
     }
 }
