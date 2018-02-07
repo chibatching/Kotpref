@@ -23,7 +23,7 @@ var Kotpref.gson: Gson?
  * @param key custom preferences key
  */
 inline fun <reified T : Any> KotprefModel.gsonPref(default: T, key: String? = null, commitByDefault: Boolean = commitAllPropertiesByDefault)
-        : ReadWriteProperty<KotprefModel, T> = GsonPref(T::class, default, key, commitByDefault)
+        : ReadWriteProperty<KotprefModel, T> = GsonPref(object : TypeToken<T>() {}.type, default, key, commitByDefault)
 
 /**
  * Delegate shared preferences property serialized and deserialized by gson
@@ -31,7 +31,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(default: T, key: String? = nu
  * @param key custom preferences key resource id
  */
 inline fun <reified T : Any> KotprefModel.gsonPref(default: T, key: Int, commitByDefault: Boolean = commitAllPropertiesByDefault)
-        : ReadWriteProperty<KotprefModel, T> = GsonPref(T::class, default, context.getString(key), commitByDefault)
+        : ReadWriteProperty<KotprefModel, T> = GsonPref(object : TypeToken<T>() {}.type, default, context.getString(key), commitByDefault)
 
 /**
  * Delegate shared preferences property serialized and deserialized by gson
@@ -39,7 +39,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(default: T, key: Int, commitB
  * @param key custom preferences key
  */
 inline fun <reified T : Any> KotprefModel.gsonNullablePref(default: T? = null, key: String? = null, commitByDefault: Boolean = commitAllPropertiesByDefault)
-        : ReadWriteProperty<KotprefModel, T?> = GsonNullablePref(T::class, default, key, commitByDefault)
+        : ReadWriteProperty<KotprefModel, T?> = GsonNullablePref(object : TypeToken<T>() {}.type, default, key, commitByDefault)
 
 /**
  * Delegate shared preferences property serialized and deserialized by gson
@@ -47,4 +47,4 @@ inline fun <reified T : Any> KotprefModel.gsonNullablePref(default: T? = null, k
  * @param key custom preferences key resource id
  */
 inline fun <reified T : Any> KotprefModel.gsonNullablePref(default: T? = null, key: Int, commitByDefault: Boolean = commitAllPropertiesByDefault)
-        : ReadWriteProperty<KotprefModel, T?> = GsonNullablePref(T::class, default, context.getString(key), commitByDefault)
+        : ReadWriteProperty<KotprefModel, T?> = GsonNullablePref(object : TypeToken<T>() {}.type, default, context.getString(key), commitByDefault)
