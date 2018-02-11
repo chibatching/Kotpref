@@ -10,10 +10,11 @@ Android SharedPreference delegation for Kotlin.
 
 ```groovy
 dependencies {
-    compile "com.chibatching.kotpref:kotpref:2.3.0"
-    compile "com.chibatching.kotpref:initializer:2.3.0" // optional
-    compile "com.chibatching.kotpref:enum-support:2.3.0" // optional
-    compile "com.chibatching.kotpref:gson-support:2.3.0" // optional
+    compile "com.chibatching.kotpref:kotpref:2.4.0"
+    compile "com.chibatching.kotpref:initializer:2.4.0" // optional
+    compile "com.chibatching.kotpref:enum-support:2.4.0" // optional
+    compile "com.chibatching.kotpref:gson-support:2.4.0" // optional
+    compile "com.chibatching.kotpref:livedata-support:2.4.0" // optional
 }
 ```
 
