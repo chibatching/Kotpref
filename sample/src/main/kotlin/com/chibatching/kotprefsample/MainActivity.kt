@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.chibatching.kotpref.bulk
 import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
+import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.*
 
@@ -20,6 +21,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         writeAndReadSample()
+
+        preferenceFragmentSampleButton.setOnClickListener {
+            startActivity(Intent(this, PreferenceFragmentSampleActivity::class.java))
+        }
 
         liveDataSampleButton.setOnClickListener {
             startActivity(Intent(this, LiveDataSampleActivity::class.java))

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <bool name="sample_switch_default">true</bool>
+    <string name="sample_edit_text_default">Hello world!</string>
+</resources>

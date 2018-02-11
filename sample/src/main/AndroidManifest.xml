@@ -17,8 +17,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".livedata.LiveDataSampleActivity">
-        </activity>
+        <activity
+            android:name=".livedata.LiveDataSampleActivity"
+            android:label="@string/live_data_sample"
+        />
+        <activity
+            android:name=".preferencefragment.PreferenceFragmentSampleActivity"
+            android:label="@string/preference_fragment_sample"
+        />
     </application>
-
 </manifest>

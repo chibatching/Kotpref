@@ -12,10 +12,10 @@
     tools:context=".MainActivity"
 >
     <Button
-        android:id="@+id/preferencesFragmentSampleButton"
+        android:id="@+id/preferenceFragmentSampleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/preferences_fragment_sample"
+        android:text="@string/preference_fragment_sample"
         android:textAllCaps="false"
     />
     <Button
