@@ -5,10 +5,9 @@ import java.util.*
 
 
 data class Avatar(
+    @SerializedName("icon")
+    var icon: String = "default",
 
-        @SerializedName("icon")
-        var icon: String = "default",
-
-        @SerializedName("updated_at")
-        var updatedAt: Date = Date()
+    @SerializedName("updated_at")
+    var updatedAt: Date = Date()
 )

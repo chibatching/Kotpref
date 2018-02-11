@@ -1,5 +1,13 @@
 <resources>
     <string name="app_name">kotpref sample</string>
 
-    <string name="hello_world">Hello world!</string>
+    <string name="preference_fragment_sample">PreferenceFragment sample</string>
+    <string name="live_data_sample">LiveData sample</string>
+    <string name="save">Save</string>
+
+    <!-- Sample preference fragment -->
+    <string name="pref_title_sample_switch">Sample switch preference</string>
+    <string name="pref_key_sample_switch">sample_switch</string>
+    <string name="pref_title_sample_edit_text">Sample edit text preference</string>
+    <string name="pref_key_sample_edit_text">sample_edit_text</string>
 </resources>

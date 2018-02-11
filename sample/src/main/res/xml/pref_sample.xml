@@ -1,0 +1,14 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+        android:defaultValue="@bool/sample_switch_default"
+        android:key="@string/pref_key_sample_switch"
+        android:title="@string/pref_title_sample_switch"
+    />
+
+    <EditTextPreference
+        android:defaultValue="@string/sample_edit_text_default"
+        android:key="@string/pref_key_sample_edit_text"
+        android:title="@string/pref_title_sample_edit_text"
+    />
+</PreferenceScreen>
