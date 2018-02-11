@@ -175,19 +175,6 @@ object UserInfo : KotprefModel() {
     override val kotprefMode: Int = Context.MODE_MULTI_PROCESS
 ```
 
-### Migration from v1
-
-#### Change function names providing delegated properties
-
-Kotpref v2 changes function names providing delegated properties.
-
-Example, old `stringPrefVar` is changed to `stringPref`.
-
-
-### Separate auto initialization module
-
-If you wish to use auto initialization, you should import initializer module.
-
 ## License
 
 ```
