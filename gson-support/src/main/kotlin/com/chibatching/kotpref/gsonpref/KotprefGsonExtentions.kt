@@ -3,6 +3,7 @@ package com.chibatching.kotpref.gsonpref
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import kotlin.properties.ReadWriteProperty
 
 
