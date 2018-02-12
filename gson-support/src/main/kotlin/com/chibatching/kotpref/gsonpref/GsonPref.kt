@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.execute
 import com.chibatching.kotpref.pref.AbstractPref
-import kotlin.reflect.KClass
+import java.lang.reflect.Type
 import kotlin.reflect.KProperty
 
 
