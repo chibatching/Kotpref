@@ -5,11 +5,11 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.execute
 import com.chibatching.kotpref.pref.AbstractPref
-import kotlin.reflect.KClass
+import java.lang.reflect.Type
 import kotlin.reflect.KProperty
 
 
-class GsonNullablePref<T : Any>(val targetClass: KClass<T>, val default: T?, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<T?>() {
+class GsonNullablePref<T : Any>(val targetType: Type, val default: T?, override val key: String?, private val commitByDefault: Boolean) : AbstractPref<T?>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
         return preference.getString(key ?: property.name, null)?.let { json ->
@@ -42,7 +42,7 @@ class GsonNullablePref<T : Any>(val targetClass: KClass<T>, val default: T?, ove
         return Kotpref.gson.let {
             if (it == null) throw IllegalStateException("Gson has not been set to Kotpref")
 
-            it.fromJson(json, targetClass.java)
+            it.fromJson(json, targetType)
         }
     }
 }
