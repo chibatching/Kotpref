@@ -1,29 +1,23 @@
+import dependencies.Deps
+import dependencies.Versions
+
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
 
-    ext.versionName = '2.4.0'
+    ext.versionName = Versions.versionName
     ext.groupName = 'com.chibatching.kotpref'
-
-    ext.kotlinVersion = '1.2.21'
-    ext.junitVersion = '4.12'
-    ext.robolectricVersion = '3.4.2'
-    ext.assertjVersion = '3.8.0'
-    ext.testingVersion = '0.1'
-
-    ext.sdkVersion = 27
-    ext.buildToolsVersion = '27.0.2'
-    ext.minSdkVersion = 9
 
     repositories {
         jcenter()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        classpath 'org.jetbrains.dokka:dokka-android-gradle-plugin:0.9.15'
+        classpath Deps.androidGradlePlugin
+        classpath Deps.Kotlin.gradlePlugin
+        classpath Deps.bintrayGradlePlugin
+        classpath Deps.androidMavenGradlePlugin
+        classpath Deps.dokkaAndroidGradlePlugin
     }
 }
 
