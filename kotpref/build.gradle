@@ -40,8 +40,9 @@ android {
 }
 
 dependencies {
-    api Deps.Kotlin.stdlib
+    compileOnly Deps.Kotlin.stdlib
 
+    testImplementation Deps.Kotlin.stdlib
     testImplementation Deps.junit
     testImplementation Deps.robolectric
     testImplementation Deps.assertj
