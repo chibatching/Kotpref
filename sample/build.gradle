@@ -5,7 +5,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
-    android {
+android {
     compileSdkVersion Versions.targetSdk
     buildToolsVersion Versions.buildTools
 
@@ -37,10 +37,23 @@ dependencies {
     implementation Deps.SupportLibrary.appCompatV7
     implementation Deps.SupportLibrary.preferenceV7
     implementation Deps.Kotlin.stdlib
+
+    // core
     implementation project(":kotpref")
+
+    // initializer
     implementation project(":initializer")
+
+    // enum support
     implementation project(":enum-support")
+
+    // gson support
     implementation project(":gson-support")
+    implementation Deps.gson
+
+    // LiveData support
     implementation project(":livedata-support")
+    implementation Deps.Arch.liveData
+    implementation Deps.Kotlin.reflect
 }
 

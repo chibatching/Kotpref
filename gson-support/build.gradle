@@ -37,11 +37,13 @@ android {
 }
 
 dependencies {
-    api Deps.Kotlin.stdlib
+    compileOnly Deps.Kotlin.stdlib
     api project(":kotpref")
 
-    api Deps.gson
+    compileOnly Deps.gson
 
+    testImplementation Deps.Kotlin.stdlib
+    testImplementation Deps.gson
     testImplementation Deps.junit
     testImplementation Deps.robolectric
     testImplementation Deps.assertj

@@ -31,8 +31,9 @@ android {
 
 dependencies {
     compileOnly Deps.Kotlin.stdlib
-    compileOnly project(":kotpref")
+    api project(":kotpref")
 
+    testImplementation Deps.Kotlin.stdlib
     testImplementation Deps.junit
     testImplementation Deps.robolectric
 }
