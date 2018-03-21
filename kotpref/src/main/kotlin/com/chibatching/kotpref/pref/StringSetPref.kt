@@ -9,21 +9,37 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-internal class StringSetPref(val default: () -> Set<String>, override val key: String?, private val commitByDefault: Boolean) : ReadOnlyProperty<KotprefModel, MutableSet<String>>, PreferenceKey {
+internal class StringSetPref(
+    val default: () -> Set<String>,
+    override val key: String?,
+    private val commitByDefault: Boolean
+) : ReadOnlyProperty<KotprefModel, MutableSet<String>>, PreferenceKey {
 
     private var stringSet: MutableSet<String>? = null
     private var lastUpdate: Long = 0L
 
-    override operator fun getValue(thisRef: KotprefModel, property: KProperty<*>): MutableSet<String> {
+    override operator fun getValue(
+        thisRef: KotprefModel,
+        property: KProperty<*>
+    ): MutableSet<String> {
         if (stringSet == null || lastUpdate < thisRef.kotprefTransactionStartTime) {
             val prefSet = thisRef.kotprefPreference.getStringSet(key ?: property.name, null)
-            stringSet = PrefMutableSet(thisRef, prefSet ?: default.invoke().toMutableSet(), key ?: property.name)
+                ?.let { HashSet(it) }
+            stringSet = PrefMutableSet(
+                thisRef,
+                prefSet ?: default.invoke().toMutableSet(),
+                key ?: property.name
+            )
             lastUpdate = System.currentTimeMillis()
         }
         return stringSet!!
     }
 
-    internal inner class PrefMutableSet(val kotprefModel: KotprefModel, val set: MutableSet<String>, val key: String) : MutableSet<String> by set {
+    internal inner class PrefMutableSet(
+        val kotprefModel: KotprefModel,
+        val set: MutableSet<String>,
+        val key: String
+    ) : MutableSet<String> by set {
 
         init {
             addAll(set)
@@ -148,13 +164,15 @@ internal class StringSetPref(val default: () -> Set<String>, override val key: S
             }
 
         private inner class KotprefMutableIterator(
-                val baseIterator: MutableIterator<String>, val inTransaction: Boolean) : MutableIterator<String> by baseIterator {
+            val baseIterator: MutableIterator<String>, val inTransaction: Boolean
+        ) : MutableIterator<String> by baseIterator {
 
             @SuppressLint("CommitPrefEdits")
             override fun remove() {
                 baseIterator.remove()
                 if (!inTransaction) {
-                    kotprefModel.kotprefPreference.edit().putStringSet(key, set).execute(commitByDefault)
+                    kotprefModel.kotprefPreference.edit().putStringSet(key, set)
+                        .execute(commitByDefault)
                 }
             }
         }
