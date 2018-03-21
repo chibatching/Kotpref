@@ -6,12 +6,12 @@ import java.util.*
 
 data class Content(
 
-        @SerializedName("title")
-        var title: String = "",
+    @SerializedName("title")
+    var title: String = "",
 
-        @SerializedName("body")
-        var body: String = "",
+    @SerializedName("body")
+    var body: String = "",
 
-        @SerializedName("created_at")
-        var createdAt: Date = Date()
+    @SerializedName("created_at")
+    var createdAt: Date = Date()
 )
