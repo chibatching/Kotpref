@@ -11,7 +11,7 @@ object Deps {
     val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
     val assertj = "org.assertj:assertj-core:${Versions.assertj}"
 
-    val gson = "com.google.code.gson:gson:2.8.2"
+    val gson = "com.google.code.gson:gson:${Versions.gson}"
 
     object Kotlin {
         val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
