@@ -5,6 +5,7 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
@@ -25,17 +26,17 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
             return Arrays.asList(arrayOf(false), arrayOf(true))
         }
 
-        fun createDefaultContent(): Content
-                = Content("default title", "contents write here", createDate(2017, 1, 5))
+        fun createDefaultContent(): Content =
+            Content("default title", "contents write here", createDate(2017, 1, 5))
 
         fun createDate(year: Int, month: Int, day: Int): Date =
-                Calendar.getInstance().apply {
-                    set(year, month, day)
-                    set(Calendar.HOUR, 0)
-                    set(Calendar.MINUTE, 0)
-                    set(Calendar.SECOND, 0)
-                    set(Calendar.MILLISECOND, 0)
-                }.time
+            Calendar.getInstance().apply {
+                set(year, month, day)
+                set(Calendar.HOUR, 0)
+                set(Calendar.MINUTE, 0)
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }.time
     }
 
     class Example(private val commitAllProperties: Boolean) : KotprefModel() {
@@ -43,6 +44,8 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
             get() = commitAllProperties
 
         var content by gsonPref(createDefaultContent())
+
+        var list: List<String> by gsonPref(emptyList())
 
         var nullableContent: Content? by gsonNullablePref()
     }
@@ -75,8 +78,19 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
     @Test
     fun setGsonPrefSetCausePreferenceUpdate() {
         example.content = Content("new title", "this is new content", createDate(2017, 1, 25))
-        assertThat(example.content).isEqualTo(Content("new title", "this is new content", createDate(2017, 1, 25)))
-        assertThat(example.content).isEqualTo(Kotpref.gson?.fromJson(pref.getString("content", ""), Content::class.java))
+        assertThat(example.content).isEqualTo(
+            Content(
+                "new title",
+                "this is new content",
+                createDate(2017, 1, 25)
+            )
+        )
+        assertThat(example.content).isEqualTo(
+            Kotpref.gson?.fromJson(
+                pref.getString("content", ""),
+                Content::class.java
+            )
+        )
     }
 
     @Test
@@ -86,9 +100,23 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
 
     @Test
     fun gsonNullablePrefCausePreferenceUpdate() {
-        example.nullableContent = Content("nullable content", "this is not null", createDate(2017, 1, 20))
-        assertThat(example.nullableContent).isEqualTo(Content("nullable content", "this is not null", createDate(2017, 1, 20)))
-        assertThat(example.nullableContent).isEqualTo(Kotpref.gson?.fromJson(pref.getString("nullableContent", ""), Content::class.java))
+        example.nullableContent =
+                Content("nullable content", "this is not null", createDate(2017, 1, 20))
+        assertThat(example.nullableContent).isEqualTo(
+            Content(
+                "nullable content",
+                "this is not null",
+                createDate(2017, 1, 20)
+            )
+        )
+        assertThat(example.nullableContent).isEqualTo(
+            Kotpref.gson?.fromJson(
+                pref.getString(
+                    "nullableContent",
+                    ""
+                ), Content::class.java
+            )
+        )
     }
 
     @Test
@@ -99,6 +127,22 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
         }
         setNull()
         assertThat(example.nullableContent).isNull()
-        assertThat(example.nullableContent).isEqualTo(Kotpref.gson?.fromJson(pref.getString("nullableContent", ""), Content::class.java))
+        assertThat(example.nullableContent).isEqualTo(
+            Kotpref.gson?.fromJson(
+                pref.getString(
+                    "nullableContent",
+                    ""
+                ), Content::class.java
+            )
+        )
+    }
+
+    @Test
+    fun gsonGenericTypeTest() {
+        example.list = listOf("gson", "generic", "type")
+        val result = Kotpref.gson?.fromJson<List<String>>(
+            pref.getString("list", ""), object : TypeToken<List<String>>() {}.type
+        )
+        assertThat(example.list).containsExactlyElementsOf(result)
     }
 }
