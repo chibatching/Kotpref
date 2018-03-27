@@ -1,8 +1,11 @@
 import dependencies.Deps
 import dependencies.Versions
+import plugin.BuildSettingHelperPlugin
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
+apply plugin: BuildSettingHelperPlugin
 
 ext.moduleName = 'Kotpref enum support'
 
@@ -17,7 +20,7 @@ android {
     }
     buildTypes {
         debug {
-            testCoverageEnabled env("CI", "false") == "true"
+            testCoverageEnabled isCi
         }
         release {
             minifyEnabled false
