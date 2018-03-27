@@ -28,20 +28,22 @@ allprojects {
     }
 }
 
-task replaceVersionInReadme() {
-    ant.replaceregexp(match: 'com\\.chibatching\\.kotpref:(.+):([0-9\\.]+)', replace: "com.chibatching.kotpref:\\1:${Versions.versionName}", flags: 'g') {
-        fileset(dir: project.projectDir, includes: 'README.md')
-    }
-    ant.replaceregexp(match: 'android\\.arch\\.lifecycle:livedata:([0-9\\.]+)', replace: "android.arch.lifecycle:livedata:${Versions.arch}", flags: 'g') {
-        fileset(dir: project.projectDir, includes: 'README.md')
-    }
-    ant.replaceregexp(match: 'com\\.google\\.code\\.gson:gson:([0-9\\.]+)', replace: "com.google.code.gson:gson:${Versions.gson}", flags: 'g') {
-        fileset(dir: project.projectDir, includes: 'README.md')
-    }
-    ant.replaceregexp(match: 'org\\.jetbrains\\.kotlin:kotlin-reflect:([0-9\\.]+)', replace: "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}", flags: 'g') {
-        fileset(dir: project.projectDir, includes: 'README.md')
-    }
-    ant.replaceregexp(match: 'kotlin-([0-9\\.]+)-blue\\.svg', replace: "kotlin-${Versions.kotlin}-blue.svg", flags: 'g') {
-        fileset(dir: project.projectDir, includes: 'README.md')
+task replaceVersionInReadme {
+    doLast {
+        ant.replaceregexp(match: 'com\\.chibatching\\.kotpref:(.+):([0-9\\.]+)', replace: "com.chibatching.kotpref:\\1:${Versions.versionName}", flags: 'g') {
+            fileset(dir: project.projectDir, includes: 'README.md')
+        }
+        ant.replaceregexp(match: 'android\\.arch\\.lifecycle:livedata:([0-9\\.]+)', replace: "android.arch.lifecycle:livedata:${Versions.arch}", flags: 'g') {
+            fileset(dir: project.projectDir, includes: 'README.md')
+        }
+        ant.replaceregexp(match: 'com\\.google\\.code\\.gson:gson:([0-9\\.]+)', replace: "com.google.code.gson:gson:${Versions.gson}", flags: 'g') {
+            fileset(dir: project.projectDir, includes: 'README.md')
+        }
+        ant.replaceregexp(match: 'org\\.jetbrains\\.kotlin:kotlin-reflect:([0-9\\.]+)', replace: "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}", flags: 'g') {
+            fileset(dir: project.projectDir, includes: 'README.md')
+        }
+        ant.replaceregexp(match: 'kotlin-([0-9\\.]+)-blue\\.svg', replace: "kotlin-${Versions.kotlin}-blue.svg", flags: 'g') {
+            fileset(dir: project.projectDir, includes: 'README.md')
+        }
     }
 }
