@@ -2,7 +2,7 @@ package plugin
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.kotlin.dsl.closureOf
+import org.gradle.kotlin.dsl.getByName
 import org.gradle.testing.jacoco.plugins.JacocoPluginExtension
 import org.gradle.testing.jacoco.tasks.JacocoReport
 
@@ -14,7 +14,7 @@ class BuildSettingHelperPlugin : Plugin<Project> {
     }
 
     private fun addJacocoSettings(project: Project) {
-        project.closureOf<JacocoPluginExtension> {
+        project.extensions.getByName<JacocoPluginExtension>("jacoco").apply {
             toolVersion = "0.8.0"
         }
         project.tasks.create("jacocoTestReport", JacocoReport::class.java) {
