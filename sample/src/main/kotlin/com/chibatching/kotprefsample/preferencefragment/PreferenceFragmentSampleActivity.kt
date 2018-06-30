@@ -11,4 +11,12 @@ class PreferenceFragmentSampleActivity : AppCompatActivity() {
         setContentView(R.layout.activity_preference_fragment_sample)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        if (super.onSupportNavigateUp()) {
+            return true
+        }
+        finish()
+        return true
+    }
 }

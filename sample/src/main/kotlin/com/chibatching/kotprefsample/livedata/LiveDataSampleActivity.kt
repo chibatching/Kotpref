@@ -24,4 +24,12 @@ class LiveDataSampleActivity : AppCompatActivity() {
                 textView.text = it
             })
     }
+
+    override fun onSupportNavigateUp(): Boolean {
+        if (super.onSupportNavigateUp()) {
+            return true
+        }
+        finish()
+        return true
+    }
 }
