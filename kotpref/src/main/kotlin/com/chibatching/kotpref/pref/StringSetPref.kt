@@ -3,6 +3,7 @@ package com.chibatching.kotpref.pref
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
 import android.os.Build
+import android.os.SystemClock
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.execute
 import kotlin.properties.ReadOnlyProperty
@@ -30,7 +31,7 @@ internal class StringSetPref(
                 prefSet ?: default.invoke().toMutableSet(),
                 key ?: property.name
             )
-            lastUpdate = System.currentTimeMillis()
+            lastUpdate = SystemClock.uptimeMillis()
         }
         return stringSet!!
     }
