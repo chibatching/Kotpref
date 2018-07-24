@@ -21,4 +21,7 @@ object Versions {
     internal const val bintrayGradlePlugin = "1.8.1"
     internal const val androidMavenGradlePlugin = "2.1"
     internal const val dokkaAndroidGradlePlugin = "0.9.17"
+
+    internal const val mockito = "2.19.0"
+    internal const val mockitoKotlin = "1.6.0"
 }

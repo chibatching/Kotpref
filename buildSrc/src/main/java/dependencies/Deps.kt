@@ -28,4 +28,9 @@ object Deps {
         val appCompatV7 = "com.android.support:appcompat-v7:${Versions.supportLibrary}"
         val preferenceV7 = "com.android.support:preference-v7:${Versions.supportLibrary}"
     }
+
+    object Mockito {
+        val core = "org.mockito:mockito-core:${Versions.mockito}"
+        val kotlin = "com.nhaarman:mockito-kotlin-kt1.1:${Versions.mockitoKotlin}"
+    }
 }
