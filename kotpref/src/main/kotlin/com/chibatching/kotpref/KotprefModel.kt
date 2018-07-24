@@ -5,6 +5,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
+import android.os.SystemClock
 import com.chibatching.kotpref.pref.*
 import java.util.*
 import kotlin.properties.ReadOnlyProperty
@@ -294,7 +295,7 @@ abstract class KotprefModel {
     @SuppressLint("CommitPrefEdits")
     fun beginBulkEdit() {
         kotprefInTransaction = true
-        kotprefTransactionStartTime = System.currentTimeMillis()
+        kotprefTransactionStartTime = SystemClock.uptimeMillis()
         kotprefEditor = kotprefPreference.KotprefEditor(kotprefPreference.edit())
     }
 

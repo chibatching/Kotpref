@@ -1,6 +1,7 @@
 package com.chibatching.kotpref.pref
 
 import android.content.SharedPreferences
+import android.os.SystemClock
 import com.chibatching.kotpref.KotprefModel
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
@@ -19,7 +20,7 @@ abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, Pref
         }
         if (lastUpdate < thisRef.kotprefTransactionStartTime) {
             transactionData = getFromPreference(property, thisRef.kotprefPreference)
-            lastUpdate = System.currentTimeMillis()
+            lastUpdate = SystemClock.uptimeMillis()
         }
         @Suppress("UNCHECKED_CAST")
         return transactionData as T
@@ -28,7 +29,7 @@ abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, Pref
     override operator fun setValue(thisRef: KotprefModel, property: KProperty<*>, value: T) {
         if (thisRef.kotprefInTransaction) {
             transactionData = value
-            lastUpdate = System.currentTimeMillis()
+            lastUpdate = SystemClock.uptimeMillis()
             setToEditor(property, value, thisRef.kotprefEditor!!)
         } else {
             setToPreference(property, value, thisRef.kotprefPreference)
