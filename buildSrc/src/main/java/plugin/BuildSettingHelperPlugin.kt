@@ -1,5 +1,6 @@
 package plugin
 
+import dependencies.Versions
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.kotlin.dsl.getByName
@@ -15,7 +16,7 @@ class BuildSettingHelperPlugin : Plugin<Project> {
 
     private fun addJacocoSettings(project: Project) {
         project.extensions.getByName<JacocoPluginExtension>("jacoco").apply {
-            toolVersion = "0.8.0"
+            toolVersion = Versions.jacoco
         }
         project.tasks.create("jacocoTestReport", JacocoReport::class.java) {
             dependsOn("testDebugUnitTest")
