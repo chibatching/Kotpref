@@ -33,8 +33,19 @@ inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(default: T? 
  * @param default default enum value
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Enum<*>> KotprefModel.enumNullableValuePref(default: T? = null, key: Int, commitByDefault: Boolean = commitAllPropertiesByDefault)
+inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(default: T? = null, key: Int, commitByDefault: Boolean = commitAllPropertiesByDefault)
         : ReadWriteProperty<KotprefModel, T?> = EnumNullableValuePref(T::class, default, context.getString(key), commitByDefault)
+
+/**
+ * Delegate enum-based shared preferences property storing and recalling by the enum value's name as a string.
+ * @param default default enum value
+ * @param key custom preferences key resource id
+ */
+@Deprecated("This method is deprecated. Use nullableEnumValuePref",
+    ReplaceWith("nullableEnumValuePref(default, key, commitByDefault)")
+)
+inline fun <reified T : Enum<*>> KotprefModel.enumNullableValuePref(default: T? = null, key: Int, commitByDefault: Boolean = commitAllPropertiesByDefault)
+        : ReadWriteProperty<KotprefModel, T?> = nullableEnumValuePref(default, key, commitByDefault)
 
 /**
  * Delegate enum-based shared preferences property storing and recalling by the enum value's ordinal as an integer.
