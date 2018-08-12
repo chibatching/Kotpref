@@ -1,10 +1,12 @@
 package com.chibatching.kotpref
 
+import android.annotation.SuppressLint
 import android.content.Context
 
 /**
  * Kotpref: SharedPreference delegation for Kotlin
  */
+@SuppressLint("StaticFieldLeak")
 object Kotpref {
 
     /**
