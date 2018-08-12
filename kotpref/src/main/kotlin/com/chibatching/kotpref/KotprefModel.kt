@@ -76,8 +76,7 @@ abstract class KotprefModel {
         default: String = "",
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, String> = StringPref(default, key, commitByDefault)
+    ): ReadWriteProperty<KotprefModel, String> = StringPref(default, key, commitByDefault)
 
     /**
      * Delegate string shared preferences property.
@@ -89,8 +88,7 @@ abstract class KotprefModel {
         default: String = "",
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, String> =
+    ): ReadWriteProperty<KotprefModel, String> =
         stringPref(default, context.getString(key), commitByDefault)
 
     /**
@@ -103,8 +101,7 @@ abstract class KotprefModel {
         default: String? = null,
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, String?> =
+    ): ReadWriteProperty<KotprefModel, String?> =
         StringNullablePref(default, key, commitByDefault)
 
     /**
@@ -117,8 +114,7 @@ abstract class KotprefModel {
         default: String? = null,
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, String?> =
+    ): ReadWriteProperty<KotprefModel, String?> =
         nullableStringPref(default, context.getString(key), commitByDefault)
 
     /**
@@ -131,8 +127,7 @@ abstract class KotprefModel {
         default: Int = 0,
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Int> = IntPref(default, key, commitByDefault)
+    ): ReadWriteProperty<KotprefModel, Int> = IntPref(default, key, commitByDefault)
 
     /**
      * Delegate int shared preferences property.
@@ -144,8 +139,7 @@ abstract class KotprefModel {
         default: Int = 0,
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Int> =
+    ): ReadWriteProperty<KotprefModel, Int> =
         intPref(default, context.getString(key), commitByDefault)
 
     /**
@@ -158,8 +152,7 @@ abstract class KotprefModel {
         default: Long = 0L,
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Long> = LongPref(default, key, commitByDefault)
+    ): ReadWriteProperty<KotprefModel, Long> = LongPref(default, key, commitByDefault)
 
     /**
      * Delegate long shared preferences property.
@@ -171,8 +164,7 @@ abstract class KotprefModel {
         default: Long = 0L,
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Long> =
+    ): ReadWriteProperty<KotprefModel, Long> =
         longPref(default, context.getString(key), commitByDefault)
 
     /**
@@ -198,8 +190,7 @@ abstract class KotprefModel {
         default: Float = 0F,
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Float> =
+    ): ReadWriteProperty<KotprefModel, Float> =
         floatPref(default, context.getString(key), commitByDefault)
 
     /**
@@ -212,8 +203,8 @@ abstract class KotprefModel {
         default: Boolean = false,
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Boolean> = BooleanPref(default, key, commitByDefault)
+    ): ReadWriteProperty<KotprefModel, Boolean> =
+        BooleanPref(default, key, commitByDefault)
 
     /**
      * Delegate boolean shared preferences property.
@@ -225,8 +216,7 @@ abstract class KotprefModel {
         default: Boolean = false,
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Boolean> =
+    ): ReadWriteProperty<KotprefModel, Boolean> =
         booleanPref(default, context.getString(key), commitByDefault)
 
     /**
@@ -240,8 +230,7 @@ abstract class KotprefModel {
         default: Set<String> = LinkedHashSet<String>(),
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> =
+    ): ReadOnlyProperty<KotprefModel, MutableSet<String>> =
         stringSetPref(key, commitByDefault) { default }
 
     /**
@@ -255,8 +244,7 @@ abstract class KotprefModel {
         default: Set<String> = LinkedHashSet<String>(),
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> =
+    ): ReadOnlyProperty<KotprefModel, MutableSet<String>> =
         stringSetPref(context.getString(key), commitByDefault) { default }
 
     /**
@@ -270,8 +258,7 @@ abstract class KotprefModel {
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault,
         default: () -> Set<String>
-    )
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> =
+    ): ReadOnlyProperty<KotprefModel, MutableSet<String>> =
         StringSetPref(default, key, commitByDefault)
 
     /**
@@ -285,8 +272,7 @@ abstract class KotprefModel {
         key: Int,
         commitByDefault: Boolean = commitAllPropertiesByDefault,
         default: () -> Set<String>
-    )
-            : ReadOnlyProperty<KotprefModel, MutableSet<String>> =
+    ): ReadOnlyProperty<KotprefModel, MutableSet<String>> =
         stringSetPref(context.getString(key), commitByDefault, default)
 
     /**
