@@ -12,15 +12,24 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 
 
-abstract class KotprefModel {
+abstract class KotprefModel(
+    private val contextProvider: ContextProvider = StaticContextProvider
+) {
+
+    constructor(context: Context) : this(object : ContextProvider {
+        override fun getApplicationContext(): Context {
+            return context.applicationContext
+        }
+    })
 
     internal var kotprefInTransaction: Boolean = false
     internal var kotprefTransactionStartTime: Long = 0
 
     /**
-     * Context set to Kotpref
+     * Application Context
      */
-    val context: Context by lazy { Kotpref.context!! }
+    val context: Context
+        get() = contextProvider.getApplicationContext()
 
     /**
      * Preference file name

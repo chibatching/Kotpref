@@ -21,9 +21,8 @@ abstract class BasePrefTest(private val commitAllProperties: Boolean) {
     @Before
     fun setUp() {
         context = RuntimeEnvironment.application
-        Kotpref.init(context)
-        example = Example(commitAllProperties)
-        customExample = CustomExample(commitAllProperties)
+        example = Example(commitAllProperties, context)
+        customExample = CustomExample(commitAllProperties, context)
 
         examplePref = example.preferences
         examplePref.edit().clear().commit()
