@@ -2,29 +2,29 @@
 
 Android SharedPreference delegation for Kotlin.
 
-[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.2.21-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.2.60-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
 
 ```groovy
 dependencies {
     // core
-    implementation 'com.chibatching.kotpref:kotpref:2.5.0'
+    implementation 'com.chibatching.kotpref:kotpref:2.6.0'
   
     // optional, auto initialization module
-    implementation 'com.chibatching.kotpref:initializer:2.5.0'
+    implementation 'com.chibatching.kotpref:initializer:2.6.0'
   
     // optional, support saving enum value and ordinal
-    implementation 'com.chibatching.kotpref:enum-support:2.5.0'
+    implementation 'com.chibatching.kotpref:enum-support:2.6.0'
   
     // optional, support saving json string through Gson
-    implementation 'com.chibatching.kotpref:gson-support:2.5.0'
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.chibatching.kotpref:gson-support:2.6.0'
+    implementation 'com.google.code.gson:gson:2.8.5'
   
     // optional, support LiveData observable preference
-    implementation 'com.chibatching.kotpref:livedata-support:2.5.0'
-    implementation 'android.arch.lifecycle:livedata:1.1.0'
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.21"
+    implementation 'com.chibatching.kotpref:livedata-support:2.6.0'
+    implementation 'android.arch.lifecycle:livedata:1.1.1'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.60"
 }
 ```
 
