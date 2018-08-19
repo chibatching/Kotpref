@@ -1,9 +1,10 @@
 package com.chibatching.kotpref
 
+import android.content.Context
 import java.util.*
 
 
-class Example(private val commitAllProperties: Boolean) : KotprefModel() {
+class Example(private val commitAllProperties: Boolean, context: Context) : KotprefModel(context) {
     override val commitAllPropertiesByDefault: Boolean
         get() = commitAllProperties
 

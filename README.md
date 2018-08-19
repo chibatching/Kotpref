@@ -64,6 +64,19 @@ Kotpref.init(context)
 
 or use auto initializer module.
 
+### Injectable Context
+
+If you don't want to use singleton context because of unit test or etc.., you can use secondary 
+constructor of KotprefModel to inject context.  
+
+```kotlin
+class InjectableContextSamplePref(context: Context) : KotprefModel(context) {
+    var sampleData by stringPref()
+}
+```
+
+If you set context to all your model, you don't need call `Kotpref.init(context)` and don't use auto initializer module.
+
 ### Read and Write
 
 ```kotlin
