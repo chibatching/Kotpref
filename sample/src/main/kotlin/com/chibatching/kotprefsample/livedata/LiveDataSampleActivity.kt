@@ -1,8 +1,8 @@
 package com.chibatching.kotprefsample.livedata
 
-import android.arch.lifecycle.Observer
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import com.chibatching.kotpref.livedata.asLiveData
 import com.chibatching.kotprefsample.R
 import kotlinx.android.synthetic.main.activity_live_data_sample.*
