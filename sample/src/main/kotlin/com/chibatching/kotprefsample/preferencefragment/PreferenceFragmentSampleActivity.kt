@@ -1,7 +1,7 @@
 package com.chibatching.kotprefsample.preferencefragment
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.chibatching.kotprefsample.R
 
 class PreferenceFragmentSampleActivity : AppCompatActivity() {

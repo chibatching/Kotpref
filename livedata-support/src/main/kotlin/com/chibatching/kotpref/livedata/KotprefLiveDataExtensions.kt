@@ -1,7 +1,7 @@
 package com.chibatching.kotpref.livedata
 
-import android.arch.lifecycle.LiveData
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.pref.PreferenceKey
 import kotlin.reflect.KProperty0

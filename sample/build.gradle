@@ -33,9 +33,8 @@ android {
 }
 
 dependencies {
-    implementation Deps.SupportLibrary.supportV4
-    implementation Deps.SupportLibrary.appCompatV7
-    implementation Deps.SupportLibrary.preferenceV7
+    implementation Deps.AndroidX.appCompat
+    implementation Deps.AndroidX.preference
     implementation Deps.Kotlin.stdlib
 
     // core

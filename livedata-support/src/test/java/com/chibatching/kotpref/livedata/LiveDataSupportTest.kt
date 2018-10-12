@@ -1,8 +1,8 @@
 package com.chibatching.kotpref.livedata
 
-import android.arch.lifecycle.Observer
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.Observer
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
 import org.assertj.core.api.Assertions.assertThat

@@ -20,13 +20,12 @@ object Deps {
     }
 
     object Arch {
-        val liveData = "android.arch.lifecycle:livedata:${Versions.arch}"
+        val liveData = "androidx.lifecycle:lifecycle-livedata:${Versions.liveData}"
     }
 
-    object SupportLibrary {
-        val supportV4 = "com.android.support:support-v4:${Versions.supportLibrary}"
-        val appCompatV7 = "com.android.support:appcompat-v7:${Versions.supportLibrary}"
-        val preferenceV7 = "com.android.support:preference-v7:${Versions.supportLibrary}"
+    object AndroidX {
+        val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
+        val preference = "androidx.preference:preference:${Versions.AndroidX.preference}"
     }
 
     object Mockito {

@@ -14,8 +14,7 @@ object Versions {
     internal const val robolectric = "3.8"
     internal const val assertj = "3.11.1"
     internal const val gson = "2.8.5"
-    internal const val arch = "1.1.1"
-    internal const val supportLibrary = "27.1.1"
+    internal const val liveData = "2.0.0"
 
     internal const val androidGradlePlugin = "3.2.1"
     internal const val bintrayGradlePlugin = "1.8.4"
@@ -25,4 +24,9 @@ object Versions {
     internal const val jacoco = "0.8.2"
     internal const val mockito = "2.23.0"
     internal const val mockitoKotlin = "1.6.0"
+
+    internal object AndroidX {
+        internal const val appCompat = "1.0.0"
+        internal const val preference = "1.0.0"
+    }
 }
