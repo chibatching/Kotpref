@@ -7,7 +7,6 @@ object Versions {
     const val targetSdk = 28
     const val minSdk = 9
     const val minSdkWithSupportLibrary = 14
-    const val buildTools = "28.0.3"
 
     internal const val kotlin = "1.2.71"
     internal const val junit = "4.12"
