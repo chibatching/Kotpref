@@ -7,7 +7,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion Versions.targetSdk
-    buildToolsVersion Versions.buildTools
 
     defaultConfig {
         applicationId "com.chibatching.kotprefsample"
