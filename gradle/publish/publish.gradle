@@ -29,6 +29,7 @@ bintray {
         licenses = ['Apache-2.0']
         labels = ['aar', 'android', 'kotlin']
         publicDownloadNumbers = true
+        githubRepo = 'chibatching/Kotpref'
     }
 }
 
@@ -57,38 +58,33 @@ artifacts {
     archives sourcesJar
 }
 
-uploadArchives {
-    repositories.mavenDeployer {
-        repository(url: "https://oss.jfrog.org/oss-snapshot-local/") {
-            authentication(userName: USER, password: KEY)
-        }
-    }
-}
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            artifactId archivesBaseName
+            name moduleName
 
-[install.repositories.mavenInstaller, uploadArchives.repositories.mavenDeployer]*.pom*.whenConfigured { pom ->
-    project {
-        packaging 'aar'
-
-        name moduleName
-        url SITE_URL
-
-        licenses {
-            license {
-                name 'The Apache Software License, Version 2.0'
-                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-            }
-        }
-        developers {
-            developer {
-                id 'chibatching'
-                name 'Takao Chiba'
-                email 'chibatching.apps@gmail.com'
-            }
-        }
-        scm {
-            connection GIT_URL
-            developerConnection GIT_URL
+            packaging 'aar'
             url SITE_URL
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                }
+            }
+            developers {
+                developer {
+                    id 'chibatching'
+                    name 'Takao Chiba'
+                    email 'chibatching.apps@gmail.com'
+                }
+            }
+            scm {
+                connection GIT_URL
+                developerConnection GIT_URL
+                url SITE_URL
+            }
         }
     }
 }
