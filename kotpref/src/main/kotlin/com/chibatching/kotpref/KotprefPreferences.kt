@@ -7,15 +7,15 @@ import com.chibatching.kotpref.pref.StringSetPref
 import java.util.*
 
 
-internal class KotprefPreferences(
-    val preferences: SharedPreferences
+open class KotprefPreferences(
+  public  val preferences: SharedPreferences
 ) : SharedPreferences by preferences {
 
-    override fun edit(): SharedPreferences.Editor {
+  public  override fun edit(): SharedPreferences.Editor {
         return KotprefEditor(preferences.edit())
     }
 
-    internal inner class KotprefEditor(
+    internal open class KotprefEditor(
         val editor: SharedPreferences.Editor
     ) : SharedPreferences.Editor by editor {
 

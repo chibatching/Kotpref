@@ -26,6 +26,7 @@ object Deps {
     object AndroidX {
         val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         val preference = "androidx.preference:preference:${Versions.AndroidX.preference}"
+        val annotationsLib = "androidx.annotation:annotation:${Versions.AndroidX.annotation}"
     }
 
     object Mockito {

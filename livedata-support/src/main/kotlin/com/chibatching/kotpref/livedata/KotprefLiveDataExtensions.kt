@@ -25,11 +25,12 @@ fun <T> KotprefModel.asLiveData(property: KProperty0<T>): LiveData<T> {
         }
 
         override fun onActive() {
-            this@asLiveData.preferences.registerOnSharedPreferenceChangeListener(this)
+
+            this@asLiveData.kotprefPreference.registerOnSharedPreferenceChangeListener(this)
         }
 
         override fun onInactive() {
-            this@asLiveData.preferences.unregisterOnSharedPreferenceChangeListener(this)
+            this@asLiveData.kotprefPreference.unregisterOnSharedPreferenceChangeListener(this)
         }
     }
 }

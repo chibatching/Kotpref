@@ -32,7 +32,7 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
     fun setUp() {
         example = Example(commitAllProperties, RuntimeEnvironment.application)
 
-        pref = example.preferences
+        pref = example.kotprefPreference
         pref.edit().clear().commit()
     }
 

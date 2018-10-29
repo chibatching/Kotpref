@@ -27,5 +27,6 @@ object Versions {
     internal object AndroidX {
         internal const val appCompat = "1.0.0"
         internal const val preference = "1.0.0"
+        internal const val annotation = "1.0.0"
     }
 }
