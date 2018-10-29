@@ -61,7 +61,7 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
         Kotpref.gson = Gson()
         example = Example(commitAllProperties)
 
-        pref = example.preferences
+        pref = example.kotprefPreference
         pref.edit().clear().commit()
     }
 
