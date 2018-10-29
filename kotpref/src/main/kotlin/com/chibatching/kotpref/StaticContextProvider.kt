@@ -3,7 +3,7 @@ package com.chibatching.kotpref
 import android.content.Context
 
 
-internal object StaticContextProvider : ContextProvider {
+ object StaticContextProvider : ContextProvider {
 
     private var staticContext: Context? = null
 

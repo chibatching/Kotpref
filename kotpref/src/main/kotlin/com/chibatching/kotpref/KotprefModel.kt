@@ -50,7 +50,7 @@ abstract class KotprefModel(
      * Internal shared preferences.
      * This property will be initialized on use.
      */
-    internal val kotprefPreference: KotprefPreferences by lazy {
+    open val kotprefPreference: KotprefPreferences by lazy {
         KotprefPreferences(context.getSharedPreferences(kotprefName, kotprefMode))
     }
 
@@ -58,13 +58,6 @@ abstract class KotprefModel(
      * Internal shared preferences editor.
      */
     internal var kotprefEditor: KotprefPreferences.KotprefEditor? = null
-
-    /**
-     * SharedPreferences instance exposed.
-     * Use carefully when during bulk edit, it may cause inconsistent with internal data of Kotpref.
-     */
-    val preferences: SharedPreferences
-        get() = kotprefPreference.preferences
 
     /**
      * Clear all preferences in this model
@@ -288,10 +281,10 @@ abstract class KotprefModel(
      * Begin bulk edit mode. You must commit or cancel after bulk edit finished.
      */
     @SuppressLint("CommitPrefEdits")
-    fun beginBulkEdit() {
+    open fun beginBulkEdit() {
         kotprefInTransaction = true
         kotprefTransactionStartTime = SystemClock.uptimeMillis()
-        kotprefEditor = kotprefPreference.KotprefEditor(kotprefPreference.edit())
+        kotprefEditor = KotprefPreferences.KotprefEditor(kotprefPreference.edit())
     }
 
     /**
