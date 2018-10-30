@@ -33,7 +33,7 @@ class LiveDataSupportTest {
         Kotpref.init(context)
         example = Example()
 
-        pref = example.preferences
+        pref = example.kotprefPreference
         pref.edit().clear().commit()
     }
 
