@@ -54,6 +54,31 @@ enum class GameLevel {
 }
 ```
 
+### Declare preference model with encryption
+
+```kotlin
+object UserInfo : KotprefEncryptedModel() {
+    var gameLevel by enumValuePref(GameLevel.NORMAL)
+    var name by stringPref()
+    var code by nullableStringPref()
+    var age by intPref(default = 14)
+    var highScore by longPref()
+    var rate by floatPref()
+    val prizes by stringSetPref {
+        val set = TreeSet<String>()
+        set.add("Beginner")
+        return@stringSetPref set
+    }
+}
+
+enum class GameLevel {
+    EASY,
+    NORMAL,
+    HARD
+}
+```
+
+
 ### Set up
 
 Pass the application context to Kotpref

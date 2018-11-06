@@ -24,10 +24,10 @@ abstract class BasePrefTest(private val commitAllProperties: Boolean) {
         example = Example(commitAllProperties, context)
         customExample = CustomExample(commitAllProperties, context)
 
-        examplePref = example.preferences
+        examplePref = example.kotprefPreference
         examplePref.edit().clear().commit()
 
-        customPref = customExample.preferences
+        customPref = customExample.kotprefPreference
         customPref.edit().clear().commit()
     }
 
