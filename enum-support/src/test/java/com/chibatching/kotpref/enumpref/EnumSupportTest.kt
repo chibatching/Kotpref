@@ -2,7 +2,7 @@ package com.chibatching.kotpref.enumpref
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.chibatching.kotpref.Kotpref
+import androidx.test.core.app.ApplicationProvider
 import com.chibatching.kotpref.KotprefModel
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -10,10 +10,10 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
+import org.robolectric.annotation.Config
 import java.util.*
 
-
+@Config(manifest = Config.NONE)
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class EnumSupportTest(private val commitAllProperties: Boolean) {
 
@@ -25,7 +25,8 @@ class EnumSupportTest(private val commitAllProperties: Boolean) {
         }
     }
 
-    class Example(private val commitAllProperties: Boolean) : KotprefModel() {
+    class Example(private val commitAllProperties: Boolean) :
+        KotprefModel(ApplicationProvider.getApplicationContext<Context>()) {
         override val commitAllPropertiesByDefault: Boolean
             get() = commitAllProperties
 
@@ -34,14 +35,11 @@ class EnumSupportTest(private val commitAllProperties: Boolean) {
         var testEnumOrdinal by enumOrdinalPref(ExampleEnum.FIRST)
     }
 
-    lateinit var example: Example
-    lateinit var context: Context
-    lateinit var pref: SharedPreferences
+    private lateinit var example: Example
+    private lateinit var pref: SharedPreferences
 
     @Before
     fun setUp() {
-        context = RuntimeEnvironment.application
-        Kotpref.init(context)
         example = Example(commitAllProperties)
 
         pref = example.preferences
@@ -74,7 +72,12 @@ class EnumSupportTest(private val commitAllProperties: Boolean) {
     fun setEnumNullableValuePrefCausePreferenceUpdate() {
         example.testEnumNullableValue = ExampleEnum.SECOND
         assertThat(example.testEnumNullableValue).isEqualTo(ExampleEnum.SECOND)
-        assertThat(example.testEnumNullableValue!!.name).isEqualTo(pref.getString("testEnumNullableValue", ""))
+        assertThat(example.testEnumNullableValue!!.name).isEqualTo(
+            pref.getString(
+                "testEnumNullableValue",
+                ""
+            )
+        )
     }
 
     @Test

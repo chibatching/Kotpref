@@ -2,6 +2,7 @@ package com.chibatching.kotpref.gsonpref
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.test.core.app.ApplicationProvider
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
 import com.google.gson.Gson
@@ -12,7 +13,6 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import java.util.*
 
 
@@ -39,7 +39,8 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
             }.time
     }
 
-    class Example(private val commitAllProperties: Boolean) : KotprefModel() {
+    class Example(private val commitAllProperties: Boolean) :
+        KotprefModel(ApplicationProvider.getApplicationContext<Context>()) {
         override val commitAllPropertiesByDefault: Boolean
             get() = commitAllProperties
 
@@ -50,14 +51,11 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
         var nullableContent: Content? by gsonNullablePref()
     }
 
-    lateinit var example: Example
-    lateinit var context: Context
-    lateinit var pref: SharedPreferences
+    private lateinit var example: Example
+    private lateinit var pref: SharedPreferences
 
     @Before
     fun setUp() {
-        context = RuntimeEnvironment.application
-        Kotpref.init(context)
         Kotpref.gson = Gson()
         example = Example(commitAllProperties)
 

@@ -33,10 +33,12 @@ android {
     }
     testOptions {
         unitTests {
-            includeAndroidResources = true
             all {
-                jacoco.includeNoLocationClasses = true
+                jacoco {
+                    includeNoLocationClasses = true
+                }
             }
+            includeAndroidResources = true
         }
     }
 }
@@ -47,6 +49,7 @@ dependencies {
     testImplementation Deps.Kotlin.stdlib
     testImplementation Deps.junit
     testImplementation Deps.robolectric
+    testImplementation Deps.AndroidX.test
     testImplementation Deps.assertj
 }
 

@@ -2,12 +2,11 @@ package com.chibatching.kotpref.pref
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.test.core.app.ApplicationProvider
 import com.chibatching.kotpref.CustomExample
 import com.chibatching.kotpref.Example
-import com.chibatching.kotpref.Kotpref
 import org.junit.After
 import org.junit.Before
-import org.robolectric.RuntimeEnvironment
 
 
 abstract class BasePrefTest(private val commitAllProperties: Boolean) {
@@ -20,7 +19,7 @@ abstract class BasePrefTest(private val commitAllProperties: Boolean) {
 
     @Before
     fun setUp() {
-        context = RuntimeEnvironment.application
+        context = ApplicationProvider.getApplicationContext()
         example = Example(commitAllProperties, context)
         customExample = CustomExample(commitAllProperties, context)
 

@@ -3,7 +3,7 @@ package com.chibatching.kotpref.livedata
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.lifecycle.Observer
-import com.chibatching.kotpref.Kotpref
+import androidx.test.core.app.ApplicationProvider
 import com.chibatching.kotpref.KotprefModel
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
@@ -11,27 +11,23 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
 
 @RunWith(RobolectricTestRunner::class)
 class LiveDataSupportTest {
-    class Example : KotprefModel() {
+    class Example(context: Context) : KotprefModel(context) {
         var someProperty by stringPref("default")
         var customKeyProperty by intPref(8, "custom_key")
     }
 
     lateinit var example: Example
-    lateinit var context: Context
     lateinit var pref: SharedPreferences
 
     @Before
     fun setUp() {
-        context = RuntimeEnvironment.application
-        Kotpref.init(context)
-        example = Example()
+        example = Example(ApplicationProvider.getApplicationContext())
 
         pref = example.preferences
         pref.edit().clear().commit()

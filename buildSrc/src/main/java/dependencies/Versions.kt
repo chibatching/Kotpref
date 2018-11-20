@@ -10,7 +10,7 @@ object Versions {
 
     internal const val kotlin = "1.3.10"
     internal const val junit = "4.12"
-    internal const val robolectric = "3.8"
+    internal const val robolectric = "4.0.2"
     internal const val assertj = "3.11.1"
     internal const val gson = "2.8.5"
     internal const val liveData = "2.0.0"
@@ -27,5 +27,6 @@ object Versions {
     internal object AndroidX {
         internal const val appCompat = "1.0.0"
         internal const val preference = "1.0.0"
+        internal const val test = "1.0.0"
     }
 }
