@@ -30,10 +30,13 @@ android {
         main.java.srcDirs += 'src/main/kotlin'
     }
     testOptions {
-        unitTests.all {
-            jacoco {
-                includeNoLocationClasses = true
+        unitTests {
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
             }
+            includeAndroidResources = true
         }
     }
 }
@@ -45,6 +48,7 @@ dependencies {
     testImplementation Deps.Kotlin.stdlib
     testImplementation Deps.junit
     testImplementation Deps.robolectric
+    testImplementation Deps.AndroidX.test
     testImplementation Deps.assertj
 }
 

@@ -3,13 +3,13 @@ package com.chibatching.kotpref
 import android.annotation.TargetApi
 import android.content.SharedPreferences
 import android.os.Build
+import androidx.test.core.app.ApplicationProvider
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
-import org.robolectric.RuntimeEnvironment
 import org.robolectric.annotation.Config
 import java.util.*
 
@@ -30,7 +30,7 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
 
     @Before
     fun setUp() {
-        example = Example(commitAllProperties, RuntimeEnvironment.application)
+        example = Example(commitAllProperties, ApplicationProvider.getApplicationContext())
 
         pref = example.preferences
         pref.edit().clear().commit()

@@ -26,6 +26,7 @@ object Deps {
     object AndroidX {
         val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         val preference = "androidx.preference:preference:${Versions.AndroidX.preference}"
+        val test = "androidx.test:core:${Versions.AndroidX.test}"
     }
 
     object Mockito {
