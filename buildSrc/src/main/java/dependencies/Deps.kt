@@ -31,6 +31,6 @@ object Deps {
 
     object Mockito {
         val core = "org.mockito:mockito-core:${Versions.mockito}"
-        val kotlin = "com.nhaarman:mockito-kotlin-kt1.1:${Versions.mockitoKotlin}"
+        val kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
     }
 }
