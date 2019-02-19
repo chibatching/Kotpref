@@ -17,6 +17,7 @@ object Deps {
         val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
         val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
         val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
     }
 
     object Arch {

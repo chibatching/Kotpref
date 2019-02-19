@@ -27,6 +27,12 @@
             tools:targetApi="jelly_bean"
         />
         <activity
+            android:name=".coroutines.CoroutinesSampleActivity"
+            android:label="@string/coroutines_sample"
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean"
+        />
+        <activity
             android:name=".preferencefragment.PreferenceFragmentSampleActivity"
             android:label="@string/preference_fragment_sample"
             android:parentActivityName=".MainActivity"

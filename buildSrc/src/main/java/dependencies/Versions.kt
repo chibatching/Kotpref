@@ -14,6 +14,7 @@ object Versions {
     internal const val assertj = "3.11.1"
     internal const val gson = "2.8.5"
     internal const val liveData = "2.0.0"
+    internal const val coroutines = "1.1.1"
 
     internal const val androidGradlePlugin = "3.3.0"
     internal const val bintrayGradlePlugin = "1.8.4"

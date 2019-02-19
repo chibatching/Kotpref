@@ -54,6 +54,11 @@ dependencies {
     implementation Deps.Arch.liveData
     implementation Deps.Kotlin.reflect
 
+    // Coroutines support
+    implementation project(":coroutines-support")
+    implementation Deps.Kotlin.coroutines
+    implementation Deps.Kotlin.reflect
+
     // For test
     testImplementation Deps.junit
     testImplementation Deps.robolectric

@@ -3,6 +3,7 @@
 
     <string name="preference_fragment_sample">PreferenceFragment sample</string>
     <string name="live_data_sample">LiveData sample</string>
+    <string name="coroutines_sample">Coroutines sample</string>
     <string name="injectable_context_sample">LiveData sample</string>
     <string name="save">Save</string>
 

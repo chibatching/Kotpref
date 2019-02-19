@@ -1,0 +1,60 @@
+import dependencies.Deps
+import dependencies.Versions
+import plugin.BuildSettingHelperPlugin
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
+apply plugin: BuildSettingHelperPlugin
+
+ext.moduleName = 'Kotpref Coroutines support'
+
+android {
+    compileSdkVersion Versions.targetSdk
+
+    defaultConfig {
+        minSdkVersion Versions.minSdkWithSupportLibrary
+        targetSdkVersion Versions.targetSdk
+        versionName Versions.versionName
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled isCi
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    testOptions {
+        unitTests {
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+            }
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    compileOnly Deps.Kotlin.stdlib
+    api project(":kotpref")
+
+    compileOnly Deps.Kotlin.coroutines
+    compileOnly Deps.Kotlin.reflect
+
+    testImplementation Deps.Kotlin.stdlib
+    testImplementation Deps.Kotlin.reflect
+    testImplementation Deps.Kotlin.coroutines
+    testImplementation Deps.junit
+    testImplementation Deps.robolectric
+    testImplementation Deps.AndroidX.test
+    testImplementation Deps.assertj
+}
+
+apply from: "${project.rootDir}/gradle/publish/publish.gradle"

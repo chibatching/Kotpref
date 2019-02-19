@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.chibatching.kotpref.bulk
+import com.chibatching.kotprefsample.coroutines.CoroutinesSampleActivity
 import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
 import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -28,6 +29,10 @@ class MainActivity : AppCompatActivity() {
 
         liveDataSampleButton.setOnClickListener {
             startActivity(Intent(this, LiveDataSampleActivity::class.java))
+        }
+
+        coroutinesSampleButton.setOnClickListener {
+            startActivity(Intent(this, CoroutinesSampleActivity::class.java))
         }
     }
 
