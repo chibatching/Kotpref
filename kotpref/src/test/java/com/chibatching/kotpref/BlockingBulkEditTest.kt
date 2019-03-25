@@ -77,8 +77,9 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         } catch (e: Exception) {
             // no-op
         }
-        assertThat(example.testString).isEqualTo("before")
-        assertThat(pref.getString("testString", "")).isEqualTo("before")
+        assertThat(example.testString)
+            .isEqualTo("before")
+            .isEqualTo(pref.getString("testString", ""))
     }
 
     @Test

@@ -27,8 +27,9 @@ class BooleanPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProp
     @Test
     fun setValueToPreference() {
         example.testBoolean = false
-        assertThat(example.testBoolean).isEqualTo(false)
-        assertThat(example.testBoolean).isEqualTo(examplePref.getBoolean("testBoolean", false))
+        assertThat(example.testBoolean)
+            .isEqualTo(false)
+            .isEqualTo(examplePref.getBoolean("testBoolean", false))
     }
 
     @Test
@@ -39,7 +40,8 @@ class BooleanPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProp
     @Test
     fun useCustomPreferenceKey() {
         customExample.testBoolean = false
-        assertThat(customExample.testBoolean).isEqualTo(false)
-        assertThat(customExample.testBoolean).isEqualTo(customPref.getBoolean(context.getString(R.string.test_custom_boolean), false))
+        assertThat(customExample.testBoolean)
+            .isEqualTo(false)
+            .isEqualTo(customPref.getBoolean(context.getString(R.string.test_custom_boolean), false))
     }
 }

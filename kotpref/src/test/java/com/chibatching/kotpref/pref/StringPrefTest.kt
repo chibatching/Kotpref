@@ -26,8 +26,9 @@ class StringPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPrope
     @Test
     fun setValueToStringPref() {
         example.testString = "Ohayo!"
-        assertThat(example.testString).isEqualTo("Ohayo!")
-        assertThat(example.testString).isEqualTo(examplePref.getString("testString", ""))
+        assertThat(example.testString)
+            .isEqualTo("Ohayo!")
+            .isEqualTo(examplePref.getString("testString", ""))
     }
 
     @Test
@@ -38,7 +39,8 @@ class StringPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPrope
     @Test
     fun useCustomPreferenceKey() {
         customExample.testString = "Hello"
-        assertThat(customExample.testString).isEqualTo("Hello")
-        assertThat(customExample.testString).isEqualTo(customPref.getString(context.getString(R.string.test_custom_string), null))
+        assertThat(customExample.testString)
+            .isEqualTo("Hello")
+            .isEqualTo(customPref.getString(context.getString(R.string.test_custom_string), null))
     }
 }

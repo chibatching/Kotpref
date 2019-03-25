@@ -26,8 +26,9 @@ class LongPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPropert
     @Test
     fun setValueToLongPref() {
         example.testLong = 32942L
-        assertThat(example.testLong).isEqualTo(32942L)
-        assertThat(example.testLong).isEqualTo(examplePref.getLong("testLong", 0L))
+        assertThat(example.testLong)
+            .isEqualTo(32942L)
+            .isEqualTo(examplePref.getLong("testLong", 0L))
     }
 
     @Test
@@ -38,7 +39,8 @@ class LongPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPropert
     @Test
     fun useCustomPreferenceKey() {
         customExample.testLong = 296201L
-        assertThat(customExample.testLong).isEqualTo(296201L)
-        assertThat(customExample.testLong).isEqualTo(customPref.getLong(context.getString(R.string.test_custom_long), 0L))
+        assertThat(customExample.testLong)
+            .isEqualTo(296201L)
+            .isEqualTo(customPref.getLong(context.getString(R.string.test_custom_long), 0L))
     }
 }

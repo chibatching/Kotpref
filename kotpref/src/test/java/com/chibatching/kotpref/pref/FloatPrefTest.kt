@@ -26,8 +26,9 @@ class FloatPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProper
     @Test
     fun setValueToFloatPref() {
         example.testFloat = 78422.214F
-        assertThat(example.testFloat).isEqualTo(78422.214F)
-        assertThat(example.testFloat).isEqualTo(examplePref.getFloat("testFloat", 0f))
+        assertThat(example.testFloat)
+            .isEqualTo(78422.214F)
+            .isEqualTo(examplePref.getFloat("testFloat", 0f))
     }
 
     @Test
@@ -38,7 +39,8 @@ class FloatPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProper
     @Test
     fun useCustomPreferenceKey() {
         customExample.testFloat = 309F
-        assertThat(customExample.testFloat).isEqualTo(309F)
-        assertThat(customExample.testFloat).isEqualTo(customPref.getFloat(context.getString(R.string.test_custom_float), 0F))
+        assertThat(customExample.testFloat)
+            .isEqualTo(309F)
+            .isEqualTo(customPref.getFloat(context.getString(R.string.test_custom_float), 0F))
     }
 }

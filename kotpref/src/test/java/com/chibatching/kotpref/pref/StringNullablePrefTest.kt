@@ -26,8 +26,9 @@ class StringNullablePrefTest(commitAllProperties: Boolean) : BasePrefTest(commit
     @Test
     fun setValueToStringNullablePref() {
         example.testStringNullable = "Ohayo!"
-        assertThat(example.testStringNullable).isEqualTo("Ohayo!")
-        assertThat(example.testStringNullable).isEqualTo(examplePref.getString("testStringNullable", null))
+        assertThat(example.testStringNullable)
+            .isEqualTo("Ohayo!")
+            .isEqualTo(examplePref.getString("testStringNullable", null))
     }
 
     @Test
@@ -38,7 +39,8 @@ class StringNullablePrefTest(commitAllProperties: Boolean) : BasePrefTest(commit
     @Test
     fun useCustomPreferenceKey() {
         customExample.testStringNullable = "Hello"
-        assertThat(customExample.testStringNullable).isEqualTo("Hello")
-        assertThat(customExample.testStringNullable).isEqualTo(customPref.getString(context.getString(R.string.test_custom_nullable_string), null))
+        assertThat(customExample.testStringNullable)
+            .isEqualTo("Hello")
+            .isEqualTo(customPref.getString(context.getString(R.string.test_custom_nullable_string), null))
     }
 }
