@@ -6,7 +6,6 @@ import com.chibatching.kotpref.KotprefModel
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-
 abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, PreferenceKey {
 
     private var lastUpdate: Long = 0

@@ -11,7 +11,6 @@ import java.util.*
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 
-
 abstract class KotprefModel(
     private val contextProvider: ContextProvider = StaticContextProvider
 ) {
@@ -186,8 +185,8 @@ abstract class KotprefModel(
         default: Float = 0F,
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    )
-            : ReadWriteProperty<KotprefModel, Float> = FloatPref(default, key, commitByDefault)
+    ):
+            ReadWriteProperty<KotprefModel, Float> = FloatPref(default, key, commitByDefault)
 
     /**
      * Delegate float shared preferences property.
@@ -318,4 +317,3 @@ abstract class KotprefModel(
         kotprefInTransaction = false
     }
 }
-

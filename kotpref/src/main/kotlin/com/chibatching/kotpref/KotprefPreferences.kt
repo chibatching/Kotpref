@@ -6,7 +6,6 @@ import android.os.Build
 import com.chibatching.kotpref.pref.StringSetPref
 import java.util.*
 
-
 internal class KotprefPreferences(
     val preferences: SharedPreferences
 ) : SharedPreferences by preferences {

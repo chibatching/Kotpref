@@ -5,7 +5,6 @@ import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.gsonpref.gson
 import com.google.gson.Gson
 
-
 class SampleApplication : Application() {
     override fun onCreate() {
         super.onCreate()

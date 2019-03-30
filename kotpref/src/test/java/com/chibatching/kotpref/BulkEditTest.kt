@@ -12,7 +12,6 @@ import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 import java.util.*
 
-
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class BulkEditTest(private val commitAllProperties: Boolean) {
     companion object {

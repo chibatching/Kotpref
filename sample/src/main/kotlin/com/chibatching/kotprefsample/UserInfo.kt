@@ -5,7 +5,6 @@ import com.chibatching.kotpref.enumpref.enumValuePref
 import com.chibatching.kotpref.gsonpref.gsonPref
 import java.util.*
 
-
 object UserInfo : KotprefModel() {
     var gameLevel by enumValuePref(GameLevel.NORMAL)
     var name by stringPref()

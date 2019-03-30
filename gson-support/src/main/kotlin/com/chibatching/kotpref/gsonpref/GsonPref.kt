@@ -8,7 +8,6 @@ import com.chibatching.kotpref.pref.AbstractPref
 import java.lang.reflect.Type
 import kotlin.reflect.KProperty
 
-
 class GsonPref<T : Any>(
     private val targetType: Type,
     private val default: T,

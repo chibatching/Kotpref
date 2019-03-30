@@ -15,7 +15,6 @@ import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 import java.util.*
 
-
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class GsonSupportTest(private val commitAllProperties: Boolean) {
 

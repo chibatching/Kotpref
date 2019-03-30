@@ -3,9 +3,9 @@ package com.chibatching.kotpref
 import android.content.Context
 import java.util.*
 
-
 class CustomExample(
-    private val commitAllProperties: Boolean, context: Context
+    private val commitAllProperties: Boolean,
+    context: Context
 ) : KotprefModel(context) {
 
     override val commitAllPropertiesByDefault: Boolean

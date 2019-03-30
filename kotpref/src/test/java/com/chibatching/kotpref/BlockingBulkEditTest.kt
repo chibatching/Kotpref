@@ -13,7 +13,6 @@ import org.robolectric.ParameterizedRobolectricTestRunner
 import org.robolectric.annotation.Config
 import java.util.*
 
-
 @RunWith(ParameterizedRobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.N]) // Avoid hang caused by Robolectric https://github.com/robolectric/robolectric/issues/3641
 class BlockingBulkEditTest(private val commitAllProperties: Boolean) {

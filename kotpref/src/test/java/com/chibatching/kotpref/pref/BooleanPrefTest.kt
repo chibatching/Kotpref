@@ -8,7 +8,6 @@ import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 import java.util.*
 
-
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class BooleanPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {
     companion object {
@@ -18,7 +17,6 @@ class BooleanPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProp
             return Arrays.asList(arrayOf(false), arrayOf(true))
         }
     }
-
 
     @Test
     fun booleanPrefDefaultIsFalse() {

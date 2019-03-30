@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
-
 internal class IntPref(
     val default: Int,
     override val key: String?,

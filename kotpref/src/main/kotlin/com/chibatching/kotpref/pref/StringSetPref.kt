@@ -166,7 +166,8 @@ internal class StringSetPref(
             }
 
         private inner class KotprefMutableIterator(
-            val baseIterator: MutableIterator<String>, val inTransaction: Boolean
+            val baseIterator: MutableIterator<String>,
+            val inTransaction: Boolean
         ) : MutableIterator<String> by baseIterator {
 
             @SuppressLint("CommitPrefEdits")

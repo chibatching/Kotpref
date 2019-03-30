@@ -3,7 +3,6 @@ package com.chibatching.kotpref.gsonpref
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-
 data class Content(
 
     @SerializedName("title")

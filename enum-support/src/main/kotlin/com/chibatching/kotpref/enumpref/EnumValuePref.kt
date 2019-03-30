@@ -7,7 +7,6 @@ import com.chibatching.kotpref.pref.AbstractPref
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
-
 class EnumValuePref<T : Enum<*>>(
     enumClass: KClass<T>,
     val default: T,

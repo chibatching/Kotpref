@@ -14,7 +14,6 @@ import org.robolectric.RobolectricTestRunner
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.TimeUnit
 
-
 @RunWith(RobolectricTestRunner::class)
 class LiveDataSupportTest {
     class Example(context: Context) : KotprefModel(context) {

@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
-
 internal class BooleanPref(
     val default: Boolean,
     override val key: String?,

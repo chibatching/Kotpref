@@ -6,7 +6,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import kotlin.properties.ReadWriteProperty
 
-
 /**
  * Gson object to serialize and deserialize delegated property
  */

@@ -8,7 +8,6 @@ import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 import java.util.*
 
-
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class StringPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {
     companion object {
