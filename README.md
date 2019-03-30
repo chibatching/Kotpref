@@ -2,29 +2,29 @@
 
 Android SharedPreference delegation for Kotlin.
 
-[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.2.60-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+[![wercker status](https://app.wercker.com/status/dd188c571c2416d90eb24133d9bcfa83/s/master "wercker status")](https://app.wercker.com/project/byKey/dd188c571c2416d90eb24133d9bcfa83) [![kotlin](https://img.shields.io/badge/kotlin-1.3.21-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
 
 ```groovy
 dependencies {
     // core
-    implementation 'com.chibatching.kotpref:kotpref:2.6.0'
+    implementation 'com.chibatching.kotpref:kotpref:2.7.0'
   
     // optional, auto initialization module
-    implementation 'com.chibatching.kotpref:initializer:2.6.0'
+    implementation 'com.chibatching.kotpref:initializer:2.7.0'
   
     // optional, support saving enum value and ordinal
-    implementation 'com.chibatching.kotpref:enum-support:2.6.0'
+    implementation 'com.chibatching.kotpref:enum-support:2.7.0'
   
     // optional, support saving json string through Gson
-    implementation 'com.chibatching.kotpref:gson-support:2.6.0'
+    implementation 'com.chibatching.kotpref:gson-support:2.7.0'
     implementation 'com.google.code.gson:gson:2.8.5'
   
     // optional, support LiveData observable preference
-    implementation 'com.chibatching.kotpref:livedata-support:2.6.0'
-    implementation 'android.arch.lifecycle:livedata:1.1.1'
-    implementation "org.jetbrains.kotlin:kotlin-reflect:1.2.60"
+    implementation 'com.chibatching.kotpref:livedata-support:2.7.0'
+    implementation 'android.arch.lifecycle:livedata:2.0.0'
+    implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.21"
 }
 ```
 
@@ -96,7 +96,7 @@ Log.d(TAG, "User code: ${UserInfo.code}")
 Log.d(TAG, "User age: ${UserInfo.age}")
 Log.d(TAG, "User high score: ${UserInfo.highScore}")
 Log.d(TAG, "User rate: ${UserInfo.rate}")
-UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: ${s}") }
+UserInfo.prizes.forEachIndexed { i, s -> Log.d(TAG, "prize[$i]: $s") }
 ```
 
 ### Bulk edit
@@ -201,7 +201,7 @@ object UserInfo : KotprefModel() {
 ## License
 
 ```
-Copyright 2015-2018 Takao Chiba
+Copyright 2015-2019 Takao Chiba
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
