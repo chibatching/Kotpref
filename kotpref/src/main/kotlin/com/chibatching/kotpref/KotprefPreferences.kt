@@ -18,7 +18,9 @@ internal class KotprefPreferences(
         val editor: SharedPreferences.Editor
     ) : SharedPreferences.Editor by editor {
 
-        private val prefStringSet: MutableMap<String, StringSetPref.PrefMutableSet> by lazy { HashMap<String, StringSetPref.PrefMutableSet>() }
+        private val prefStringSet: MutableMap<String, StringSetPref.PrefMutableSet> by lazy {
+            HashMap<String, StringSetPref.PrefMutableSet>()
+        }
 
         override fun apply() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
