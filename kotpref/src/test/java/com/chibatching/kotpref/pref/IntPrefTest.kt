@@ -1,5 +1,6 @@
 package com.chibatching.kotpref.pref
 
+import android.content.Context
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -42,5 +43,30 @@ class IntPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperti
         assertThat(customExample.testInt)
             .isEqualTo(29)
             .isEqualTo(customPref.getInt(context.getString(R.string.test_custom_int), 0))
+    }
+
+    @Test
+    fun readFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testInt = 20
+
+        assertThat(otherPreference.getInt("testInt", 0))
+            .isEqualTo(20)
+    }
+
+    @Test
+    fun writeFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testInt
+
+        otherPreference.edit()
+            .putInt("testInt", 50)
+            .commit()
+
+        assertThat(example.testInt).isEqualTo(50)
     }
 }

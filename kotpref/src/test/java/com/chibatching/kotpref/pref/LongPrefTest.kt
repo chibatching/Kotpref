@@ -1,5 +1,6 @@
 package com.chibatching.kotpref.pref
 
+import android.content.Context
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -42,5 +43,30 @@ class LongPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPropert
         assertThat(customExample.testLong)
             .isEqualTo(296201L)
             .isEqualTo(customPref.getLong(context.getString(R.string.test_custom_long), 0L))
+    }
+
+    @Test
+    fun readFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testLong = 40L
+
+        assertThat(otherPreference.getLong("testFloat", 40L))
+            .isEqualTo(40L)
+    }
+
+    @Test
+    fun writeFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testLong
+
+        otherPreference.edit()
+            .putLong("testLong", 10L)
+            .commit()
+
+        assertThat(example.testLong).isEqualTo(10L)
     }
 }

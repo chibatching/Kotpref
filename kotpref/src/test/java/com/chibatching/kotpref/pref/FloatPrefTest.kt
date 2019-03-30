@@ -1,5 +1,6 @@
 package com.chibatching.kotpref.pref
 
+import android.content.Context
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -42,5 +43,30 @@ class FloatPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProper
         assertThat(customExample.testFloat)
             .isEqualTo(309F)
             .isEqualTo(customPref.getFloat(context.getString(R.string.test_custom_float), 0F))
+    }
+
+    @Test
+    fun readFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testFloat = 100F
+
+        assertThat(otherPreference.getFloat("testFloat", 0F))
+            .isEqualTo(100F)
+    }
+
+    @Test
+    fun writeFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testFloat
+
+        otherPreference.edit()
+            .putFloat("testFloat", 120F)
+            .commit()
+
+        assertThat(example.testFloat).isEqualTo(120F)
     }
 }

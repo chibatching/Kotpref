@@ -23,7 +23,7 @@ abstract class KotprefModel(
     })
 
     internal var kotprefInTransaction: Boolean = false
-    internal var kotprefTransactionStartTime: Long = 0
+    internal var kotprefTransactionStartTime: Long = Long.MAX_VALUE
 
     /**
      * Application Context
