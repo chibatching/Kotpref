@@ -11,7 +11,7 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.util.*
+import java.util.Arrays
 
 @Config(manifest = Config.NONE)
 @RunWith(ParameterizedRobolectricTestRunner::class)

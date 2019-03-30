@@ -6,8 +6,14 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.SystemClock
-import com.chibatching.kotpref.pref.*
-import java.util.*
+import com.chibatching.kotpref.pref.BooleanPref
+import com.chibatching.kotpref.pref.FloatPref
+import com.chibatching.kotpref.pref.IntPref
+import com.chibatching.kotpref.pref.LongPref
+import com.chibatching.kotpref.pref.StringNullablePref
+import com.chibatching.kotpref.pref.StringPref
+import com.chibatching.kotpref.pref.StringSetPref
+import java.util.LinkedHashSet
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 
@@ -186,7 +192,7 @@ abstract class KotprefModel(
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
     ):
-            ReadWriteProperty<KotprefModel, Float> = FloatPref(default, key, commitByDefault)
+        ReadWriteProperty<KotprefModel, Float> = FloatPref(default, key, commitByDefault)
 
     /**
      * Delegate float shared preferences property.

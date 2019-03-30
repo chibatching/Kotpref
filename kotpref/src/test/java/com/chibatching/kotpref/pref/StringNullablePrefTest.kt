@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
-import java.util.*
+import java.util.Arrays
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class StringNullablePrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {

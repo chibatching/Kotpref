@@ -4,7 +4,7 @@ import android.annotation.TargetApi
 import android.content.SharedPreferences
 import android.os.Build
 import com.chibatching.kotpref.pref.StringSetPref
-import java.util.*
+import java.util.HashMap
 
 internal class KotprefPreferences(
     val preferences: SharedPreferences

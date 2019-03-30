@@ -1,7 +1,7 @@
 package com.chibatching.kotpref
 
 import android.content.Context
-import java.util.*
+import java.util.LinkedHashSet
 
 class CustomExample(
     private val commitAllProperties: Boolean,

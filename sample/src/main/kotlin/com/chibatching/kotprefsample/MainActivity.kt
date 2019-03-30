@@ -8,7 +8,7 @@ import com.chibatching.kotpref.bulk
 import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
 import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.*
+import java.util.Date
 
 class MainActivity : AppCompatActivity() {
 
