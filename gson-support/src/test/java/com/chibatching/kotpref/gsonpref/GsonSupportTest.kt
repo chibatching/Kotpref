@@ -76,19 +76,20 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
     @Test
     fun setGsonPrefSetCausePreferenceUpdate() {
         example.content = Content("new title", "this is new content", createDate(2017, 1, 25))
-        assertThat(example.content).isEqualTo(
-            Content(
-                "new title",
-                "this is new content",
-                createDate(2017, 1, 25)
+        assertThat(example.content)
+            .isEqualTo(
+                Content(
+                    "new title",
+                    "this is new content",
+                    createDate(2017, 1, 25)
+                )
             )
-        )
-        assertThat(example.content).isEqualTo(
-            Kotpref.gson?.fromJson(
-                pref.getString("content", ""),
-                Content::class.java
+            .isEqualTo(
+                Kotpref.gson?.fromJson(
+                    pref.getString("content", ""),
+                    Content::class.java
+                )
             )
-        )
     }
 
     @Test
@@ -99,22 +100,23 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
     @Test
     fun gsonNullablePrefCausePreferenceUpdate() {
         example.nullableContent =
-                Content("nullable content", "this is not null", createDate(2017, 1, 20))
-        assertThat(example.nullableContent).isEqualTo(
-            Content(
-                "nullable content",
-                "this is not null",
-                createDate(2017, 1, 20)
+            Content("nullable content", "this is not null", createDate(2017, 1, 20))
+        assertThat(example.nullableContent)
+            .isEqualTo(
+                Content(
+                    "nullable content",
+                    "this is not null",
+                    createDate(2017, 1, 20)
+                )
             )
-        )
-        assertThat(example.nullableContent).isEqualTo(
-            Kotpref.gson?.fromJson(
-                pref.getString(
-                    "nullableContent",
-                    ""
-                ), Content::class.java
+            .isEqualTo(
+                Kotpref.gson?.fromJson(
+                    pref.getString(
+                        "nullableContent",
+                        ""
+                    ), Content::class.java
+                )
             )
-        )
     }
 
     @Test
@@ -124,15 +126,16 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
             example.nullableContent = null
         }
         setNull()
-        assertThat(example.nullableContent).isNull()
-        assertThat(example.nullableContent).isEqualTo(
-            Kotpref.gson?.fromJson(
-                pref.getString(
-                    "nullableContent",
-                    ""
-                ), Content::class.java
+        assertThat(example.nullableContent)
+            .isEqualTo(
+                Kotpref.gson?.fromJson(
+                    pref.getString(
+                        "nullableContent",
+                        ""
+                    ), Content::class.java
+                )
             )
-        )
+            .isNull()
     }
 
     @Test
