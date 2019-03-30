@@ -3,10 +3,10 @@
 
     <application>
         <provider
-                android:authorities="${applicationId}.kotprefinitprovider"
-                android:exported="false"
-                android:enabled="true"
-                android:name="com.chibatching.kotpref.initializer.KotprefInitProvider"/>
+            android:authorities="${applicationId}.kotprefinitprovider"
+            android:exported="false"
+            android:enabled="true"
+            android:name="com.chibatching.kotpref.initializer.KotprefInitProvider"/>
     </application>
 
 </manifest>

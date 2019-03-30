@@ -5,7 +5,6 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
-
 internal class LongPref(
     val default: Long,
     override val key: String?,

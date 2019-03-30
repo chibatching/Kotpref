@@ -3,9 +3,12 @@ package dependencies
 object Deps {
 
     val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
-    val bintrayGradlePlugin = "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintrayGradlePlugin}"
-    val androidMavenGradlePlugin = "com.github.dcendents:android-maven-gradle-plugin:${Versions.androidMavenGradlePlugin}"
-    val dokkaAndroidGradlePlugin = "org.jetbrains.dokka:dokka-android-gradle-plugin:${Versions.dokkaAndroidGradlePlugin}"
+    val bintrayGradlePlugin =
+        "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintrayGradlePlugin}"
+    val androidMavenGradlePlugin =
+        "com.github.dcendents:android-maven-gradle-plugin:${Versions.androidMavenGradlePlugin}"
+    val dokkaAndroidGradlePlugin =
+        "org.jetbrains.dokka:dokka-android-gradle-plugin:${Versions.dokkaAndroidGradlePlugin}"
 
     val junit = "junit:junit:${Versions.junit}"
     val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"

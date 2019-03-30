@@ -8,7 +8,6 @@ import com.chibatching.kotpref.Example
 import org.junit.After
 import org.junit.Before
 
-
 abstract class BasePrefTest(private val commitAllProperties: Boolean) {
 
     lateinit var example: Example

@@ -11,8 +11,9 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
 import org.robolectric.annotation.Config
-import java.util.*
-
+import java.util.Arrays
+import java.util.HashSet
+import java.util.TreeSet
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
 @Config(sdk = [Build.VERSION_CODES.N]) // Avoid hang caused by Robolectric https://github.com/robolectric/robolectric/issues/3641

@@ -3,7 +3,6 @@ package com.chibatching.kotpref.enumpref
 import com.chibatching.kotpref.KotprefModel
 import kotlin.properties.ReadWriteProperty
 
-
 /**
  * Delegate enum-based shared preferences property storing and recalling by the enum value's name as a string.
  * @param default default enum value

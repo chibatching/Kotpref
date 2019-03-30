@@ -1,8 +1,7 @@
 package com.chibatching.kotpref.gsonpref
 
 import com.google.gson.annotations.SerializedName
-import java.util.*
-
+import java.util.Date
 
 data class Content(
 

@@ -13,8 +13,9 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
-import java.util.*
-
+import java.util.Arrays
+import java.util.Calendar
+import java.util.Date
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
 class GsonSupportTest(private val commitAllProperties: Boolean) {
