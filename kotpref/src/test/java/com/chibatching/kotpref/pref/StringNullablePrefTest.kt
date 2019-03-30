@@ -1,5 +1,6 @@
 package com.chibatching.kotpref.pref
 
+import android.content.Context
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -41,6 +42,36 @@ class StringNullablePrefTest(commitAllProperties: Boolean) : BasePrefTest(commit
         customExample.testStringNullable = "Hello"
         assertThat(customExample.testStringNullable)
             .isEqualTo("Hello")
-            .isEqualTo(customPref.getString(context.getString(R.string.test_custom_nullable_string), null))
+            .isEqualTo(
+                customPref.getString(
+                    context.getString(R.string.test_custom_nullable_string),
+                    null
+                )
+            )
+    }
+
+    @Test
+    fun readFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testStringNullable = "Hello world"
+
+        assertThat(otherPreference.getString("testStringNullable", null))
+            .isEqualTo("Hello world")
+    }
+
+    @Test
+    fun writeFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testStringNullable
+
+        otherPreference.edit()
+            .putString("testStringNullable", "Hello world")
+            .commit()
+
+        assertThat(example.testStringNullable).isEqualTo("Hello world")
     }
 }

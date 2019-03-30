@@ -1,5 +1,6 @@
 package com.chibatching.kotpref.pref
 
+import android.content.Context
 import com.chibatching.kotpref.R
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Test
@@ -42,6 +43,36 @@ class BooleanPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProp
         customExample.testBoolean = false
         assertThat(customExample.testBoolean)
             .isEqualTo(false)
-            .isEqualTo(customPref.getBoolean(context.getString(R.string.test_custom_boolean), false))
+            .isEqualTo(
+                customPref.getBoolean(
+                    context.getString(R.string.test_custom_boolean),
+                    false
+                )
+            )
+    }
+
+    @Test
+    fun readFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testBoolean = true
+
+        assertThat(otherPreference.getBoolean("testBoolean", false))
+            .isTrue()
+    }
+
+    @Test
+    fun writeFromOtherPreferenceInstance() {
+        val otherPreference =
+            context.getSharedPreferences(example.kotprefName, Context.MODE_PRIVATE)
+
+        example.testBoolean
+
+        otherPreference.edit()
+            .putBoolean("testBoolean", true)
+            .commit()
+
+        assertThat(example.testBoolean).isTrue()
     }
 }

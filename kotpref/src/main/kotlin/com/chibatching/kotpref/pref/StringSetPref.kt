@@ -23,16 +23,17 @@ internal class StringSetPref(
         thisRef: KotprefModel,
         property: KProperty<*>
     ): MutableSet<String> {
-        if (stringSet == null || lastUpdate < thisRef.kotprefTransactionStartTime) {
-            val prefSet = thisRef.kotprefPreference.getStringSet(key ?: property.name, null)
-                ?.let { HashSet(it) }
-            stringSet = PrefMutableSet(
-                thisRef,
-                prefSet ?: default.invoke().toMutableSet(),
-                key ?: property.name
-            )
-            lastUpdate = SystemClock.uptimeMillis()
+        if (stringSet != null && lastUpdate >= thisRef.kotprefTransactionStartTime) {
+            return stringSet!!
         }
+        val prefSet = thisRef.kotprefPreference.getStringSet(key ?: property.name, null)
+            ?.let { HashSet(it) }
+        stringSet = PrefMutableSet(
+            thisRef,
+            prefSet ?: default.invoke().toMutableSet(),
+            key ?: property.name
+        )
+        lastUpdate = SystemClock.uptimeMillis()
         return stringSet!!
     }
 
