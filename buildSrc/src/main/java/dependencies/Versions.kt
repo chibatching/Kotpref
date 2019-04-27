@@ -25,6 +25,7 @@ object Versions {
     internal const val mockitoKotlin = "2.1.0"
 
     internal object AndroidX {
+        internal const val annotation = "1.0.2"
         internal const val appCompat = "1.0.2"
         internal const val preference = "1.0.0"
         internal const val test = "1.1.0"
