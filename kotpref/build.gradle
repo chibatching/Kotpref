@@ -45,6 +45,7 @@ android {
 
 dependencies {
     compileOnly Deps.Kotlin.stdlib
+    implementation Deps.AndroidX.annotation
 
     testImplementation Deps.Kotlin.stdlib
     testImplementation Deps.junit

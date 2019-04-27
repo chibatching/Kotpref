@@ -27,6 +27,7 @@ object Deps {
     }
 
     object AndroidX {
+        val annotation = "androidx.annotation:annotation:${Versions.AndroidX.annotation}"
         val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         val preference = "androidx.preference:preference:${Versions.AndroidX.preference}"
         val test = "androidx.test:core:${Versions.AndroidX.test}"

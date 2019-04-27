@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Build
 import android.os.SystemClock
+import androidx.annotation.CallSuper
 import com.chibatching.kotpref.pref.BooleanPref
 import com.chibatching.kotpref.pref.FloatPref
 import com.chibatching.kotpref.pref.IntPref
@@ -74,7 +75,8 @@ abstract class KotprefModel(
     /**
      * Clear all preferences in this model
      */
-    fun clear() {
+    @CallSuper
+    open fun clear() {
         beginBulkEdit()
         kotprefEditor!!.clear()
         commitBulkEdit()
