@@ -31,6 +31,8 @@ abstract class KotprefModel(
     internal var kotprefInTransaction: Boolean = false
     internal var kotprefTransactionStartTime: Long = Long.MAX_VALUE
 
+    open val preferenceName = javaClass.simpleName
+
     /**
      * Application Context
      */
@@ -50,7 +52,7 @@ abstract class KotprefModel(
     /**
      * Preference read/write mode
      */
-    protected open val kotprefMode: Int = Context.MODE_PRIVATE
+    open val kotprefMode: Int = Context.MODE_PRIVATE
 
     /**
      * Internal shared preferences.
@@ -91,8 +93,10 @@ abstract class KotprefModel(
     protected fun stringPref(
         default: String = "",
         key: String? = null,
-        commitByDefault: Boolean = commitAllPropertiesByDefault
-    ): ReadWriteProperty<KotprefModel, String> = StringPref(default, key, commitByDefault)
+        commitByDefault: Boolean = commitAllPropertiesByDefault,
+        preferenceLabel: Int? = null,
+        preferenceSummary: Int? = null
+    ): ReadWriteProperty<KotprefModel, String> = StringPref(default, key, commitByDefault, preferenceLabel, preferenceSummary)
 
     /**
      * Delegate string shared preferences property.
@@ -103,9 +107,11 @@ abstract class KotprefModel(
     protected fun stringPref(
         default: String = "",
         key: Int,
-        commitByDefault: Boolean = commitAllPropertiesByDefault
+        commitByDefault: Boolean = commitAllPropertiesByDefault,
+        preferenceLabel: Int? = null,
+        preferenceSummary: Int? = null
     ): ReadWriteProperty<KotprefModel, String> =
-        stringPref(default, context.getString(key), commitByDefault)
+        stringPref(default, context.getString(key), commitByDefault, preferenceLabel, preferenceSummary)
 
     /**
      * Delegate nullable string shared preferences property.
@@ -218,9 +224,11 @@ abstract class KotprefModel(
     protected fun booleanPref(
         default: Boolean = false,
         key: String? = null,
-        commitByDefault: Boolean = commitAllPropertiesByDefault
+        commitByDefault: Boolean = commitAllPropertiesByDefault,
+        preferenceLabel: Int? = null,
+        preferenceSummary: Int? = null
     ): ReadWriteProperty<KotprefModel, Boolean> =
-        BooleanPref(default, key, commitByDefault)
+        BooleanPref(default, key, commitByDefault, preferenceLabel, preferenceSummary)
 
     /**
      * Delegate boolean shared preferences property.
@@ -231,9 +239,11 @@ abstract class KotprefModel(
     protected fun booleanPref(
         default: Boolean = false,
         key: Int,
-        commitByDefault: Boolean = commitAllPropertiesByDefault
+        commitByDefault: Boolean = commitAllPropertiesByDefault,
+        preferenceLabel: Int? = null,
+        preferenceSummary: Int? = null
     ): ReadWriteProperty<KotprefModel, Boolean> =
-        booleanPref(default, context.getString(key), commitByDefault)
+        booleanPref(default, context.getString(key), commitByDefault, preferenceLabel, preferenceSummary)
 
     /**
      * Delegate string set shared preferences property.
@@ -245,7 +255,9 @@ abstract class KotprefModel(
     protected fun stringSetPref(
         default: Set<String> = LinkedHashSet<String>(),
         key: String? = null,
-        commitByDefault: Boolean = commitAllPropertiesByDefault
+        commitByDefault: Boolean = commitAllPropertiesByDefault,
+        preferenceLabel: Int? = null,
+        preferenceSummary: Int? = null
     ): ReadOnlyProperty<KotprefModel, MutableSet<String>> =
         stringSetPref(key, commitByDefault) { default }
 

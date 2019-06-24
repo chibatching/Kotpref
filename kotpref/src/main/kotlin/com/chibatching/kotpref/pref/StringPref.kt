@@ -5,10 +5,12 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
-internal class StringPref(
+class StringPref(
     val default: String,
     override val key: String?,
-    private val commitByDefault: Boolean
+    private val commitByDefault: Boolean,
+    override val preferenceLabel: Int? = null,
+    override val preferenceSummary: Int? = null
 ) : AbstractPref<String>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String {

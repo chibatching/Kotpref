@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.chibatching.kotpref.preference">
+
+    <application>
+
+        <activity android:name=".KotprefPrefActivity"/>
+        
+    </application>
+
+</manifest>

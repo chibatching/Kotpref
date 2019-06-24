@@ -13,6 +13,10 @@ abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, Pref
 
     abstract override val key: String?
 
+    // fields for preferences
+    open val preferenceLabel: Int? = null
+    open val preferenceSummary: Int? = null
+
     override operator fun getValue(thisRef: KotprefModel, property: KProperty<*>): T {
         if (!thisRef.kotprefInTransaction) {
             return getFromPreference(property, thisRef.kotprefPreference)

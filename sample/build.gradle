@@ -54,6 +54,9 @@ dependencies {
     implementation Deps.Arch.liveData
     implementation Deps.Kotlin.reflect
 
+    // preference support
+    implementation project(":preference-support")
+
     // For test
     testImplementation Deps.junit
     testImplementation Deps.robolectric

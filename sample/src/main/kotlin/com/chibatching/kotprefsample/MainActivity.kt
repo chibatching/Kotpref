@@ -6,7 +6,10 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.chibatching.kotpref.bulk
 import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
+import com.chibatching.kotprefsample.preferencefragment.AppSettings
 import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
+import com.chibatching.kotpref.preference.KotprefPrefActivity
+import com.chibatching.kotprefsample.autopreference.AutoPreferenceSettings
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.Date
 
@@ -28,6 +31,10 @@ class MainActivity : AppCompatActivity() {
 
         liveDataSampleButton.setOnClickListener {
             startActivity(Intent(this, LiveDataSampleActivity::class.java))
+        }
+
+        preferenceAutoFragmentSampleButton.setOnClickListener {
+            KotprefPrefActivity.show(this, AutoPreferenceSettings)
         }
     }
 

@@ -2,6 +2,7 @@
     <string name="app_name">kotpref sample</string>
 
     <string name="preference_fragment_sample">PreferenceFragment sample</string>
+    <string name="preference_auto_fragment_sample">Auto PreferenceFragment sample</string>
     <string name="live_data_sample">LiveData sample</string>
     <string name="injectable_context_sample">LiveData sample</string>
     <string name="save">Save</string>
@@ -11,4 +12,9 @@
     <string name="pref_key_sample_switch">sample_switch</string>
     <string name="pref_title_sample_edit_text">Sample edit text preference</string>
     <string name="pref_key_sample_edit_text">sample_edit_text</string>
+
+    <!-- auto preference fragment -->
+    <string name="pref_summary_sample_switch">My custom summary (value = %1$b)</string>
+    <string name="pref_summary_sample_edit_text">My custom summary formatter: %1$s</string>
+
 </resources>

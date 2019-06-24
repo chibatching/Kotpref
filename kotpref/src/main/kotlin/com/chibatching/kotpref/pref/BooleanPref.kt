@@ -5,10 +5,12 @@ import android.content.SharedPreferences
 import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
-internal class BooleanPref(
+class BooleanPref(
     val default: Boolean,
     override val key: String?,
-    private val commitByDefault: Boolean
+    private val commitByDefault: Boolean,
+    override val preferenceLabel: Int? = null,
+    override val preferenceSummary: Int? = null
 ) : AbstractPref<Boolean>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Boolean {
