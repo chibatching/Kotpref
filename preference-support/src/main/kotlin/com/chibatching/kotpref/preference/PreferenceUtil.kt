@@ -56,7 +56,7 @@ internal object PreferenceUtil {
                 val property = kotprefModel::class.memberProperties
                     .firstOrNull { it.name == propertyName } as KProperty1<Any, *>?
 
-                val keyName = preference.key!!
+                val keyName = preference.key ?: property!!.name
                 val label =
                     preference.preferenceLabel?.let { context.getString(it) } ?: propertyName
 
