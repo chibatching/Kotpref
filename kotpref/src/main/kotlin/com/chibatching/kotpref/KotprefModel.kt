@@ -31,6 +31,7 @@ abstract class KotprefModel(
     internal var kotprefInTransaction: Boolean = false
     internal var kotprefTransactionStartTime: Long = Long.MAX_VALUE
 
+    open val preferenceTheme: Int? = null
     open val preferenceName = javaClass.simpleName
 
     /**

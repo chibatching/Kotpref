@@ -17,9 +17,11 @@ class KotprefPrefActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
 
         val kotPref = PreferenceUtil.getKotprefObject(intent)
+        kotPref.preferenceTheme?.let { setTheme(it) }
+
+        super.onCreate(savedInstanceState)
 
         supportActionBar?.setTitle(kotPref.preferenceName)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
