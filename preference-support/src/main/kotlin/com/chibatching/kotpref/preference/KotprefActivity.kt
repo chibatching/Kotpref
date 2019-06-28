@@ -9,10 +9,18 @@ class KotprefPrefActivity : AppCompatActivity() {
 
     companion object {
 
-        fun show(activity: AppCompatActivity, preferenceModel: KotprefModel) {
+        fun show(
+            activity: AppCompatActivity,
+            preferenceModel: KotprefModel,
+            requestCode: Int? = null
+        ) {
             val intent = Intent(activity, KotprefPrefActivity::class.java)
             PreferenceUtil.putKotprefObject(intent, preferenceModel)
-            activity.startActivity(intent)
+            if (requestCode != null) {
+                activity.startActivityForResult(intent, requestCode)
+            } else {
+                activity.startActivity(intent)
+            }
         }
     }
 
