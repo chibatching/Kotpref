@@ -24,7 +24,7 @@ commands:
             - ~/.gradle
 
 jobs:
-  test:
+  unit_test:
     executor:
       name: default
     parameters:
@@ -42,7 +42,6 @@ jobs:
           condition: << parameters.run-on-master >>
           steps:
             - save_gradle_cache
-
   publish:
     executor:
       name: default
@@ -56,12 +55,12 @@ workflows:
   version: 2
   test:
     jobs:
-      - test:
+      - unit_test:
           run-on-master: true
           filters:
             branches:
               only: master
-      - test:
+      - unit_test:
           run-on-master: false
           filters:
             branches:
