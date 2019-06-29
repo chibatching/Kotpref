@@ -1,0 +1,77 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/android:api-28
+
+orbs:
+  codecov: codecov/codecov@1.0.5
+
+commands:
+  restore_gradle_cache:
+    steps:
+      - restore_cache:
+          keys:
+            - gradle-cache-{{ checksum "buildSrc/src/main/java/dependencies/Versions.kt" }}-{{ checksum "buildSrc/src/main/java/dependencies/Deps.kt" }}
+            - gradle-cache-{{ checksum "buildSrc/src/main/java/dependencies/Versions.kt" }}-
+
+  save_gradle_cache:
+    steps:
+      - save_cache:
+          key: gradle-cache-{{ checksum "buildSrc/src/main/java/dependencies/Versions.kt" }}-{{ checksum "buildSrc/src/main/java/dependencies/Deps.kt" }}
+          paths:
+            - ~/.gradle
+
+jobs:
+  test:
+    executor:
+      name: default
+    parameters:
+      run-on-master:
+        type: boolean
+        default: false
+    steps:
+      - checkout
+      - restore_gradle_cache
+      - run:
+          name: Run unit tests
+          command: ./gradlew jacocoTestReport --no-daemon
+      - codecov/upload
+      - when:
+          condition: << parameters.run-on-master >>
+          steps:
+            - save_gradle_cache
+
+  publish:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - run:
+          name: Upload to bintray
+          command: ./gradlew clean install bintrayUpload --no-daemon
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test:
+          run-on-master: true
+          filters:
+            branches:
+              only: master
+      - test:
+          run-on-master: false
+          filters:
+            branches:
+              ignore: master
+  publish:
+    jobs:
+      - publish:
+          filters:
+            tags:
+              only: /^v.*/
+            branches:
+              ignore: /.*/
+
