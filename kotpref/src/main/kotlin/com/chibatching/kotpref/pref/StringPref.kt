@@ -12,7 +12,7 @@ internal class StringPref(
 ) : AbstractPref<String>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String {
-        return preference.getString(key ?: property.name, default)
+        return requireNotNull(preference.getString(key ?: property.name, default))
     }
 
     @SuppressLint("CommitPrefEdits")
