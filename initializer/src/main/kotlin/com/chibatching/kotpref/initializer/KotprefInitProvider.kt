@@ -22,7 +22,7 @@ class KotprefInitProvider : ContentProvider() {
     }
 
     override fun onCreate(): Boolean {
-        Kotpref.init(context)
+        Kotpref.init(requireNotNull(context))
         return true
     }
 
