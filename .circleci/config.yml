@@ -7,6 +7,7 @@ executors:
 
 orbs:
   codecov: codecov/codecov@1.0.5
+  android: circleci/android@0.1.0
 
 commands:
   restore_gradle_cache:
@@ -34,10 +35,12 @@ jobs:
     steps:
       - checkout
       - restore_gradle_cache
+      - android/restore-build-cache
       - run:
           name: Run unit tests
           command: ./gradlew jacocoTestReport --no-daemon
       - codecov/upload
+      - android/save-build-cache
       - when:
           condition: << parameters.run-on-master >>
           steps:
@@ -47,6 +50,8 @@ jobs:
       name: default
     steps:
       - checkout
+      - restore_gradle_cache
+      - android/restore-build-cache
       - run:
           name: Upload to bintray
           command: ./gradlew clean install bintrayUpload --no-daemon
