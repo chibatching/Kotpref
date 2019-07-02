@@ -19,14 +19,15 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
 
 abstract class KotprefModel(
-    private val contextProvider: ContextProvider = StaticContextProvider
+    private val contextProvider: ContextProvider = StaticContextProvider,
+    private val opener: PreferencesOpener = defaultPreferenceOpener()
 ) {
 
-    constructor(context: Context) : this(object : ContextProvider {
+    constructor(context: Context, opener: PreferencesOpener = defaultPreferenceOpener()) : this(object : ContextProvider {
         override fun getApplicationContext(): Context {
             return context.applicationContext
         }
-    })
+    }, opener)
 
     internal var kotprefInTransaction: Boolean = false
     internal var kotprefTransactionStartTime: Long = Long.MAX_VALUE
@@ -57,7 +58,7 @@ abstract class KotprefModel(
      * This property will be initialized on use.
      */
     internal val kotprefPreference: KotprefPreferences by lazy {
-        KotprefPreferences(context.getSharedPreferences(kotprefName, kotprefMode))
+        KotprefPreferences(opener.openPreferences(context, kotprefName, kotprefMode))
     }
 
     /**
