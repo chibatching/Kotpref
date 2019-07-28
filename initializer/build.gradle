@@ -35,9 +35,9 @@ dependencies {
     compileOnly Deps.Kotlin.stdlib
     api project(":kotpref")
 
-    testImplementation Deps.Kotlin.stdlib
-    testImplementation Deps.junit
-    testImplementation Deps.robolectric
+    testCompileOnly Deps.Kotlin.stdlib
+    testCompileOnly Deps.junit
+    testCompileOnly Deps.robolectric
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"

@@ -48,13 +48,13 @@ dependencies {
     compileOnly Deps.Arch.liveData
     compileOnly Deps.Kotlin.reflect
 
-    testImplementation Deps.Kotlin.stdlib
-    testImplementation Deps.Kotlin.reflect
-    testImplementation Deps.Arch.liveData
-    testImplementation Deps.junit
-    testImplementation Deps.robolectric
-    testImplementation Deps.AndroidX.test
-    testImplementation Deps.assertj
+    testCompileOnly Deps.Kotlin.stdlib
+    testCompileOnly Deps.Kotlin.reflect
+    testCompileOnly Deps.Arch.liveData
+    testCompileOnly Deps.junit
+    testCompileOnly Deps.robolectric
+    testCompileOnly Deps.AndroidX.test
+    testCompileOnly Deps.assertj
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"

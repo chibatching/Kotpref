@@ -47,12 +47,12 @@ dependencies {
 
     compileOnly Deps.gson
 
-    testImplementation Deps.Kotlin.stdlib
-    testImplementation Deps.gson
-    testImplementation Deps.junit
-    testImplementation Deps.robolectric
-    testImplementation Deps.AndroidX.test
-    testImplementation Deps.assertj
+    testCompileOnly Deps.Kotlin.stdlib
+    testCompileOnly Deps.gson
+    testCompileOnly Deps.junit
+    testCompileOnly Deps.robolectric
+    testCompileOnly Deps.AndroidX.test
+    testCompileOnly Deps.assertj
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"
