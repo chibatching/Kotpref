@@ -33,6 +33,12 @@
             tools:targetApi="jelly_bean"
         />
         <activity
+            android:name=".preferencesupport.PreferenceSupportSampleActivity"
+            android:label="@string/preference_fragment_sample"
+            android:parentActivityName=".MainActivity"
+            tools:targetApi="jelly_bean"
+        />
+        <activity
             android:name=".injectablecontext.InjectableContextSampleActivity"
             android:label="@string/injectable_context_sample"
             android:parentActivityName=".MainActivity"

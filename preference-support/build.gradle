@@ -1,0 +1,58 @@
+import dependencies.Deps
+import dependencies.Versions
+import plugin.BuildSettingHelperPlugin
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'jacoco'
+apply plugin: BuildSettingHelperPlugin
+
+ext.moduleName = 'Kotpref preference support'
+
+android {
+    compileSdkVersion Versions.targetSdk
+
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionName Versions.versionName
+    }
+    buildTypes {
+        debug {
+            testCoverageEnabled isCi
+        }
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    testOptions {
+        unitTests {
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                }
+            }
+            includeAndroidResources = true
+        }
+    }
+}
+
+dependencies {
+    compileOnly Deps.Kotlin.stdlib
+    api project(":kotpref")
+
+    compileOnly Deps.Kotlin.reflect
+    implementation Deps.AndroidX.preference
+
+    testCompileOnly Deps.Kotlin.stdlib
+    testCompileOnly Deps.junit
+    testCompileOnly Deps.robolectric
+    testCompileOnly Deps.AndroidX.test
+    testCompileOnly Deps.assertj
+}
+
+apply from: "${project.rootDir}/gradle/publish/publish.gradle"

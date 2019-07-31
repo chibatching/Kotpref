@@ -1,5 +1,4 @@
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,20 +8,26 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".MainActivity"
->
+    tools:context=".MainActivity">
+
     <Button
         android:id="@+id/preferenceFragmentSampleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/preference_fragment_sample"
-        android:textAllCaps="false"
-    />
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/preferenceSupportSampleButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/preference_support_sample"
+        android:textAllCaps="false" />
+
     <Button
         android:id="@+id/liveDataSampleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/live_data_sample"
-        android:textAllCaps="false"
-    />
+        android:textAllCaps="false" />
 </LinearLayout>
