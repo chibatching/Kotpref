@@ -53,9 +53,11 @@ jobs:
       - restore_gradle_cache
       - android/restore-build-cache
       - run:
-          name: Upload to bintray
-          command: ./gradlew clean install bintrayUpload --no-daemon
-
+          name: Prepare artifacts
+          command: ./gradlew clean install --no-daemon
+      - run:
+          name: Upload to Bintray
+          command: ./gradlew bintrayUpload --no-daemon
 workflows:
   version: 2
   test:
