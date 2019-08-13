@@ -9,20 +9,20 @@ Android SharedPreference delegation for Kotlin.
 ```groovy
 dependencies {
     // core
-    implementation 'com.chibatching.kotpref:kotpref:2.9.0'
+    implementation 'com.chibatching.kotpref:kotpref:2.9.1'
   
     // optional, auto initialization module
-    implementation 'com.chibatching.kotpref:initializer:2.9.0'
+    implementation 'com.chibatching.kotpref:initializer:2.9.1'
   
     // optional, support saving enum value and ordinal
-    implementation 'com.chibatching.kotpref:enum-support:2.9.0'
+    implementation 'com.chibatching.kotpref:enum-support:2.9.1'
   
     // optional, support saving json string through Gson
-    implementation 'com.chibatching.kotpref:gson-support:2.9.0'
+    implementation 'com.chibatching.kotpref:gson-support:2.9.1'
     implementation 'com.google.code.gson:gson:2.8.5'
   
     // optional, support LiveData observable preference
-    implementation 'com.chibatching.kotpref:livedata-support:2.9.0'
+    implementation 'com.chibatching.kotpref:livedata-support:2.9.1'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.0.0'
     implementation "org.jetbrains.kotlin:kotlin-reflect:1.3.41"
 }
