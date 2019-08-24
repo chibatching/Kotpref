@@ -95,7 +95,7 @@ class PreferenceScreenBuilder(
     fun editText(
         property: KProperty0<String>,
         title: String,
-        options: (EditTextPreference.() -> Unit)?
+        options: (EditTextPreference.() -> Unit)? = null
     ): EditTextPreference {
         val preference =
             EditTextPreference(context).applyPreferenceOptions(property, title, options)
@@ -107,7 +107,7 @@ class PreferenceScreenBuilder(
     fun dropDown(
         property: KProperty0<String>,
         title: String,
-        options: (DropDownPreference.() -> Unit)?
+        options: (DropDownPreference.() -> Unit)? = null
     ): DropDownPreference {
         val preference =
             DropDownPreference(context).applyPreferenceOptions(property, title, options)
@@ -119,7 +119,7 @@ class PreferenceScreenBuilder(
     fun list(
         property: KProperty0<String>,
         title: String,
-        options: (ListPreference.() -> Unit)?
+        options: (ListPreference.() -> Unit)? = null
     ): ListPreference {
         val preference =
             ListPreference(context).applyPreferenceOptions(property, title, options)
@@ -131,7 +131,7 @@ class PreferenceScreenBuilder(
     fun multiSelectList(
         property: KProperty0<Set<String>>,
         title: String,
-        options: (MultiSelectListPreference.() -> Unit)?
+        options: (MultiSelectListPreference.() -> Unit)? = null
     ): MultiSelectListPreference {
         val preference =
             MultiSelectListPreference(context).applyPreferenceOptions(property, title, options)
@@ -143,7 +143,7 @@ class PreferenceScreenBuilder(
     fun seekBar(
         property: KProperty0<Int>,
         title: String,
-        options: (SeekBarPreference.() -> Unit)?
+        options: (SeekBarPreference.() -> Unit)? = null
     ): SeekBarPreference {
         val preference =
             SeekBarPreference(context).applyPreferenceOptions(property, title, options)
@@ -167,7 +167,7 @@ class PreferenceScreenBuilder(
 
     fun screen(
         title: String,
-        options: (PreferenceScreen.() -> Unit)?
+        options: (PreferenceScreen.() -> Unit)? = null
     ): PreferenceScreen {
         val preference = rootScreen.preferenceManager.createPreferenceScreen(context).apply {
             this.title = title
