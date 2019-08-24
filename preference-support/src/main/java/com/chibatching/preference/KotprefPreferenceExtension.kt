@@ -165,6 +165,18 @@ class PreferenceScreenBuilder(
         return category
     }
 
+    fun screen(
+        title: String,
+        options: (PreferenceScreen.() -> Unit)?
+    ): PreferenceScreen {
+        val preference = rootScreen.preferenceManager.createPreferenceScreen(context).apply {
+            this.title = title
+            options?.invoke(this)
+        }
+        rootScreen.addPreference(preference)
+        return preference
+    }
+
     private fun <T : Preference> T.applyPreferenceOptions(
         property: KProperty0<Any>,
         title: String,
