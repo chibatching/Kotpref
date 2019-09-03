@@ -96,6 +96,10 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
                     max = 100
                 }
             }
+
+            category("Info") {
+                screen("Version 1.0")
+            }
         }
     }
 }
