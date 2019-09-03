@@ -16,6 +16,8 @@ android {
         minSdkVersion Versions.minSdk
         targetSdkVersion Versions.targetSdk
         versionName Versions.versionName
+
+        consumerProguardFiles 'proguard-rules.pro'
     }
     buildTypes {
         debug {
