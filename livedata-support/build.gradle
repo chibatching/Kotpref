@@ -51,6 +51,7 @@ dependencies {
     testImplementation Deps.Kotlin.stdlib
     testImplementation Deps.Kotlin.reflect
     testImplementation Deps.Arch.liveData
+    testImplementation Deps.Arch.runtime
     testImplementation Deps.junit
     testImplementation Deps.robolectric
     testImplementation Deps.AndroidX.testCore
