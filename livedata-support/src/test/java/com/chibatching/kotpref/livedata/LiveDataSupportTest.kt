@@ -2,6 +2,9 @@ package com.chibatching.kotpref.livedata
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
 import com.chibatching.kotpref.KotprefModel
@@ -140,6 +143,54 @@ class LiveDataSupportTest {
         example.customKeyProperty = 12
 
         liveData.observeForever(observer)
+
+        assertThat(observerSlot)
+            .containsExactly(8, 12)
+    }
+
+    @Test
+    fun firesLastValueWhileInactive() {
+        val liveData = example.asLiveData(example::someProperty)
+        val observerSlot = mutableListOf<String>()
+        val observer = observer<String>()
+        val lifecycle = LifecycleRegistry(mockk(relaxed = true))
+
+        every {
+            observer.onChanged(capture(observerSlot))
+        } just Runs
+
+        liveData.observe(LifecycleOwner { lifecycle }, observer)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+
+        example.someProperty = "some value 1"
+        example.someProperty = "value 2"
+
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+
+        assertThat(observerSlot)
+            .containsExactly("default", "value 2")
+    }
+
+    @Test
+    fun firesLastValueWhileInactiveWithCustomKey() {
+        val liveData = example.asLiveData(example::customKeyProperty)
+        val observerSlot = mutableListOf<Int>()
+        val observer = observer<Int>()
+        val lifecycle = LifecycleRegistry(mockk(relaxed = true))
+
+        every {
+            observer.onChanged(capture(observerSlot))
+        } just Runs
+
+        liveData.observe(LifecycleOwner { lifecycle }, observer)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_STOP)
+
+        example.customKeyProperty = 1
+        example.customKeyProperty = 12
+
+        lifecycle.handleLifecycleEvent(Lifecycle.Event.ON_START)
 
         assertThat(observerSlot)
             .containsExactly(8, 12)

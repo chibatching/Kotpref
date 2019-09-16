@@ -26,6 +26,9 @@ fun <T> KotprefModel.asLiveData(property: KProperty0<T>): LiveData<T> {
 
         override fun onActive() {
             this@asLiveData.preferences.registerOnSharedPreferenceChangeListener(this)
+            if (value != property.get()) {
+                value = property.get()
+            }
         }
 
         override fun onInactive() {
