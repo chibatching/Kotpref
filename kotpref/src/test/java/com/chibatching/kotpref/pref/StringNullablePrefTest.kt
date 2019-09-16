@@ -2,7 +2,7 @@ package com.chibatching.kotpref.pref
 
 import android.content.Context
 import com.chibatching.kotpref.R
-import org.assertj.core.api.Assertions.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
@@ -28,6 +28,7 @@ class StringNullablePrefTest(commitAllProperties: Boolean) : BasePrefTest(commit
         example.testStringNullable = "Ohayo!"
         assertThat(example.testStringNullable)
             .isEqualTo("Ohayo!")
+        assertThat(example.testStringNullable)
             .isEqualTo(examplePref.getString("testStringNullable", null))
     }
 
@@ -41,6 +42,7 @@ class StringNullablePrefTest(commitAllProperties: Boolean) : BasePrefTest(commit
         customExample.testStringNullable = "Hello"
         assertThat(customExample.testStringNullable)
             .isEqualTo("Hello")
+        assertThat(customExample.testStringNullable)
             .isEqualTo(
                 customPref.getString(
                     context.getString(R.string.test_custom_nullable_string),

@@ -4,7 +4,7 @@ import android.annotation.TargetApi
 import android.content.Context
 import android.os.Build
 import com.chibatching.kotpref.R
-import org.assertj.core.api.Assertions.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
@@ -38,8 +38,9 @@ class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPr
         }
 
         assertThat(example.testStringSet)
-            .containsExactlyInAnyOrder("test1", "test3", "test4")
-            .containsExactlyInAnyOrderElementsOf(examplePref.getStringSet("testStringSet", null))
+            .containsExactly("test1", "test3", "test4")
+        assertThat(example.testStringSet)
+            .containsExactlyElementsIn(examplePref.getStringSet("testStringSet", null))
     }
 
     @Test
@@ -56,8 +57,9 @@ class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPr
         }
 
         assertThat(example.testStringSet)
-            .containsExactlyInAnyOrder("test1", "test2", "test3", "test4")
-            .containsExactlyInAnyOrderElementsOf(examplePref.getStringSet("testStringSet", null))
+            .containsExactly("test1", "test2", "test3", "test4")
+        assertThat(example.testStringSet)
+            .containsExactlyElementsIn(examplePref.getStringSet("testStringSet", null))
     }
 
     @Test
@@ -76,8 +78,9 @@ class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPr
         }
 
         assertThat(example.testStringSet)
-            .containsExactlyInAnyOrder("test1", "test3")
-            .containsExactlyInAnyOrderElementsOf(examplePref.getStringSet("testStringSet", null))
+            .containsExactly("test1", "test3")
+        assertThat(example.testStringSet)
+            .containsExactlyElementsIn(examplePref.getStringSet("testStringSet", null))
     }
 
     @Test
@@ -97,15 +100,16 @@ class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPr
         }
 
         assertThat(example.testStringSet)
-            .containsExactlyInAnyOrder("test2", "test4")
-            .containsExactlyInAnyOrderElementsOf(examplePref.getStringSet("testStringSet", null))
+            .containsExactly("test2", "test4")
+        assertThat(example.testStringSet)
+            .containsExactlyElementsIn(examplePref.getStringSet("testStringSet", null))
     }
 
     @Test
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     fun lazyDefaultStringSetDefaultIsSetOfDefinedInLazyBlock() {
         assertThat(customExample.testStringSet)
-            .containsExactlyInAnyOrder("Lazy set item 1", "Lazy set item 2", "Lazy set item 3")
+            .containsExactly("Lazy set item 1", "Lazy set item 2", "Lazy set item 3")
     }
 
     @Test
@@ -113,23 +117,25 @@ class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPr
     fun useCustomPreferenceKey() {
         customExample.testStringSet.add("Additional item")
         assertThat(customExample.testStringSet)
-            .containsExactlyInAnyOrder(
+            .containsExactly(
                 "Lazy set item 1",
                 "Lazy set item 2",
                 "Lazy set item 3",
                 "Additional item"
             )
-            .containsAll(
+        assertThat(customExample.testStringSet)
+            .containsExactlyElementsIn(
                 customPref.getStringSet(
                     context.getString(R.string.test_custom_string_set),
                     null
                 )
             )
-            .hasSameSizeAs(
+        assertThat(customExample.testStringSet)
+            .hasSize(
                 customPref.getStringSet(
                     context.getString(R.string.test_custom_string_set),
                     null
-                )
+                )!!.size
             )
     }
 
@@ -150,7 +156,8 @@ class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllPr
 
         assertThat(example.testStringSet)
             .hasSize(1)
-            .containsExactlyInAnyOrderElementsOf(examplePref.getStringSet("testStringSet", null))
+        assertThat(example.testStringSet)
+            .containsExactlyElementsIn(examplePref.getStringSet("testStringSet", null))
     }
 
     @Test

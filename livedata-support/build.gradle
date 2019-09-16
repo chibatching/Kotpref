@@ -53,8 +53,9 @@ dependencies {
     testImplementation Deps.Arch.liveData
     testImplementation Deps.junit
     testImplementation Deps.robolectric
-    testImplementation Deps.AndroidX.test
-    testImplementation Deps.assertj
+    testImplementation Deps.AndroidX.testCore
+    testImplementation Deps.mockk
+    testImplementation Deps.truth
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"

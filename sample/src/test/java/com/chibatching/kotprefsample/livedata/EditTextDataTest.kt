@@ -1,16 +1,18 @@
 package com.chibatching.kotprefsample.livedata
 
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
-import org.assertj.core.api.Assertions.assertThat
+import com.google.common.truth.Truth.assertThat
+import io.mockk.every
+import io.mockk.mockk
 import org.junit.Test
 
 class EditTextDataTest {
 
     @Test
     fun sampleMockTest() {
-        val data = mock<EditTextData>()
-        whenever(data.savedText).thenReturn("foo")
+        val data = mockk<EditTextData>(relaxed = true)
+        every {
+            data.savedText
+        } returns "foo"
 
         assertThat(data.savedText).isEqualTo("foo")
     }

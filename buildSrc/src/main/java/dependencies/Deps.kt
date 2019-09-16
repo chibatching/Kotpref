@@ -2,39 +2,35 @@ package dependencies
 
 object Deps {
 
-    val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
-    val bintrayGradlePlugin =
+    const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
+    const val bintrayGradlePlugin =
         "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintrayGradlePlugin}"
-    val androidMavenGradlePlugin =
+    const val androidMavenGradlePlugin =
         "com.github.dcendents:android-maven-gradle-plugin:${Versions.androidMavenGradlePlugin}"
-    val dokkaAndroidGradlePlugin =
+    const val dokkaAndroidGradlePlugin =
         "org.jetbrains.dokka:dokka-android-gradle-plugin:${Versions.dokkaAndroidGradlePlugin}"
 
-    val junit = "junit:junit:${Versions.junit}"
-    val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
-    val assertj = "org.assertj:assertj-core:${Versions.assertj}"
+    const val junit = "junit:junit:${Versions.junit}"
+    const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
+    const val truth = "com.google.truth:truth:${Versions.truth}"
 
-    val gson = "com.google.code.gson:gson:${Versions.gson}"
+    const val gson = "com.google.code.gson:gson:${Versions.gson}"
 
     object Kotlin {
-        val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-        val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
-        val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
+        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
+        const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     }
 
     object Arch {
-        val liveData = "androidx.lifecycle:lifecycle-livedata:${Versions.liveData}"
+        const val liveData = "androidx.lifecycle:lifecycle-livedata:${Versions.liveData}"
     }
 
     object AndroidX {
-        val annotation = "androidx.annotation:annotation:${Versions.AndroidX.annotation}"
-        val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
-        val preference = "androidx.preference:preference:${Versions.AndroidX.preference}"
-        val test = "androidx.test:core:${Versions.AndroidX.test}"
-    }
-
-    object Mockito {
-        val core = "org.mockito:mockito-core:${Versions.mockito}"
-        val kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockitoKotlin}"
+        const val annotation = "androidx.annotation:annotation:${Versions.AndroidX.annotation}"
+        const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
+        const val preference = "androidx.preference:preference:${Versions.AndroidX.preference}"
+        const val testCore = "androidx.test:core:${Versions.AndroidX.test}"
     }
 }
