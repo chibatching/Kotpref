@@ -57,10 +57,7 @@ dependencies {
     // For test
     testImplementation Deps.junit
     testImplementation Deps.robolectric
-    testImplementation Deps.assertj
-    testImplementation Deps.Mockito.core
-    testImplementation(Deps.Mockito.kotlin) {
-        exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib'
-    }
+    testImplementation Deps.truth
+    testImplementation Deps.mockk
 }
 

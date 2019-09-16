@@ -2,7 +2,7 @@ package com.chibatching.kotpref.pref
 
 import android.content.Context
 import com.chibatching.kotpref.R
-import org.assertj.core.api.Assertions.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
@@ -28,6 +28,7 @@ class FloatPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProper
         example.testFloat = 78422.214F
         assertThat(example.testFloat)
             .isEqualTo(78422.214F)
+        assertThat(example.testFloat)
             .isEqualTo(examplePref.getFloat("testFloat", 0f))
     }
 
@@ -41,6 +42,7 @@ class FloatPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProper
         customExample.testFloat = 309F
         assertThat(customExample.testFloat)
             .isEqualTo(309F)
+        assertThat(customExample.testFloat)
             .isEqualTo(customPref.getFloat(context.getString(R.string.test_custom_float), 0F))
     }
 

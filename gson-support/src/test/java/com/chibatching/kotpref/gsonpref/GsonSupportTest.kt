@@ -5,9 +5,9 @@ import android.content.SharedPreferences
 import androidx.test.core.app.ApplicationProvider
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
+import com.google.common.truth.Truth.assertThat
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import org.assertj.core.api.Assertions.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -85,6 +85,7 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
                     createDate(2017, 1, 25)
                 )
             )
+        assertThat(example.content)
             .isEqualTo(
                 Kotpref.gson?.fromJson(
                     pref.getString("content", ""),
@@ -110,6 +111,7 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
                     createDate(2017, 1, 20)
                 )
             )
+        assertThat(example.nullableContent)
             .isEqualTo(
                 Kotpref.gson?.fromJson(
                     pref.getString(
@@ -136,7 +138,7 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
                     ), Content::class.java
                 )
             )
-            .isNull()
+        assertThat(example.nullableContent).isNull()
     }
 
     @Test
@@ -145,6 +147,8 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
         val result = Kotpref.gson?.fromJson<List<String>>(
             pref.getString("list", ""), object : TypeToken<List<String>>() {}.type
         )
-        assertThat(example.list).containsExactlyElementsOf(result)
+        assertThat(example.list)
+            .containsExactlyElementsIn(result)
+            .inOrder()
     }
 }

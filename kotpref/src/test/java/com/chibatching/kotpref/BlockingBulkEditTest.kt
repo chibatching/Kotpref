@@ -4,7 +4,7 @@ import android.annotation.TargetApi
 import android.content.SharedPreferences
 import android.os.Build
 import androidx.test.core.app.ApplicationProvider
-import org.assertj.core.api.Assertions.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -80,6 +80,7 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         }
         assertThat(example.testString)
             .isEqualTo("before")
+        assertThat(example.testString)
             .isEqualTo(pref.getString("testString", ""))
     }
 
@@ -93,9 +94,9 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
             testStringSet.add("test3")
             testStringSet.remove("test2")
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test3")
+            assertThat(testStringSet).containsExactly("test1", "test3")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test3")
+        assertThat(example.testStringSet).containsExactly("test1", "test3")
     }
 
     @Test
@@ -108,9 +109,9 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
             testStringSet.add("test3")
             testStringSet.remove("test2")
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1")
+            assertThat(pref.getStringSet("testStringSet", null)).containsExactly("test1")
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder(
+        assertThat(pref.getStringSet("testStringSet", null)).containsExactly(
             "test1",
             "test3"
         )
@@ -129,9 +130,9 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         example.blockingBulk {
             testStringSet.addAll(addSet)
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test2", "test3")
+            assertThat(testStringSet).containsExactly("test1", "test2", "test3")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test2", "test3")
+        assertThat(example.testStringSet).containsExactly("test1", "test2", "test3")
     }
 
     @Test
@@ -147,9 +148,9 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         example.blockingBulk {
             testStringSet.addAll(addSet)
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test1")
+            assertThat(pref.getStringSet("testStringSet", null)).containsExactly("test1")
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder(
+        assertThat(pref.getStringSet("testStringSet", null)).containsExactly(
             "test1",
             "test2",
             "test3"
@@ -173,9 +174,9 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         example.blockingBulk {
             testStringSet.removeAll(removeSet)
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test2")
+            assertThat(testStringSet).containsExactly("test2")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test2")
+        assertThat(example.testStringSet).containsExactly("test2")
     }
 
     @Test
@@ -195,13 +196,13 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         example.blockingBulk {
             testStringSet.removeAll(removeSet)
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder(
+            assertThat(pref.getStringSet("testStringSet", null)).containsExactly(
                 "test1",
                 "test2",
                 "test3"
             )
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder("test2")
+        assertThat(pref.getStringSet("testStringSet", null)).containsExactly("test2")
     }
 
     @Test
@@ -222,9 +223,9 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         example.blockingBulk {
             testStringSet.retainAll(retainSet)
 
-            assertThat(testStringSet).containsExactlyInAnyOrder("test1", "test3")
+            assertThat(testStringSet).containsExactly("test1", "test3")
         }
-        assertThat(example.testStringSet).containsExactlyInAnyOrder("test1", "test3")
+        assertThat(example.testStringSet).containsExactly("test1", "test3")
     }
 
     @Test
@@ -245,13 +246,13 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
         example.blockingBulk {
             testStringSet.retainAll(retainSet)
 
-            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder(
+            assertThat(pref.getStringSet("testStringSet", null)).containsExactly(
                 "test1",
                 "test2",
                 "test3"
             )
         }
-        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyInAnyOrder(
+        assertThat(pref.getStringSet("testStringSet", null)).containsExactly(
             "test1",
             "test3"
         )
@@ -277,11 +278,11 @@ class BlockingBulkEditTest(private val commitAllProperties: Boolean) {
                 iterator.remove()
             }
 
-            assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
-            assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy)
+            assertThat(example.testStringSet).containsExactlyElementsIn(originalCopy - deletedItem)
+            assertThat(pref.getStringSet("testStringSet", null)).containsExactlyElementsIn(originalCopy)
         }
 
-        assertThat(example.testStringSet).containsAll(originalCopy - deletedItem)
-        assertThat(pref.getStringSet("testStringSet", null)).containsAll(originalCopy - deletedItem)
+        assertThat(example.testStringSet).containsExactlyElementsIn(originalCopy - deletedItem)
+        assertThat(pref.getStringSet("testStringSet", null)).containsExactlyElementsIn(originalCopy - deletedItem)
     }
 }

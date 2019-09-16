@@ -2,7 +2,7 @@ package com.chibatching.kotpref.pref
 
 import android.content.Context
 import com.chibatching.kotpref.R
-import org.assertj.core.api.Assertions.assertThat
+import com.google.common.truth.Truth.assertThat
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.ParameterizedRobolectricTestRunner
@@ -28,6 +28,7 @@ class BooleanPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProp
         example.testBoolean = false
         assertThat(example.testBoolean)
             .isEqualTo(false)
+        assertThat(example.testBoolean)
             .isEqualTo(examplePref.getBoolean("testBoolean", false))
     }
 
@@ -41,6 +42,7 @@ class BooleanPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProp
         customExample.testBoolean = false
         assertThat(customExample.testBoolean)
             .isEqualTo(false)
+        assertThat(customExample.testBoolean)
             .isEqualTo(
                 customPref.getBoolean(
                     context.getString(R.string.test_custom_boolean),
