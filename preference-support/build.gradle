@@ -53,8 +53,8 @@ dependencies {
     testCompileOnly Deps.Kotlin.stdlib
     testCompileOnly Deps.junit
     testCompileOnly Deps.robolectric
-    testCompileOnly Deps.AndroidX.test
-    testCompileOnly Deps.assertj
+    testCompileOnly Deps.AndroidX.testCore
+    testCompileOnly Deps.truth
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"
