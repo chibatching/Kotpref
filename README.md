@@ -164,7 +164,7 @@ var useFunc1: Boolean by booleanPref(key = "use_func1")
 var mode: Int by intPref(default = 1, key = R.string.pref_mode)
 ```
 
-### Change default save mode
+#### Change default save mode
 
 Kotpref save all preference property by `apply` method.
 You can change method to `commit` for each property.
