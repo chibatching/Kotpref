@@ -6,7 +6,6 @@ import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.execute
 import com.chibatching.kotpref.pref.AbstractPref
 import java.lang.reflect.Type
-import kotlin.reflect.KProperty
 
 class GsonNullablePref<T : Any>(
     private val targetType: Type,
@@ -15,22 +14,22 @@ class GsonNullablePref<T : Any>(
     private val commitByDefault: Boolean
 ) : AbstractPref<T?>() {
 
-    override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
-        return preference.getString(key ?: property.name, null)?.let { json ->
+    override fun getFromPreference(propertyName: String, preference: SharedPreferences): T? {
+        return preference.getString(key ?: propertyName, null)?.let { json ->
             deserializeFromJson(json) ?: default
         }
     }
 
     @SuppressLint("CommitPrefEdits")
-    override fun setToPreference(property: KProperty<*>, value: T?, preference: SharedPreferences) {
+    override fun setToPreference(propertyName: String, value: T?, preference: SharedPreferences) {
         serializeToJson(value).let { json ->
-            preference.edit().putString(key ?: property.name, json).execute(commitByDefault)
+            preference.edit().putString(key ?: propertyName, json).execute(commitByDefault)
         }
     }
 
-    override fun setToEditor(property: KProperty<*>, value: T?, editor: SharedPreferences.Editor) {
+    override fun setToEditor(propertyName: String, value: T?, editor: SharedPreferences.Editor) {
         serializeToJson(value).let { json ->
-            editor.putString(key ?: property.name, json)
+            editor.putString(key ?: propertyName, json)
         }
     }
 

@@ -19,19 +19,27 @@ internal class StringSetPref(
     private var stringSet: MutableSet<String>? = null
     private var lastUpdate: Long = 0L
 
-    override operator fun getValue(
+    override inline operator fun getValue(
         thisRef: KotprefModel,
         property: KProperty<*>
+    ): MutableSet<String> {
+        val propertyName = property.name
+        return getValueInternal(thisRef, propertyName)
+    }
+
+    @PublishedApi internal fun StringSetPref.getValueInternal(
+        thisRef: KotprefModel,
+        propertyName: String
     ): MutableSet<String> {
         if (stringSet != null && lastUpdate >= thisRef.kotprefTransactionStartTime) {
             return stringSet!!
         }
-        val prefSet = thisRef.kotprefPreference.getStringSet(key ?: property.name, null)
+        val prefSet = thisRef.kotprefPreference.getStringSet(key ?: propertyName, null)
             ?.let { HashSet(it) }
         stringSet = PrefMutableSet(
             thisRef,
             prefSet ?: default.invoke().toMutableSet(),
-            key ?: property.name
+            key ?: propertyName
         )
         lastUpdate = SystemClock.uptimeMillis()
         return stringSet!!

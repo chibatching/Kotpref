@@ -3,7 +3,6 @@ package com.chibatching.kotpref.pref
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import com.chibatching.kotpref.execute
-import kotlin.reflect.KProperty
 
 internal class StringPref(
     val default: String,
@@ -11,24 +10,24 @@ internal class StringPref(
     private val commitByDefault: Boolean
 ) : AbstractPref<String>() {
 
-    override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String {
-        return requireNotNull(preference.getString(key ?: property.name, default))
+    override fun getFromPreference(propertyName: String, preference: SharedPreferences): String {
+        return requireNotNull(preference.getString(key ?: propertyName, default))
     }
 
     @SuppressLint("CommitPrefEdits")
     override fun setToPreference(
-        property: KProperty<*>,
+        propertyName: String,
         value: String,
         preference: SharedPreferences
     ) {
-        preference.edit().putString(key ?: property.name, value).execute(commitByDefault)
+        preference.edit().putString(key ?: propertyName, value).execute(commitByDefault)
     }
 
     override fun setToEditor(
-        property: KProperty<*>,
+        propertyName: String,
         value: String,
         editor: SharedPreferences.Editor
     ) {
-        editor.putString(key ?: property.name, value)
+        editor.putString(key ?: propertyName, value)
     }
 }

@@ -13,29 +13,43 @@ abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, Pref
 
     abstract override val key: String?
 
-    override operator fun getValue(thisRef: KotprefModel, property: KProperty<*>): T {
+    final override inline operator fun getValue(thisRef: KotprefModel, property: KProperty<*>): T =
+        getValueInternal(thisRef, property.name)
+
+    @PublishedApi internal fun getValueInternal(
+        thisRef: KotprefModel,
+        propertyName: String
+    ): T {
         if (!thisRef.kotprefInTransaction) {
-            return getFromPreference(property, thisRef.kotprefPreference)
+            return getFromPreference(propertyName, thisRef.kotprefPreference)
         }
         if (lastUpdate < thisRef.kotprefTransactionStartTime) {
-            transactionData = getFromPreference(property, thisRef.kotprefPreference)
+            transactionData = getFromPreference(propertyName, thisRef.kotprefPreference)
             lastUpdate = SystemClock.uptimeMillis()
         }
         @Suppress("UNCHECKED_CAST")
         return transactionData as T
     }
 
-    override operator fun setValue(thisRef: KotprefModel, property: KProperty<*>, value: T) {
+    final override inline operator fun setValue(thisRef: KotprefModel, property: KProperty<*>, value: T) {
+        setValueInternal(thisRef, value, property.name)
+    }
+
+    fun AbstractPref<T>.setValueInternal(
+        thisRef: KotprefModel,
+        value: T,
+        propertyName: String
+    ) {
         if (thisRef.kotprefInTransaction) {
             transactionData = value
             lastUpdate = SystemClock.uptimeMillis()
-            setToEditor(property, value, thisRef.kotprefEditor!!)
+            setToEditor(propertyName, value, thisRef.kotprefEditor!!)
         } else {
-            setToPreference(property, value, thisRef.kotprefPreference)
+            setToPreference(propertyName, value, thisRef.kotprefPreference)
         }
     }
 
-    abstract fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T
-    abstract fun setToPreference(property: KProperty<*>, value: T, preference: SharedPreferences)
-    abstract fun setToEditor(property: KProperty<*>, value: T, editor: SharedPreferences.Editor)
+    abstract fun getFromPreference(propertyName: String, preference: SharedPreferences): T
+    abstract fun setToPreference(propertyName: String, value: T, preference: SharedPreferences)
+    abstract fun setToEditor(propertyName: String, value: T, editor: SharedPreferences.Editor)
 }

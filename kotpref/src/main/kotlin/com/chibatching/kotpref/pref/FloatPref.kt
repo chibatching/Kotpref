@@ -3,7 +3,6 @@ package com.chibatching.kotpref.pref
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
 import com.chibatching.kotpref.execute
-import kotlin.reflect.KProperty
 
 internal class FloatPref(
     val default: Float,
@@ -11,24 +10,24 @@ internal class FloatPref(
     private val commitByDefault: Boolean
 ) : AbstractPref<Float>() {
 
-    override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Float {
-        return preference.getFloat(key ?: property.name, default)
+    override fun getFromPreference(propertyName: String, preference: SharedPreferences): Float {
+        return preference.getFloat(key ?: propertyName, default)
     }
 
     @SuppressLint("CommitPrefEdits")
     override fun setToPreference(
-        property: KProperty<*>,
+        propertyName: String,
         value: Float,
         preference: SharedPreferences
     ) {
-        preference.edit().putFloat(key ?: property.name, value).execute(commitByDefault)
+        preference.edit().putFloat(key ?: propertyName, value).execute(commitByDefault)
     }
 
     override fun setToEditor(
-        property: KProperty<*>,
+        propertyName: String,
         value: Float,
         editor: SharedPreferences.Editor
     ) {
-        editor.putFloat(key ?: property.name, value)
+        editor.putFloat(key ?: propertyName, value)
     }
 }
