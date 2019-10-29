@@ -17,7 +17,7 @@ class EnumNullableValuePref<T : Enum<*>>(
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
         val value = preference.getString(key ?: property.name, default?.name)
-        return enumConstants.firstOrNull { it.name == value }
+        return enumConstants?.firstOrNull { it.name == value }
     }
 
     @SuppressLint("CommitPrefEdits")

@@ -7,12 +7,12 @@ import android.net.Uri
 import com.chibatching.kotpref.Kotpref
 
 class KotprefInitProvider : ContentProvider() {
-    override fun insert(uri: Uri?, values: ContentValues?): Uri? {
+    override fun insert(uri: Uri, values: ContentValues?): Uri? {
         return null
     }
 
     override fun query(
-        uri: Uri?,
+        uri: Uri,
         projection: Array<out String>?,
         selection: String?,
         selectionArgs: Array<out String>?,
@@ -27,7 +27,7 @@ class KotprefInitProvider : ContentProvider() {
     }
 
     override fun update(
-        uri: Uri?,
+        uri: Uri,
         values: ContentValues?,
         selection: String?,
         selectionArgs: Array<out String>?
@@ -35,11 +35,11 @@ class KotprefInitProvider : ContentProvider() {
         return 0
     }
 
-    override fun delete(uri: Uri?, selection: String?, selectionArgs: Array<out String>?): Int {
+    override fun delete(uri: Uri, selection: String?, selectionArgs: Array<out String>?): Int {
         return 0
     }
 
-    override fun getType(uri: Uri?): String? {
+    override fun getType(uri: Uri): String? {
         return null
     }
 }

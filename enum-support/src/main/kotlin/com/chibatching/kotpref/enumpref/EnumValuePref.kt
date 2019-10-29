@@ -17,7 +17,7 @@ class EnumValuePref<T : Enum<*>>(
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
         val value = preference.getString(key ?: property.name, default.name)
-        return enumConstants.first { it.name == value }
+        return enumConstants!!.first { it.name == value }
     }
 
     @SuppressLint("CommitPrefEdits")

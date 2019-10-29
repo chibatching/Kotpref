@@ -17,7 +17,7 @@ class EnumOrdinalPref<T : Enum<*>>(
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
         val value = preference.getInt(key ?: property.name, default.ordinal)
-        return enumConstants.first { it.ordinal == value }
+        return enumConstants!!.first { it.ordinal == value }
     }
 
     @SuppressLint("CommitPrefEdits")
