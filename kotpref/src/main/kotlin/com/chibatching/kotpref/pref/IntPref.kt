@@ -12,7 +12,7 @@ internal class IntPref(
 ) : AbstractPref<Int>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Int {
-        return preference.getInt(key ?: property.name, default)
+        return preference.getInt(preferenceKey, default)
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -21,10 +21,10 @@ internal class IntPref(
         value: Int,
         preference: SharedPreferences
     ) {
-        preference.edit().putInt(key ?: property.name, value).execute(commitByDefault)
+        preference.edit().putInt(preferenceKey, value).execute(commitByDefault)
     }
 
     override fun setToEditor(property: KProperty<*>, value: Int, editor: SharedPreferences.Editor) {
-        editor.putInt(key ?: property.name, value)
+        editor.putInt(preferenceKey, value)
     }
 }

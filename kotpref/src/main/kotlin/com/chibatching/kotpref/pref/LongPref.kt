@@ -12,7 +12,7 @@ internal class LongPref(
 ) : AbstractPref<Long>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Long {
-        return preference.getLong(key ?: property.name, default)
+        return preference.getLong(preferenceKey, default)
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -21,7 +21,7 @@ internal class LongPref(
         value: Long,
         preference: SharedPreferences
     ) {
-        preference.edit().putLong(key ?: property.name, value).execute(commitByDefault)
+        preference.edit().putLong(preferenceKey, value).execute(commitByDefault)
     }
 
     override fun setToEditor(
@@ -29,6 +29,6 @@ internal class LongPref(
         value: Long,
         editor: SharedPreferences.Editor
     ) {
-        editor.putLong(key ?: property.name, value)
+        editor.putLong(preferenceKey, value)
     }
 }
