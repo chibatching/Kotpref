@@ -56,7 +56,6 @@ dependencies {
     // Preference support
     implementation project(":preference-support")
     implementation Deps.AndroidX.preference
-    implementation Deps.Kotlin.reflect
 
     // For test
     testImplementation Deps.junit

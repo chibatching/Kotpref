@@ -16,10 +16,7 @@ import androidx.preference.PreferenceScreen
 import androidx.preference.SeekBarPreference
 import androidx.preference.SwitchPreferenceCompat
 import com.chibatching.kotpref.KotprefModel
-import com.chibatching.kotpref.pref.PreferenceKey
-import kotlin.jvm.internal.PropertyReference
 import kotlin.reflect.KProperty0
-import kotlin.reflect.jvm.isAccessible
 
 fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
     model: T,
@@ -182,23 +179,11 @@ class PreferenceScreenBuilder(
         title: String,
         options: (T.() -> Unit)?
     ): T {
-        val key = obtainKotprefPropertyDelegationKey(property)
+        val key = model.getPrefKey(property)
         this.key = key
         this.title = title
         options?.invoke(this)
         return this
-    }
-
-    private fun obtainKotprefPropertyDelegationKey(property: KProperty0<Any>): String {
-        property.isAccessible = true
-        if ((property as PropertyReference).boundReceiver != model) {
-            throw IllegalArgumentException("Property should be bounded with same KotprefModel as starting builder")
-        }
-
-        val delegate =
-            (property.getDelegate() as? PreferenceKey)
-                ?: throw IllegalArgumentException("Only Kotpref delegated property is permitted here")
-        return delegate.key ?: property.name
     }
 }
 

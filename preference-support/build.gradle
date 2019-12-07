@@ -47,7 +47,6 @@ dependencies {
     compileOnly Deps.Kotlin.stdlib
     api project(":kotpref")
 
-    compileOnly Deps.Kotlin.reflect
     implementation Deps.AndroidX.preference
 
     testCompileOnly Deps.Kotlin.stdlib
