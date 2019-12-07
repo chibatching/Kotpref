@@ -1,15 +1,12 @@
 package com.chibatching.kotpref.livedata
 
-import android.content.Context
+import android.app.Application
 import android.content.SharedPreferences
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
-import com.chibatching.kotpref.KotprefModel
-import com.chibatching.kotpref.enumpref.enumValuePref
-import com.chibatching.kotpref.gsonpref.gsonPref
 import com.google.common.truth.Truth.assertThat
 import io.mockk.Runs
 import io.mockk.every
@@ -27,20 +24,6 @@ import org.robolectric.RobolectricTestRunner
 @RunWith(RobolectricTestRunner::class)
 class LiveDataSupportTest {
 
-    class Example(context: Context) : KotprefModel(context) {
-        companion object {
-            val gsonSampleDefault = GsonSample("text", 1)
-            val defaultSet = setOf("test1", "test2")
-        }
-
-        var someProperty by stringPref("default")
-        var customKeyProperty by intPref(8, "custom_key")
-
-        var gsonPref by gsonPref(gsonSampleDefault)
-        var enumPref by enumValuePref(EnumSample.FIRST)
-        val setPref by stringSetPref(defaultSet)
-    }
-
     data class GsonSample(
         val text: String,
         val number: Int
@@ -57,7 +40,9 @@ class LiveDataSupportTest {
 
     @Before
     fun setUp() {
-        example = Example(ApplicationProvider.getApplicationContext())
+        val context = ApplicationProvider.getApplicationContext<Application>()
+        example =
+            Example(context)
 
         pref = example.preferences
         pref.edit().clear().commit()
