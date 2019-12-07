@@ -47,6 +47,8 @@ dependencies {
 
     compileOnly Deps.Arch.liveData
 
+    testImplementation project(":gson-support")
+    testImplementation project(":enum-support")
     testImplementation Deps.Kotlin.stdlib
     testImplementation Deps.Arch.liveData
     testImplementation Deps.Arch.runtime
