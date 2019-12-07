@@ -1,18 +1,18 @@
 package com.chibatching.kotpref.livedata
 
-import android.content.Context
+import android.app.Application
 import android.content.SharedPreferences
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
 import androidx.lifecycle.Observer
 import androidx.test.core.app.ApplicationProvider
-import com.chibatching.kotpref.KotprefModel
 import com.google.common.truth.Truth.assertThat
 import io.mockk.Runs
 import io.mockk.every
 import io.mockk.just
 import io.mockk.mockk
+import io.mockk.slot
 import io.mockk.verify
 import io.mockk.verifySequence
 import org.junit.After
@@ -23,9 +23,14 @@ import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
 class LiveDataSupportTest {
-    class Example(context: Context) : KotprefModel(context) {
-        var someProperty by stringPref("default")
-        var customKeyProperty by intPref(8, "custom_key")
+
+    data class GsonSample(
+        val text: String,
+        val number: Int
+    )
+
+    enum class EnumSample {
+        FIRST
     }
 
     private lateinit var example: Example
@@ -35,7 +40,9 @@ class LiveDataSupportTest {
 
     @Before
     fun setUp() {
-        example = Example(ApplicationProvider.getApplicationContext())
+        val context = ApplicationProvider.getApplicationContext<Application>()
+        example =
+            Example(context)
 
         pref = example.preferences
         pref.edit().clear().commit()
@@ -68,6 +75,48 @@ class LiveDataSupportTest {
         verify(exactly = 1) {
             observer.onChanged(8)
         }
+    }
+
+    @Test
+    fun providesDefaultValueWithGson() {
+        val liveData = example.asLiveData(example::gsonPref)
+        val observer = observer<GsonSample>()
+
+        liveData.observeForever(observer)
+
+        verify(exactly = 1) {
+            observer.onChanged(Example.gsonSampleDefault)
+        }
+    }
+
+    @Test
+    fun providesDefaultValueWithEnum() {
+        val liveData = example.asLiveData(example::enumPref)
+        val observer = observer<EnumSample>()
+
+        liveData.observeForever(observer)
+
+        verify(exactly = 1) {
+            observer.onChanged(EnumSample.FIRST)
+        }
+    }
+
+    @Test
+    fun providesDefaultValueWithStringSet() {
+        val liveData = example.asLiveData(example::setPref)
+        val observer = observer<Set<String>>()
+
+        val slot = slot<Set<String>>()
+        every {
+            observer.onChanged(capture(slot))
+        } just Runs
+
+        liveData.observeForever(observer)
+
+        verify(exactly = 1) {
+            observer.onChanged(any())
+        }
+        assertThat(slot.captured).containsExactlyElementsIn(Example.defaultSet)
     }
 
     @Test

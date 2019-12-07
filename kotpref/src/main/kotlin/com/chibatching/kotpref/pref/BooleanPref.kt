@@ -12,7 +12,7 @@ internal class BooleanPref(
 ) : AbstractPref<Boolean>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Boolean {
-        return preference.getBoolean(key ?: property.name, default)
+        return preference.getBoolean(preferenceKey, default)
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -21,7 +21,7 @@ internal class BooleanPref(
         value: Boolean,
         preference: SharedPreferences
     ) {
-        preference.edit().putBoolean(key ?: property.name, value).execute(commitByDefault)
+        preference.edit().putBoolean(preferenceKey, value).execute(commitByDefault)
     }
 
     override fun setToEditor(
@@ -29,6 +29,6 @@ internal class BooleanPref(
         value: Boolean,
         editor: SharedPreferences.Editor
     ) {
-        editor.putBoolean(key ?: property.name, value)
+        editor.putBoolean(preferenceKey, value)
     }
 }

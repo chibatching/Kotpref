@@ -12,7 +12,7 @@ internal class StringPref(
 ) : AbstractPref<String>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): String {
-        return requireNotNull(preference.getString(key ?: property.name, default))
+        return requireNotNull(preference.getString(preferenceKey, default))
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -21,7 +21,7 @@ internal class StringPref(
         value: String,
         preference: SharedPreferences
     ) {
-        preference.edit().putString(key ?: property.name, value).execute(commitByDefault)
+        preference.edit().putString(preferenceKey, value).execute(commitByDefault)
     }
 
     override fun setToEditor(
@@ -29,6 +29,6 @@ internal class StringPref(
         value: String,
         editor: SharedPreferences.Editor
     ) {
-        editor.putString(key ?: property.name, value)
+        editor.putString(preferenceKey, value)
     }
 }

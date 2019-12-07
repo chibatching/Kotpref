@@ -46,12 +46,13 @@ dependencies {
     api project(":kotpref")
 
     compileOnly Deps.Arch.liveData
-    compileOnly Deps.Kotlin.reflect
 
+    testImplementation project(":gson-support")
+    testImplementation project(":enum-support")
     testImplementation Deps.Kotlin.stdlib
-    testImplementation Deps.Kotlin.reflect
     testImplementation Deps.Arch.liveData
     testImplementation Deps.Arch.runtime
+    testImplementation Deps.gson
     testImplementation Deps.junit
     testImplementation Deps.robolectric
     testImplementation Deps.AndroidX.testCore

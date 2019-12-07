@@ -16,7 +16,7 @@ class GsonNullablePref<T : Any>(
 ) : AbstractPref<T?>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T? {
-        return preference.getString(key ?: property.name, null)?.let { json ->
+        return preference.getString(preferenceKey, null)?.let { json ->
             deserializeFromJson(json) ?: default
         }
     }
@@ -24,13 +24,13 @@ class GsonNullablePref<T : Any>(
     @SuppressLint("CommitPrefEdits")
     override fun setToPreference(property: KProperty<*>, value: T?, preference: SharedPreferences) {
         serializeToJson(value).let { json ->
-            preference.edit().putString(key ?: property.name, json).execute(commitByDefault)
+            preference.edit().putString(preferenceKey, json).execute(commitByDefault)
         }
     }
 
     override fun setToEditor(property: KProperty<*>, value: T?, editor: SharedPreferences.Editor) {
         serializeToJson(value).let { json ->
-            editor.putString(key ?: property.name, json)
+            editor.putString(preferenceKey, json)
         }
     }
 

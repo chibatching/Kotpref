@@ -2,9 +2,9 @@ package com.chibatching.kotpref.gsonpref
 
 import com.chibatching.kotpref.Kotpref
 import com.chibatching.kotpref.KotprefModel
+import com.chibatching.kotpref.pref.AbstractPref
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import kotlin.properties.ReadWriteProperty
 
 /**
  * Gson object to serialize and deserialize delegated property
@@ -26,8 +26,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(
     default: T,
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault
-): ReadWriteProperty<KotprefModel, T> =
-    GsonPref(object : TypeToken<T>() {}.type, default, key, commitByDefault)
+): AbstractPref<T> = GsonPref(object : TypeToken<T>() {}.type, default, key, commitByDefault)
 
 /**
  * Delegate shared preferences property serialized and deserialized by gson
@@ -38,7 +37,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(
     default: T,
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault
-): ReadWriteProperty<KotprefModel, T> =
+): AbstractPref<T> =
     GsonPref(object : TypeToken<T>() {}.type, default, context.getString(key), commitByDefault)
 
 /**
@@ -50,7 +49,7 @@ inline fun <reified T : Any> KotprefModel.gsonNullablePref(
     default: T? = null,
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault
-): ReadWriteProperty<KotprefModel, T?> =
+): AbstractPref<T?> =
     GsonNullablePref(object : TypeToken<T>() {}.type, default, key, commitByDefault)
 
 /**
@@ -62,7 +61,7 @@ inline fun <reified T : Any> KotprefModel.gsonNullablePref(
     default: T? = null,
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault
-): ReadWriteProperty<KotprefModel, T?> = GsonNullablePref(
+): AbstractPref<T?> = GsonNullablePref(
     object : TypeToken<T>() {}.type,
     default,
     context.getString(key),

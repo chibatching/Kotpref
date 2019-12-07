@@ -19,7 +19,6 @@ object Deps {
 
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
-        const val reflect = "org.jetbrains.kotlin:kotlin-reflect:${Versions.kotlin}"
         const val gradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
     }
 

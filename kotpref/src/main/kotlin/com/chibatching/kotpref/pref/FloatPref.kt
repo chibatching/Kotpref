@@ -12,7 +12,7 @@ internal class FloatPref(
 ) : AbstractPref<Float>() {
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): Float {
-        return preference.getFloat(key ?: property.name, default)
+        return preference.getFloat(preferenceKey, default)
     }
 
     @SuppressLint("CommitPrefEdits")
@@ -21,7 +21,7 @@ internal class FloatPref(
         value: Float,
         preference: SharedPreferences
     ) {
-        preference.edit().putFloat(key ?: property.name, value).execute(commitByDefault)
+        preference.edit().putFloat(preferenceKey, value).execute(commitByDefault)
     }
 
     override fun setToEditor(
@@ -29,6 +29,6 @@ internal class FloatPref(
         value: Float,
         editor: SharedPreferences.Editor
     ) {
-        editor.putFloat(key ?: property.name, value)
+        editor.putFloat(preferenceKey, value)
     }
 }

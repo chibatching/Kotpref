@@ -16,16 +16,16 @@ class EnumOrdinalPref<T : Enum<*>>(
     private val enumConstants = enumClass.java.enumConstants
 
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
-        val value = preference.getInt(key ?: property.name, default.ordinal)
+        val value = preference.getInt(preferenceKey, default.ordinal)
         return enumConstants!!.first { it.ordinal == value }
     }
 
     @SuppressLint("CommitPrefEdits")
     override fun setToPreference(property: KProperty<*>, value: T, preference: SharedPreferences) {
-        preference.edit().putInt(key ?: property.name, value.ordinal).execute(commitByDefault)
+        preference.edit().putInt(preferenceKey, value.ordinal).execute(commitByDefault)
     }
 
     override fun setToEditor(property: KProperty<*>, value: T, editor: SharedPreferences.Editor) {
-        editor.putInt(key ?: property.name, value.ordinal)
+        editor.putInt(preferenceKey, value.ordinal)
     }
 }
