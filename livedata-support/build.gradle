@@ -46,10 +46,8 @@ dependencies {
     api project(":kotpref")
 
     compileOnly Deps.Arch.liveData
-    compileOnly Deps.Kotlin.reflect
 
     testImplementation Deps.Kotlin.stdlib
-    testImplementation Deps.Kotlin.reflect
     testImplementation Deps.Arch.liveData
     testImplementation Deps.Arch.runtime
     testImplementation Deps.junit

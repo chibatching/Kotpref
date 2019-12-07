@@ -52,7 +52,6 @@ dependencies {
     // LiveData support
     implementation project(":livedata-support")
     implementation Deps.Arch.liveData
-    implementation Deps.Kotlin.reflect
 
     // For test
     testImplementation Deps.junit
