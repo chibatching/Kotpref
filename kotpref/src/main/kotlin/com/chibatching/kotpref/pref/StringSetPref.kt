@@ -6,35 +6,17 @@ import android.os.Build
 import android.os.SystemClock
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.execute
-import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 internal class StringSetPref(
     val default: () -> Set<String>,
-    val key: String?,
+    override val key: String?,
     private val commitByDefault: Boolean
-) : ReadOnlyProperty<KotprefModel, MutableSet<String>>, PreferenceProperty {
+) : AbstractStringSetPref() {
 
     private var stringSet: MutableSet<String>? = null
     private var lastUpdate: Long = 0L
-
-    private lateinit var property: KProperty<*>
-
-    override val propertyName: String
-        get() = property.name
-
-    override val preferenceKey: String
-        get() = key ?: property.name
-
-    operator fun provideDelegate(
-        thisRef: KotprefModel,
-        property: KProperty<*>
-    ): ReadOnlyProperty<KotprefModel, MutableSet<String>> {
-        this.property = property
-        thisRef.kotprefProperties[property.name] = this
-        return this
-    }
 
     override operator fun getValue(
         thisRef: KotprefModel,
@@ -43,12 +25,12 @@ internal class StringSetPref(
         if (stringSet != null && lastUpdate >= thisRef.kotprefTransactionStartTime) {
             return stringSet!!
         }
-        val prefSet = thisRef.kotprefPreference.getStringSet(key ?: property.name, null)
+        val prefSet = thisRef.kotprefPreference.getStringSet(preferenceKey, null)
             ?.let { HashSet(it) }
         stringSet = PrefMutableSet(
             thisRef,
             prefSet ?: default.invoke().toMutableSet(),
-            key ?: property.name
+            preferenceKey
         )
         lastUpdate = SystemClock.uptimeMillis()
         return stringSet!!
