@@ -32,5 +32,6 @@ abstract class BasePrefTest(private val commitAllProperties: Boolean) {
     @After
     fun tearDown() {
         example.clear()
+        customExample.clear()
     }
 }

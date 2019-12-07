@@ -13,5 +13,5 @@ class Example(private val commitAllProperties: Boolean, context: Context) : Kotp
     var testBoolean by booleanPref()
     var testString by stringPref()
     var testStringNullable by nullableStringPref()
-    val testStringSet by stringSetPref(TreeSet<String>())
+    val testStringSet by stringSetPref(TreeSet())
 }

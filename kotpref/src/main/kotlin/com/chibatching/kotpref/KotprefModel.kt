@@ -332,4 +332,19 @@ abstract class KotprefModel(
     fun getPrefKey(property: KProperty<*>): String? {
         return kotprefProperties[property.name]?.preferenceKey
     }
+
+    /**
+     * Remove entry from SharedPreferences
+     * @param property property to remove
+     */
+    @SuppressLint("ApplySharedPref")
+    fun remove(property: KProperty<*>) {
+        preferences.edit().remove(getPrefKey(property)).apply {
+            if (commitAllPropertiesByDefault) {
+                commit()
+            } else {
+                apply()
+            }
+        }
+    }
 }
