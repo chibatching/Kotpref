@@ -2,7 +2,7 @@ apply plugin: 'com.github.dcendents.android-maven'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
 apply plugin: 'com.jfrog.bintray'
-apply plugin: 'org.jetbrains.dokka-android'
+apply plugin: 'org.jetbrains.dokka'
 
 // Bintray upload
 group = groupName
@@ -35,21 +35,19 @@ bintray {
 
 task sourcesJar(type: Jar) {
     from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
+    archiveClassifier.set('sources')
 }
 
 dokka {
     outputFormat = 'javadoc'
-    moduleName = project.name
-    linkMapping {
-        dir = "${project.name}/src/main/kotlin"
-        url = "https://github.com/chibatching/Kotpref/tree/v${version}/${project.name}/src/main/kotlin"
-        suffix = "#L"
+
+    configuration {
+        moduleName = project.name
     }
 }
 
 task javadocJar(type: Jar, dependsOn: dokka) {
-    classifier = 'javadoc'
+    archiveClassifier.set('javadoc')
     from dokka.outputDirectory
 }
 
