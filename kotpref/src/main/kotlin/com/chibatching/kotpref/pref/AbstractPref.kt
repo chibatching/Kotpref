@@ -6,12 +6,29 @@ import com.chibatching.kotpref.KotprefModel
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, PreferenceKey {
+abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, PreferenceProperty {
 
     private var lastUpdate: Long = 0
     private var transactionData: Any? = null
 
-    abstract override val key: String?
+    abstract val key: String?
+
+    private lateinit var property: KProperty<*>
+
+    override val propertyName: String
+        get() = property.name
+
+    override val preferenceKey: String
+        get() = key ?: property.name
+
+    operator fun provideDelegate(
+        thisRef: KotprefModel,
+        property: KProperty<*>
+    ): ReadWriteProperty<KotprefModel, T> {
+        this.property = property
+        thisRef.kotprefProperties[property.name] = this
+        return this
+    }
 
     override operator fun getValue(thisRef: KotprefModel, property: KProperty<*>): T {
         if (!thisRef.kotprefInTransaction) {

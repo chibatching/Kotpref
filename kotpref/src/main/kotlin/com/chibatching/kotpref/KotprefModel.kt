@@ -7,30 +7,38 @@ import android.content.SharedPreferences
 import android.os.Build
 import android.os.SystemClock
 import androidx.annotation.CallSuper
+import com.chibatching.kotpref.pref.AbstractPref
 import com.chibatching.kotpref.pref.BooleanPref
 import com.chibatching.kotpref.pref.FloatPref
 import com.chibatching.kotpref.pref.IntPref
 import com.chibatching.kotpref.pref.LongPref
+import com.chibatching.kotpref.pref.PreferenceProperty
 import com.chibatching.kotpref.pref.StringNullablePref
 import com.chibatching.kotpref.pref.StringPref
 import com.chibatching.kotpref.pref.StringSetPref
 import java.util.LinkedHashSet
 import kotlin.properties.ReadOnlyProperty
 import kotlin.properties.ReadWriteProperty
+import kotlin.reflect.KProperty
 
 abstract class KotprefModel(
     private val contextProvider: ContextProvider = StaticContextProvider,
     private val opener: PreferencesOpener = defaultPreferenceOpener()
 ) {
 
-    constructor(context: Context, opener: PreferencesOpener = defaultPreferenceOpener()) : this(object : ContextProvider {
-        override fun getApplicationContext(): Context {
-            return context.applicationContext
-        }
-    }, opener)
+    constructor(context: Context, opener: PreferencesOpener = defaultPreferenceOpener()) : this(
+        object : ContextProvider {
+            override fun getApplicationContext(): Context {
+                return context.applicationContext
+            }
+        },
+        opener
+    )
 
     internal var kotprefInTransaction: Boolean = false
     internal var kotprefTransactionStartTime: Long = Long.MAX_VALUE
+
+    internal val kotprefProperties: MutableMap<String, PreferenceProperty> = mutableMapOf()
 
     /**
      * Application Context
@@ -93,7 +101,7 @@ abstract class KotprefModel(
         default: String = "",
         key: String? = null,
         commitByDefault: Boolean = commitAllPropertiesByDefault
-    ): ReadWriteProperty<KotprefModel, String> = StringPref(default, key, commitByDefault)
+    ): AbstractPref<String> = StringPref(default, key, commitByDefault)
 
     /**
      * Delegate string shared preferences property.
@@ -324,5 +332,14 @@ abstract class KotprefModel(
     fun cancelBulkEdit() {
         kotprefEditor = null
         kotprefInTransaction = false
+    }
+
+    /**
+     * Get preference key for a property.
+     * @param property property delegated to Kotpref
+     * @return preference key
+     */
+    fun getPrefKey(property: KProperty<*>): String? {
+        return kotprefProperties[property.name]?.preferenceKey
     }
 }
