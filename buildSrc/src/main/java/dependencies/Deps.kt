@@ -7,8 +7,8 @@ object Deps {
         "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintrayGradlePlugin}"
     const val androidMavenGradlePlugin =
         "com.github.dcendents:android-maven-gradle-plugin:${Versions.androidMavenGradlePlugin}"
-    const val dokkaAndroidGradlePlugin =
-        "org.jetbrains.dokka:dokka-android-gradle-plugin:${Versions.dokkaAndroidGradlePlugin}"
+    const val dokkaGradlePlugin =
+        "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokkaGradlePlugin}"
 
     const val junit = "junit:junit:${Versions.junit}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
