@@ -59,6 +59,12 @@ class PreferenceScreenBuilder(
                 entry.key.dependency = entry.value.key
             }
         }
+
+        fun delegateToParentBuilder(parent: DependencyBuilder) {
+            map.forEach { (t, u) ->
+                parent.addDependency(t, u)
+            }
+        }
     }
 
     fun Preference.dependsOn(preference: Preference) {
@@ -159,6 +165,7 @@ class PreferenceScreenBuilder(
         rootScreen.addPreference(category)
         val builder = PreferenceScreenBuilder(context, category, model)
         childBuilder.invoke(builder)
+        builder.dependencyBuilder.delegateToParentBuilder(dependencyBuilder)
         return category
     }
 
