@@ -1,6 +1,10 @@
 package com.chibatching.kotprefsample.preferencesupport
 
 import android.os.Bundle
+import androidx.preference.DropDownPreference
+import androidx.preference.EditTextPreference
+import androidx.preference.ListPreference
+import androidx.preference.MultiSelectListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.chibatching.preference.kotprefScreen
@@ -17,13 +21,10 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
                 val enableOption = checkBox(it::sampleCheckBox, "Sample check box preference")
 
                 editText(it::sampleEditText, "Sample edit text preference") {
-                    summary = it.sampleEditText
                     dialogTitle = "Enter new value"
-                    onPreferenceChangeListener =
-                        Preference.OnPreferenceChangeListener { _, newValue ->
-                            summary = newValue as String
-                            true
-                        }
+                    summaryProvider = Preference.SummaryProvider<EditTextPreference> {
+                        it.text
+                    }
                     dependsOn(enableOption)
                 }
             }
@@ -41,11 +42,10 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
                         PreferenceSupportSampleSettings.Item.values()
                             .map { it.value }
                             .toTypedArray()
-                    onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-                        summary = PreferenceSupportSampleSettings.Item
-                            .find(newValue as String)
+                    summaryProvider = Preference.SummaryProvider<DropDownPreference> {
+                        PreferenceSupportSampleSettings.Item
+                            .find(it.value)
                             .displayName
-                        true
                     }
                 }
             }
@@ -63,18 +63,19 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
                         PreferenceSupportSampleSettings.Item.values()
                             .map { it.value }
                             .toTypedArray()
-                    onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-                        summary = PreferenceSupportSampleSettings.Item
-                            .find(newValue as String)
+                    summaryProvider = Preference.SummaryProvider<ListPreference> {
+                        PreferenceSupportSampleSettings.Item
+                            .find(it.value)
                             .displayName
-                        true
                     }
                 }
 
                 multiSelectList(it::sampleMultiSelectList, "Sample multi select list preference") {
-                    summary = it.sampleMultiSelectList
-                        .map { PreferenceSupportSampleSettings.Item.find(it).displayName }
-                        .joinToString()
+                    summary = it.sampleMultiSelectList.joinToString {
+                        PreferenceSupportSampleSettings.Item
+                            .find(it)
+                            .displayName
+                    }
                     entries =
                         PreferenceSupportSampleSettings.Item.values()
                             .map { it.displayName }
@@ -83,17 +84,17 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
                         PreferenceSupportSampleSettings.Item.values()
                             .map { it.value }
                             .toTypedArray()
-                    onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
-                        summary = (newValue as Set<String>)
-                            .map { PreferenceSupportSampleSettings.Item.find(it).displayName }
-                            .joinToString()
-                        true
+                    summaryProvider = Preference.SummaryProvider<MultiSelectListPreference> {
+                        it.values.joinToString {
+                            PreferenceSupportSampleSettings.Item.find(it).displayName
+                        }
                     }
                 }
 
                 seekBar(it::sampleSeekBar, "Sample seek bar preference") {
                     min = 0
                     max = 100
+                    this.showSeekBarValue = true
                 }
             }
 
