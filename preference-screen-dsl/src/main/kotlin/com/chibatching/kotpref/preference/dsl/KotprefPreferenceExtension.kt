@@ -1,4 +1,4 @@
-package com.chibatching.preference
+package com.chibatching.kotpref.preference.dsl
 
 import android.content.Context
 import android.util.TypedValue

@@ -7,7 +7,7 @@ import androidx.preference.ListPreference
 import androidx.preference.MultiSelectListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
-import com.chibatching.preference.kotprefScreen
+import com.chibatching.kotpref.preference.dsl.kotprefScreen
 
 class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
