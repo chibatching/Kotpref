@@ -54,7 +54,7 @@ dependencies {
     implementation Deps.Arch.liveData
 
     // Preference support
-    implementation project(":preference-support")
+    implementation project(':preference-screen-dsl')
     implementation Deps.AndroidX.preference
 
     // For test
