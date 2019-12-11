@@ -1,0 +1,11 @@
+$dokka.format:html
+$dokka.linkExtension:html
+$dokka.location:com.chibatching.kotpref$execute(android.content.SharedPreferences.Editor, kotlin.Boolean)com.chibatching.kotpref/android.content.-shared-preferences.-editor/execute.html
+$dokka.location:com.chibatching.kotpref.preference.dsl$kotprefScreen(androidx.preference.PreferenceFragmentCompat, com.chibatching.kotpref.preference.dsl.kotprefScreen.T, kotlin.Function2((com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder, com.chibatching.kotpref.preference.dsl.kotprefScreen.T, kotlin.Unit)))com.chibatching.kotpref.preference.dsl/androidx.preference.-preference-fragment-compat/kotpref-screen.html
+com.chibatching.kotpref
+com.chibatching.kotpref.enumpref
+com.chibatching.kotpref.gsonpref
+com.chibatching.kotpref.initializer
+com.chibatching.kotpref.livedata
+com.chibatching.kotpref.pref
+com.chibatching.kotpref.preference.dsl

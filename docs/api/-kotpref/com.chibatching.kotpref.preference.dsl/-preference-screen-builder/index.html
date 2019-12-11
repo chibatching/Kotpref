@@ -1,0 +1,110 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>PreferenceScreenBuilder - Kotpref</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">Kotpref</a>&nbsp;/&nbsp;<a href="../index.html">com.chibatching.kotpref.preference.dsl</a>&nbsp;/&nbsp;<a href="./index.html">PreferenceScreenBuilder</a><br/>
+<br/>
+<h1>PreferenceScreenBuilder</h1>
+<code><span class="keyword">class </span><span class="identifier">PreferenceScreenBuilder</span></code> <a href="https://github.com/chibatching/Kotpref/tree/v2.9.2/preference-screen-dsl/src/main/kotlin/com/chibatching/kotpref/preference/dsl/KotprefPreferenceExtension.kt#L50">(source)</a>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">PreferenceScreenBuilder</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$<init>(android.content.Context, androidx.preference.PreferenceGroup, com.chibatching.kotpref.KotprefModel)/context">context</span><span class="symbol">:</span>&nbsp;<span class="identifier">Context</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$<init>(android.content.Context, androidx.preference.PreferenceGroup, com.chibatching.kotpref.KotprefModel)/rootScreen">rootScreen</span><span class="symbol">:</span>&nbsp;<span class="identifier">PreferenceGroup</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$<init>(android.content.Context, androidx.preference.PreferenceGroup, com.chibatching.kotpref.KotprefModel)/model">model</span><span class="symbol">:</span>&nbsp;<a href="../../com.chibatching.kotpref/-kotpref-model/index.html"><span class="identifier">KotprefModel</span></a><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="category.html">category</a></h4>
+</td>
+<td>
+<p>Create <a href="#">PreferenceCategory</a></p>
+<code><span class="keyword">fun </span><span class="identifier">category</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$category(kotlin.String, kotlin.Function1((com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$category(kotlin.String, kotlin.Function1((com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder, kotlin.Unit)))/childBuilder">childBuilder</span><span class="symbol">:</span>&nbsp;<a href="./index.html"><span class="identifier">PreferenceScreenBuilder</span></a><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">PreferenceCategory</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="check-box.html">checkBox</a></h4>
+</td>
+<td>
+<p>Create <a href="#">CheckBoxPreference</a> with provided property</p>
+<code><span class="keyword">fun </span><span class="identifier">checkBox</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$checkBox(kotlin.reflect.KProperty0((kotlin.Boolean)), kotlin.String, kotlin.Function1((androidx.preference.CheckBoxPreference, kotlin.Unit)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property0/index.html"><span class="identifier">KProperty0</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$checkBox(kotlin.reflect.KProperty0((kotlin.Boolean)), kotlin.String, kotlin.Function1((androidx.preference.CheckBoxPreference, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$checkBox(kotlin.reflect.KProperty0((kotlin.Boolean)), kotlin.String, kotlin.Function1((androidx.preference.CheckBoxPreference, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">CheckBoxPreference</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">CheckBoxPreference</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="depends-on.html">dependsOn</a></h4>
+</td>
+<td>
+<p>Add dependency to other Preference</p>
+<code><span class="keyword">fun </span><span class="identifier">Preference</span><span class="symbol">.</span><span class="identifier">dependsOn</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$dependsOn(androidx.preference.Preference, androidx.preference.Preference)/preference">preference</span><span class="symbol">:</span>&nbsp;<span class="identifier">Preference</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="drop-down.html">dropDown</a></h4>
+</td>
+<td>
+<p>Create <a href="#">DropDownPreference</a> with provided property</p>
+<code><span class="keyword">fun </span><span class="identifier">dropDown</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$dropDown(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.DropDownPreference, kotlin.Unit)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property0/index.html"><span class="identifier">KProperty0</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$dropDown(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.DropDownPreference, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$dropDown(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.DropDownPreference, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">DropDownPreference</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">DropDownPreference</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="edit-text.html">editText</a></h4>
+</td>
+<td>
+<p>Create <a href="#">EditTextPreference</a> with provided property</p>
+<code><span class="keyword">fun </span><span class="identifier">editText</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$editText(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.EditTextPreference, kotlin.Unit)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property0/index.html"><span class="identifier">KProperty0</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$editText(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.EditTextPreference, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$editText(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.EditTextPreference, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">EditTextPreference</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">EditTextPreference</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="list.html">list</a></h4>
+</td>
+<td>
+<p>Create <a href="#">ListPreference</a> with provided property</p>
+<code><span class="keyword">fun </span><span class="identifier">list</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$list(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.ListPreference, kotlin.Unit)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property0/index.html"><span class="identifier">KProperty0</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$list(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.ListPreference, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$list(kotlin.reflect.KProperty0((kotlin.String)), kotlin.String, kotlin.Function1((androidx.preference.ListPreference, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">ListPreference</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">ListPreference</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="multi-select-list.html">multiSelectList</a></h4>
+</td>
+<td>
+<p>Create <a href="#">MultiSelectListPreference</a> with provided property</p>
+<code><span class="keyword">fun </span><span class="identifier">multiSelectList</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$multiSelectList(kotlin.reflect.KProperty0((kotlin.collections.Set((kotlin.String)))), kotlin.String, kotlin.Function1((androidx.preference.MultiSelectListPreference, kotlin.Unit)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property0/index.html"><span class="identifier">KProperty0</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.collections/-set/index.html"><span class="identifier">Set</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$multiSelectList(kotlin.reflect.KProperty0((kotlin.collections.Set((kotlin.String)))), kotlin.String, kotlin.Function1((androidx.preference.MultiSelectListPreference, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$multiSelectList(kotlin.reflect.KProperty0((kotlin.collections.Set((kotlin.String)))), kotlin.String, kotlin.Function1((androidx.preference.MultiSelectListPreference, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">MultiSelectListPreference</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">MultiSelectListPreference</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="screen.html">screen</a></h4>
+</td>
+<td>
+<p>Create <a href="#">PreferenceScreen</a></p>
+<code><span class="keyword">fun </span><span class="identifier">screen</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$screen(kotlin.String, kotlin.Function1((androidx.preference.PreferenceScreen, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$screen(kotlin.String, kotlin.Function1((androidx.preference.PreferenceScreen, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">PreferenceScreen</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">PreferenceScreen</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="seek-bar.html">seekBar</a></h4>
+</td>
+<td>
+<p>Create <a href="#">SeekBarPreference</a> with provided property</p>
+<code><span class="keyword">fun </span><span class="identifier">seekBar</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$seekBar(kotlin.reflect.KProperty0((kotlin.Int)), kotlin.String, kotlin.Function1((androidx.preference.SeekBarPreference, kotlin.Unit)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property0/index.html"><span class="identifier">KProperty0</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$seekBar(kotlin.reflect.KProperty0((kotlin.Int)), kotlin.String, kotlin.Function1((androidx.preference.SeekBarPreference, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$seekBar(kotlin.reflect.KProperty0((kotlin.Int)), kotlin.String, kotlin.Function1((androidx.preference.SeekBarPreference, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">SeekBarPreference</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SeekBarPreference</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="switch.html">switch</a></h4>
+</td>
+<td>
+<p>Create <a href="#">SwitchPreferenceCompat</a> with provided property</p>
+<code><span class="keyword">fun </span><span class="identifier">switch</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$switch(kotlin.reflect.KProperty0((kotlin.Boolean)), kotlin.String, kotlin.Function1((androidx.preference.SwitchPreferenceCompat, kotlin.Unit)))/property">property</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin.reflect/-k-property0/index.html"><span class="identifier">KProperty0</span></a><span class="symbol">&lt;</span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a><span class="symbol">&gt;</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$switch(kotlin.reflect.KProperty0((kotlin.Boolean)), kotlin.String, kotlin.Function1((androidx.preference.SwitchPreferenceCompat, kotlin.Unit)))/title">title</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.preference.dsl.PreferenceScreenBuilder$switch(kotlin.reflect.KProperty0((kotlin.Boolean)), kotlin.String, kotlin.Function1((androidx.preference.SwitchPreferenceCompat, kotlin.Unit)))/options">options</span><span class="symbol">:</span>&nbsp;<span class="symbol">(</span><span class="identifier">SwitchPreferenceCompat</span><span class="symbol">.</span><span class="symbol">(</span><span class="symbol">)</span>&nbsp;<span class="symbol">-&gt;</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html"><span class="identifier">Unit</span></a><span class="symbol">)</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">)</span><span class="symbol">: </span><span class="identifier">SwitchPreferenceCompat</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

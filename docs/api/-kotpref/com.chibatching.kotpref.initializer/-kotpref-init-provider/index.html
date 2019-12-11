@@ -1,0 +1,72 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>KotprefInitProvider - Kotpref</title>
+<link rel="stylesheet" href="../../../style.css">
+</HEAD>
+<BODY>
+<a href="../../index.html">Kotpref</a>&nbsp;/&nbsp;<a href="../index.html">com.chibatching.kotpref.initializer</a>&nbsp;/&nbsp;<a href="./index.html">KotprefInitProvider</a><br/>
+<br/>
+<h1>KotprefInitProvider</h1>
+<code><span class="keyword">class </span><span class="identifier">KotprefInitProvider</span>&nbsp;<span class="symbol">:</span>&nbsp;<span class="identifier">ContentProvider</span></code> <a href="https://github.com/chibatching/Kotpref/tree/v2.9.2/initializer/src/main/kotlin/com/chibatching/kotpref/initializer/KotprefInitProvider.kt#L9">(source)</a>
+<h3>Constructors</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-init-.html">&lt;init&gt;</a></h4>
+</td>
+<td>
+<code><span class="identifier">KotprefInitProvider</span><span class="symbol">(</span><span class="symbol">)</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="delete.html">delete</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">delete</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$delete(android.net.Uri, kotlin.String, kotlin.Array((kotlin.String)))/uri">uri</span><span class="symbol">:</span>&nbsp;<span class="identifier">Uri</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$delete(android.net.Uri, kotlin.String, kotlin.Array((kotlin.String)))/selection">selection</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$delete(android.net.Uri, kotlin.String, kotlin.Array((kotlin.String)))/selectionArgs">selectionArgs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="get-type.html">getType</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">getType</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$getType(android.net.Uri)/uri">uri</span><span class="symbol">:</span>&nbsp;<span class="identifier">Uri</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="insert.html">insert</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">insert</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$insert(android.net.Uri, android.content.ContentValues)/uri">uri</span><span class="symbol">:</span>&nbsp;<span class="identifier">Uri</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$insert(android.net.Uri, android.content.ContentValues)/values">values</span><span class="symbol">:</span>&nbsp;<span class="identifier">ContentValues</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Uri</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="on-create.html">onCreate</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">onCreate</span><span class="symbol">(</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="query.html">query</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">query</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$query(android.net.Uri, kotlin.Array((kotlin.String)), kotlin.String, kotlin.Array((kotlin.String)), kotlin.String)/uri">uri</span><span class="symbol">:</span>&nbsp;<span class="identifier">Uri</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$query(android.net.Uri, kotlin.Array((kotlin.String)), kotlin.String, kotlin.Array((kotlin.String)), kotlin.String)/projection">projection</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$query(android.net.Uri, kotlin.Array((kotlin.String)), kotlin.String, kotlin.Array((kotlin.String)), kotlin.String)/selection">selection</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$query(android.net.Uri, kotlin.Array((kotlin.String)), kotlin.String, kotlin.Array((kotlin.String)), kotlin.String)/selectionArgs">selectionArgs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$query(android.net.Uri, kotlin.Array((kotlin.String)), kotlin.String, kotlin.Array((kotlin.String)), kotlin.String)/sortOrder">sortOrder</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><span class="identifier">Cursor</span><span class="symbol">?</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="update.html">update</a></h4>
+</td>
+<td>
+<code><span class="keyword">fun </span><span class="identifier">update</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$update(android.net.Uri, android.content.ContentValues, kotlin.String, kotlin.Array((kotlin.String)))/uri">uri</span><span class="symbol">:</span>&nbsp;<span class="identifier">Uri</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$update(android.net.Uri, android.content.ContentValues, kotlin.String, kotlin.Array((kotlin.String)))/values">values</span><span class="symbol">:</span>&nbsp;<span class="identifier">ContentValues</span><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$update(android.net.Uri, android.content.ContentValues, kotlin.String, kotlin.Array((kotlin.String)))/selection">selection</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.initializer.KotprefInitProvider$update(android.net.Uri, android.content.ContentValues, kotlin.String, kotlin.Array((kotlin.String)))/selectionArgs">selectionArgs</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-array/index.html"><span class="identifier">Array</span></a><span class="symbol">&lt;</span><span class="keyword">out</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">&gt;</span><span class="symbol">?</span><span class="symbol">)</span><span class="symbol">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>

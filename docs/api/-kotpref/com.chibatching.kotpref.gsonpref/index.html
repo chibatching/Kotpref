@@ -1,0 +1,67 @@
+<HTML>
+<HEAD>
+<meta charset="UTF-8">
+<title>com.chibatching.kotpref.gsonpref - Kotpref</title>
+<link rel="stylesheet" href="../../style.css">
+</HEAD>
+<BODY>
+<a href="../index.html">Kotpref</a>&nbsp;/&nbsp;<a href="./index.html">com.chibatching.kotpref.gsonpref</a><br/>
+<br/>
+<h2>Package com.chibatching.kotpref.gsonpref</h2>
+<h3>Types</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="-gson-nullable-pref/index.html">GsonNullablePref</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">GsonNullablePref</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.chibatching.kotpref.pref/-abstract-pref/index.html"><span class="identifier">AbstractPref</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">?</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="-gson-pref/index.html">GsonPref</a></h4>
+</td>
+<td>
+<code><span class="keyword">class </span><span class="identifier">GsonPref</span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="../com.chibatching.kotpref.pref/-abstract-pref/index.html"><span class="identifier">AbstractPref</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Properties</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="gson.html">gson</a></h4>
+</td>
+<td>
+<p>Gson object to serialize and deserialize delegated property</p>
+<code><span class="keyword">var </span><a href="../com.chibatching.kotpref/-kotpref/index.html"><span class="identifier">Kotpref</span></a><span class="symbol">.</span><span class="identifier">gson</span><span class="symbol">: </span><span class="identifier">Gson</span><span class="symbol">?</span></code></td>
+</tr>
+</tbody>
+</table>
+<h3>Functions</h3>
+<table>
+<tbody>
+<tr>
+<td>
+<h4><a href="gson-nullable-pref.html">gsonNullablePref</a></h4>
+</td>
+<td>
+<p>Delegate shared preferences property serialized and deserialized by gson</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../com.chibatching.kotpref/-kotpref-model/index.html"><span class="identifier">KotprefModel</span></a><span class="symbol">.</span><span class="identifier">gsonNullablePref</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonNullablePref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonNullablePref.T, kotlin.String, kotlin.Boolean)/default">default</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonNullablePref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonNullablePref.T, kotlin.String, kotlin.Boolean)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonNullablePref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonNullablePref.T, kotlin.String, kotlin.Boolean)/commitByDefault">commitByDefault</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;commitAllPropertiesByDefault<span class="symbol">)</span><span class="symbol">: </span><a href="../com.chibatching.kotpref.pref/-abstract-pref/index.html"><span class="identifier">AbstractPref</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">?</span><span class="symbol">&gt;</span></code><br/>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../com.chibatching.kotpref/-kotpref-model/index.html"><span class="identifier">KotprefModel</span></a><span class="symbol">.</span><span class="identifier">gsonNullablePref</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonNullablePref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonNullablePref.T, kotlin.Int, kotlin.Boolean)/default">default</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonNullablePref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonNullablePref.T, kotlin.Int, kotlin.Boolean)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonNullablePref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonNullablePref.T, kotlin.Int, kotlin.Boolean)/commitByDefault">commitByDefault</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;commitAllPropertiesByDefault<span class="symbol">)</span><span class="symbol">: </span><a href="../com.chibatching.kotpref.pref/-abstract-pref/index.html"><span class="identifier">AbstractPref</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">?</span><span class="symbol">&gt;</span></code></td>
+</tr>
+<tr>
+<td>
+<h4><a href="gson-pref.html">gsonPref</a></h4>
+</td>
+<td>
+<p>Delegate shared preferences property serialized and deserialized by gson</p>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../com.chibatching.kotpref/-kotpref-model/index.html"><span class="identifier">KotprefModel</span></a><span class="symbol">.</span><span class="identifier">gsonPref</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonPref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonPref.T, kotlin.String, kotlin.Boolean)/default">default</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonPref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonPref.T, kotlin.String, kotlin.Boolean)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-string/index.html"><span class="identifier">String</span></a><span class="symbol">?</span>&nbsp;<span class="symbol">=</span>&nbsp;null<span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonPref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonPref.T, kotlin.String, kotlin.Boolean)/commitByDefault">commitByDefault</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;commitAllPropertiesByDefault<span class="symbol">)</span><span class="symbol">: </span><a href="../com.chibatching.kotpref.pref/-abstract-pref/index.html"><span class="identifier">AbstractPref</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code><br/>
+<code><span class="keyword">fun </span><span class="symbol">&lt;</span><span class="identifier">T</span>&nbsp;<span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-any/index.html"><span class="identifier">Any</span></a><span class="symbol">&gt;</span> <a href="../com.chibatching.kotpref/-kotpref-model/index.html"><span class="identifier">KotprefModel</span></a><span class="symbol">.</span><span class="identifier">gsonPref</span><span class="symbol">(</span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonPref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonPref.T, kotlin.Int, kotlin.Boolean)/default">default</span><span class="symbol">:</span>&nbsp;<span class="identifier">T</span><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonPref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonPref.T, kotlin.Int, kotlin.Boolean)/key">key</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-int/index.html"><span class="identifier">Int</span></a><span class="symbol">, </span><span class="identifier" id="com.chibatching.kotpref.gsonpref$gsonPref(com.chibatching.kotpref.KotprefModel, com.chibatching.kotpref.gsonpref.gsonPref.T, kotlin.Int, kotlin.Boolean)/commitByDefault">commitByDefault</span><span class="symbol">:</span>&nbsp;<a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html"><span class="identifier">Boolean</span></a>&nbsp;<span class="symbol">=</span>&nbsp;commitAllPropertiesByDefault<span class="symbol">)</span><span class="symbol">: </span><a href="../com.chibatching.kotpref.pref/-abstract-pref/index.html"><span class="identifier">AbstractPref</span></a><span class="symbol">&lt;</span><span class="identifier">T</span><span class="symbol">&gt;</span></code></td>
+</tr>
+</tbody>
+</table>
+</BODY>
+</HTML>
