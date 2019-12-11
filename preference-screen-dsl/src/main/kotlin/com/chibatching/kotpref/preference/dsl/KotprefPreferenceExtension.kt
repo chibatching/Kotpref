@@ -18,6 +18,11 @@ import androidx.preference.SwitchPreferenceCompat
 import com.chibatching.kotpref.KotprefModel
 import kotlin.reflect.KProperty0
 
+/**
+ * Build new PreferenceScreen with KotprefModel
+ * @param model KotprefModel using with this PreferenceScreen
+ * @param builder Create PreferenceScreen with this Builder
+ */
 @ExperimentalPreferenceScreenDsl
 fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
     model: T,
@@ -69,10 +74,16 @@ class PreferenceScreenBuilder(
         }
     }
 
+    /**
+     * Add dependency to other Preference
+     */
     fun Preference.dependsOn(preference: Preference) {
         dependencyBuilder.addDependency(this, preference)
     }
 
+    /**
+     * Create [SwitchPreferenceCompat] with provided property
+     */
     fun switch(
         property: KProperty0<Boolean>,
         title: String,
@@ -85,6 +96,9 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Create [CheckBoxPreference] with provided property
+     */
     fun checkBox(
         property: KProperty0<Boolean>,
         title: String,
@@ -97,6 +111,9 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Create [EditTextPreference] with provided property
+     */
     fun editText(
         property: KProperty0<String>,
         title: String,
@@ -109,6 +126,9 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Create [DropDownPreference] with provided property
+     */
     fun dropDown(
         property: KProperty0<String>,
         title: String,
@@ -121,6 +141,9 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Create [ListPreference] with provided property
+     */
     fun list(
         property: KProperty0<String>,
         title: String,
@@ -133,6 +156,9 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Create [MultiSelectListPreference] with provided property
+     */
     fun multiSelectList(
         property: KProperty0<Set<String>>,
         title: String,
@@ -145,6 +171,9 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Create [SeekBarPreference] with provided property
+     */
     fun seekBar(
         property: KProperty0<Int>,
         title: String,
@@ -157,6 +186,11 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Create [PreferenceCategory]
+     * @param title category title
+     * @param childBuilder [PreferenceScreenBuilder] to create Preference in this category
+     */
     fun category(
         title: String,
         childBuilder: PreferenceScreenBuilder.() -> Unit
@@ -171,6 +205,9 @@ class PreferenceScreenBuilder(
         return category
     }
 
+    /**
+     * Create [PreferenceScreen]
+     */
     fun screen(
         title: String,
         options: (PreferenceScreen.() -> Unit)? = null
