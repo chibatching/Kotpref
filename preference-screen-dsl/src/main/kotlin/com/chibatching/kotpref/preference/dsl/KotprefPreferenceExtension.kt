@@ -18,6 +18,7 @@ import androidx.preference.SwitchPreferenceCompat
 import com.chibatching.kotpref.KotprefModel
 import kotlin.reflect.KProperty0
 
+@ExperimentalPreferenceScreenDsl
 fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
     model: T,
     builder: PreferenceScreenBuilder.(T) -> Unit
@@ -40,6 +41,7 @@ fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
     preferenceBuilder.dependencyBuilder.build()
 }
 
+@ExperimentalPreferenceScreenDsl
 class PreferenceScreenBuilder(
     private val context: Context,
     private val rootScreen: PreferenceGroup,
