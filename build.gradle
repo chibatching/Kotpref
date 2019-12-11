@@ -50,7 +50,8 @@ task replaceVersionInReadme {
 
 dokka {
     outputFormat = 'html'
-    subProjects = ["kotpref", "enum-support", "gson-support", "initializer", "livedata-support"]
+    outputDirectory = 'docs/api'
+    subProjects = ["kotpref", "enum-support", "gson-support", "initializer", "livedata-support", "preference-screen-dsl"]
 
     configuration {
         moduleName = project.name
@@ -61,3 +62,9 @@ dokka {
         }
     }
 }
+
+task cleanApiDocs(type: Delete) {
+    delete 'docs/api'
+}
+
+dokka.dependsOn cleanApiDocs
