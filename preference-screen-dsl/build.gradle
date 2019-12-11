@@ -7,7 +7,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'jacoco'
 apply plugin: BuildSettingHelperPlugin
 
-ext.moduleName = 'Kotpref preference support'
+ext.moduleName = 'Kotpref preference screen DSL'
 
 android {
     compileSdkVersion Versions.targetSdk
