@@ -13,7 +13,7 @@ android {
     compileSdkVersion Versions.targetSdk
 
     defaultConfig {
-        minSdkVersion Versions.minSdk
+        minSdkVersion Versions.minSdkWithSupportLibrary
         targetSdkVersion Versions.targetSdk
         versionName Versions.versionName
 
