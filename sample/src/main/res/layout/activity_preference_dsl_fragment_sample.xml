@@ -6,7 +6,7 @@
 >
     <fragment
         android:id="@+id/fragment"
-        android:name="com.chibatching.kotprefsample.preferencesupport.PreferenceSupportSampleFragment"
+        android:name="com.chibatching.kotprefsample.preferencedsl.PreferenceScreenDslSampleFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     />

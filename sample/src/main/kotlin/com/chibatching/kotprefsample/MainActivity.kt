@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.chibatching.kotpref.bulk
 import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
 import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
-import com.chibatching.kotprefsample.preferencesupport.PreferenceSupportSampleActivity
+import com.chibatching.kotprefsample.preferencedsl.PreferenceScreenDslSampleActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import java.util.Date
 
@@ -28,7 +28,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         preferenceSupportSampleButton.setOnClickListener {
-            startActivity(Intent(this, PreferenceSupportSampleActivity::class.java))
+            startActivity(Intent(this, PreferenceScreenDslSampleActivity::class.java))
         }
 
         liveDataSampleButton.setOnClickListener {

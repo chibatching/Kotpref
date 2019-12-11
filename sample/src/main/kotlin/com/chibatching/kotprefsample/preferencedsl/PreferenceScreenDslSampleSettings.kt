@@ -1,8 +1,8 @@
-package com.chibatching.kotprefsample.preferencesupport
+package com.chibatching.kotprefsample.preferencedsl
 
 import com.chibatching.kotpref.KotprefModel
 
-object PreferenceSupportSampleSettings : KotprefModel() {
+object PreferenceScreenDslSampleSettings : KotprefModel() {
 
     var sampleSwitch by booleanPref(false)
 

@@ -33,7 +33,7 @@
             tools:targetApi="jelly_bean"
         />
         <activity
-            android:name=".preferencesupport.PreferenceSupportSampleActivity"
+            android:name=".preferencedsl.PreferenceScreenDslSampleActivity"
             android:label="@string/preference_fragment_sample"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean"

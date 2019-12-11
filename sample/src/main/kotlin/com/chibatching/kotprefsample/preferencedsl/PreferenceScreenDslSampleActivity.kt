@@ -1,14 +1,14 @@
-package com.chibatching.kotprefsample.preferencesupport
+package com.chibatching.kotprefsample.preferencedsl
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.chibatching.kotprefsample.R
 
-class PreferenceSupportSampleActivity : AppCompatActivity() {
+class PreferenceScreenDslSampleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_preference_support_fragment_sample)
+        setContentView(R.layout.activity_preference_dsl_fragment_sample)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 

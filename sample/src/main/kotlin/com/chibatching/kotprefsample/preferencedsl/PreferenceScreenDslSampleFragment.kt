@@ -1,4 +1,4 @@
-package com.chibatching.kotprefsample.preferencesupport
+package com.chibatching.kotprefsample.preferencedsl
 
 import android.os.Bundle
 import androidx.preference.DropDownPreference
@@ -9,9 +9,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.chibatching.kotpref.preference.dsl.kotprefScreen
 
-class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
+class PreferenceScreenDslSampleFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        kotprefScreen(PreferenceSupportSampleSettings) {
+        kotprefScreen(PreferenceScreenDslSampleSettings) {
             category("Sample category 1") {
                 switch(it::sampleSwitch, "Sample switch preference") {
                     summaryOn = "sample is on"
@@ -31,19 +31,19 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
 
             category("Sample category 2") {
                 dropDown(it::sampleDropDown, "Sample drop down preference") {
-                    summary = PreferenceSupportSampleSettings.Item
+                    summary = PreferenceScreenDslSampleSettings.Item
                         .find(it.sampleDropDown)
                         .displayName
                     entries =
-                        PreferenceSupportSampleSettings.Item.values()
+                        PreferenceScreenDslSampleSettings.Item.values()
                             .map { it.displayName }
                             .toTypedArray()
                     entryValues =
-                        PreferenceSupportSampleSettings.Item.values()
+                        PreferenceScreenDslSampleSettings.Item.values()
                             .map { it.value }
                             .toTypedArray()
                     summaryProvider = Preference.SummaryProvider<DropDownPreference> {
-                        PreferenceSupportSampleSettings.Item
+                        PreferenceScreenDslSampleSettings.Item
                             .find(it.value)
                             .displayName
                     }
@@ -52,19 +52,19 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
 
             category("Sample category 3") {
                 list(it::sampleList, "Sample list preference") {
-                    summary = PreferenceSupportSampleSettings.Item
+                    summary = PreferenceScreenDslSampleSettings.Item
                         .find(it.sampleList)
                         .displayName
                     entries =
-                        PreferenceSupportSampleSettings.Item.values()
+                        PreferenceScreenDslSampleSettings.Item.values()
                             .map { it.displayName }
                             .toTypedArray()
                     entryValues =
-                        PreferenceSupportSampleSettings.Item.values()
+                        PreferenceScreenDslSampleSettings.Item.values()
                             .map { it.value }
                             .toTypedArray()
                     summaryProvider = Preference.SummaryProvider<ListPreference> {
-                        PreferenceSupportSampleSettings.Item
+                        PreferenceScreenDslSampleSettings.Item
                             .find(it.value)
                             .displayName
                     }
@@ -72,21 +72,21 @@ class PreferenceSupportSampleFragment : PreferenceFragmentCompat() {
 
                 multiSelectList(it::sampleMultiSelectList, "Sample multi select list preference") {
                     summary = it.sampleMultiSelectList.joinToString {
-                        PreferenceSupportSampleSettings.Item
+                        PreferenceScreenDslSampleSettings.Item
                             .find(it)
                             .displayName
                     }
                     entries =
-                        PreferenceSupportSampleSettings.Item.values()
+                        PreferenceScreenDslSampleSettings.Item.values()
                             .map { it.displayName }
                             .toTypedArray()
                     entryValues =
-                        PreferenceSupportSampleSettings.Item.values()
+                        PreferenceScreenDslSampleSettings.Item.values()
                             .map { it.value }
                             .toTypedArray()
                     summaryProvider = Preference.SummaryProvider<MultiSelectListPreference> {
                         it.values.joinToString {
-                            PreferenceSupportSampleSettings.Item.find(it).displayName
+                            PreferenceScreenDslSampleSettings.Item.find(it).displayName
                         }
                     }
                 }

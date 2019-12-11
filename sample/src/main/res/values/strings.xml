@@ -2,7 +2,7 @@
     <string name="app_name">kotpref sample</string>
 
     <string name="preference_fragment_sample">PreferenceFragment sample</string>
-    <string name="preference_support_sample">Preference support sample</string>
+    <string name="preference_dsl_sample">PreferenceScreen DSL sample</string>
     <string name="live_data_sample">LiveData sample</string>
     <string name="injectable_context_sample">LiveData sample</string>
     <string name="save">Save</string>
