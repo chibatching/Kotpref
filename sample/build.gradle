@@ -53,6 +53,10 @@ dependencies {
     implementation project(":livedata-support")
     implementation Deps.Arch.liveData
 
+    // Preference support
+    implementation project(':preference-screen-dsl')
+    implementation Deps.AndroidX.preference
+
     // For test
     testImplementation Deps.junit
     testImplementation Deps.robolectric

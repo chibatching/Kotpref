@@ -1,1 +1,1 @@
-include ':sample', ':kotpref', ':initializer', ':enum-support', ':gson-support', ':livedata-support'
+include ':sample', ':kotpref', ':initializer', ':enum-support', ':gson-support', ':livedata-support', ':preference-screen-dsl'
