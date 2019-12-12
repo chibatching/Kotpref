@@ -202,7 +202,7 @@ object UserInfo : KotprefModel() {
 
 ## API Docs
 
-http://chibatching.github.io/Kotpref/docs/api/-kotpref/index.html
+[http://chibatching.github.io/Kotpref/docs/api/-kotpref/index.html](http://chibatching.github.io/Kotpref/docs/api/-kotpref/index.html)
 
 ## License
 
