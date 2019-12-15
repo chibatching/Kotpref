@@ -31,6 +31,7 @@ object Deps {
         const val annotation = "androidx.annotation:annotation:${Versions.AndroidX.annotation}"
         const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         const val preference = "androidx.preference:preference:${Versions.AndroidX.preference}"
+        const val security = "androidx.security:security-crypto:${Versions.AndroidX.security}"
         const val testCore = "androidx.test:core:${Versions.AndroidX.test}"
     }
 }

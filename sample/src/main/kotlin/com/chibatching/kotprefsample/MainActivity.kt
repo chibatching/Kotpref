@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.chibatching.kotpref.bulk
+import com.chibatching.kotprefsample.encrypt.EncryptionSampleActivity
 import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
 import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
 import com.chibatching.kotprefsample.preferencedsl.PreferenceScreenDslSampleActivity
@@ -33,6 +34,10 @@ class MainActivity : AppCompatActivity() {
 
         liveDataSampleButton.setOnClickListener {
             startActivity(Intent(this, LiveDataSampleActivity::class.java))
+        }
+
+        encryptionSampleButton.setOnClickListener {
+            startActivity(Intent(this, EncryptionSampleActivity::class.java))
         }
     }
 
