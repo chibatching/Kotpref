@@ -22,16 +22,19 @@ import kotlin.reflect.KProperty
 
 abstract class KotprefModel(
     private val contextProvider: ContextProvider = StaticContextProvider,
-    private val opener: PreferencesOpener = defaultPreferenceOpener()
+    private val preferencesProvider: PreferencesProvider = defaultPreferenceProvider()
 ) {
 
-    constructor(context: Context, opener: PreferencesOpener = defaultPreferenceOpener()) : this(
+    constructor(
+        context: Context,
+        preferencesProvider: PreferencesProvider = defaultPreferenceProvider()
+    ) : this(
         object : ContextProvider {
             override fun getApplicationContext(): Context {
                 return context.applicationContext
             }
         },
-        opener
+        preferencesProvider
     )
 
     internal var kotprefInTransaction: Boolean = false
@@ -58,14 +61,14 @@ abstract class KotprefModel(
     /**
      * Preference read/write mode
      */
-    protected open val kotprefMode: Int = Context.MODE_PRIVATE
+    open val kotprefMode: Int = Context.MODE_PRIVATE
 
     /**
      * Internal shared preferences.
      * This property will be initialized on use.
      */
     internal val kotprefPreference: KotprefPreferences by lazy {
-        KotprefPreferences(opener.openPreferences(context, kotprefName, kotprefMode))
+        KotprefPreferences(preferencesProvider.get(context, kotprefName, kotprefMode))
     }
 
     /**
@@ -78,7 +81,7 @@ abstract class KotprefModel(
      * Use carefully when during bulk edit, it may cause inconsistent with internal data of Kotpref.
      */
     val preferences: SharedPreferences
-        get() = kotprefPreference.preferences
+        get() = kotprefPreference
 
     /**
      * Clear all preferences in this model
