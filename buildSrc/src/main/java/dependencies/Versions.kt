@@ -27,6 +27,7 @@ object Versions {
         internal const val annotation = "1.1.0"
         internal const val appCompat = "1.1.0"
         internal const val preference = "1.1.0"
+        internal const val security = "1.0.0-alpha02"
         internal const val test = "1.2.0"
     }
 }

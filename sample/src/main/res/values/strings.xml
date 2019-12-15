@@ -4,7 +4,8 @@
     <string name="preference_fragment_sample">PreferenceFragment sample</string>
     <string name="preference_dsl_sample">PreferenceScreen DSL sample</string>
     <string name="live_data_sample">LiveData sample</string>
-    <string name="injectable_context_sample">LiveData sample</string>
+    <string name="injectable_context_sample">Injectable context sample</string>
+    <string name="encryption_sample">Encryption sample</string>
     <string name="save">Save</string>
 
     <!-- Sample preference fragment -->

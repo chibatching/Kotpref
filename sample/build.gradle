@@ -64,6 +64,8 @@ dependencies {
     implementation project(':preference-screen-dsl')
     implementation Deps.AndroidX.preference
 
+    implementation Deps.AndroidX.security
+
     // For test
     testImplementation Deps.junit
     testImplementation Deps.robolectric
