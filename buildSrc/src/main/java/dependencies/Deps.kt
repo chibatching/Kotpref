@@ -23,8 +23,8 @@ object Deps {
     }
 
     object Arch {
-        const val liveData = "androidx.lifecycle:lifecycle-livedata:${Versions.liveData}"
-        const val runtime = "androidx.lifecycle:lifecycle-runtime:${Versions.liveData}"
+        const val liveData = "androidx.lifecycle:lifecycle-livedata:${Versions.AndroidX.liveData}"
+        const val runtime = "androidx.lifecycle:lifecycle-runtime:${Versions.AndroidX.liveData}"
     }
 
     object AndroidX {
