@@ -2,31 +2,31 @@
 
 Android SharedPreference delegation for Kotlin.
 
-[![CircleCI](https://circleci.com/gh/chibatching/Kotpref/tree/master.svg?style=svg)](https://circleci.com/gh/chibatching/Kotpref/tree/master) [![kotlin](https://img.shields.io/badge/kotlin-1.3.61-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
+[![CircleCI](https://circleci.com/gh/chibatching/Kotpref/tree/master.svg?style=svg)](https://circleci.com/gh/chibatching/Kotpref/tree/master) [![kotlin](https://img.shields.io/badge/kotlin-1.3.72-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
 
 ```groovy
 dependencies {
     // core
-    implementation 'com.chibatching.kotpref:kotpref:2.10.0'
+    implementation 'com.chibatching.kotpref:kotpref:2.11.0'
   
     // optional, auto initialization module
-    implementation 'com.chibatching.kotpref:initializer:2.10.0'
+    implementation 'com.chibatching.kotpref:initializer:2.11.0'
   
     // optional, support saving enum value and ordinal
-    implementation 'com.chibatching.kotpref:enum-support:2.10.0'
+    implementation 'com.chibatching.kotpref:enum-support:2.11.0'
   
     // optional, support saving json string through Gson
-    implementation 'com.chibatching.kotpref:gson-support:2.10.0'
-    implementation 'com.google.code.gson:gson:2.8.5'
+    implementation 'com.chibatching.kotpref:gson-support:2.11.0'
+    implementation 'com.google.code.gson:gson:2.8.6'
   
     // optional, support LiveData observable preference
-    implementation 'com.chibatching.kotpref:livedata-support:2.10.0'
-    implementation 'androidx.lifecycle:lifecycle-livedata:2.1.0'
+    implementation 'com.chibatching.kotpref:livedata-support:2.11.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
 
     // experimental, preference screen build dsl
-    implementation 'com.chibatching.kotpref:preference-screen-dsl:2.10.0'
+    implementation 'com.chibatching.kotpref:preference-screen-dsl:2.11.0'
 }
 ```
 
