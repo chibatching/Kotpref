@@ -47,9 +47,9 @@ class GsonSupportTest(private val commitAllProperties: Boolean) {
 
         var content by gsonPref(createDefaultContent())
 
-        var list: List<String> by gsonPref(emptyList())
+        var list: List<String> by gsonPref(emptyList<String>())
 
-        var nullableContent: Content? by gsonNullablePref()
+        var nullableContent: Content? by gsonNullablePref<Content>()
     }
 
     private lateinit var example: Example

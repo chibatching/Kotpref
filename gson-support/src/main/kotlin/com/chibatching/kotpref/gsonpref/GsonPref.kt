@@ -10,15 +10,24 @@ import kotlin.reflect.KProperty
 
 class GsonPref<T : Any>(
     private val targetType: Type,
-    private val default: T,
+    private val default: () -> T,
     override val key: String?,
     private val commitByDefault: Boolean
 ) : AbstractPref<T>() {
 
+    constructor(
+        targetType: Type,
+        default: T,
+        key: String?,
+        commitByDefault: Boolean
+    ) : this(
+        targetType, { default }, key, commitByDefault
+    )
+
     override fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T {
         return preference.getString(preferenceKey, null)?.let { json ->
-            deserializeFromJson(json) ?: default
-        } ?: default
+            deserializeFromJson(json) ?: default()
+        } ?: default()
     }
 
     @SuppressLint("CommitPrefEdits")
