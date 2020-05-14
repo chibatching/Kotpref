@@ -1,0 +1,16 @@
+categories:
+  - title: 'Features'
+    labels:
+      - 'feature'
+      - 'enhancement'
+  - title: 'Bug Fixes'
+    labels:
+      - 'bug'
+      - 'bugfix'
+  - title: 'Experimental Features'
+    label: 'experimental'
+  - title: 'Maintenance'
+    label: 'maintenance'
+change-template: '- $TITLE #$NUMBER (@$AUTHOR)'
+template: |
+  $CHANGES
