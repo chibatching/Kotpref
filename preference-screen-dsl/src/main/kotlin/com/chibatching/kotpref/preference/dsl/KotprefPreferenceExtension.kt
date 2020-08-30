@@ -41,8 +41,8 @@ fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
 
     val rootScreen: PreferenceScreen = preferenceManager.createPreferenceScreen(themedContext)
     val preferenceBuilder = PreferenceScreenBuilder(themedContext, rootScreen, model)
-    builder(preferenceBuilder, model)
     preferenceScreen = rootScreen
+    builder(preferenceBuilder, model)
     preferenceBuilder.dependencyBuilder.build()
 }
 
