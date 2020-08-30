@@ -96,6 +96,10 @@ class PreferenceScreenDslSampleFragment : PreferenceFragmentCompat() {
                     max = 100
                     this.showSeekBarValue = true
                 }
+
+                preference("samplePreference", "Sample preference") {
+                    summary = "This preference does nothing"
+                }
             }
 
             category("Info") {

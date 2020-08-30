@@ -187,6 +187,23 @@ class PreferenceScreenBuilder(
     }
 
     /**
+     * Create [Preference]
+     */
+    fun preference(
+        key: String,
+        title: String,
+        options: (Preference.() -> Unit)? = null
+    ): Preference {
+        val preference = Preference(context).apply {
+            this.key = key
+            this.title = title
+            options?.invoke(this)
+        }
+        rootScreen.addPreference(preference)
+        return preference
+    }
+
+    /**
      * Create [PreferenceCategory]
      * @param title category title
      * @param childBuilder [PreferenceScreenBuilder] to create Preference in this category
