@@ -2,6 +2,7 @@ package com.chibatching.kotpref.livedata
 
 import android.app.Application
 import android.content.SharedPreferences
+import android.os.Looper.getMainLooper
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LifecycleRegistry
@@ -20,6 +21,8 @@ import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.Shadows.shadowOf
+import org.robolectric.annotation.LooperMode
 
 @RunWith(RobolectricTestRunner::class)
 class LiveDataSupportTest {
@@ -127,7 +130,10 @@ class LiveDataSupportTest {
         liveData.observeForever(observer)
 
         example.someProperty = "some value 1"
+        shadowOf(getMainLooper()).idle()
+
         example.someProperty = "value 2"
+        shadowOf(getMainLooper()).idle()
 
         verifySequence {
             observer.onChanged("default")
@@ -144,7 +150,10 @@ class LiveDataSupportTest {
         liveData.observeForever(observer)
 
         example.customKeyProperty = 1
+        shadowOf(getMainLooper()).idle()
+
         example.customKeyProperty = 12
+        shadowOf(getMainLooper()).idle()
 
         verifySequence {
             observer.onChanged(8)
