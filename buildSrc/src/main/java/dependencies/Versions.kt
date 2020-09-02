@@ -10,7 +10,7 @@ object Versions {
 
     internal const val kotlin = "1.3.72"
     internal const val junit = "4.12"
-    internal const val robolectric = "4.3"
+    internal const val robolectric = "4.4"
     internal const val gson = "2.8.6"
 
     internal const val androidGradlePlugin = "3.6.3"
