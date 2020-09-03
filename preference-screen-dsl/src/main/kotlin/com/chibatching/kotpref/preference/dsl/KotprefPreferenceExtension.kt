@@ -41,8 +41,8 @@ fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
 
     val rootScreen: PreferenceScreen = preferenceManager.createPreferenceScreen(themedContext)
     val preferenceBuilder = PreferenceScreenBuilder(themedContext, rootScreen, model)
-    builder(preferenceBuilder, model)
     preferenceScreen = rootScreen
+    builder(preferenceBuilder, model)
     preferenceBuilder.dependencyBuilder.build()
 }
 
@@ -182,6 +182,23 @@ class PreferenceScreenBuilder(
         val preference =
             SeekBarPreference(context).applyPreferenceOptions(property, title, options)
         preference.value = property.get()
+        rootScreen.addPreference(preference)
+        return preference
+    }
+
+    /**
+     * Create [Preference]
+     */
+    fun preference(
+        key: String,
+        title: String,
+        options: (Preference.() -> Unit)? = null
+    ): Preference {
+        val preference = Preference(context).apply {
+            this.key = key
+            this.title = title
+            options?.invoke(this)
+        }
         rootScreen.addPreference(preference)
         return preference
     }
