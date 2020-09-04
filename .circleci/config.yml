@@ -26,8 +26,7 @@ commands:
 
 jobs:
   unit_test:
-    executor:
-      name: default
+    executor: default
     parameters:
       run-on-master:
         type: boolean
@@ -46,18 +45,17 @@ jobs:
           steps:
             - save_gradle_cache
   publish:
-    executor:
-      name: default
+    executor: default
     steps:
       - checkout
       - restore_gradle_cache
       - android/restore-build-cache
       - run:
           name: Prepare artifacts
-          command: ./gradlew clean install --no-daemon
+          command: ./gradlew publishToMavenLocal
       - run:
           name: Upload to Bintray
-          command: ./gradlew bintrayUpload --no-daemon
+          command: ./gradlew bintrayUpload
 workflows:
   version: 2
   test:

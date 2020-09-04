@@ -36,7 +36,6 @@ dependencies {
 
 ```kotlin
 object UserInfo : KotprefModel() {
-    var gameLevel by enumValuePref(GameLevel.NORMAL)
     var name by stringPref()
     var code by nullableStringPref()
     var age by intPref(default = 14)

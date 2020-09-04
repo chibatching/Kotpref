@@ -16,7 +16,6 @@ buildscript {
         classpath Deps.androidGradlePlugin
         classpath Deps.Kotlin.gradlePlugin
         classpath Deps.bintrayGradlePlugin
-        classpath Deps.androidMavenGradlePlugin
         classpath Deps.dokkaGradlePlugin
     }
 }
@@ -26,6 +25,10 @@ allprojects {
         jcenter()
         google()
     }
+}
+
+wrapper {
+    distributionType = Wrapper.DistributionType.ALL
 }
 
 task replaceVersionInReadme {
@@ -45,23 +48,12 @@ task replaceVersionInReadme {
     }
 }
 
-dokka {
-    outputFormat = 'html'
-    outputDirectory = 'docs/api'
-    subProjects = ["kotpref", "enum-support", "gson-support", "initializer", "livedata-support", "preference-screen-dsl"]
-
-    configuration {
-        moduleName = project.name
-        sourceLink {
-            path = "./"
-            url = "https://github.com/chibatching/Kotpref/tree/v${Versions.versionName}"
-            lineSuffix = "#L"
-        }
-    }
+tasks.named("dokkaHtmlMultiModule") {
+    outputDirectory.set(file("docs/api"))
+    documentationFileName.set("README.md")
+    dependsOn cleanApiDocs
 }
 
 task cleanApiDocs(type: Delete) {
     delete 'docs/api'
 }
-
-dokka.dependsOn cleanApiDocs
