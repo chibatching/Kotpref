@@ -1,0 +1,3 @@
+# Kotpref
+
+Kotpref core module

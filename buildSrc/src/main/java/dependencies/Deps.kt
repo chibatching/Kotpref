@@ -1,14 +1,13 @@
 package dependencies
 
+@Suppress("unused")
 object Deps {
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
     const val bintrayGradlePlugin =
         "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintrayGradlePlugin}"
-    const val androidMavenGradlePlugin =
-        "com.github.dcendents:android-maven-gradle-plugin:${Versions.androidMavenGradlePlugin}"
     const val dokkaGradlePlugin =
-        "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokkaGradlePlugin}"
+        "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
 
     const val junit = "junit:junit:${Versions.junit}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"
