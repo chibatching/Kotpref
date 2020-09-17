@@ -102,6 +102,12 @@ class PreferenceScreenDslSampleFragment : PreferenceFragmentCompat() {
                 }
             }
 
+            CustomPreference(requireContext())
+                .with(it::customPreferenceValue)
+                .title("Custom preference") {
+                    setCustomValue("custom")
+                }
+
             category("Info") {
                 screen("Version 1.0")
             }

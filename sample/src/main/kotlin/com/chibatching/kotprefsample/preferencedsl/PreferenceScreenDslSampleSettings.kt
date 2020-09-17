@@ -18,6 +18,8 @@ object PreferenceScreenDslSampleSettings : KotprefModel() {
 
     val sampleSeekBar by intPref(50)
 
+    val customPreferenceValue by stringPref("custom")
+
     enum class Item(val displayName: String, val value: String) {
         FIRST("first item", "first"),
         SECOND("second item", "second"),

@@ -41,8 +41,8 @@ fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
 
     val rootScreen: PreferenceScreen = preferenceManager.createPreferenceScreen(themedContext)
     val preferenceBuilder = PreferenceScreenBuilder(themedContext, rootScreen, model)
-    preferenceScreen = rootScreen
     builder(preferenceBuilder, model)
+    preferenceScreen = rootScreen
     preferenceBuilder.dependencyBuilder.build()
 }
 
@@ -237,6 +237,23 @@ class PreferenceScreenBuilder(
         return preference
     }
 
+    /**
+     * Start builder adding custom preference into PreferenceScreen
+     *
+     * ```
+     * CustomPreference(context)
+     *     .with(it::customValue)
+     *     .title("Custom preference") {
+     *         setCustomParam(param)
+     *     }
+     * ```
+     *
+     * @param property property to associate this custom preference
+     * @return [CustomPreferenceBuilder]
+     */
+    inline fun <reified T : Preference> T.with(property: KProperty0<Any>) =
+        CustomPreferenceBuilder(this, property)
+
     private fun <T : Preference> T.applyPreferenceOptions(
         property: KProperty0<Any>,
         title: String,
@@ -247,6 +264,21 @@ class PreferenceScreenBuilder(
         this.title = title
         options?.invoke(this)
         return this
+    }
+
+    /**
+     * Builder for custom preference.
+     * Calling [title] is required to add PreferenceScreen.
+     */
+    inner class CustomPreferenceBuilder<T : Preference>(
+        private val preference: T,
+        private val property: KProperty0<Any>
+    ) {
+        fun title(title: String, options: (T.() -> Unit)?): T {
+            preference.applyPreferenceOptions(property, title, options)
+            rootScreen.addPreference(preference)
+            return preference
+        }
     }
 }
 
