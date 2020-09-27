@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":gson-support/debug": [], ":gson-support/main": [], ":gson-support/release": []}'
+sourceset_dependencies = '{":gson-support:dokkaHtml/debug": [], ":gson-support:dokkaHtml/main": [], ":gson-support:dokkaHtml/release": []}'

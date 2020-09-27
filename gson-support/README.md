@@ -1,7 +1,3 @@
-# Kotpref gson-sppurt
+# Module gson-support
 
 Serialize/Deserialize json object to KotprefModel using Gson
-
-```kotlin
-
-```

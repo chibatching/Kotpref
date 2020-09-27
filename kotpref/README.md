@@ -1,3 +1,3 @@
-# Kotpref
+# Module kotpref
 
 Kotpref core module

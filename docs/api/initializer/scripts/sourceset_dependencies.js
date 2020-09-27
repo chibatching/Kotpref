@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":initializer/debug": [], ":initializer/main": [], ":initializer/release": []}'
+sourceset_dependencies = '{":initializer:dokkaHtml/debug": [], ":initializer:dokkaHtml/main": [], ":initializer:dokkaHtml/release": []}'

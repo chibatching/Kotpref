@@ -1,3 +1,3 @@
-# Kotpref livedata support
+# Module livedata-support
 
 Observe SharedPreferences changes as LiveData

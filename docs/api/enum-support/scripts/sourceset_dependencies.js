@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":enum-support/debug": [], ":enum-support/main": [], ":enum-support/release": []}'
+sourceset_dependencies = '{":enum-support:dokkaHtml/debug": [], ":enum-support:dokkaHtml/main": [], ":enum-support:dokkaHtml/release": []}'

@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":kotpref/debug": [], ":kotpref/main": [], ":kotpref/release": []}'
+sourceset_dependencies = '{":kotpref:dokkaHtml/debug": [], ":kotpref:dokkaHtml/main": [], ":kotpref:dokkaHtml/release": []}'

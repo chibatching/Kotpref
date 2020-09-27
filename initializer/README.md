@@ -1,3 +1,3 @@
-# Kotpref auto initializer
+# Module initializer
 
 Auto initialization Kotpref using ContentProvider

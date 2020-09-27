@@ -1,1 +1,1 @@
-sourceset_dependencies = '{":livedata-support/debug": [], ":livedata-support/main": [], ":livedata-support/release": []}'
+sourceset_dependencies = '{":livedata-support:dokkaHtml/debug": [], ":livedata-support:dokkaHtml/main": [], ":livedata-support:dokkaHtml/release": []}'
