@@ -29,11 +29,7 @@ abstract class KotprefModel(
         context: Context,
         preferencesProvider: PreferencesProvider = defaultPreferenceProvider()
     ) : this(
-        object : ContextProvider {
-            override fun getApplicationContext(): Context {
-                return context.applicationContext
-            }
-        },
+        ContextProvider { context.applicationContext },
         preferencesProvider
     )
 
