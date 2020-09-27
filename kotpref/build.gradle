@@ -60,6 +60,7 @@ dependencies {
     testImplementation Deps.robolectric
     testImplementation Deps.AndroidX.testCore
     testImplementation Deps.truth
+    testImplementation Deps.mockk
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"

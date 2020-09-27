@@ -15,4 +15,10 @@ object Kotpref {
     fun init(context: Context) {
         StaticContextProvider.setContext(context.applicationContext)
     }
+
+    /**
+     * Return true if Kotpref singleton object is initialized via [init] function
+     */
+    val isInitialized
+        get() = StaticContextProvider.isInitialized
 }

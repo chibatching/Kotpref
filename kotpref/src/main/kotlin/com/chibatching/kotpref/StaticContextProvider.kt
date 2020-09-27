@@ -8,10 +8,13 @@ internal object StaticContextProvider : ContextProvider {
 
     override fun getApplicationContext(): Context {
         return staticContext
-            ?: throw IllegalStateException("StaticContextProvider has not been initialized.")
+            ?: throw IllegalStateException("Kotpref has not been initialized.")
     }
 
     fun setContext(context: Context) {
         staticContext = context.applicationContext
     }
+
+    val isInitialized
+        get() = staticContext != null
 }
