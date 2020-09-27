@@ -4,6 +4,8 @@ executors:
   default:
     docker:
       - image: circleci/android:api-28
+    environment:
+      GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx2048m"
 
 orbs:
   codecov: codecov/codecov@1.0.5
