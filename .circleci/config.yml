@@ -4,6 +4,9 @@ executors:
   default:
     docker:
       - image: circleci/android:api-28
+    environment:
+      JVM_OPTS: -Xmx2048m
+      GRADLE_OPTS: -Xmx1536m
 
 orbs:
   codecov: codecov/codecov@1.0.5
@@ -37,7 +40,7 @@ jobs:
       - android/restore-build-cache
       - run:
           name: Run unit tests
-          command: ./gradlew jacocoTestReport --no-daemon
+          command: ./gradlew jacocoTestReport --stacktrace
       - codecov/upload
       - android/save-build-cache
       - when:
@@ -52,10 +55,10 @@ jobs:
       - android/restore-build-cache
       - run:
           name: Prepare artifacts
-          command: ./gradlew publishToMavenLocal
+          command: ./gradlew publishToMavenLocal --stacktrace
       - run:
           name: Upload to Bintray
-          command: ./gradlew bintrayUpload
+          command: ./gradlew bintrayUpload --stacktrace
 workflows:
   version: 2
   test:
