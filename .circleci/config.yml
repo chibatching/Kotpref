@@ -5,11 +5,11 @@ executors:
     docker:
       - image: circleci/android:api-28
     environment:
-      GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx2048m"
+      GRADLE_OPTS: -Dorg.gradle.jvmargs=-Xmx2048m
 
 orbs:
-  codecov: codecov/codecov@1.0.5
-  android: circleci/android@0.1.0
+  codecov: codecov/codecov@1.1.1
+  android: circleci/android@0.2.1
 
 commands:
   restore_gradle_cache:
