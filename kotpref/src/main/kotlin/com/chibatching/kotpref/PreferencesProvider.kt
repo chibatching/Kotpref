@@ -3,7 +3,7 @@ package com.chibatching.kotpref
 import android.content.Context
 import android.content.SharedPreferences
 
-interface PreferencesProvider {
+fun interface PreferencesProvider {
     fun get(context: Context, name: String, mode: Int): SharedPreferences
 }
 

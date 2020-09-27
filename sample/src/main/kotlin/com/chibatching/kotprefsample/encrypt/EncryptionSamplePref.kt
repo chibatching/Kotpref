@@ -14,28 +14,22 @@ class EncryptionSamplePref(
 
     companion object {
         private var encryptedSharedPreference: SharedPreferences? = null
-        private val preferencesProvider = object : PreferencesProvider {
-            override fun get(
-                context: Context,
-                name: String,
-                mode: Int
-            ): SharedPreferences {
-                return encryptedSharedPreference ?: run {
-                    // EncryptedSharedPreferences supports above SDK 23
-                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-                        context.getSharedPreferences(name, mode)
-                    } else {
-                        val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
-                        EncryptedSharedPreferences.create(
-                            name,
-                            masterKeyAlias,
-                            context,
-                            EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
-                            EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
-                        )
-                    }.also {
-                        encryptedSharedPreference = it
-                    }
+        private val preferencesProvider = PreferencesProvider { context, name, mode ->
+            encryptedSharedPreference ?: run {
+                // EncryptedSharedPreferences supports above SDK 23
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+                    context.getSharedPreferences(name, mode)
+                } else {
+                    val masterKeyAlias = MasterKeys.getOrCreate(MasterKeys.AES256_GCM_SPEC)
+                    EncryptedSharedPreferences.create(
+                        name,
+                        masterKeyAlias,
+                        context,
+                        EncryptedSharedPreferences.PrefKeyEncryptionScheme.AES256_SIV,
+                        EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
+                    )
+                }.also {
+                    encryptedSharedPreference = it
                 }
             }
         }
