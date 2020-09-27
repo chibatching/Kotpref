@@ -8,7 +8,7 @@ object Versions {
     const val minSdk = 9
     const val minSdkWithSupportLibrary = 14
 
-    internal const val kotlin = "1.4.0"
+    internal const val kotlin = "1.4.10"
     internal const val junit = "4.12"
     internal const val robolectric = "4.4"
     internal const val gson = "2.8.6"
