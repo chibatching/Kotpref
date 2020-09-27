@@ -39,7 +39,7 @@ jobs:
       - android/restore-build-cache
       - run:
           name: Run unit tests
-          command: ./gradlew jacocoTestReport --no-daemon
+          command: ./gradlew jacocoTestReport --no-daemon --stacktrace
       - codecov/upload
       - android/save-build-cache
       - when:
