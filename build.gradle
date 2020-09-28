@@ -50,7 +50,6 @@ task replaceVersionInReadme {
 
 tasks.named("dokkaHtmlMultiModule") {
     outputDirectory.set(file("docs/api"))
-    documentationFileName.set("README.md")
     dependsOn cleanApiDocs
 }
 

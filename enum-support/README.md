@@ -1,4 +1,4 @@
-# Kotpref enum-sppurt
+# Module enum-support
 
 Saving enum value to KotprefModel as String
 

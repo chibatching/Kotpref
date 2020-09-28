@@ -1,0 +1,1 @@
+var pages = [{'name': 'fun <T> KotprefModel.asLiveData(property: KProperty0<T>): LiveData<T>', 'description':'com.chibatching.kotpref.livedata.asLiveData', 'location':'livedata-support/com.chibatching.kotpref.livedata/as-live-data.html', 'searchKey':'asLiveData'}]
