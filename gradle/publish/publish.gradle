@@ -17,7 +17,7 @@ bintray {
     user = USER
     key = KEY
 
-    configurations = ['archives'] //When uploading configuration files
+    publications = ['release']
     pkg {
         repo = 'maven'
         name = 'kotpref'
