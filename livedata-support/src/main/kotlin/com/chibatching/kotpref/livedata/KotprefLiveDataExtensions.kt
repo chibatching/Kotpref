@@ -10,10 +10,6 @@ fun <T> KotprefModel.asLiveData(property: KProperty0<T>): LiveData<T> {
         private val key: String = this@asLiveData.getPrefKey(property)
             ?: throw IllegalArgumentException("Failed to get preference key, check property ${property.name} is delegated to Kotpref")
 
-        init {
-            postValue(property.get())
-        }
-
         override fun onSharedPreferenceChanged(prefs: SharedPreferences, propertyName: String) {
             if (propertyName == key) {
                 postValue(property.get())
