@@ -1,12 +1,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.chibatching.initializer">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.chibatching.initializer">
 
     <application>
         <provider
-            android:authorities="${applicationId}.kotprefinitprovider"
+            android:name="androidx.startup.InitializationProvider"
+            android:authorities="${applicationId}.androidx-startup"
             android:exported="false"
-            android:enabled="true"
-            android:name="com.chibatching.kotpref.initializer.KotprefInitProvider"/>
+            tools:node="merge">
+
+            <!-- Automatically runs KotprefInitializer at app startup -->
+            <meta-data
+                android:name="com.chibatching.kotpref.initializer.KotprefInitializer"
+                android:value="androidx.startup" />
+        </provider>
     </application>
 
 </manifest>

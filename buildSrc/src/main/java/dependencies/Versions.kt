@@ -26,6 +26,7 @@ object Versions {
         internal const val appCompat = "1.2.0"
         internal const val preference = "1.1.1"
         internal const val security = "1.0.0-rc03"
+        internal const val startup = "1.0.0"
         internal const val liveData = "2.2.0"
         internal const val test = "1.3.0"
     }
