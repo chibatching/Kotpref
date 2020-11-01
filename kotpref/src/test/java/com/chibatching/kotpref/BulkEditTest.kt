@@ -15,7 +15,7 @@ import java.util.HashSet
 import java.util.TreeSet
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-class BulkEditTest(private val commitAllProperties: Boolean) {
+internal class BulkEditTest(private val commitAllProperties: Boolean) {
     companion object {
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "commitAllProperties = {0}")

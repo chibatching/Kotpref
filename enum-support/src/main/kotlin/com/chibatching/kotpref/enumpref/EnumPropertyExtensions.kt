@@ -8,7 +8,7 @@ import com.chibatching.kotpref.pref.AbstractPref
  * @param default default enum value
  * @param key custom preferences key
  */
-inline fun <reified T : Enum<*>> KotprefModel.enumValuePref(
+public inline fun <reified T : Enum<*>> KotprefModel.enumValuePref(
     default: T,
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -19,7 +19,7 @@ inline fun <reified T : Enum<*>> KotprefModel.enumValuePref(
  * @param default default enum value
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Enum<*>> KotprefModel.enumValuePref(
+public inline fun <reified T : Enum<*>> KotprefModel.enumValuePref(
     default: T,
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -31,7 +31,7 @@ inline fun <reified T : Enum<*>> KotprefModel.enumValuePref(
  * @param default default enum value
  * @param key custom preferences key
  */
-inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(
+public inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(
     default: T? = null,
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -42,7 +42,7 @@ inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(
  * @param default default enum value
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(
+public inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(
     default: T? = null,
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -54,7 +54,7 @@ inline fun <reified T : Enum<*>> KotprefModel.nullableEnumValuePref(
  * @param default default enum value
  * @param key custom preferences key
  */
-inline fun <reified T : Enum<*>> KotprefModel.enumOrdinalPref(
+public inline fun <reified T : Enum<*>> KotprefModel.enumOrdinalPref(
     default: T,
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -65,7 +65,7 @@ inline fun <reified T : Enum<*>> KotprefModel.enumOrdinalPref(
  * @param default default enum value
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Enum<*>> KotprefModel.enumOrdinalPref(
+public inline fun <reified T : Enum<*>> KotprefModel.enumOrdinalPref(
     default: T,
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault

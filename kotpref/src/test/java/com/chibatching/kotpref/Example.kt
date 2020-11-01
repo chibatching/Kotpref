@@ -3,7 +3,7 @@ package com.chibatching.kotpref
 import android.content.Context
 import java.util.TreeSet
 
-class Example(private val commitAllProperties: Boolean, context: Context) : KotprefModel(context) {
+internal class Example(private val commitAllProperties: Boolean, context: Context) : KotprefModel(context) {
     override val commitAllPropertiesByDefault: Boolean
         get() = commitAllProperties
 

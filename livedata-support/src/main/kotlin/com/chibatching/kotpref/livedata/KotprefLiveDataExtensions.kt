@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import com.chibatching.kotpref.KotprefModel
 import kotlin.reflect.KProperty0
 
-fun <T> KotprefModel.asLiveData(property: KProperty0<T>): LiveData<T> {
+public fun <T> KotprefModel.asLiveData(property: KProperty0<T>): LiveData<T> {
     return object : LiveData<T>(), SharedPreferences.OnSharedPreferenceChangeListener {
         private val key: String = this@asLiveData.getPrefKey(property)
             ?: throw IllegalArgumentException("Failed to get preference key, check property ${property.name} is delegated to Kotpref")

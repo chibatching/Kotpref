@@ -5,7 +5,7 @@ import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.enumpref.enumValuePref
 import com.chibatching.kotpref.gsonpref.gsonPref
 
-class Example(context: Context) : KotprefModel(context) {
+internal class Example(context: Context) : KotprefModel(context) {
     companion object {
         val gsonSampleDefault = LiveDataSupportTest.GsonSample("text", 1)
         val defaultSet = setOf("test1", "test2")

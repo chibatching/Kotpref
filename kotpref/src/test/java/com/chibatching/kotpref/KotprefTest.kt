@@ -13,7 +13,7 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class KotprefTest {
+internal class KotprefTest {
 
     @Before
     fun setUp() {

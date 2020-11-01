@@ -1,6 +1,6 @@
 package com.chibatching.kotpref.enumpref
 
-enum class ExampleEnum {
+internal enum class ExampleEnum {
     FIRST,
     SECOND,
     THIRD

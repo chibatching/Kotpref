@@ -9,7 +9,7 @@ import com.google.gson.reflect.TypeToken
 /**
  * Gson object to serialize and deserialize delegated property
  */
-var Kotpref.gson: Gson?
+public var Kotpref.gson: Gson?
     get() {
         return KotprefGsonHolder.gson
     }
@@ -22,7 +22,7 @@ var Kotpref.gson: Gson?
  * @param default default gson object value
  * @param key custom preferences key
  */
-inline fun <reified T : Any> KotprefModel.gsonPref(
+public inline fun <reified T : Any> KotprefModel.gsonPref(
     default: T,
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -33,7 +33,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(
  * @param default default gson object value provider function
  * @param key custom preferences key
  */
-inline fun <reified T : Any> KotprefModel.gsonPref(
+public inline fun <reified T : Any> KotprefModel.gsonPref(
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault,
     noinline default: () -> T
@@ -44,7 +44,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(
  * @param default default gson object value
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Any> KotprefModel.gsonPref(
+public inline fun <reified T : Any> KotprefModel.gsonPref(
     default: T,
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -56,7 +56,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(
  * @param default default gson object value provider function
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Any> KotprefModel.gsonPref(
+public inline fun <reified T : Any> KotprefModel.gsonPref(
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault,
     noinline default: () -> T
@@ -68,7 +68,7 @@ inline fun <reified T : Any> KotprefModel.gsonPref(
  * @param default default gson object value
  * @param key custom preferences key
  */
-inline fun <reified T : Any> KotprefModel.gsonNullablePref(
+public inline fun <reified T : Any> KotprefModel.gsonNullablePref(
     default: T? = null,
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -80,7 +80,7 @@ inline fun <reified T : Any> KotprefModel.gsonNullablePref(
  * @param default default gson object value provider function
  * @param key custom preferences key
  */
-inline fun <reified T : Any> KotprefModel.gsonNullablePref(
+public inline fun <reified T : Any> KotprefModel.gsonNullablePref(
     key: String? = null,
     commitByDefault: Boolean = commitAllPropertiesByDefault,
     noinline default: (() -> T?)
@@ -92,7 +92,7 @@ inline fun <reified T : Any> KotprefModel.gsonNullablePref(
  * @param default default gson object value
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Any> KotprefModel.gsonNullablePref(
+public inline fun <reified T : Any> KotprefModel.gsonNullablePref(
     default: T? = null,
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault
@@ -108,7 +108,7 @@ inline fun <reified T : Any> KotprefModel.gsonNullablePref(
  * @param default default gson object value provider function
  * @param key custom preferences key resource id
  */
-inline fun <reified T : Any> KotprefModel.gsonNullablePref(
+public inline fun <reified T : Any> KotprefModel.gsonNullablePref(
     key: Int,
     commitByDefault: Boolean = commitAllPropertiesByDefault,
     noinline default: (() -> T?)

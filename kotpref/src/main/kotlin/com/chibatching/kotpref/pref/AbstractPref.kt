@@ -6,12 +6,12 @@ import com.chibatching.kotpref.KotprefModel
 import kotlin.properties.ReadWriteProperty
 import kotlin.reflect.KProperty
 
-abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, PreferenceProperty {
+public abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, PreferenceProperty {
 
     private var lastUpdate: Long = 0
     private var transactionData: Any? = null
 
-    abstract val key: String?
+    public abstract val key: String?
 
     private lateinit var property: KProperty<*>
 
@@ -21,7 +21,7 @@ abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, Pref
     override val preferenceKey: String
         get() = key ?: property.name
 
-    operator fun provideDelegate(
+    public operator fun provideDelegate(
         thisRef: KotprefModel,
         property: KProperty<*>
     ): ReadWriteProperty<KotprefModel, T> {
@@ -52,7 +52,7 @@ abstract class AbstractPref<T : Any?> : ReadWriteProperty<KotprefModel, T>, Pref
         }
     }
 
-    abstract fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T
-    abstract fun setToPreference(property: KProperty<*>, value: T, preference: SharedPreferences)
-    abstract fun setToEditor(property: KProperty<*>, value: T, editor: SharedPreferences.Editor)
+    public abstract fun getFromPreference(property: KProperty<*>, preference: SharedPreferences): T
+    public abstract fun setToPreference(property: KProperty<*>, value: T, preference: SharedPreferences)
+    public abstract fun setToEditor(property: KProperty<*>, value: T, editor: SharedPreferences.Editor)
 }

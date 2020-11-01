@@ -1,6 +1,6 @@
 package com.chibatching.kotpref.pref
 
-interface PreferenceProperty {
-    val propertyName: String
-    val preferenceKey: String
+public interface PreferenceProperty {
+    public val propertyName: String
+    public val preferenceKey: String
 }

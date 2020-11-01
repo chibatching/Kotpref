@@ -9,7 +9,7 @@ import org.robolectric.ParameterizedRobolectricTestRunner
 import java.util.Arrays
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-class IntPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {
+internal class IntPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {
     companion object {
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "commitAllProperties = {0}")

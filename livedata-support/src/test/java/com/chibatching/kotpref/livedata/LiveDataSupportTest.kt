@@ -25,7 +25,7 @@ import org.robolectric.Shadows.shadowOf
 import org.robolectric.annotation.LooperMode
 
 @RunWith(RobolectricTestRunner::class)
-class LiveDataSupportTest {
+internal class LiveDataSupportTest {
 
     data class GsonSample(
         val text: String,

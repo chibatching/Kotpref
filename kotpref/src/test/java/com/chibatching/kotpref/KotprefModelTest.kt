@@ -13,7 +13,7 @@ import org.robolectric.RobolectricTestRunner
 import java.util.Arrays
 
 @RunWith(Enclosed::class)
-class KotprefModelTest {
+internal class KotprefModelTest {
 
     @RunWith(ParameterizedRobolectricTestRunner::class)
     class RemovePropertyTest(private val commitAllProperties: Boolean) {

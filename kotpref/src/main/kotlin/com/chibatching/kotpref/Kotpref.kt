@@ -5,20 +5,20 @@ import android.content.Context
 /**
  * Kotpref: SharedPreference delegation for Kotlin
  */
-object Kotpref {
+public object Kotpref {
 
     /**
      * Initialize Kotpref singleton object.
      *
      * @param context Application context
      */
-    fun init(context: Context) {
+    public fun init(context: Context) {
         StaticContextProvider.setContext(context.applicationContext)
     }
 
     /**
      * Return true if Kotpref singleton object is initialized via [init] function
      */
-    val isInitialized
+    public val isInitialized: Boolean
         get() = StaticContextProvider.isInitialized
 }
