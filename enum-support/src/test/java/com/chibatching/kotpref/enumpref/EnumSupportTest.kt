@@ -15,7 +15,7 @@ import java.util.Arrays
 
 @Config(manifest = Config.NONE)
 @RunWith(ParameterizedRobolectricTestRunner::class)
-class EnumSupportTest(private val commitAllProperties: Boolean) {
+internal class EnumSupportTest(private val commitAllProperties: Boolean) {
 
     companion object {
         @JvmStatic

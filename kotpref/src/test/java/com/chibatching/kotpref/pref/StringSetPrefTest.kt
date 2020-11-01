@@ -12,7 +12,7 @@ import java.util.Arrays
 import java.util.TreeSet
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {
+internal class StringSetPrefTest(commitAllProperties: Boolean) : BasePrefTest(commitAllProperties) {
     companion object {
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "commitAllProperties = {0}")

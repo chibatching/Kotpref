@@ -20,12 +20,12 @@ import com.chibatching.kotpref.pref.StringSetPref
 import java.util.LinkedHashSet
 import kotlin.reflect.KProperty
 
-abstract class KotprefModel(
+public abstract class KotprefModel(
     private val contextProvider: ContextProvider = StaticContextProvider,
     private val preferencesProvider: PreferencesProvider = defaultPreferenceProvider()
 ) {
 
-    constructor(
+    public constructor(
         context: Context,
         preferencesProvider: PreferencesProvider = defaultPreferenceProvider()
     ) : this(
@@ -41,23 +41,23 @@ abstract class KotprefModel(
     /**
      * Application Context
      */
-    val context: Context
+    public val context: Context
         get() = contextProvider.getApplicationContext()
 
     /**
      * Preference file name
      */
-    open val kotprefName: String = javaClass.simpleName
+    public open val kotprefName: String = javaClass.simpleName
 
     /**
      * commit() all properties in this pref by default instead of apply()
      */
-    open val commitAllPropertiesByDefault: Boolean = false
+    public open val commitAllPropertiesByDefault: Boolean = false
 
     /**
      * Preference read/write mode
      */
-    open val kotprefMode: Int = Context.MODE_PRIVATE
+    public open val kotprefMode: Int = Context.MODE_PRIVATE
 
     /**
      * Internal shared preferences.
@@ -76,14 +76,14 @@ abstract class KotprefModel(
      * SharedPreferences instance exposed.
      * Use carefully when during bulk edit, it may cause inconsistent with internal data of Kotpref.
      */
-    val preferences: SharedPreferences
+    public val preferences: SharedPreferences
         get() = kotprefPreference
 
     /**
      * Clear all preferences in this model
      */
     @CallSuper
-    open fun clear() {
+    public open fun clear() {
         beginBulkEdit()
         kotprefEditor!!.clear()
         commitBulkEdit()
@@ -293,7 +293,7 @@ abstract class KotprefModel(
      * Begin bulk edit mode. You must commit or cancel after bulk edit finished.
      */
     @SuppressLint("CommitPrefEdits")
-    fun beginBulkEdit() {
+    public fun beginBulkEdit() {
         kotprefInTransaction = true
         kotprefTransactionStartTime = SystemClock.uptimeMillis()
         kotprefEditor = kotprefPreference.KotprefEditor(kotprefPreference.edit())
@@ -302,7 +302,7 @@ abstract class KotprefModel(
     /**
      * Commit values set in the bulk edit mode to preferences.
      */
-    fun commitBulkEdit() {
+    public fun commitBulkEdit() {
         kotprefEditor!!.apply()
         kotprefInTransaction = false
     }
@@ -310,7 +310,7 @@ abstract class KotprefModel(
     /**
      * Commit values set in the bulk edit mode to preferences immediately, in blocking manner.
      */
-    fun blockingCommitBulkEdit() {
+    public fun blockingCommitBulkEdit() {
         kotprefEditor!!.commit()
         kotprefInTransaction = false
     }
@@ -318,7 +318,7 @@ abstract class KotprefModel(
     /**
      * Cancel bulk edit mode. Values set in the bulk mode will be rolled back.
      */
-    fun cancelBulkEdit() {
+    public fun cancelBulkEdit() {
         kotprefEditor = null
         kotprefInTransaction = false
     }
@@ -328,7 +328,7 @@ abstract class KotprefModel(
      * @param property property delegated to Kotpref
      * @return preference key
      */
-    fun getPrefKey(property: KProperty<*>): String? {
+    public fun getPrefKey(property: KProperty<*>): String? {
         return kotprefProperties[property.name]?.preferenceKey
     }
 
@@ -337,7 +337,7 @@ abstract class KotprefModel(
      * @param property property to remove
      */
     @SuppressLint("ApplySharedPref")
-    fun remove(property: KProperty<*>) {
+    public fun remove(property: KProperty<*>) {
         preferences.edit().remove(getPrefKey(property)).apply {
             if (commitAllPropertiesByDefault) {
                 commit()

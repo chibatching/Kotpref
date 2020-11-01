@@ -6,7 +6,7 @@ import android.database.Cursor
 import android.net.Uri
 import com.chibatching.kotpref.Kotpref
 
-class KotprefInitProvider : ContentProvider() {
+public class KotprefInitProvider : ContentProvider() {
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         return null
     }

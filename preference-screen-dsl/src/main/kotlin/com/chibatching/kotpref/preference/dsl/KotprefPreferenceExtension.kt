@@ -24,7 +24,7 @@ import kotlin.reflect.KProperty0
  * @param builder Create PreferenceScreen with this Builder
  */
 @ExperimentalPreferenceScreenDsl
-fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
+public fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
     model: T,
     builder: PreferenceScreenBuilder.(T) -> Unit
 ) {
@@ -47,7 +47,7 @@ fun <T : KotprefModel> PreferenceFragmentCompat.kotprefScreen(
 }
 
 @ExperimentalPreferenceScreenDsl
-class PreferenceScreenBuilder(
+public class PreferenceScreenBuilder(
     private val context: Context,
     private val rootScreen: PreferenceGroup,
     private val model: KotprefModel
@@ -77,14 +77,14 @@ class PreferenceScreenBuilder(
     /**
      * Add dependency to other Preference
      */
-    fun Preference.dependsOn(preference: Preference) {
+    public fun Preference.dependsOn(preference: Preference) {
         dependencyBuilder.addDependency(this, preference)
     }
 
     /**
      * Create [SwitchPreferenceCompat] with provided property
      */
-    fun switch(
+    public fun switch(
         property: KProperty0<Boolean>,
         title: String,
         options: (SwitchPreferenceCompat.() -> Unit)? = null
@@ -99,7 +99,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [CheckBoxPreference] with provided property
      */
-    fun checkBox(
+    public fun checkBox(
         property: KProperty0<Boolean>,
         title: String,
         options: (CheckBoxPreference.() -> Unit)? = null
@@ -114,7 +114,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [EditTextPreference] with provided property
      */
-    fun editText(
+    public fun editText(
         property: KProperty0<String>,
         title: String,
         options: (EditTextPreference.() -> Unit)? = null
@@ -129,7 +129,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [DropDownPreference] with provided property
      */
-    fun dropDown(
+    public fun dropDown(
         property: KProperty0<String>,
         title: String,
         options: (DropDownPreference.() -> Unit)? = null
@@ -144,7 +144,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [ListPreference] with provided property
      */
-    fun list(
+    public fun list(
         property: KProperty0<String>,
         title: String,
         options: (ListPreference.() -> Unit)? = null
@@ -159,7 +159,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [MultiSelectListPreference] with provided property
      */
-    fun multiSelectList(
+    public fun multiSelectList(
         property: KProperty0<Set<String>>,
         title: String,
         options: (MultiSelectListPreference.() -> Unit)? = null
@@ -174,7 +174,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [SeekBarPreference] with provided property
      */
-    fun seekBar(
+    public fun seekBar(
         property: KProperty0<Int>,
         title: String,
         options: (SeekBarPreference.() -> Unit)? = null
@@ -189,7 +189,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [Preference]
      */
-    fun preference(
+    public fun preference(
         key: String,
         title: String,
         options: (Preference.() -> Unit)? = null
@@ -208,7 +208,7 @@ class PreferenceScreenBuilder(
      * @param title category title
      * @param childBuilder [PreferenceScreenBuilder] to create Preference in this category
      */
-    fun category(
+    public fun category(
         title: String,
         childBuilder: PreferenceScreenBuilder.() -> Unit
     ): PreferenceCategory {
@@ -225,7 +225,7 @@ class PreferenceScreenBuilder(
     /**
      * Create [PreferenceScreen]
      */
-    fun screen(
+    public fun screen(
         title: String,
         options: (PreferenceScreen.() -> Unit)? = null
     ): PreferenceScreen {
@@ -251,7 +251,9 @@ class PreferenceScreenBuilder(
      * @param property property to associate this custom preference
      * @return [CustomPreferenceBuilder]
      */
-    inline fun <reified T : Preference> T.with(property: KProperty0<Any>) =
+    public inline fun <reified T : Preference> T.with(
+        property: KProperty0<Any>
+    ): CustomPreferenceBuilder<T> =
         CustomPreferenceBuilder(this, property)
 
     private fun <T : Preference> T.applyPreferenceOptions(
@@ -270,11 +272,11 @@ class PreferenceScreenBuilder(
      * Builder for custom preference.
      * Calling [title] is required to add PreferenceScreen.
      */
-    inner class CustomPreferenceBuilder<T : Preference>(
+    public inner class CustomPreferenceBuilder<T : Preference>(
         private val preference: T,
         private val property: KProperty0<Any>
     ) {
-        fun title(title: String, options: (T.() -> Unit)?): T {
+        public fun title(title: String, options: (T.() -> Unit)?): T {
             preference.applyPreferenceOptions(property, title, options)
             rootScreen.addPreference(preference)
             return preference

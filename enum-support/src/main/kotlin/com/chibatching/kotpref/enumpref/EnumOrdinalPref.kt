@@ -7,7 +7,7 @@ import com.chibatching.kotpref.pref.AbstractPref
 import kotlin.reflect.KClass
 import kotlin.reflect.KProperty
 
-class EnumOrdinalPref<T : Enum<*>>(
+public class EnumOrdinalPref<T : Enum<*>>(
     enumClass: KClass<T>,
     private val default: T,
     override val key: String?,

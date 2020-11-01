@@ -4,11 +4,11 @@ import com.chibatching.kotpref.KotprefModel
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-abstract class AbstractStringSetPref :
+public abstract class AbstractStringSetPref :
     ReadOnlyProperty<KotprefModel, MutableSet<String>>,
     PreferenceProperty {
 
-    abstract val key: String?
+    public abstract val key: String?
 
     private lateinit var property: KProperty<*>
 
@@ -18,7 +18,7 @@ abstract class AbstractStringSetPref :
     override val preferenceKey: String
         get() = key ?: property.name
 
-    operator fun provideDelegate(
+    public operator fun provideDelegate(
         thisRef: KotprefModel,
         property: KProperty<*>
     ): ReadOnlyProperty<KotprefModel, MutableSet<String>> {

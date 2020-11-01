@@ -8,14 +8,14 @@ import com.chibatching.kotpref.pref.AbstractPref
 import java.lang.reflect.Type
 import kotlin.reflect.KProperty
 
-class GsonNullablePref<T : Any>(
+public class GsonNullablePref<T : Any>(
     private val targetType: Type,
     private val default: (() -> T?),
     override val key: String?,
     private val commitByDefault: Boolean
 ) : AbstractPref<T?>() {
 
-    constructor(
+    public constructor(
         targetType: Type,
         default: T?,
         key: String?,

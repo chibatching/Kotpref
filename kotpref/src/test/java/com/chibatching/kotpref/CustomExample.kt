@@ -3,7 +3,7 @@ package com.chibatching.kotpref
 import android.content.Context
 import java.util.LinkedHashSet
 
-class CustomExample(
+internal class CustomExample(
     private val commitAllProperties: Boolean,
     context: Context
 ) : KotprefModel(context) {
