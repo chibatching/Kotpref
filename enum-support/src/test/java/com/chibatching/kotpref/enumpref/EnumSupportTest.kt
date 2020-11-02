@@ -15,12 +15,12 @@ import java.util.Arrays
 
 @Config(manifest = Config.NONE)
 @RunWith(ParameterizedRobolectricTestRunner::class)
-internal class EnumSupportTest(private val commitAllProperties: Boolean) {
+class EnumSupportTest(private val commitAllProperties: Boolean) {
 
     companion object {
         @JvmStatic
         @ParameterizedRobolectricTestRunner.Parameters(name = "commitAllProperties = {0}")
-        fun data(): Collection<Array<out Any>> {
+        public fun data(): Collection<Array<out Any>> {
             return Arrays.asList(arrayOf(false), arrayOf(true))
         }
     }

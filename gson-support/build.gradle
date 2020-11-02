@@ -46,7 +46,12 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
-        freeCompilerArgs += "-Xexplicit-api=strict"
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile) {
+    if (!it.name.contains("Test")) {
+        kotlinOptions.freeCompilerArgs += "-Xexplicit-api=strict"
     }
 }
 

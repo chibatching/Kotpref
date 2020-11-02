@@ -18,7 +18,7 @@ import java.util.Calendar
 import java.util.Date
 
 @RunWith(ParameterizedRobolectricTestRunner::class)
-internal class GsonSupportTest(private val commitAllProperties: Boolean) {
+class GsonSupportTest(private val commitAllProperties: Boolean) {
 
     companion object {
         @JvmStatic

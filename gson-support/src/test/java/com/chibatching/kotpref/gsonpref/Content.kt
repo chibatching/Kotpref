@@ -3,7 +3,7 @@ package com.chibatching.kotpref.gsonpref
 import com.google.gson.annotations.SerializedName
 import java.util.Date
 
-internal data class Content(
+data class Content(
 
     @SerializedName("title")
     var title: String = "",
