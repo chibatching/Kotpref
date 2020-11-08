@@ -17,7 +17,7 @@ object Versions {
     internal const val bintrayGradlePlugin = "1.8.5"
     internal const val dokka = "1.4.10"
 
-    internal const val jacoco = "0.7.9"
+    internal const val jacoco = "0.8.6"
     internal const val mockk = "1.10.2"
     internal const val truth = "1.1"
 
