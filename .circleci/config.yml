@@ -9,7 +9,6 @@ executors:
       GRADLE_OPTS: -Xmx1536m
 
 orbs:
-  codecov: codecov/codecov@1.0.5
   android: circleci/android@0.1.0
 
 commands:
@@ -28,25 +27,6 @@ commands:
             - ~/.gradle
 
 jobs:
-  unit_test:
-    executor: default
-    parameters:
-      run-on-master:
-        type: boolean
-        default: false
-    steps:
-      - checkout
-      - restore_gradle_cache
-      - android/restore-build-cache
-      - run:
-          name: Run unit tests
-          command: ./gradlew jacocoTestReport --stacktrace
-      - codecov/upload
-      - android/save-build-cache
-      - when:
-          condition: << parameters.run-on-master >>
-          steps:
-            - save_gradle_cache
   publish:
     executor: default
     steps:

@@ -26,4 +26,4 @@ jobs:
             ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-
       - name: Unit test
         run: ./gradlew jacocoTestReport --stacktrace
-      - use: codecov/codecov-action@v1
+      - uses: codecov/codecov-action@v1
