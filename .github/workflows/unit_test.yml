@@ -12,7 +12,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - name: set up JDK
+      - name: Setup JDK
         uses: actions/setup-java@v1
         with:
           java-version: 1.9
@@ -26,4 +26,9 @@ jobs:
             ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-
       - name: Unit test
         run: ./gradlew jacocoTestReport --stacktrace
-      - uses: codecov/codecov-action@v1
+      - name: Upload coverage report to codecov
+        uses: codecov/codecov-action@v1
+      - name: Run codacy-coverage-reporter
+        uses: codacy/codacy-coverage-reporter-action@master
+        with:
+          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
