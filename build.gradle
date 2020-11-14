@@ -20,6 +20,11 @@ buildscript {
     }
 }
 
+repositories {
+    jcenter()
+    google()
+}
+
 subprojects {
     repositories {
         jcenter()

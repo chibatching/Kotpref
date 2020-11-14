@@ -2,7 +2,7 @@ package dependencies
 
 object Versions {
 
-    const val versionName = "2.12.0"
+    const val versionName = "2.13.0"
 
     const val targetSdk = 29
     const val minSdk = 9
@@ -15,7 +15,7 @@ object Versions {
 
     internal const val androidGradlePlugin = "4.1.0"
     internal const val bintrayGradlePlugin = "1.8.5"
-    internal const val dokka = "1.4.10"
+    internal const val dokka = "1.4.10.2"
 
     internal const val jacoco = "0.8.6"
     internal const val mockk = "1.10.2"

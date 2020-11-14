@@ -10,6 +10,10 @@ jobs:
 
     if: ${{ github.event.ref_type == 'tag' }}
 
+    env:
+      BINTRAY_USER: ${{ secrets.BINTRAY_USER }}
+      BINTRAY_API_KEY: ${{ secrets.BINTRAY_API_KEY }}
+
     steps:
       - uses: actions/checkout@v2
       - name: Setup JDK
