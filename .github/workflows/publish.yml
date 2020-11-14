@@ -1,0 +1,22 @@
+name: Publish to Bintray
+
+on:
+  create:
+
+jobs:
+  publish:
+
+    runs-on: ubuntu-latest
+
+    if: ${{ github.event.ref_type == 'tag' }}
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Setup JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+      - name: Build artifacts
+        run: ./gradlew publishToMavenLocal --stacktrace
+      - name: Upload to Bintray
+        run: ./gradlew bintrayUpload --stacktrace
