@@ -10,8 +10,8 @@ version = versionName
 def SITE_URL = 'https://github.com/chibatching/kotpref'
 def GIT_URL = 'https://github.com/chibatching/kotpref.git'
 
-def USER = System.getenv("bintray_user")
-def KEY = System.getenv("bintray_api_key")
+def USER = System.getenv("BINTRAY_USER")
+def KEY = System.getenv("BINTRAY_API_KEY")
 
 bintray {
     user = USER
