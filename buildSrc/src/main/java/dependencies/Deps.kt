@@ -4,8 +4,6 @@ package dependencies
 object Deps {
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
-    const val bintrayGradlePlugin =
-        "com.jfrog.bintray.gradle:gradle-bintray-plugin:${Versions.bintrayGradlePlugin}"
     const val dokkaGradlePlugin =
         "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
 

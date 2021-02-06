@@ -8,6 +8,7 @@ apply plugin: 'jacoco'
 apply plugin: BuildSettingHelperPlugin
 
 ext.moduleName = 'Kotpref enum support'
+ext.moduleDescription = "Saving enum value to KotprefModel as String"
 
 android {
     compileSdkVersion Versions.targetSdk
