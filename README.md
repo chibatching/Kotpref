@@ -8,7 +8,7 @@ Android SharedPreference delegation for Kotlin.
 
 ```groovy
 repositories {
-    // 2.13.0 or newer
+    // 2.13.1 or newer
     mavenCentral()
     // older
     maven { url 'https://jitpack.io' }
@@ -16,24 +16,24 @@ repositories {
 
 dependencies {
     // core
-    implementation 'com.chibatching.kotpref:kotpref:2.13.0'
+    implementation 'com.chibatching.kotpref:kotpref:2.13.1'
   
     // optional, auto initialization module
-    implementation 'com.chibatching.kotpref:initializer:2.13.0'
+    implementation 'com.chibatching.kotpref:initializer:2.13.1'
   
     // optional, support saving enum value and ordinal
-    implementation 'com.chibatching.kotpref:enum-support:2.13.0'
+    implementation 'com.chibatching.kotpref:enum-support:2.13.1'
   
     // optional, support saving json string through Gson
-    implementation 'com.chibatching.kotpref:gson-support:2.13.0'
+    implementation 'com.chibatching.kotpref:gson-support:2.13.1'
     implementation 'com.google.code.gson:gson:2.8.6'
   
     // optional, support LiveData observable preference
-    implementation 'com.chibatching.kotpref:livedata-support:2.13.0'
+    implementation 'com.chibatching.kotpref:livedata-support:2.13.1'
     implementation 'androidx.lifecycle:lifecycle-livedata:2.2.0'
 
     // experimental, preference screen build dsl
-    implementation 'com.chibatching.kotpref:preference-screen-dsl:2.13.0'
+    implementation 'com.chibatching.kotpref:preference-screen-dsl:2.13.1'
 }
 ```
 

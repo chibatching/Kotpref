@@ -1,4 +1,4 @@
-name: Publish to Bintray
+name: Publish
 
 on:
   create:
@@ -22,5 +22,15 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 1.8
-      - name: Build and upload artifacts
-        run: ./gradlew publish --stacktrace
+      - name: Upload kotpref
+        run: ./gradlew kotpref:publish --stacktrace
+      - name: Upload initializer
+        run: ./gradlew initializer:publish --stacktrace
+      - name: Upload gson-support
+        run: ./gradlew gson-support:publish --stacktrace
+      - name: Upload enum-support
+        run: ./gradlew enum-support:publish --stacktrace
+      - name: Upload livedata-support
+        run: ./gradlew livedata-support:publish --stacktrace
+      - name: Upload preference-screen-dsl
+        run: ./gradlew preference-screen-dsl:publish --stacktrace
