@@ -8,6 +8,7 @@ apply plugin: 'jacoco'
 apply plugin: BuildSettingHelperPlugin
 
 ext.moduleName = 'Kotpref'
+ext.moduleDescription = "Android SharedPreference delegation for Kotlin"
 
 android {
     compileSdkVersion Versions.targetSdk

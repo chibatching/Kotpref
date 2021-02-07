@@ -7,6 +7,13 @@ Android SharedPreference delegation for Kotlin.
 ## Install
 
 ```groovy
+repositories {
+    // 2.13.0 or newer
+    mavenCentral()
+    // older
+    maven { url 'https://jitpack.io' }
+}
+
 dependencies {
     // core
     implementation 'com.chibatching.kotpref:kotpref:2.13.0'
@@ -206,7 +213,7 @@ object UserInfo : KotprefModel() {
 ## License
 
 ```
-Copyright 2015-2020 Takao Chiba
+Copyright 2015-2021 Takao Chiba
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.

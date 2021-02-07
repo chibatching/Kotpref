@@ -8,6 +8,7 @@ apply plugin: 'jacoco'
 apply plugin: BuildSettingHelperPlugin
 
 ext.moduleName = 'Kotpref auto initializer'
+ext.moduleDescription = "Auto initialization Kotpref using ContentProvider"
 
 android {
     compileSdkVersion Versions.targetSdk

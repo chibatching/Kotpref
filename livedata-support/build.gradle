@@ -8,6 +8,7 @@ apply plugin: 'jacoco'
 apply plugin: BuildSettingHelperPlugin
 
 ext.moduleName = 'Kotpref LiveData support'
+ext.moduleDescription = "Observe SharedPreferences changes as LiveData"
 
 android {
     compileSdkVersion Versions.targetSdk

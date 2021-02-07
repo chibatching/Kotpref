@@ -8,6 +8,7 @@ apply plugin: 'jacoco'
 apply plugin: BuildSettingHelperPlugin
 
 ext.moduleName = 'Kotpref preference screen DSL'
+ext.moduleDescription = "Preference screen builder DSL with KotprefModel"
 
 android {
     compileSdkVersion Versions.targetSdk

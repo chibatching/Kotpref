@@ -1,36 +1,13 @@
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
-apply plugin: 'com.jfrog.bintray'
+apply plugin: 'signing'
 apply plugin: 'org.jetbrains.dokka'
 
-// Bintray upload
 group = groupName
 version = versionName
 
 def SITE_URL = 'https://github.com/chibatching/kotpref'
 def GIT_URL = 'https://github.com/chibatching/kotpref.git'
-
-def USER = System.getenv("BINTRAY_USER")
-def KEY = System.getenv("BINTRAY_API_KEY")
-
-bintray {
-    user = USER
-    key = KEY
-
-    publications = ['release']
-    pkg {
-        repo = 'maven'
-        name = 'kotpref'
-        desc = 'Android SharedPreferences delegation for Kotlin.'
-        websiteUrl = SITE_URL
-        issueTrackerUrl = 'https://github.com/chibatching/kotpref/issues'
-        vcsUrl = GIT_URL
-        licenses = ['Apache-2.0']
-        labels = ['aar', 'android', 'kotlin']
-        publicDownloadNumbers = true
-        githubRepo = 'chibatching/Kotpref'
-    }
-}
 
 tasks.named("dokkaHtml") {
     dokkaSourceSets {
@@ -56,7 +33,23 @@ task javadocJar(type: Jar, dependsOn: dokkaJavadoc) {
 }
 
 afterEvaluate {
+    signing {
+        def signingKey = System.getenv("GPG_SIGNING_KEY")
+        def signingPassword = System.getenv("GPG_SIGNING_PASS")
+        useInMemoryPgpKeys(signingKey, signingPassword)
+        sign publishing.publications
+    }
+
     publishing {
+        repositories {
+            maven {
+                url "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+                credentials {
+                    username System.getenv("SONATYPE_USER")
+                    password System.getenv("SONATYPE_PASS")
+                }
+            }
+        }
         publications {
             release(MavenPublication) {
                 from components.release
@@ -67,6 +60,7 @@ afterEvaluate {
                 pom {
                     artifactId archivesBaseName
                     name = moduleName
+                    description = moduleDescription
 
                     packaging 'aar'
                     url = SITE_URL
