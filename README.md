@@ -8,7 +8,7 @@ Android SharedPreference delegation for Kotlin.
 
 ```groovy
 repositories {
-    // 2.13.0 or newer
+    // 2.13.1 or newer
     mavenCentral()
     // older
     maven { url 'https://jitpack.io' }
