@@ -335,8 +335,9 @@ public abstract class KotprefModel(
     /**
      * Check if a property exists
      * @param property property to remove
+     * @return true if a property exists
      */
-    public fun contains(property: KProperty<*>) = preferences.contains(getPrefKey(property))
+    public fun contains(property: KProperty<*>): Boolean = preferences.contains(getPrefKey(property))
     
     /**
      * Remove entry from SharedPreferences
