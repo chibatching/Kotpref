@@ -333,6 +333,12 @@ public abstract class KotprefModel(
     }
 
     /**
+     * Check if a property exists
+     * @param property property to remove
+     */
+    public fun contains(property: KProperty<*>) = preferences.contains(getPrefKey(property))
+    
+    /**
      * Remove entry from SharedPreferences
      * @param property property to remove
      */
