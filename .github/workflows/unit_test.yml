@@ -28,7 +28,3 @@ jobs:
         run: ./gradlew jacocoTestReport --stacktrace
       - name: Upload coverage report to codecov
         uses: codecov/codecov-action@v1
-      - name: Run codacy-coverage-reporter
-        uses: codacy/codacy-coverage-reporter-action@master
-        with:
-          project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
