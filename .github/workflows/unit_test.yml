@@ -16,14 +16,10 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 13
-      - name: Gradle cache
-        uses: actions/cache@v2
+      - name: Setup gradle cache
+        uses: gradle/gradle-build-action@v2
         with:
-          path: ~/.gradle
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/src/main/java/dependencies/*.kt') }}-${{ hashFiles('**/*.gradle*') }}
-          restore-keys: |
-            ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/src/main/kotlin/com/chibatching/dep/*.kt') }}-
-            ${{ runner.os }}-gradle-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-
+          cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Unit test
         run: ./gradlew jacocoTestReport --stacktrace
       - name: Upload coverage report to codecov
