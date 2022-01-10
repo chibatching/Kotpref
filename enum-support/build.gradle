@@ -4,6 +4,7 @@ import plugin.BuildSettingHelperPlugin
 
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.dokka'
 apply plugin: 'jacoco'
 apply plugin: BuildSettingHelperPlugin
 
@@ -63,6 +64,8 @@ dependencies {
     testImplementation Deps.robolectric
     testImplementation Deps.AndroidX.testCore
     testImplementation Deps.truth
+
+    dokkaHtmlPlugin Deps.dokkaJava
 }
 
 apply from: "${project.rootDir}/gradle/publish/publish.gradle"
