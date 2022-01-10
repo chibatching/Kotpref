@@ -13,8 +13,7 @@ object Versions {
     internal const val robolectric = "4.4"
     internal const val gson = "2.8.6"
 
-    internal const val androidGradlePlugin = "4.1.0"
-    internal const val bintrayGradlePlugin = "1.8.5"
+    internal const val androidGradlePlugin = "7.0.4"
     internal const val dokka = "1.4.10.2"
 
     internal const val jacoco = "0.8.6"
