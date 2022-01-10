@@ -21,7 +21,11 @@ jobs:
       - name: Setup JDK
         uses: actions/setup-java@v1
         with:
-          java-version: 1.8
+          java-version: 13
+      - name: Setup gradle cache
+        uses: gradle/gradle-build-action@v2
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Upload kotpref
         run: ./gradlew kotpref:publish --stacktrace
       - name: Upload initializer
