@@ -14,6 +14,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".MainActivity"
+            android:exported="true"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,26 +23,31 @@
         </activity>
         <activity
             android:name=".livedata.LiveDataSampleActivity"
+            android:exported="false"
             android:label="@string/live_data_sample"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
         <activity
             android:name=".preferencefragment.PreferenceFragmentSampleActivity"
+            android:exported="false"
             android:label="@string/preference_fragment_sample"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
         <activity
             android:name=".preferencedsl.PreferenceScreenDslSampleActivity"
+            android:exported="false"
             android:label="@string/preference_fragment_sample"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
         <activity
             android:name=".injectablecontext.InjectableContextSampleActivity"
+            android:exported="false"
             android:label="@string/injectable_context_sample"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />
         <activity
             android:name=".encrypt.EncryptionSampleActivity"
+            android:exported="false"
             android:label="@string/encryption_sample"
             android:parentActivityName=".MainActivity"
             tools:targetApi="jelly_bean" />

@@ -4,7 +4,7 @@ object Versions {
 
     const val versionName = "2.13.1"
 
-    const val targetSdk = 29
+    const val targetSdk = 31
     const val minSdk = 9
     const val minSdkWithSupportLibrary = 14
 
