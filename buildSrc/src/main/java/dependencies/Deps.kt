@@ -4,8 +4,11 @@ package dependencies
 object Deps {
 
     const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
+
     const val dokkaGradlePlugin =
         "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
+    const val dokkaJava =
+        "org.jetbrains.dokka:kotlin-as-java-plugin:${Versions.dokka}"
 
     const val junit = "junit:junit:${Versions.junit}"
     const val robolectric = "org.robolectric:robolectric:${Versions.robolectric}"

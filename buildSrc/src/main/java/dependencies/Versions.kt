@@ -14,7 +14,7 @@ object Versions {
     internal const val gson = "2.8.6"
 
     internal const val androidGradlePlugin = "7.0.4"
-    internal const val dokka = "1.4.10.2"
+    internal const val dokka = "1.6.10"
 
     internal const val jacoco = "0.8.7"
     internal const val mockk = "1.12.2"
