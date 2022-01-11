@@ -23,8 +23,8 @@ class BuildSettingHelperPlugin : Plugin<Project> {
             register("jacocoTestReport", JacocoReport::class.java) {
                 dependsOn("testDebugUnitTest")
                 reports {
-                    xml.isEnabled = true
-                    html.isEnabled = true
+                    xml.required.set(true)
+                    html.required.set(true)
                 }
                 val fileFilter = listOf(
                     "**/R.class", "**/R$*.class", "**/BuildConfig.*", "**/Manifest*.*"
