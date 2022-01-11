@@ -4,24 +4,24 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import com.chibatching.kotpref.livedata.asLiveData
-import com.chibatching.kotprefsample.R
-import kotlinx.android.synthetic.main.activity_live_data_sample.*
+import com.chibatching.kotprefsample.databinding.ActivityLiveDataSampleBinding
 
 class LiveDataSampleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_live_data_sample)
+        val binding = ActivityLiveDataSampleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        saveButton.setOnClickListener {
-            EditTextData.savedText = editText.text.toString()
+        binding.saveButton.setOnClickListener {
+            EditTextData.savedText = binding.editText.text.toString()
         }
 
         EditTextData
             .asLiveData(EditTextData::savedText)
             .observe(this, Observer<String> {
-                textView.text = it
+                binding.textView.text = it
             })
     }
 
