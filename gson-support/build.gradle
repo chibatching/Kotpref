@@ -20,9 +20,6 @@ android {
         versionName Versions.versionName
     }
     buildTypes {
-        debug {
-            testCoverageEnabled isCi
-        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
