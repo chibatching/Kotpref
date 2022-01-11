@@ -11,7 +11,6 @@ import org.gradle.testing.jacoco.tasks.JacocoReport
 class BuildSettingHelperPlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
-        project.extensions.add("isCi", System.getenv("CI")?.toBoolean() ?: false)
         addJacocoSettings(project)
     }
 
