@@ -2,8 +2,7 @@ package com.chibatching.kotprefsample.injectablecontext
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.chibatching.kotprefsample.R
-import kotlinx.android.synthetic.main.activity_injectable_context_sample.*
+import com.chibatching.kotprefsample.databinding.ActivityInjectableContextSampleBinding
 
 class InjectableContextSampleActivity : AppCompatActivity() {
 
@@ -13,12 +12,13 @@ class InjectableContextSampleActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_injectable_context_sample)
+        val binding = ActivityInjectableContextSampleBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        saveButton.setOnClickListener {
-            injectableContextData.sampleData = editText.text.toString()
-            textView.text = injectableContextData.sampleData
+        binding.saveButton.setOnClickListener {
+            injectableContextData.sampleData = binding.editText.text.toString()
+            binding.textView.text = injectableContextData.sampleData
         }
     }
 

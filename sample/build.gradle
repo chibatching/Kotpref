@@ -3,7 +3,6 @@ import dependencies.Versions
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion Versions.targetSdk
@@ -25,6 +24,9 @@ android {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+    buildFeatures {
+        viewBinding = true
     }
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'

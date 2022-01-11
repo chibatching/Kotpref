@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.chibatching.kotpref.bulk
+import com.chibatching.kotprefsample.databinding.ActivityMainBinding
 import com.chibatching.kotprefsample.encrypt.EncryptionSampleActivity
 import com.chibatching.kotprefsample.livedata.LiveDataSampleActivity
-import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
 import com.chibatching.kotprefsample.preferencedsl.PreferenceScreenDslSampleActivity
-import kotlinx.android.synthetic.main.activity_main.*
+import com.chibatching.kotprefsample.preferencefragment.PreferenceFragmentSampleActivity
 import java.util.Date
 
 class MainActivity : AppCompatActivity() {
@@ -20,23 +20,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         writeAndReadSample()
 
-        preferenceFragmentSampleButton.setOnClickListener {
+        binding.preferenceFragmentSampleButton.setOnClickListener {
             startActivity(Intent(this, PreferenceFragmentSampleActivity::class.java))
         }
 
-        preferenceSupportSampleButton.setOnClickListener {
+        binding.preferenceSupportSampleButton.setOnClickListener {
             startActivity(Intent(this, PreferenceScreenDslSampleActivity::class.java))
         }
 
-        liveDataSampleButton.setOnClickListener {
+        binding.liveDataSampleButton.setOnClickListener {
             startActivity(Intent(this, LiveDataSampleActivity::class.java))
         }
 
-        encryptionSampleButton.setOnClickListener {
+        binding.encryptionSampleButton.setOnClickListener {
             startActivity(Intent(this, EncryptionSampleActivity::class.java))
         }
     }
