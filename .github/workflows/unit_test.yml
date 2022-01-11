@@ -21,7 +21,7 @@ jobs:
         with:
           cache-read-only: ${{ github.ref != 'refs/heads/master' }}
       - name: Unit test
-        run: ./gradlew jacocoTestReport --stacktrace
+        run: ./gradlew jacocoTestReport --stacktrace --no-build-cache
       - name: file check
         run: ls -R kotpref/build/reports
       - name: Upload coverage report to codecov
