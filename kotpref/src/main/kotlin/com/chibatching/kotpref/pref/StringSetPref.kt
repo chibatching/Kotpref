@@ -8,6 +8,58 @@ import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
 
+/**
+ * Delegate string set shared preferences property.
+ * @param default default string set value
+ * @param key custom preferences key
+ * @param commitByDefault commit this property instead of apply
+ */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public fun KotprefModel.stringSetPref(
+    default: Set<String> = LinkedHashSet(),
+    key: String? = null,
+    commitByDefault: Boolean = commitAllPropertiesByDefault
+): AbstractStringSetPref = stringSetPref(key, commitByDefault) { default }
+
+/**
+ * Delegate string set shared preferences property.
+ * @param default default string set value
+ * @param key custom preferences key resource id
+ * @param commitByDefault commit this property instead of apply
+ */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public fun KotprefModel.stringSetPref(
+    default: Set<String> = LinkedHashSet(),
+    key: Int,
+    commitByDefault: Boolean = commitAllPropertiesByDefault
+): AbstractStringSetPref = stringSetPref(context.getString(key), commitByDefault) { default }
+
+/**
+ * Delegate string set shared preferences property.
+ * @param key custom preferences key
+ * @param commitByDefault commit this property instead of apply
+ * @param default default string set value creation function
+ */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public fun KotprefModel.stringSetPref(
+    key: String? = null,
+    commitByDefault: Boolean = commitAllPropertiesByDefault,
+    default: () -> Set<String>
+): AbstractStringSetPref = StringSetPref(default, key, commitByDefault)
+
+/**
+ * Delegate string set shared preferences property.
+ * @param key custom preferences key resource id
+ * @param commitByDefault commit this property instead of apply
+ * @param default default string set value
+ */
+@TargetApi(Build.VERSION_CODES.HONEYCOMB)
+public fun KotprefModel.stringSetPref(
+    key: Int,
+    commitByDefault: Boolean = commitAllPropertiesByDefault,
+    default: () -> Set<String>
+): AbstractStringSetPref = stringSetPref(context.getString(key), commitByDefault, default)
+
 @TargetApi(Build.VERSION_CODES.HONEYCOMB)
 internal class StringSetPref(
     val default: () -> Set<String>,

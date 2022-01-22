@@ -2,6 +2,7 @@ package com.chibatching.kotpref
 
 import android.content.Context
 import androidx.test.core.app.ApplicationProvider
+import com.chibatching.kotpref.pref.intPref
 import com.google.common.truth.Truth.assertThat
 import org.junit.After
 import org.junit.Before

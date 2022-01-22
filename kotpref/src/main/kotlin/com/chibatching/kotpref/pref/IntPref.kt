@@ -2,8 +2,34 @@ package com.chibatching.kotpref.pref
 
 import android.annotation.SuppressLint
 import android.content.SharedPreferences
+import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.execute
 import kotlin.reflect.KProperty
+
+/**
+ * Delegate int shared preferences property.
+ * @param default default int value
+ * @param key custom preferences key
+ * @param commitByDefault commit this property instead of apply
+ */
+public fun KotprefModel.intPref(
+    default: Int = 0,
+    key: String? = null,
+    commitByDefault: Boolean = commitAllPropertiesByDefault
+): AbstractPref<Int> = IntPref(default, key, commitByDefault)
+
+/**
+ * Delegate int shared preferences property.
+ * @param default default int value
+ * @param key custom preferences key resource id
+ * @param commitByDefault commit this property instead of apply
+ */
+public fun KotprefModel.intPref(
+    default: Int = 0,
+    key: Int,
+    commitByDefault: Boolean = commitAllPropertiesByDefault
+): AbstractPref<Int> =
+    intPref(default, context.getString(key), commitByDefault)
 
 internal class IntPref(
     val default: Int,
