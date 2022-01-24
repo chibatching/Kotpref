@@ -4,6 +4,9 @@ import android.content.Context
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.enumpref.enumValuePref
 import com.chibatching.kotpref.gsonpref.gsonPref
+import com.chibatching.kotpref.pref.intPref
+import com.chibatching.kotpref.pref.stringPref
+import com.chibatching.kotpref.pref.stringSetPref
 
 internal class Example(context: Context) : KotprefModel(context) {
     companion object {

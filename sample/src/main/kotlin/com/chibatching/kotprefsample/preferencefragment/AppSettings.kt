@@ -1,6 +1,8 @@
 package com.chibatching.kotprefsample.preferencefragment
 
 import com.chibatching.kotpref.KotprefModel
+import com.chibatching.kotpref.pref.booleanPref
+import com.chibatching.kotpref.pref.stringPref
 import com.chibatching.kotprefsample.R
 
 object AppSettings : KotprefModel() {

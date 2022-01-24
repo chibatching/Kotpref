@@ -1,6 +1,10 @@
 package com.chibatching.kotprefsample.preferencedsl
 
 import com.chibatching.kotpref.KotprefModel
+import com.chibatching.kotpref.pref.booleanPref
+import com.chibatching.kotpref.pref.intPref
+import com.chibatching.kotpref.pref.stringPref
+import com.chibatching.kotpref.pref.stringSetPref
 
 object PreferenceScreenDslSampleSettings : KotprefModel() {
 

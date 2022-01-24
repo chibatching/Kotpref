@@ -7,6 +7,7 @@ import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKeys
 import com.chibatching.kotpref.KotprefModel
 import com.chibatching.kotpref.PreferencesProvider
+import com.chibatching.kotpref.pref.stringPref
 
 class EncryptionSamplePref(
     context: Context
