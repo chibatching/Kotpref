@@ -10,8 +10,10 @@ public fun <T> KotprefModel.asLiveData(property: KProperty0<T>): LiveData<T> {
         private val key: String = this@asLiveData.getPrefKey(property)
             ?: throw IllegalArgumentException("Failed to get preference key, check property ${property.name} is delegated to Kotpref")
 
-        override fun onSharedPreferenceChanged(prefs: SharedPreferences, propertyName: String) {
-            if (propertyName == key) {
+        override fun onSharedPreferenceChanged(prefs: SharedPreferences, propertyName: String?) {
+            // propertyName will be null when preferences are cleared on Android R
+            val isCleared = propertyName == null
+            if (isCleared || propertyName == key) {
                 postValue(property.get())
             }
         }
