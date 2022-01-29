@@ -2,7 +2,7 @@ package dependencies
 
 object Versions {
 
-    const val versionName = "2.13.1"
+    const val versionName = "2.13.2"
 
     const val targetSdk = 31
     const val minSdk = 9
