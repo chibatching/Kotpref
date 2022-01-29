@@ -6,6 +6,7 @@
 /.idea/modules.xml
 /.idea/caches
 /.idea/runConfigurations.xml
+/.idea/jarRepositories.xml
 .DS_Store
 /captures
 /.wercker

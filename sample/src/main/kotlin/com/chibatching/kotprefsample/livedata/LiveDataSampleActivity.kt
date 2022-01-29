@@ -2,7 +2,6 @@ package com.chibatching.kotprefsample.livedata
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.chibatching.kotpref.livedata.asLiveData
 import com.chibatching.kotprefsample.databinding.ActivityLiveDataSampleBinding
 
@@ -17,12 +16,15 @@ class LiveDataSampleActivity : AppCompatActivity() {
         binding.saveButton.setOnClickListener {
             EditTextData.savedText = binding.editText.text.toString()
         }
+        binding.clearButton.setOnClickListener {
+            EditTextData.clear()
+        }
 
         EditTextData
             .asLiveData(EditTextData::savedText)
-            .observe(this, Observer<String> {
+            .observe(this) {
                 binding.textView.text = it
-            })
+            }
     }
 
     override fun onSupportNavigateUp(): Boolean {

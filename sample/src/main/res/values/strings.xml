@@ -7,6 +7,7 @@
     <string name="injectable_context_sample">Injectable context sample</string>
     <string name="encryption_sample">Encryption sample</string>
     <string name="save">Save</string>
+    <string name="clear">Clear</string>
 
     <!-- Sample preference fragment -->
     <string name="pref_title_sample_switch">Sample switch preference</string>
