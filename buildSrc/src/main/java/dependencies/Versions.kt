@@ -12,6 +12,7 @@ object Versions {
     internal const val junit = "4.13.2"
     internal const val robolectric = "4.7.3"
     internal const val gson = "2.8.9"
+    internal const val moshi = "1.13.0"
 
     internal const val androidGradlePlugin = "7.0.4"
     internal const val dokka = "1.6.10"
