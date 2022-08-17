@@ -24,6 +24,13 @@ dependencies {
     // optional, support saving json string through Gson
     implementation 'com.chibatching.kotpref:gson-support:2.13.1'
     implementation 'com.google.code.gson:gson:2.8.6'
+    
+    // optional, support saving json string through Moshi
+    implementation 'com.chibatching.kotpref:moshi-support:2.13.1'
+    implementation 'com.squareup.moshi:moshi:1.13.0'
+    // optional to moshi
+    implementation 'com.squareup.moshi:moshi-adapters:1.13.0'
+    kapt 'com.squareup.moshi:moshi-kotlin-codegen:1.13.0'
   
     // optional, support LiveData observable preference
     implementation 'com.chibatching.kotpref:livedata-support:2.13.1'

@@ -1,0 +1,74 @@
+import dependencies.Deps
+import dependencies.Versions
+import plugin.BuildSettingHelperPlugin
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'org.jetbrains.dokka'
+apply plugin: 'jacoco'
+apply plugin: BuildSettingHelperPlugin
+apply plugin: 'kotlin-kapt'
+
+ext.moduleName = 'Kotpref moshi support'
+ext.moduleDescription = "Serialize/Deserialize json object to KotprefModel using Moshi"
+
+android {
+    compileSdkVersion Versions.targetSdk
+
+    defaultConfig {
+        minSdkVersion Versions.minSdk
+        targetSdkVersion Versions.targetSdk
+        versionName Versions.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+    }
+    testOptions {
+        unitTests {
+            all {
+                jacoco {
+                    includeNoLocationClasses = true
+                    excludes = ['jdk.internal.*']
+                }
+            }
+            includeAndroidResources = true
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+        freeCompilerArgs += "-Xexplicit-api=strict"
+    }
+    jacoco {
+        version = Versions.jacoco
+    }
+}
+
+dependencies {
+    compileOnly Deps.Kotlin.stdlib
+    api project(":kotpref")
+
+    compileOnly Deps.moshi
+
+    testImplementation Deps.Kotlin.stdlib
+    testImplementation Deps.moshi
+    testImplementation Deps.moshiAdapters
+    kaptTest Deps.moshiKapt
+    testImplementation Deps.junit
+    testImplementation Deps.robolectric
+    testImplementation Deps.AndroidX.testCore
+    testImplementation Deps.truth
+
+    dokkaHtmlPlugin Deps.dokkaJava
+}
+
+apply from: "${project.rootDir}/gradle/publish/publish.gradle"
