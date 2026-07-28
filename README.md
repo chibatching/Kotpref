@@ -2,6 +2,28 @@
 
 Android SharedPreference delegation for Kotlin.
 
+> [!IMPORTANT]
+> **Kotpref is no longer maintained.** Development has ended and this repository is
+> archived: there will be no further releases, and issues and pull requests are no
+> longer accepted.
+>
+> Use [Jetpack DataStore](https://developer.android.com/topic/libraries/architecture/datastore)
+> instead — see the [migration guide](docs/MIGRATION.md).
+
+Existing builds are unaffected. All published artifacts remain on Maven Central and will
+not be removed, so there is no rush to migrate. The Install and How to use sections below
+stay in place as a reference for current users.
+
+For most Kotpref models, [Preferences DataStore](https://developer.android.com/topic/libraries/architecture/datastore/preferences-datastore)
+is the direct replacement: the same key-value storage, with an asynchronous, observable
+API that SharedPreferences never had. [Proto DataStore](https://developer.android.com/topic/libraries/architecture/datastore/proto-datastore)
+is worth a look as well — Kotpref existed largely to give a group of preferences the shape
+of a typed object, and Proto DataStore does that natively, with a real schema instead of
+loose keys. Community libraries offering a delegate-style API on top of DataStore also
+exist, if that is what you liked about Kotpref.
+
+Thanks to everyone who used Kotpref and contributed to it over the years.
+
 [![kotlin](https://img.shields.io/badge/kotlin-1.4.10-blue.svg)]() [![codecov](https://codecov.io/gh/chibatching/Kotpref/branch/master/graph/badge.svg)](https://codecov.io/gh/chibatching/Kotpref) [![license](https://img.shields.io/github/license/chibatching/Kotpref.svg?maxAge=2592000)]()
 
 ## Install
